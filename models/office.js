@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   var office = sequelize.define("office", {
-    office_Name: DataTypes.STRING(60),
+    office_name: DataTypes.STRING(60),
     status :{type :DataTypes.INTEGER(1),defaultValue:1 }
       
   }, {
