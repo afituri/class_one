@@ -1,9 +1,15 @@
 var models = require("../models");
 
+<<<<<<< HEAD
 //// new insert
 // var obj_region = {
 // 	region_name : "مصراته"
 // }
+=======
+var obj_region = {
+	region_name : "سبها"
+}
+>>>>>>> 720815362d1ba27f17d38d1c4213c48ff5992f2e
 
 // models.Region.create(obj_region).then(function(result) {
 //   console.log(result);
