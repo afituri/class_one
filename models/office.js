@@ -8,6 +8,12 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
+        Office.belongsTo(models.Region, {
+          onDelete: "RESTRICT",
+          foreignKey: {
+            allowNull: false
+          }
+        });
    
       }
     }
