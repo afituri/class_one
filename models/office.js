@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-  var office = sequelize.define("office", {
+  var Office = sequelize.define("Office", {
     office_name: DataTypes.STRING(60),
     status :{type :DataTypes.INTEGER(1),defaultValue:1 }
       
@@ -13,5 +13,5 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  return office;
+  return Office;
 };
