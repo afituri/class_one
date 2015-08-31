@@ -3,3 +3,5 @@ extends layout
 block content
   h1= title
   p اهلا بك في #{title}
+  for region in regions
+    p #{region.id} - #{region.region_name} 
