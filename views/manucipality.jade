@@ -3,3 +3,5 @@ extends layout
 block content
   h1= title
   p اهلا بك في #{title}
+  for manucipality in manucipalitys
+    p #{manucipality.id} - #{manucipality.manucipality_name} 

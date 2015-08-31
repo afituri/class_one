@@ -1,11 +1,19 @@
+var models = require("../models");
 module.exports = function (router) {
 
-  /* GET manucipality page. */
+  /* GET manucipalitys page. */
   router.get('/manucipality', function(req, res) {
-    res.render('manucipality', { title: 'البلديات' });
+    models.Manucipality.findAndCountAll({
+      where: {
+        status: 1
+      }
+    }).then(function(result) {
+      console.log(result);
+      res.render('manucipality', { title: 'البلديات', manucipalitys:result.rows});
+    });
   });
 
-  /* Add manucipality page. */
+  /* Add manucipalitys page. */
   router.post('/manucipality/newmanucipality', function(req, res) {
     res.render('manucipality', { title: 'البلديات' });
   });
