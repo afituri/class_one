@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var region = require('./region')(router);
+var country = require('./country')(router);
 
 
 /* GET home page. */
