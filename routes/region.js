@@ -1,9 +1,16 @@
-
+var models = require("../models");
 module.exports = function (router) {
 
   /* GET Regions page. */
   router.get('/region', function(req, res) {
-    res.render('region', { title: 'المناطق' });
+    models.Region.findAndCountAll({
+      where: {
+        status: 1
+      }
+    }).then(function(result) {
+      console.log(result);
+      res.render('region', { title: 'المناطق', regions:result.rows});
+    });
   });
 
   /* Add Regions page. */
