@@ -4,10 +4,8 @@ var region = require('./region')(router);
 var country = require('./country')(router);
 var manucipality = require('./manucipality')(router);
 var job = require('./job')(router);
+var kinship = require('./kinship')(router);
 
-
-
-//manucipality_name
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
