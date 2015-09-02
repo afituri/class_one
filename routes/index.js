@@ -3,6 +3,7 @@ var router = express.Router();
 var region = require('./region')(router);
 var country = require('./country')(router);
 var manucipality = require('./manucipality')(router);
+var job = require('./job')(router);
 
 
 

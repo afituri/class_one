@@ -3,20 +3,20 @@ var models = require("../models");
 module.exports = function (router) {
 
   /* GET Countries page. */
-  router.get('/Country', function(req, res) {
+  router.get('/country', function(req, res) {
     models.Country.findAndCountAll({
       where: {
         status: 1
       }
     }).then(function(result) {
       console.log(result);
-      res.render('Country', { title: 'بلدان الميلاد', countries:result.rows});
+      res.render('country', { title: 'بلدان الميلاد', countries:result.rows});
     });
   });
 
   /* Add Countries page. */
-  router.post('/Country/newCountry', function(req, res) {
-    res.render('Country', { title: 'بلدان الميلاد' });
+  router.post('/country/newcountry', function(req, res) {
+    res.render('country', { title: 'بلدان الميلاد' });
   });
 
 }
