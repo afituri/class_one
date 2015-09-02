@@ -10,11 +10,12 @@ block content
               .pull-right(style="margin-right: 10px;")
                 h3#h3.panel-title عرض #{title}
               .col-xs-6.col-md-6
-                .input-group
-                  input.form-control(type='text', placeholder='بحث...')
-                  .input-group-btn
-                    button.btn.btn-default
-                      i.glyphicon.glyphicon-search
+                form.form#searchRegion(action="")
+                  .input-group
+                    input.form-control(type='text',name="searchName" placeholder='بحث...')
+                    .input-group-btn
+                      button.btn.btn-default(type="submit")
+                        i.glyphicon.glyphicon-search
               .pull-left(style="margin-left: 10px;")
                 a.btn.btn-success(href='#add', role='button',data-toggle='modal')
                   span.glyphicon.glyphicon-plus
@@ -98,4 +99,6 @@ block content
   script(src='/js/jquery-2.1.1.min.js')
   script(src='/js/bootstrap.min.js')
   script(src='/js/jquery.validate.min.js')
+  script(src='/js/bootstrap-notify.min.js')
+  script(src='/js/helpers.js')
   script(src='/js/region.js')
