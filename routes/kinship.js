@@ -1,7 +1,7 @@
 var models = require("../models");
 module.exports = function (router) {
 
-  /* GET manucipalitys page. */
+  /* GET kinships page. */
   router.get('/kinship', function(req, res) {
     models.Kinship.findAndCountAll({
       where: {
@@ -13,7 +13,7 @@ module.exports = function (router) {
     });
   });
 
-  /* Add manucipalitys page. */
+  /* Add kinships page. */
   router.post('/kinship/newkinship', function(req, res) {
     res.render('kinship', { title: 'صلة القرابة' });
   });

@@ -8,7 +8,6 @@ module.exports = function (router) {
         status: 1
       }
     }).then(function(result) {
-      console.log(result);
       res.render('manucipality', { title: 'البلديات', manucipalitys:result.rows});
     });
   });
