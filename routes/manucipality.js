@@ -13,8 +13,12 @@ module.exports = function (router) {
   });
 
   /* Add manucipalitys page. */
-  router.post('/manucipality/newmanucipality', function(req, res) {
-    res.render('manucipality', { title: 'البلديات' });
+  router.post('/manucipality/new_manucipality', function(req, res) {
+    console.log(req.body);
+    models.Manucipality.create(req.body).then(function(result) {
+      console.log(result);
+      res.send(result);
+    });
   });
 
 }

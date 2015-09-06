@@ -8,14 +8,17 @@ module.exports = function (router) {
         status: 1
       }
     }).then(function(result) {
-      console.log(result);
       res.render('kinship', { title: 'صلة القرابة', kinships:result.rows});
     });
   });
-
+  
   /* Add kinships page. */
-  router.post('/kinship/newkinship', function(req, res) {
-    res.render('kinship', { title: 'صلة القرابة' });
+  router.post('/kinship/new_kinship', function(req, res) {
+    console.log(req.body);
+    models.Kinship.create(req.body).then(function(result) {
+      console.log(result);
+      res.send(result);
+    });
   });
 
 }

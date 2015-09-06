@@ -6,7 +6,7 @@ $(document).ready(function(){
     return this.optional(element) || /^[أ-ي,ﻻ,ء]+$/i.test(value);
   }, "الرجاء ادخال حروف عربية فقط!");
 
-  $("#addkinshipForm").validate({
+  $("#add_kinship_form").validate({
     rules:{
       kinship_name:{
         required: true,
@@ -27,7 +27,7 @@ $(document).ready(function(){
     },
   });
 
-  $("#editkinshipForm").validate({
+  $("#edit_kinship_form").validate({
     rules:{
       kinship_name:{
         required: true,
@@ -48,7 +48,7 @@ $(document).ready(function(){
     },
   });
 
-  $("#searchkinship").validate({
+  $("#search_kinship").validate({
     rules:{
       searchName:{
         required: true,
@@ -71,5 +71,30 @@ $(document).ready(function(){
         custNotify("danger","خطأ","الرجاء ادخال كلمة البحث","ok-sign","bounceIn","bounceOut");
       }
     },
+  });
+
+
+  /*----------- on add kinship----------*/
+  $('#add_kinship_btn').on('click', function(e){
+    e.preventDefault();
+    var obj = $('#add_kinship_form').serializeObject();
+    $.post('/kinship/new_kinship', obj, function(result){
+      var tr= "<tr>"+
+                "<td class='text-center'>"+result.id+"</td>"+
+                "<td class='text-center'> "+result.kinship_name+"</td>"+
+                "<td class='text-center'>"+
+                  "<p data-placement='top' data-toggle='tooltip' title='تعديل'>"+
+                    "<button id='edit_btn' data-title='Edit' data-toggle='modal' data-target='#edit' class='btn btn-primary btn-xs'><span class='glyphicon glyphicon-pencil'></span></button>"+
+                  "</p>"+
+                "</td>"+
+                "<td class='text-center'>"+
+                  "<p data-placement='top' data-toggle='tooltip' title='إلغاء'>"+
+                    "<button id='delete_btn' data-title='Delete' data-toggle='modal' data-target='#delete' class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-trash'></span></button>"+
+                  "</p>"+
+                "</td>"+
+              "</tr>";
+      $('#add').modal('hide');               
+      $('#kinship_table').prepend(tr);
+    });
   });
 });
