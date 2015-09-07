@@ -1,7 +1,104 @@
 extends layout
 
 block content
-  h1= title
-  p اهلا بك في #{title}
-  for kinship in kinships
-    p #{kinship.id} - #{kinship.kinship_name} 
+  .container
+    .row
+      .col-lg-12
+        .panel.panel-default
+          .panel-heading
+            .row
+              .pull-right(style="margin-right: 10px;")
+                h3#h3.panel-title عرض #{title}
+              .col-xs-6.col-md-6
+                form.form#search_kinship(action="")
+                  .input-group
+                    input.form-control(type='text',name="search_name" placeholder='بحث...')
+                    .input-group-btn
+                      button.btn.btn-default(type="submit")
+                        i.glyphicon.glyphicon-search
+              .pull-left(style="margin-left: 10px;")
+                a.btn.btn-success(href='#add', role='button',data-toggle='modal')
+                  span.glyphicon.glyphicon-plus
+                  span.text-none  إضافة صلة قرابة
+          .table-responsive
+            table.table.table-bordred.table-striped.table-condensed
+              thead
+                tr.info
+                  th.text-center رقم صلة القرابة
+                  th.text-center اسم صلة القرابة
+                  th.text-center تعديل
+                  th.text-center إلغاء
+              tbody#kinship_table
+              for kinship in kinships
+                tr
+                  td.text-center #{kinship.id}
+                  td.text-center #{kinship.kinship_name} 
+                  td.text-center
+                    p(data-placement="top", data-toggle="tooltip", title="تعديل")
+                      button#edit_btn.btn.btn-primary.btn-xs(data-title="Edit", data-toggle="modal", data-target="#edit")
+                        span.glyphicon.glyphicon-pencil
+                  td.text-center
+                    p(data-placement="top", data-toggle="tooltip", title="إلغاء")
+                      button#delete_btn.btn.btn-danger.btn-xs(data-title="Delete", data-toggle="modal", data-target="#delete")
+                        span.glyphicon.glyphicon-trash
+  #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        form.form#add_kinship_form(action="", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align إضافة صلة قرابة
+          .modal-body
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label اسم صلة القرابة
+                  input#kinship_name.form-control(type="text", name="kinship_name", placeholder="اسم صلة القرابة")
+          .modal-footer
+            button#add_kinship_btn.btn.btn-warning.btn-lg(type="submit", style="width: 100%;")
+              span.glyphicon.glyphicon-ok-sign
+              |  إضافة
+  #edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        form.form#edit_kinship_form(action="", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align تعديل صلة قرابة
+          .modal-body
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label اسم صلة القرابة
+                  input#kinship_name.form-control(type="text", name="kinship_name", placeholder="اسم صلة القرابة")
+          .modal-footer
+            button#edit_kinship_btn.btn.btn-info.btn-lg(type="submit", style="width: 100%;")
+              span.glyphicon.glyphicon-ok-sign
+              |  تعديل
+  #delete.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        form.form#delete_kinship_form(action="#", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align إلغاء صلة قرابة معينة
+          .modal-body
+            .alert.alert-danger.h5
+              span.glyphicon.glyphicon-warning-sign
+              |  هل تريد فعلا الغاء صلة القرابة هذه ؟
+          .modal-footer
+            button#yes_btn.btn.btn-danger(type="button" ,data-dismiss="modal")
+              span.glyphicon.glyphicon-ok-sign
+              |  نعم
+            button.btn.btn-default(type="button", data-dismiss="modal")
+              span.glyphicon.glyphicon-remove
+              |  لا
+  script(src='/js/jquery-2.1.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src='/js/jquery.validate.min.js')
+  script(src='/js/bootstrap-notify.min.js')
+  script(src='/js/helpers.js')
+  script(src='/js/kinship.js')

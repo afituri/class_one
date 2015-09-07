@@ -1,36 +1,33 @@
+@font-face {
+  font-family: 'droidkufi';
+  src : url("../fonts/DroidKufi-Regular.ttf") format("truetype");
+}
+
 body {
-  padding: 50px;
+  padding-top: 100px;
   font-family: 'droidkufi', sans-serif;
+}
+  
+.font {
+  font-family: 'droidkufi', sans-serif; 
 }
 
 input[type="text"],input[type="password"]{
   line-height: 25px;
 }
 
-a {
-  color: #00B7FF;
-}
-
-@font-face {
-  font-family: 'droidkufi';
-  src : url("../fonts/DroidKufi-Regular.ttf") format("truetype");
-}
-.font {
-  /*font-family: 'Droid Arabic Kufi', sans-serif;*/
-  /*font-family: 'Droid Arabic Naskh', serif;*/
-  font-family: 'droidkufi', sans-serif; 
-}
-
 #h3{
   font-size: 20px;
   line-height: 30px;
 }
+
 .error{
   color: red;
   position: absolute;
   font-size: 100%;
   font-weight: 100;
 }
+
 .custom-error{
   color: red;
   font-size: 100%;
