@@ -5,6 +5,7 @@ var country = require('./country')(router);
 var manucipality = require('./manucipality')(router);
 var job = require('./job')(router);
 var kinship = require('./kinship')(router);
+var branch = require('./branch')(router);
 
 /* GET home page. */
 router.get('/', function(req, res) {

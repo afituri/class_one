@@ -14,9 +14,7 @@ module.exports = function (router) {
 
   /* Add manucipalitys page. */
   router.post('/manucipality/new_manucipality', function(req, res) {
-    console.log(req.body);
     models.Manucipality.create(req.body).then(function(result) {
-      console.log(result);
       res.send(result);
     });
   });
