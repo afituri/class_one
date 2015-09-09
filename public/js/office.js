@@ -38,6 +38,6 @@ $(document).ready(function(){
   /*-------on select region edt--------*/
   $('#region_edit').on('change', function(){
     var id = $(this).val();
-    get_branches('#branches_edit',id);
+    get_branches('#edit_office_branch',id);
   });
 });
