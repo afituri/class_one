@@ -10,31 +10,40 @@ module.exports = function (router) {
       order: '`id` ASC',
       include :[{
         model: models.Branch,
-        where: { status: 1 }
+        where: { status: 1 },
+        include :[{
+          model : models.Region,
+          where:{status: 1}
+        }]
       },{
         model: models.Manucipality,
         where: { status: 1 }
-      }
-      ]
-    }).then(function(result) {
-      models.Branch.findAll({
+      }]
+    }).then(function(offices) {
+      models.Region.findAll({
         where: {
           status: 1
         }
-      }).then(function(branchs){
+      }).then(function(regions){
+        models.Branch.findAll({
+        where: {
+          status: 1
+        }
+      }).then(function(branches){
         models.Manucipality.findAll({
-        where: {
-          status: 1
-        }
-      }).then(function(manucipalitys){
-        res.render('office', { title: 'السجل المدني', offices:result.rows, manucipalitys: manucipalitys, branchs: branchs});  
-      })
+          where: {
+            status: 1
+          }
+        }).then(function(manucipalitys){
+          res.render('office', { title: 'السجل المدني', offices:offices.rows, manucipalitys: manucipalitys, regions: regions, branches:branches});  
+        });
+      });
     });
   });
 });
   /* Add Officees page. */
   router.post('/office/new_office', function(req, res) {
-    //console.log(req.body);
+    delete req.body.region
     models.Office.create(req.body).then(function(result) {
       res.redirect("/office");
     });

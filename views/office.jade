@@ -25,6 +25,7 @@ block content
               thead
                 tr.info
                   th.text-center رقم السجل المدني
+                  th.text-center المنطقة
                   th.text-center اسم مكتب الاصدار
                   th.text-center اسم البلدية
                   th.text-center اسم السجل المدني
@@ -34,8 +35,9 @@ block content
                   th.text-center إلغاء
               tbody
               for office in offices
-                tr(id="br-#{office.id}", data-name="#{office.office_name}", data-branch_id="#{office.Branch.id}", data-manucipality_id="#{office.Manucipality.id}", data-latitude="#{office.latitude}", data-longitude="#{office.longitude}")
+                tr(id="br-#{office.id}", data-name="#{office.office_name}", data-branch_id="#{office.Branch.id}", data-manucipality_id="#{office.Manucipality.id}", data-latitude="#{office.latitude}", data-longitude="#{office.longitude}",data-region="#{office.Branch.Region.id}")
                   td.text-center #{office.id}
+                  td.text-center #{office.Branch.Region.region_name}
                   td.text-center #{office.Branch.branch_name}
                   td.text-center #{office.Manucipality.manucipality_name}  
                   td.text-center #{office.office_name} 
@@ -61,11 +63,17 @@ block content
             .form-group
               .row
                 .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label  اختر المنطقة
+                  select#region_add.form-control.selectpicker(name="region", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر المنطقة...
+                    for region in regions
+                      option(value="#{region.id}") #{region.region_name}
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
                   label  اختر مكتب الاصدار
-                  select.form-control.selectpicker(name="BranchId", data-live-search="true", data-size=5)
+                  select#branches_add.form-control.selectpicker(name="BranchId", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') اختر مكتب الاصدار...
-                    for branch in branchs
-                      option(value="#{branch.id}") #{branch.branch_name}
             .form-group
               .row
                 .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
@@ -105,10 +113,18 @@ block content
             .form-group
               .row
                 .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label  اختر المنطقة
+                  select#region_edit.form-control.selectpicker(name="region", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر المنطقة...
+                    for region in regions
+                      option(value="#{region.id}") #{region.region_name}
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
                   label  اختر مكتب الاصار
                   select#edit_office_branch.form-control.selectpicker(name="BranchId", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') اختر مكتب الاصدار...
-                    for branch in branchs
+                    for branch in branches
                       option(value="#{branch.id}") #{branch.branch_name}
             .form-group
               .row

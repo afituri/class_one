@@ -24,6 +24,18 @@ module.exports = function (router) {
     });
   });
 
+  /* Get Branch by ID */
+  router.get('/branch/get_branch/:id', function(req, res) {
+    models.Branch.findAll({
+      where: {
+        status: 1,
+        RegionId: req.params.id
+      }
+    }).then(function(branches){
+      res.send(branches);      
+    })
+  });
+
   /* Add Branches page. */
   router.post('/branch/new_branch', function(req, res) {
     models.Branch.create(req.body).then(function(result) {
