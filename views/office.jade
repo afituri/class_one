@@ -1,56 +1,55 @@
 extends layout
 
 block content
-  .container
-    .row
-      .col-lg-12
-        .panel.panel-default
-          .panel-heading
-            .row
-              .pull-right(style="margin-right: 10px;")
-                h3#h3.panel-title عرض #{title}
-              .col-xs-6.col-md-6
-                form.form#search_office(action="")
-                  .input-group
-                    input.form-control(type='text',name="searchName" placeholder='بحث...')
-                    .input-group-btn
-                      button.btn.btn-default(type="submit")
-                        i.glyphicon.glyphicon-search
-              .pull-left(style="margin-left: 10px;")
-                a.btn.btn-success(href='#add', role='button',data-toggle='modal')
-                  span.glyphicon.glyphicon-plus
-                  span.text-none  إضافة سجل مدني
-          .table-responsive
-            table.table.table-bordred.table-striped.table-condensed
-              thead
-                tr.info
-                  th.text-center رقم السجل المدني
-                  th.text-center المنطقة
-                  th.text-center اسم مكتب الاصدار
-                  th.text-center اسم البلدية
-                  th.text-center اسم السجل المدني
-                  th.text-center خط العرض
-                  th.text-center خط الطول
-                  th.text-center تعديل
-                  th.text-center إلغاء
-              tbody
-              for office in offices
-                tr(id="br-#{office.id}", data-name="#{office.office_name}", data-branch_id="#{office.Branch.id}", data-manucipality_id="#{office.Manucipality.id}", data-latitude="#{office.latitude}", data-longitude="#{office.longitude}",data-region="#{office.Branch.Region.id}")
-                  td.text-center #{office.id}
-                  td.text-center #{office.Branch.Region.region_name}
-                  td.text-center #{office.Branch.branch_name}
-                  td.text-center #{office.Manucipality.manucipality_name}  
-                  td.text-center #{office.office_name} 
-                  td.text-center #{office.latitude} 
-                  td.text-center #{office.longitude}                 
-                  td.text-center
-                    p(data-placement="top", data-toggle="tooltip", title="تعديل")
-                      button.btn.btn-primary.btn-xs.edit_btn(data-title="Edit", data-toggle="modal", data-target="#edit", value="#{office.id}")
-                        span.glyphicon.glyphicon-pencil
-                  td.text-center
-                    p(data-placement="top", data-toggle="tooltip", title="إلغاء")
-                      button#delete_btn.btn.btn-danger.btn-xs(data-title="Delete", data-toggle="modal", data-target="#delete")
-                        span.glyphicon.glyphicon-trash
+  .container-fulid
+    .col-sm-10.col-md-10
+      .panel.panel-default
+        .panel-heading
+          .row
+            .pull-right(style="margin-right: 10px;")
+              h3#h3.panel-title عرض #{title}
+            .col-xs-6.col-md-6
+              form.form#search_office(action="")
+                .input-group
+                  input.form-control(type='text',name="searchName" placeholder='بحث...')
+                  .input-group-btn
+                    button.btn.btn-default(type="submit")
+                      i.glyphicon.glyphicon-search
+            .pull-left(style="margin-left: 10px;")
+              a.btn.btn-success(href='#add', role='button',data-toggle='modal')
+                span.glyphicon.glyphicon-plus
+                span.text-none  إضافة سجل مدني
+        .table-responsive
+          table.table.table-bordred.table-striped.table-condensed
+            thead
+              tr.info
+                th.text-center رقم السجل المدني
+                th.text-center المنطقة
+                th.text-center اسم مكتب الاصدار
+                th.text-center اسم البلدية
+                th.text-center اسم السجل المدني
+                th.text-center خط العرض
+                th.text-center خط الطول
+                th.text-center تعديل
+                th.text-center إلغاء
+            tbody
+            for office in offices
+              tr(id="br-#{office.id}", data-name="#{office.office_name}", data-branch_id="#{office.Branch.id}", data-manucipality_id="#{office.Manucipality.id}", data-latitude="#{office.latitude}", data-longitude="#{office.longitude}",data-region="#{office.Branch.Region.id}")
+                td.text-center #{office.id}
+                td.text-center #{office.Branch.Region.region_name}
+                td.text-center #{office.Branch.branch_name}
+                td.text-center #{office.Manucipality.manucipality_name}  
+                td.text-center #{office.office_name} 
+                td.text-center #{office.latitude} 
+                td.text-center #{office.longitude}                 
+                td.text-center
+                  p(data-placement="top", data-toggle="tooltip", title="تعديل")
+                    button.btn.btn-primary.btn-xs.edit_btn(data-title="Edit", data-toggle="modal", data-target="#edit", value="#{office.id}")
+                      span.glyphicon.glyphicon-pencil
+                td.text-center
+                  p(data-placement="top", data-toggle="tooltip", title="إلغاء")
+                    button#delete_btn.btn.btn-danger.btn-xs(data-title="Delete", data-toggle="modal", data-target="#delete")
+                      span.glyphicon.glyphicon-trash
   #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
     .modal-dialog
       .modal-content

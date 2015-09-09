@@ -4,7 +4,6 @@
 }
 
 body {
-  padding-top: 100px;
   font-family: 'droidkufi', sans-serif;
 }
   
@@ -33,3 +32,13 @@ input[type="text"],input[type="password"]{
   font-size: 100%;
   font-weight: 100;
 }
+
+/*This style for cpanel start*/
+.panel-body { padding:0px; }
+.panel-body table tr td { padding-left: 15px }
+.panel-body .table {margin-bottom: 0px; }
+/*This style for cpanel end*/
+
+/*This style for navigation start*/
+.label,#glyphicon { margin-right:5px; }
+/*This style for navigation end*/
