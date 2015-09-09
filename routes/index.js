@@ -6,7 +6,7 @@ var manucipality = require('./manucipality')(router);
 var job = require('./job')(router);
 var kinship = require('./kinship')(router);
 var branch = require('./branch')(router);
-
+var branch = require('./office')(router);
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
