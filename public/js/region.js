@@ -1,12 +1,12 @@
 $(document).ready(function(){
   
   $("[data-toggle=tooltip]").tooltip();
-
   jQuery.validator.addMethod("arabicLettersOnly", function(value, element) {
-    return this.optional(element) || /^[أ-ي,ﻻ,ء]+$/i.test(value);
+    return this.optional(element) || /^[أ-ي,ﻻ,' ',ء]+$/i.test(value);
   }, "الرجاء ادخال حروف عربية فقط!");
 
-  $("#addReginForm").validate({
+  /*----------- validate in add Region----------*/
+  $("#add_regin_form").validate({
     rules:{
       region_name:{
         required: true,
@@ -27,7 +27,8 @@ $(document).ready(function(){
     },
   });
 
-  $("#editReginForm").validate({
+  /*----------- validate in edit Region----------*/
+  $("#edit_regin_form").validate({
     rules:{
       region_name:{
         required: true,
@@ -48,14 +49,15 @@ $(document).ready(function(){
     },
   });
 
-  $("#searchRegion").validate({
+  /*----------- validate in search Region----------*/
+  $("#search_region").validate({
     rules:{
-      searchName:{
+      search_name:{
         required: true,
       },
     },
     messages:{
-      searchName:{
+      search_name:{
         required: "",
       },
     },
@@ -72,4 +74,28 @@ $(document).ready(function(){
       }
     },
   });
+
+  /*----------- view in modal Region----------*/
+  $('body').on('click', '.edit_btn', function(){
+    var region_id = $(this).val(),
+        region_name= $('#br-'+region_id).data('name');
+    $('#edit_region_name').val(region_name);
+    $('#region_id_edit').val(region_id);
+  });
+
+  /*----------- Delete in modal Region----------*/
+  $('body').on('click', '.delete_btn', function(){
+    var region_id = $(this).val();
+    console.log($(this).val());
+    $("#region_id_delete").val($(this).val());
+  });
+  if($getMsg["msg"]==1){
+    custNotify("success","نجاح","تم حذف منطقة بنجاح","ok-sign","bounceInDown","bounceOutUp");
+    replaceUrl('/region');    
+  } else if ($getMsg["msg"]==2) {
+    custNotify("danger","خطأ","لا يمكن حذف هذه المنطقة لاعتماد كيانات اخرى عليها","ok-sign","bounceIn","bounceOut");
+    replaceUrl('/region');
+  }
+
+
 });

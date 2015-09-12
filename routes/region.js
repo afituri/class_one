@@ -13,8 +13,36 @@ module.exports = function (router) {
   });
 
   /* Add Regions page. */
-  router.post('/region/newRegion', function(req, res) {
-    res.render('region', { title: 'المناطق' });
+  router.post('/region/new_region', function(req, res) {
+    delete req.body.region
+    models.Region.create(req.body).then(function(result) {
+      res.redirect("/region");
+    });
   });
 
+  /* Edit Regions page. */
+  router.post('/region/edit_region', function(req, res) {
+    models.Region.update({
+      region_name: req.body.region_name
+    },{
+      where: {
+        id:req.body.id
+      }
+    }).then(function(result){
+      res.redirect('/region');
+    });
+  });
+
+  /* Delete Regions page. */
+  router.post('/region/delete_region', function(req, res) {
+    models.Region.destroy({
+      where:{
+        id:req.body.id
+      }
+    }).then(function(result){
+      res.redirect('/region?msg=1');
+    }).catch(function(err){
+      res.redirect('/region?msg=2');
+    });
+  });
 }

@@ -1,0 +1,184 @@
+extends layout
+
+block content
+  .container-fulid
+    .col-sm-10.col-md-10
+      .panel.panel-default
+        .panel-heading
+          .row
+            .pull-right(style="margin-right: 10px;")
+              h3#h3.panel-title عرض #{title}
+            .col-xs-6.col-md-6
+              form.form#search_office(action="")
+                .input-group
+                  input.form-control(type='text',name="search_name" placeholder='بحث...')
+                  .input-group-btn
+                    button.btn.btn-default(type="submit")
+                      i.glyphicon.glyphicon-search
+            .pull-left(style="margin-left: 10px;")
+              a.btn.btn-success(href='#add', role='button',data-toggle='modal')
+                span.glyphicon.glyphicon-plus
+                span.text-none  إضافة سجل مدني
+        .table-responsive
+          table.table.table-bordred.table-striped.table-condensed
+            thead
+              tr.info
+                th.text-center رقم السجل المدني
+                th.text-center المنطقة
+                th.text-center اسم مكتب الاصدار
+                th.text-center اسم البلدية
+                th.text-center اسم السجل المدني
+                th.text-center خط العرض
+                th.text-center خط الطول
+                th.text-center تعديل
+                th.text-center إلغاء
+            tbody
+            for office in offices
+              tr(id="br-#{office.id}", data-name="#{office.office_name}", data-branch_id="#{office.Branch.id}", data-manucipality_id="#{office.Manucipality.id}", data-latitude="#{office.latitude}", data-longitude="#{office.longitude}",data-region="#{office.Branch.Region.id}")
+                td.text-center #{office.id}
+                td.text-center #{office.Branch.Region.region_name}
+                td.text-center #{office.Branch.branch_name}
+                td.text-center #{office.Manucipality.manucipality_name}  
+                td.text-center #{office.office_name} 
+                td.text-center #{office.latitude} 
+                td.text-center #{office.longitude}                 
+                td.text-center
+                  p(data-placement="top", data-toggle="tooltip", title="تعديل")
+                    button.btn.btn-primary.btn-xs.edit_btn(data-title="Edit", data-toggle="modal", data-target="#edit", value="#{office.id}")
+                      span.glyphicon.glyphicon-pencil
+                td.text-center
+                  p(data-placement="top", data-toggle="tooltip", title="إلغاء")
+                    button.btn.btn-danger.btn-xs.delete_btn(data-title="Delete", data-toggle="modal", data-target="#delete", value="#{office.id}")
+                      span.glyphicon.glyphicon-trash
+  #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="add", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        form.form#add_office_form(action="/office/new_office", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align إضافة سجل مدني جديد
+          .modal-body
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label  اختر المنطقة
+                  select#region_add.form-control.selectpicker(name="region", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر المنطقة...
+                    for region in regions
+                      option(value="#{region.id}") #{region.region_name}
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label  اختر مكتب الاصدار
+                  select#branches_add.form-control.selectpicker(name="BranchId", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر مكتب الاصدار...
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label  اختر البلدية
+                  select.form-control.selectpicker(name="ManucipalityId", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر البلدية...
+                    for manucipality in manucipalitys
+                      option(value="#{manucipality.id}") #{manucipality.manucipality_name}
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label اسم السجل المدني
+                  input#office_name.form-control(type="text", name="office_name", placeholder="اسم السجل المدني")
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label خط العرض
+                  input#latitude.form-control(type="text", name="latitude", placeholder="خط العرض")
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label خط الطول
+                  input#longitude.form-control(type="text", name="longitude", placeholder="خط الطول")                                        
+          .modal-footer
+            button#add_office_btn.btn.btn-warning.btn-lg(type="submit", style="width: 100%;")
+              span.glyphicon.glyphicon-ok-sign
+              |  إضافة
+  #edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        form.form#edit_office_form(action="/office/edit_office", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align تعديل سجل مدني
+          .modal-body
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label  اختر المنطقة
+                  select#region_edit.form-control.selectpicker(name="region", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر المنطقة...
+                    for region in regions
+                      option(value="#{region.id}") #{region.region_name}
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label  اختر مكتب الاصار
+                  select#edit_office_branch.form-control.selectpicker(name="BranchId", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر مكتب الاصدار...
+                    for branch in branches
+                      option(value="#{branch.id}") #{branch.branch_name}
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label  اختر البلدية
+                  select#edit_office_manucipality.form-control.selectpicker(name="ManucipalityId", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر البلدية...
+                    for manucipality in manucipalitys
+                      option(value="#{manucipality.id}") #{manucipality.manucipality_name}
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label اسم السجل المدني
+                  input#edit_office_name.form-control(type="text", name="office_name", placeholder="اسم السجل المدني")
+                  //- get hidden ID has name office_id_edit
+                  input#office_id_edit.form-control(type="hidden", name="id")
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label خط العرض
+                  input#edit_latitude.form-control(type="text", name="latitude", placeholder="خط العرض")
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label خط الطول
+                  input#edit_longitude.form-control(type="text", name="longitude", placeholder="خط الطول")
+          .modal-footer
+            button#edit_office_btn.btn.btn-info.btn-lg(type="submit", style="width: 100%;")
+              span.glyphicon.glyphicon-ok-sign
+              |  تعديل
+  #delete.modal.fade(tabindex="-1", role="dialog", aria-labelledby="delete", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        form.form#delete_office_form(action="/office/delete_office", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align إلغاء سجل مدني معين
+          .modal-body
+            .alert.alert-danger.h5
+              //- get hidden ID has name office_id_delete
+              input#office_id_delete.form-control(type="hidden", name="id")
+              span.glyphicon.glyphicon-warning-sign
+              |  هل تريد فعلا الغاء السجل المدني هذا ؟
+          .modal-footer
+            button#yesBtn.btn.btn-danger(type="submit")
+              span.glyphicon.glyphicon-ok-sign
+              |  نعم
+            button.btn.btn-default(type="button", data-dismiss="modal")
+              span.glyphicon.glyphicon-remove
+              |  لا
+  script(src='/js/jquery-2.1.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src='/js/bootstrap-select.min.js')
+  script(src='/js/jquery.validate.min.js')
+  script(src='/js/bootstrap-notify.min.js')
+  script(src='/js/helpers.js')
+  script(src='/js/office.js')

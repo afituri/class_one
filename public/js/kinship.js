@@ -3,9 +3,10 @@ $(document).ready(function(){
   $("[data-toggle=tooltip]").tooltip();
 
   jQuery.validator.addMethod("arabicLettersOnly", function(value, element) {
-    return this.optional(element) || /^[أ-ي,ﻻ,ء]+$/i.test(value);
+    return this.optional(element) || /^[أ-ي,ﻻ,' ',ء]+$/i.test(value);
   }, "الرجاء ادخال حروف عربية فقط!");
 
+  /*----------- validate in add Kinship----------*/
   $("#add_kinship_form").validate({
     rules:{
       kinship_name:{
@@ -27,6 +28,7 @@ $(document).ready(function(){
     },
   });
 
+  /*----------- validate in edit Kinship----------*/
   $("#edit_kinship_form").validate({
     rules:{
       kinship_name:{
@@ -48,14 +50,15 @@ $(document).ready(function(){
     },
   });
 
+  /*----------- validate in edit search----------*/
   $("#search_kinship").validate({
     rules:{
-      searchName:{
+      search_name:{
         required: true,
       },
     },
     messages:{
-      searchName:{
+      search_name:{
         required: "",
       },
     },
@@ -73,28 +76,26 @@ $(document).ready(function(){
     },
   });
 
-
-  /*----------- on add kinship----------*/
-  $('#add_kinship_btn').on('click', function(e){
-    e.preventDefault();
-    var obj = $('#add_kinship_form').serializeObject();
-    $.post('/kinship/new_kinship', obj, function(result){
-      var tr= "<tr>"+
-                "<td class='text-center'>"+result.id+"</td>"+
-                "<td class='text-center'> "+result.kinship_name+"</td>"+
-                "<td class='text-center'>"+
-                  "<p data-placement='top' data-toggle='tooltip' title='تعديل'>"+
-                    "<button id='edit_btn' data-title='Edit' data-toggle='modal' data-target='#edit' class='btn btn-primary btn-xs'><span class='glyphicon glyphicon-pencil'></span></button>"+
-                  "</p>"+
-                "</td>"+
-                "<td class='text-center'>"+
-                  "<p data-placement='top' data-toggle='tooltip' title='إلغاء'>"+
-                    "<button id='delete_btn' data-title='Delete' data-toggle='modal' data-target='#delete' class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-trash'></span></button>"+
-                  "</p>"+
-                "</td>"+
-              "</tr>";
-      $('#add').modal('hide');               
-      $('#kinship_table').prepend(tr);
-    });
+ /*----------- view in modal Kinship----------*/
+  $('body').on('click', '.edit_btn', function(){
+    var kinship_id = $(this).val(),
+        kinship_name= $('#br-'+kinship_id).data('name');
+    $('#edit_kinship_name').val(kinship_name);
+    $('#kinship_id_edit').val(kinship_id);
   });
+
+  /*----------- Delete in modal Kinship----------*/
+  $('body').on('click', '.delete_btn', function(){
+    var kinship_id = $(this).val();
+    console.log($(this).val());
+    $("#kinship_id_delete").val($(this).val());
+  });
+  if($getMsg["msg"]==1){
+    custNotify("success","نجاح","تم حذف منطقة بنجاح","ok-sign","bounceInDown","bounceOutUp");
+    replaceUrl('/kinship');    
+  } else if ($getMsg["msg"]==2) {
+    custNotify("danger","خطأ","لا يمكن حذف هذه المنطقة لاعتماد كيانات اخرى عليها","ok-sign","bounceIn","bounceOut");
+    replaceUrl('/kinship');
+  }
+
 });

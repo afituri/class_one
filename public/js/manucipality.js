@@ -3,9 +3,10 @@ $(document).ready(function(){
   $("[data-toggle=tooltip]").tooltip();
 
   jQuery.validator.addMethod("arabicLettersOnly", function(value, element) {
-    return this.optional(element) || /^[أ-ي,ﻻ,ء]+$/i.test(value);
+    return this.optional(element) || /^[أ-ي,ﻻ,' ',ء]+$/i.test(value);
   }, "الرجاء ادخال حروف عربية فقط!");
 
+  /*----------- validate in add Manucipality----------*/
   $("#add_manucipality_form").validate({
     rules:{
       manucipality_name:{
@@ -15,7 +16,7 @@ $(document).ready(function(){
     },
     messages:{
       manucipality_name:{
-        required: "الرجاء ادخال اسم البلدية!",
+        required: "الرجاء ادخال اسم المنطقة!",
         arabicLettersOnly: "الرجاء ادخال حروف عربية فقط!",
       },
     },
@@ -27,6 +28,7 @@ $(document).ready(function(){
     },
   });
 
+  /*----------- validate in edit Manucipality----------*/
   $("#edit_manucipality_form").validate({
     rules:{
       manucipality_name:{
@@ -36,7 +38,7 @@ $(document).ready(function(){
     },
     messages:{
       manucipality_name:{
-        required: "الرجاء ادخال اسم البلدية!",
+        required: "الرجاء ادخال اسم المنطقة!",
         arabicLettersOnly: "الرجاء ادخال حروف عربية فقط!",
       },
     },
@@ -48,14 +50,15 @@ $(document).ready(function(){
     },
   });
 
+  /*----------- validate in edit search----------*/
   $("#search_manucipality").validate({
     rules:{
-      searchName:{
+      search_name:{
         required: true,
       },
     },
     messages:{
-      searchName:{
+      search_name:{
         required: "",
       },
     },
@@ -73,28 +76,27 @@ $(document).ready(function(){
     },
   });
 
-
-  /*----------- on add Manucipality----------*/
-  $('#add_manucipality_btn').on('click', function(e){
-    e.preventDefault();
-    var obj = $('#add_manucipality_form').serializeObject();
-    $.post('/manucipality/new_manucipality', obj, function(result){
-      var tr= "<tr>"+
-                "<td class='text-center'>"+result.id+"</td>"+
-                "<td class='text-center'> "+result.manucipality_name+"</td>"+
-                "<td class='text-center'>"+
-                  "<p data-placement='top' data-toggle='tooltip' title='تعديل'>"+
-                    "<button id='edit_btn' data-title='Edit' data-toggle='modal' data-target='#edit' class='btn btn-primary btn-xs'><span class='glyphicon glyphicon-pencil'></span></button>"+
-                  "</p>"+
-                "</td>"+
-                "<td class='text-center'>"+
-                  "<p data-placement='top' data-toggle='tooltip' title='إلغاء'>"+
-                    "<button id='delete_btn' data-title='Delete' data-toggle='modal' data-target='#delete' class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-trash'></span></button>"+
-                  "</p>"+
-                "</td>"+
-              "</tr>";
-      $('#add').modal('hide');
-      $('#manucipality_table').prepend(tr);
-    });
+  /*----------- view in modal Manucipality----------*/
+  $('body').on('click', '.edit_btn', function(){
+    var manucipality_id = $(this).val(),
+        manucipality_name= $('#br-'+manucipality_id).data('name');
+    $('#edit_manucipality_name').val(manucipality_name);
+    $('#manucipality_id_edit').val(manucipality_id);
   });
+
+  /*----------- Delete in modal Manucipality----------*/
+  $('body').on('click', '.delete_btn', function(){
+    var manucipality_id = $(this).val();
+    console.log($(this).val());
+    $("#manucipality_id_delete").val($(this).val());
+  });
+  if($getMsg["msg"]==1){
+    custNotify("success","نجاح","تم حذف منطقة بنجاح","ok-sign","bounceInDown","bounceOutUp");
+    replaceUrl('/manucipality');    
+  } else if ($getMsg["msg"]==2) {
+    custNotify("danger","خطأ","لا يمكن حذف هذه المنطقة لاعتماد كيانات اخرى عليها","ok-sign","bounceIn","bounceOut");
+    replaceUrl('/manucipality');
+  }
+
+
 });

@@ -19,7 +19,7 @@ module.exports = function (router) {
           status: 1
         }
       }).then(function(regions){
-        res.render('branch', { title: 'المناطق', branches:result.rows, regions: regions});  
+        res.render('branch', { title: 'مكاتب الأصدار', branches:result.rows, regions: regions});  
       })
     });
   });
@@ -42,6 +42,7 @@ module.exports = function (router) {
       res.redirect("/branch");
     });
   });
+
   /* Edit Branches page. */
   router.post('/branch/edit_branch', function(req, res) {
     models.Branch.update({
@@ -55,5 +56,20 @@ module.exports = function (router) {
       res.redirect('/branch');
     });
   });
+
+  /* Delete Branches page. */
+  router.post('/branch/delete_branch', function(req, res) {
+    models.Branch.destroy({
+      where:{
+        id:req.body.id
+      }
+    }).then(function(result){
+      res.redirect('/branch?msg=1');
+    }).catch(function(err){
+      res.redirect('/branch?msg=2');
+    });
+  });
+    
+
 
 }
