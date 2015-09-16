@@ -1,0 +1,126 @@
+extends layout
+
+block content
+  .container-fulid
+    .col-sm-10.col-md-10
+      .panel.panel-default
+        .panel-heading
+          .row
+            .pull-right(style="margin-right: 10px;")
+              h3#h3.panel-title عرض #{title}
+            .col-xs-6.col-md-6
+              form.form#search_city(action="")
+                .input-group
+                  input.form-control(type='text',name="search_name" placeholder='بحث...')
+                  .input-group-btn
+                    button.btn.btn-default(type="submit")
+                      i.glyphicon.glyphicon-search
+            .pull-left(style="margin-left: 10px;")
+              a.btn.btn-success(href='#add', role='button',data-toggle='modal')
+                span.glyphicon.glyphicon-plus
+                span.text-none  إضافة مدينة ميلاد
+        .table-responsive
+          table.table.table-bordred.table-striped.table-condensed
+            thead
+              tr.info
+                th.text-center رقم مدينة الميلاد
+                th.text-center اسم المدينة
+                th.text-center الدولة التابعة لها
+                th.text-center تعديل
+                th.text-center إلغاء
+            tbody
+            for city in cities
+              tr(id="br-#{city.id}", data-name="#{city.city_name}", data-country_id="#{city.Country.id}")
+                td.text-center #{city.id}
+                td.text-center #{city.city_name} 
+                td.text-center #{city.Country.country_name} 
+                td.text-center
+                  p(data-placement="top", data-toggle="tooltip", title="تعديل")
+                    button.btn.btn-primary.btn-xs.edit_btn(data-title="Edit", data-toggle="modal", data-target="#edit", value="#{city.id}")
+                      span.glyphicon.glyphicon-pencil
+                td.text-center
+                  p(data-placement="top", data-toggle="tooltip", title="إلغاء")
+                    button.btn.btn-danger.btn-xs.delete_btn(data-title="Delete", data-toggle="modal", data-target="#delete", value="#{city.id}")
+                      span.glyphicon.glyphicon-trash
+  #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        form.form#add_city_form(action="/city/new_city", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align إضافة مدينة ميلاد جديدة
+          .modal-body
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label  اختر الدولة
+                  select.form-control.selectpicker(name="CountryId", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر الدولة...
+                    for country in countries
+                      option(value="#{country.id}") #{country.country_name}
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label اسم مدينة الميلاد
+                  input#city_name.form-control(type="text", name="city_name", placeholder="اسم مدينة الميلاد")
+          .modal-footer
+            button#add_city_btn.btn.btn-warning.btn-lg(type="submit", style="width: 100%;")
+              span.glyphicon.glyphicon-ok-sign
+              |  إضافة
+  #edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        form.form#edit_city_form(action="/city/edit_city", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align تعديل مدينة ميلاد
+          .modal-body
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label  اختر الدولة
+                  select#edit_city_region.form-control.selectpicker(name="CountryId", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر الدولة...
+                    for country in countries
+                      option(value="#{country.id}") #{country.country_name}
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label اسم مدينة الميلاد
+                  input#edit_city_name.form-control(type="text", name="city_name", placeholder="اسم مدينة الميلاد")
+                  //- get hidden ID has city_id_edit
+                  input#city_id_edit.form-control(type="hidden", name="id")
+          .modal-footer
+            button#edit_city_btn.btn.btn-info.btn-lg(type="submit", style="width: 100%;")
+              span.glyphicon.glyphicon-ok-sign
+              |  تعديل
+  #delete.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        form.form#delete_city_form(action="/city/delete_city", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align إلغاء مدينة ميلاد معينة
+          .modal-body
+            .alert.alert-danger.h5
+              //- get hidden ID has city_id_delete
+              input#city_id_delete.form-control(type="hidden", name="id")               
+              span.glyphicon.glyphicon-warning-sign
+              |  هل تريد فعلا الغاء هذه المدينة ؟
+          .modal-footer
+            button#yesBtn.btn.btn-danger(type="submit")
+              span.glyphicon.glyphicon-ok-sign
+              |  نعم
+            button.btn.btn-default(type="button", data-dismiss="modal")
+              span.glyphicon.glyphicon-remove
+              |  لا
+  script(src='/js/jquery-2.1.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src='/js/bootstrap-select.min.js')
+  script(src='/js/jquery.validate.min.js')
+  script(src='/js/bootstrap-notify.min.js')
+  script(src='/js/helpers.js')
+  script(src='/js/city.js')
