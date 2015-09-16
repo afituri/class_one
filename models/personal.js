@@ -50,6 +50,10 @@ module.exports = function(sequelize, DataTypes) {
           as: 'Father_Nationality', foreignKey : 'Fathernationality_Id',
           onDelete: "SET NULL"
         });
+        Personal.belongsTo(models.City, {
+          as: 'city_birth', foreignKey : 'city_Id',
+          onDelete: "SET NULL"
+        });
         Personal.belongsTo(models.Job, {
           onDelete: "SET NULL",
           foreignKey: {

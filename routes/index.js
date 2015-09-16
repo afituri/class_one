@@ -7,8 +7,12 @@ var job = require('./job')(router);
 var kinship = require('./kinship')(router);
 var branch = require('./branch')(router);
 var branch = require('./office')(router);
-var branch = require('./personal')(router);
 var branch = require('./family')(router);
+var personal = require('./personal')(router);
+var city = require('./city')(router);
+
+
+>>>>>>> 64faa22bcc5ded99f5fc27acaacc2443b581fd4e
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });

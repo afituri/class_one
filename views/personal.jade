@@ -109,39 +109,84 @@ block content
                   label  اختر دولة الميلاد
                   select.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') اختر دولة الميلاد...
+                    for data in country.rows
+                      option(value="", style='color:grey;') #{data.country_name}
                     //- for country in countries
+                    //-   option(value="#{country.id}") #{country.country_name}
+                .col-xs-4.col-md-4
+                  label  اختر مدينة الميلاد
+                  select.form-control.selectpicker(name="city.id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر مدينة الميلاد...
+                    //- for city in cities
                     //-   option(value="#{country.id}") #{country.country_name}
                 .col-xs-4.col-md-4
                   label محل الميلاد   
                   input#personal_birth_Place.form-control(type="text", name="Birth_Place", placeholder="محل الميلاد")
-                .col-xs-4.col-md-4
-                  label مدينة الميلاد
-                  input#personal_Birth_Date.form-control(type="text", name="Birth_Date", placeholder="تاريخ الميلاد")
 
             .form-group
               .row
                 .col-xs-4.col-md-4
-                  label مكان الميلاد
-                  input#personal_motherfamilyname.form-control(type="text", name="Arabic_Motherfamilyname", placeholder="مكان الميلاد")
+                  label  اختر الجنسية 
+                  select.form-control.selectpicker(name="city.id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر الجنسية للفرد...
                 .col-xs-4.col-md-4
-                  label فففف
-                  input#latitude.form-control(type="text", name="latitude", placeholder="خط العرض")
+                  label  اختر صلة القرابة 
+                  select.form-control.selectpicker(name="city.id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر صلة القرابة برب الأسرة...
                 .col-xs-4.col-md-4
-                  label صصصص
-                  input#longitude.form-control(type="text", name="longitude", placeholder="خط الطول")                                        
+                  label  اختر الحالة الإجتماعية
+
+                  select#Socialstatus_Id.form-control.selectpicker(name="city.id", data-live-search="true", data-size=5)
+                    option(value="", style='colr:grey; display:none;') اختر الحالة الإجتماعية...
+                    for data,i in social.social_status
+                      option(value="#{i}", style='colr:grey;') #{data[0]}
             .form-group
               .row
                 .col-xs-4.col-md-4
                   label  اختر الجنس
+                  select.form-control.selectpicker(name="Gender.id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر الجنس...
+                    for data,i in social.gender
+                      option(value="#{i}", style='color:grey;') #{data}
+
+                .col-xs-4.col-md-4
+                  label  اختر الديانة
                   select.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
-                    option(value="", style='color:grey; display:none;') اختر دولة الميلاد...
+                    option(value="", style='color:grey; display:none;') اختر الديانة...
+                    for data,i in social.religion
+                      option(value="#{i}", style='color:grey;') #{data}
                 .col-xs-4.col-md-4
-                  label خط 444
-                  input#latitude.form-control(type="text", name="latitude", placeholder="خط العرض")
+                  label تاريخ الاكتتاب
+                  input#personal_Birth_Date.form-control(type="text", name="Birth_Date", placeholder="تاريخ الميلاد")
+            .form-group
+              .row
                 .col-xs-4.col-md-4
-                  label خط 3333
-                  input#longitude.form-control(type="text", name="longitude", placeholder="خط الطول")                                        
-          
+                  label  اختر جنسية الأم
+                  select.form-control.selectpicker(name="Gender.id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر جنسية أم الفرد...
+                .col-xs-4.col-md-4
+                  label الرقم الوطني
+                  input#personal_Birth_Date.form-control(type="text", name="Birth_Date", placeholder="ادخل الرقم الوطني")
+                .col-xs-4.col-md-4
+                  label  اختر سند القيد
+                  select.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') سند قيد المواطن...
+                    for data,i in social.reg_doc_type
+                      option(value="#{i}", style='color:grey;') #{data}
+                   
+            .form-group
+              .row
+                .col-xs-4.col-md-4
+                  label  اختر نوع الجنسية
+                  select.form-control.selectpicker(name="Gender.id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر نوع الجنسية...
+                .col-xs-4.col-md-4
+                  label تاريخ حصول الجنسية
+                  input#personal_Birth_Date.form-control(type="text", name="Birth_Date", placeholder="تاريخ الجنسية")
+                .col-xs-4.col-md-4
+                  label رقم ملف الجنسية
+                  input#personal_Birth_Date.form-control(type="text", name="Birth_Date", placeholder="ادخل رقم ملف الجنسية")
+
           .modal-footer
             button#add_office_btn.btn.btn-warning.btn-lg(type="submit", style="width: 100%;")
               span.glyphicon.glyphicon-ok-sign
@@ -155,3 +200,4 @@ block content
   script(src='/js/bootstrap-notify.min.js')
   script(src='/js/bootstrap-select.min.js')
   script(src='/js/helpers.js')
+  script(src='/js/personal.js')
