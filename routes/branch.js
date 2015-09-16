@@ -1,29 +1,13 @@
 var models = require("../models");
+var branch = require('../app/branch').branch_mgr;
 module.exports = function (router) {
 
   /* GET branches page. */
   router.get('/branch', function(req, res) {
-    models.Branch.findAndCountAll({
-      where: {
-        status: 1
-      },
-      order: '`id` ASC',
-      include :[{
-        model: models.Region,
-        where: { status: 1 }
-
-      }]
-    }).then(function(result) {
-      models.Region.findAll({
-        where: {
-          status: 1
-        }
-      }).then(function(regions){
-        res.render('branch', { title: 'مكاتب الأصدار', branches:result.rows, regions: regions});  
-      })
+    branch.get_branch(function(result){
+      res.render('branch', { title: 'مكاتب الأصدار', branches:result.branch.rows, regions: result.regions});  
     });
   });
-
   /* Get Branch by ID */
   router.get('/branch/get_branch/:id', function(req, res) {
     models.Branch.findAll({
