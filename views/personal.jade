@@ -109,6 +109,8 @@ block content
                   label  اختر دولة الميلاد
                   select.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') اختر دولة الميلاد...
+                    for data in country.rows
+                      option(value="", style='color:grey;') #{data.country_name}
                     //- for country in countries
                     //-   option(value="#{country.id}") #{country.country_name}
                 .col-xs-4.col-md-4
@@ -133,18 +135,26 @@ block content
                     option(value="", style='color:grey; display:none;') اختر صلة القرابة برب الأسرة...
                 .col-xs-4.col-md-4
                   label  اختر الحالة الإجتماعية
-                  select.form-control.selectpicker(name="city.id", data-live-search="true", data-size=5)
-                    option(value="", style='color:grey; display:none;') اختر الحالة الإجتماعية...
+
+                  select#Socialstatus_Id.form-control.selectpicker(name="city.id", data-live-search="true", data-size=5)
+                    option(value="", style='colr:grey; display:none;') اختر الحالة الإجتماعية...
+                    for data,i in social.social_status
+                      option(value="#{i}", style='colr:grey;') #{data[0]}
             .form-group
               .row
                 .col-xs-4.col-md-4
                   label  اختر الجنس
                   select.form-control.selectpicker(name="Gender.id", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') اختر الجنس...
+                    for data,i in social.gender
+                      option(value="#{i}", style='color:grey;') #{data}
+
                 .col-xs-4.col-md-4
                   label  اختر الديانة
                   select.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') اختر الديانة...
+                    for data,i in social.religion
+                      option(value="#{i}", style='color:grey;') #{data}
                 .col-xs-4.col-md-4
                   label تاريخ الاكتتاب
                   input#personal_Birth_Date.form-control(type="text", name="Birth_Date", placeholder="تاريخ الميلاد")
@@ -161,6 +171,9 @@ block content
                   label  اختر سند القيد
                   select.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') سند قيد المواطن...
+                    for data,i in social.reg_doc_type
+                      option(value="#{i}", style='color:grey;') #{data}
+                   
             .form-group
               .row
                 .col-xs-4.col-md-4
@@ -187,3 +200,4 @@ block content
   script(src='/js/bootstrap-notify.min.js')
   script(src='/js/bootstrap-select.min.js')
   script(src='/js/helpers.js')
+  script(src='/js/personal.js')

@@ -1,21 +1,10 @@
 
 var models = require("../models");
+var constants = require("../data/constants.json");
 module.exports = function (router) {
 
   /* GET personals page. */
   router.get('/personal', function(req, res) {
-    // models.Personal.findAndCountAll({
-    //   where: {
-    //     status: 1
-    //   },
-    //   include :[{
-    //     model: models.Member,
-    //     where: { status: 1 },
-    //     include :[{
-    //       model : models.Kinship,
-    //       where:{status: 1}
-    //     }]
-    //   }]
     models.Member.findAndCountAll({
       where: {
         status: 1
@@ -33,7 +22,13 @@ module.exports = function (router) {
           where: { status: 1 },
       }]
     }).then(function(result) {
-      res.render('personal', { title: 'أفراد الأسرة', personals:result.rows});
+      models.Country.findAndCountAll({
+        where: {
+          status: 1
+        }
+      }).then(function(Country) {
+          res.render('personal', { title: 'أفراد الأسرة', personals:result.rows,social:constants,country:Country});
+      });
     });
   });
 
