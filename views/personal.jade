@@ -3,6 +3,12 @@ extends layout
 block content
   .container-fulid
     .col-sm-10.col-md-10
+      .form-group
+        input.form-control(type="radio", name="family_type", checked="", data-inverse="true", data-label-text="اسر ليبية", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
+        span(style="margin-right:30px;")
+        input.form-control(type="radio", name="family_type", data-inverse="true", data-label-text="اسر مؤقته", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
+        span(style="margin-right:30px;")
+        input.form-control(type="radio", name="family_type", data-inverse="true", data-label-text="اسر اجنبية", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
       .panel.panel-default
         .panel-heading
           .row
@@ -179,11 +185,12 @@ block content
               span.glyphicon.glyphicon-ok-sign
               |  إضافة
 
-
-      
   script(src='/js/jquery-2.1.1.min.js')
   script(src='/js/bootstrap.min.js')
   script(src='/js/jquery.validate.min.js')
   script(src='/js/bootstrap-notify.min.js')
   script(src='/js/bootstrap-select.min.js')
+  script(src='/js/bootstrap-switch.min.js') 
   script(src='/js/helpers.js')
+  script(src='/js/Personal.js')
+

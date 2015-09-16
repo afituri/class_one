@@ -1,5 +1,4 @@
 $(document).ready(function(){
-  
   $("[data-toggle=tooltip]").tooltip();
 
   jQuery.validator.addMethod("arabicLettersOnly", function(value, element) {
@@ -15,3 +14,7 @@ $(document).ready(function(){
     $('#edit_branch_region').selectpicker('val',branch_region);
     $('#edit_branch_name').val(branch_name);
     $('#branch_id_edit').val(branch_id);
+  });
+  $("[name='family_type']").bootstrapSwitch();
+});
+
