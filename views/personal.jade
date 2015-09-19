@@ -3,6 +3,12 @@ extends layout
 block content
   .container-fulid
     .col-sm-10.col-md-10
+      .form-group
+        input.form-control(type="radio", name="family_type", checked="", data-inverse="true", data-label-text="اسر ليبية", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
+        span(style="margin-right:30px;")
+        input.form-control(type="radio", name="family_type", data-inverse="true", data-label-text="اسر مؤقته", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
+        span(style="margin-right:30px;")
+        input.form-control(type="radio", name="family_type", data-inverse="true", data-label-text="اسر اجنبية", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
       .panel.panel-default
         .panel-heading
           .row
@@ -38,7 +44,7 @@ block content
             tbody
             for personal in personals
               tr(id="br-#{personal.Personal.id}", data-Arabic_Firstname="#{personal.Personal.Arabic_Firstname}",data-Arabic_Fathername="#{personal.Personal.Arabic_Fathername}",data-Arabic_Grandfathername="#{personal.Personal.Arabic_Grandfathername}",data-Arabic_Familyname="#{personal.Personal.Arabic_Familyname}",data-Arabic_Motherfirstname="#{personal.Personal.Arabic_Motherfirstname}",data-Birth_Date="#{personal.Personal.Birth_Date}",data-Birth_Place="#{personal.Personal.Birth_Place}")  
-                 //- Personal هو الاوبجكت اللي فيه البيانات المطلوبة
+                //- Personal هو الاوبجكت اللي فيه البيانات المطلوبة
                 td.text-center #{personal.Personal.Arabic_Firstname}
                 td.text-center #{personal.Personal.Arabic_Fathername}
                 td.text-center #{personal.Personal.Arabic_Grandfathername}
@@ -173,7 +179,7 @@ block content
                     option(value="", style='color:grey; display:none;') سند قيد المواطن...
                     for data,i in social.reg_doc_type
                       option(value="#{i}", style='color:grey;') #{data}
-                   
+
             .form-group
               .row
                 .col-xs-4.col-md-4
@@ -192,12 +198,11 @@ block content
               span.glyphicon.glyphicon-ok-sign
               |  إضافة
 
-
-      
   script(src='/js/jquery-2.1.1.min.js')
   script(src='/js/bootstrap.min.js')
   script(src='/js/jquery.validate.min.js')
   script(src='/js/bootstrap-notify.min.js')
   script(src='/js/bootstrap-select.min.js')
+  script(src='/js/bootstrap-switch.min.js') 
   script(src='/js/helpers.js')
   script(src='/js/personal.js')

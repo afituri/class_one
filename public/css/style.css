@@ -6,9 +6,9 @@
 body {
   font-family: 'droidkufi', sans-serif;
 }
-  
+
 .font {
-  font-family: 'droidkufi', sans-serif; 
+  font-family: 'droidkufi', sans-serif;
 }
 
 input[type="text"],input[type="password"]{
@@ -41,14 +41,25 @@ input[type="text"],input[type="password"]{
 
 /*This style for navigation start*/
 .label,#glyphicon { margin-right:5px; }
+.navbar-default {
+    background-color: #ebebeb;
+    border-color: #c0c0c0;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: #555;
+    background-color: #d1d1d1;
+}
 /*This style for navigation end*/
 
 
-.table>tbody>tr.active>td, .table>tbody>tr.active>th, 
-.table>tbody>tr>td.active, .table>tbody>tr>th.active, 
-.table>tfoot>tr.active>td, .table>tfoot>tr.active>th, 
-.table>tfoot>tr>td.active, .table>tfoot>tr>th.active, 
-.table>thead>tr.active>td, .table>thead>tr.active>th, 
+.table>tbody>tr.active>td, .table>tbody>tr.active>th,
+.table>tbody>tr>td.active, .table>tbody>tr>th.active,
+.table>tfoot>tr.active>td, .table>tfoot>tr.active>th,
+.table>tfoot>tr>td.active, .table>tfoot>tr>th.active,
+.table>thead>tr.active>td, .table>thead>tr.active>th,
 .table>thead>tr>td.active, .table>thead>tr>th.active {
     background-color: #f2efee;
+}
+li.active{
+  background-color: #000000;
 }
