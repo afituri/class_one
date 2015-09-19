@@ -5,6 +5,8 @@ module.exports = function (router) {
   /* GET families page. */
   router.get('/family', function (req, res) {
     family.get_family(function (result) {
+      console.log(result.result.rows);
+      console.log(result.offices);
         res.render('family', { title: 'الأسر', familys:result.result.rows,offices: result.offices});
     });
   });
@@ -29,21 +31,13 @@ module.exports = function (router) {
 
   /* Delete Familys page. */
   router.post('/family/delete_family', function (req, res) {
-    models.Family.destroy({
-        where: {
-          id: req.body.id
-        }
-      })
-      .then(function (result) {
-        res.redirect('/family?msg=1');
-      })
-      .catch(function (err) {
-        res.redirect('/family?msg=2');
-      });
-    });
+    family.delete_family(req.body, function (result) {
+      res.redirect(result);
+    })
+  });
 
   /* GET branches page. */
-  router.get('/family', function (req, res) {
+/*  router.get('/family', function (req, res) {
     models.Family.findAndCountAll({
       where: {
         status: 1
@@ -69,7 +63,7 @@ module.exports = function (router) {
         })
       });
     });
-
+*/
   // /* Get Branch by ID */
   // router.get('/family/get_family/:id', function(req, res) {
   //   models.Branch.findAll({
@@ -82,37 +76,6 @@ module.exports = function (router) {
   //   })
   // });
 
-  /* Add Familys page. */
-  router.post('/family/new_family', function (req, res) {
-    models.Family.create(req.body)
-      .then(function (result) {
-        res.redirect("/family");
-      });
-  });
 
-  /* Edit Familys page. */
-  router.post('/family/edit_family', function (req, res) {
-    models.Family.update({
-        FamilyId: req.body.FamilyId
-      } , {
-        where: {
-          id: req.body.id
-        }
-    }).then(function (result) {
-      res.redirect('/family');
-    });
-  });
 
-  /* Delete Familys page. */
-  router.post('/family/delete_family', function (req, res) {
-    models.Family.destroy({
-      where: {
-        id: req.body.id
-      }
-    }).then(function (result) {
-      res.redirect('/family?msg=1');
-    }).catch(function (err) {
-      res.redirect('/family?msg=2');
-    });
-  });
 }

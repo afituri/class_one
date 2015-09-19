@@ -45,14 +45,14 @@ exports.family_mgr = {
   edit_family : function(body,cb){
     models.Family.destroy({
         where: {
-          id: req.body.id
+          id: body.id
         }
       })
       .then(function (result) {
-        res.redirect('/family?msg=1');
+        cb('/family?msg=1');
       })
       .catch(function (err) {
-        res.redirect('/family?msg=2');
+        cb('/family?msg=2');
       });
   },
 
@@ -60,16 +60,18 @@ exports.family_mgr = {
   /*delete family  */
   delete_family : function(body,cb){
     models.Family.destroy({
-      where:{
-        id:body.id
-      }
-    }).then(function(result){
-      cb('/family?msg=1');
-    }).catch(function(err){
-      cb('/family?msg=2');
-    });
+        where: {
+          id: body.id
+        }
+      })
+    // cb its same return  ruslut at page family router
+      .then(function (result) {
+        cb('/family?msg=1');
+      })
+      .catch(function (err) {
+        cb('/family?msg=2');
+      });
   },
-
 
 
 
