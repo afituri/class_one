@@ -94,7 +94,6 @@ $(document).ready(function(){
     $('#edit_auto_generated_id').val(auto_generated_id);
     $('#edit_is_closed').val(is_closed);
     $('#family_id_edit').val(family_id);
-
   });
 
   /*----------- Delete in modal Family----------*/
