@@ -54,7 +54,7 @@ exports.family_mgr = {
       .catch(function (err) {
         res.redirect('/family?msg=2');
       });
-  });
+  },
 
 
   /*delete family  */

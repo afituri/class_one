@@ -2,7 +2,6 @@ var models = require("../models");
 var family = require("../app/family")
   .family_mgr;
 module.exports = function (router) {
-<<<<<<< HEAD
   /* GET families page. */
   router.get('/family', function (req, res) {
     family.get_family(function (result) {
@@ -41,7 +40,7 @@ module.exports = function (router) {
       .catch(function (err) {
         res.redirect('/family?msg=2');
       });
-=======
+    });
 
   /* GET branches page. */
   router.get('/family', function (req, res) {
@@ -102,7 +101,6 @@ module.exports = function (router) {
     }).then(function (result) {
       res.redirect('/family');
     });
->>>>>>> 7c90d35e3710f39794fcafaf0198665c9beedd04
   });
 
   /* Delete Familys page. */
