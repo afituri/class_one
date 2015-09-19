@@ -14,7 +14,7 @@ module.exports = function (router) {
 	});
 	/* Get Branch by ID */
 	router.get('/branch/get_branch/:id', function (req, res) {
-		branch.get_branch_by_region_id(req.parames.id, function (result) {
+		branch.get_branch_by_region_id(req.params.id, function (result) {
 			res.send(result);
 		});
 	});
