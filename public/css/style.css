@@ -63,3 +63,7 @@ input[type="text"],input[type="password"]{
 li.active{
   background-color: #000000;
 }
+
+label{
+  font-weight: 500;
+}
