@@ -92,6 +92,10 @@ block content
                   input#Arabic_Familyname.form-control(type="text", name="Arabic_Familyname", placeholder="لقب العائلة")
             .form-group
               .row
+                .col-xs-4.col-md-4
+                  label  اختر دولة الميلاد
+                  select#.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر دولة الميلاد...
                 .col-xs-3.col-md-3
                   label دولة الميلاد
                   select.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
