@@ -1,126 +1,125 @@
 extends layout
-
 block content
-  .container-fulid
-    .col-sm-10.col-md-10
-      .panel.panel-default
-        .panel-heading
-          .row
-            .pull-right(style="margin-right: 10px;")
-              h3#h3.panel-title عرض #{title}
-            .col-xs-6.col-md-6
-              form.form#search_branch(action="")
-                .input-group
-                  input.form-control(type='text',name="search_name" placeholder='بحث...')
-                  .input-group-btn
-                    button.btn.btn-default(type="submit")
-                      i.glyphicon.glyphicon-search
-            .pull-left(style="margin-left: 10px;")
-              a.btn.btn-success(href='#add', role='button',data-toggle='modal')
-                span.glyphicon.glyphicon-plus
-                span.text-none  إضافة مكتب إصدار
-        .table-responsive
-          table.table.table-bordred.table-striped.table-condensed
-            thead
-              tr.info
-                th.text-center رقم مكتب الاصدار
-                th.text-center اسم المنطقة
-                th.text-center اسم مكتب الاصدار
-                th.text-center تعديل
-                th.text-center إلغاء
-            tbody
-            for branch in branches
-              tr(id="br-#{branch.id}", data-name="#{branch.branch_name}", data-region_id="#{branch.Region.id}")
-                td.text-center #{branch.id}
-                td.text-center #{branch.Region.region_name} 
-                td.text-center #{branch.branch_name} 
-                td.text-center
-                  p(data-placement="top", data-toggle="tooltip", title="تعديل")
-                    button.btn.btn-primary.btn-xs.edit_btn(data-title="Edit", data-toggle="modal", data-target="#edit", value="#{branch.id}")
-                      span.glyphicon.glyphicon-pencil
-                td.text-center
-                  p(data-placement="top", data-toggle="tooltip", title="إلغاء")
-                    button.btn.btn-danger.btn-xs.delete_btn(data-title="Delete", data-toggle="modal", data-target="#delete", value="#{branch.id}")
-                      span.glyphicon.glyphicon-trash
-  #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
-    .modal-dialog
-      .modal-content
-        form.form#add_branch_form(action="/branch/new_branch", method="post", accept-charset="utf-8", role="form")
-          .modal-header
-            button.close(type="button", data-dismiss="modal", aria-hidden="true")
-              span.glyphicon.glyphicon-remove(aria-hidden="true")
-            h4.modal-title.custom_align إضافة مكتب إصدار جديد
-          .modal-body
-            .form-group
-              .row
-                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
-                  label  اختر المنطقة
-                  select.form-control.selectpicker(name="RegionId", data-live-search="true", data-size=5)
-                    option(value="", style='color:grey; display:none;') اختر المنطقة...
-                    for region in regions
-                      option(value="#{region.id}") #{region.region_name}
-            .form-group
-              .row
-                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
-                  label اسم مكتب الاصدار
-                  input#branch_name.form-control(type="text", name="branch_name", placeholder="اسم مكتب الاصدار")
-          .modal-footer
-            button#add_branch_btn.btn.btn-warning.btn-lg(type="submit", style="width: 100%;")
-              span.glyphicon.glyphicon-ok-sign
-              |  إضافة
-  #edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
-    .modal-dialog
-      .modal-content
-        form.form#edit_branch_form(action="/branch/edit_branch", method="post", accept-charset="utf-8", role="form")
-          .modal-header
-            button.close(type="button", data-dismiss="modal", aria-hidden="true")
-              span.glyphicon.glyphicon-remove(aria-hidden="true")
-            h4.modal-title.custom_align تعديل مكتب الإصدار
-          .modal-body
-            .form-group
-              .row
-                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
-                  label  اختر المنطقة
-                  select#edit_branch_region.form-control.selectpicker(name="RegionId", data-live-search="true", data-size=5)
-                    option(value="", style='color:grey; display:none;') اختر المنطقة...
-                    for region in regions
-                      option(value="#{region.id}") #{region.region_name}
-            .form-group
-              .row
-                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
-                  label اسم مكتب الاصدار
-                  input#edit_branch_name.form-control(type="text", name="branch_name", placeholder="اسم مكتب الاصدار")
-                  //- get hidden ID has branch_id_edit
-                  input#branch_id_edit.form-control(type="hidden", name="id")
-          .modal-footer
-            button#edit_branch_btn.btn.btn-info.btn-lg(type="submit", style="width: 100%;")
-              span.glyphicon.glyphicon-ok-sign
-              |  تعديل
-  #delete.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
-    .modal-dialog
-      .modal-content
-        form.form#delete_branch_form(action="/branch/delete_branch", method="post", accept-charset="utf-8", role="form")
-          .modal-header
-            button.close(type="button", data-dismiss="modal", aria-hidden="true")
-              span.glyphicon.glyphicon-remove(aria-hidden="true")
-            h4.modal-title.custom_align إلغاء مكتب أصدار معين
-          .modal-body
-            .alert.alert-danger.h5
-              //- get hidden ID has branch_id_delete
-              input#branch_id_delete.form-control(type="hidden", name="id")               
-              span.glyphicon.glyphicon-warning-sign
-              |  هل تريد فعلا الغاء هذا المكتب ؟
-          .modal-footer
-            button#yesBtn.btn.btn-danger(type="submit")
-              span.glyphicon.glyphicon-ok-sign
-              |  نعم
-            button.btn.btn-default(type="button", data-dismiss="modal")
-              span.glyphicon.glyphicon-remove
-              |  لا
-  script(src='/js/jquery-2.1.1.min.js')
-  script(src='/js/bootstrap.min.js')
-  script(src='/js/bootstrap-select.min.js')
-  script(src='/js/jquery.validate.min.js')
-  script(src='/js/bootstrap-notify.min.js')
-  script(src='/js/helpers.js')
-  script(src='/js/branch.js')
+	.container-fulid
+		.col-sm-10.col-md-10
+			.panel.panel-default
+				.panel-heading
+					.row
+						.pull-right(style="margin-right: 10px;")
+							h3#h3.panel-title عرض #{title}
+						.col-xs-6.col-md-6
+							form.form#search_branch(action="")
+								.input-group
+									input.form-control(type='text',name="search_name" placeholder='بحث...')
+									.input-group-btn
+										button.btn.btn-default(type="submit")
+											i.glyphicon.glyphicon-search
+						.pull-left(style="margin-left: 10px;")
+							a.btn.btn-success(href='#add', role='button',data-toggle='modal')
+								span.glyphicon.glyphicon-plus
+								span.text-none  إضافة مكتب إصدار
+				.table-responsive
+					table.table.table-bordred.table-striped.table-condensed
+						thead
+							tr.info
+								th.text-center رقم مكتب الاصدار
+								th.text-center اسم المنطقة
+								th.text-center اسم مكتب الاصدار
+								th.text-center تعديل
+								th.text-center إلغاء
+						tbody
+						for branch in branches
+							tr(id="br-#{branch.id}", data-name="#{branch.branch_name}", data-region_id="#{branch.Region.id}")
+								td.text-center #{branch.id}
+								td.text-center #{branch.Region.region_name} 
+								td.text-center #{branch.branch_name} 
+								td.text-center
+									p(data-placement="top", data-toggle="tooltip", title="تعديل")
+										button.btn.btn-primary.btn-xs.edit_btn(data-title="Edit", data-toggle="modal", data-target="#edit", value="#{branch.id}")
+											span.glyphicon.glyphicon-pencil
+								td.text-center
+									p(data-placement="top", data-toggle="tooltip", title="إلغاء")
+										button.btn.btn-danger.btn-xs.delete_btn(data-title="Delete", data-toggle="modal", data-target="#delete", value="#{branch.id}")
+											span.glyphicon.glyphicon-trash
+	#add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+		.modal-dialog
+			.modal-content
+				form.form#add_branch_form(action="/branch/new_branch", method="post", accept-charset="utf-8", role="form")
+					.modal-header
+						button.close(type="button", data-dismiss="modal", aria-hidden="true")
+							span.glyphicon.glyphicon-remove(aria-hidden="true")
+						h4.modal-title.custom_align إضافة مكتب إصدار جديد
+					.modal-body
+						.form-group
+							.row
+								.col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+									label  اختر المنطقة
+									select.form-control.selectpicker(name="RegionId", data-live-search="true", data-size=5)
+										option(value="", style='color:grey; display:none;') اختر المنطقة...
+										for region in regions
+											option(value="#{region.id}") #{region.region_name}
+						.form-group
+							.row
+								.col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+									label اسم مكتب الاصدار
+									input#branch_name.form-control(type="text", name="branch_name", placeholder="اسم مكتب الاصدار")
+					.modal-footer
+						button#add_branch_btn.btn.btn-warning.btn-lg(type="submit", style="width: 100%;")
+							span.glyphicon.glyphicon-ok-sign
+							|  إضافة
+	#edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+		.modal-dialog
+			.modal-content
+				form.form#edit_branch_form(action="/branch/edit_branch", method="post", accept-charset="utf-8", role="form")
+					.modal-header
+						button.close(type="button", data-dismiss="modal", aria-hidden="true")
+							span.glyphicon.glyphicon-remove(aria-hidden="true")
+						h4.modal-title.custom_align تعديل مكتب الإصدار
+					.modal-body
+						.form-group
+							.row
+								.col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+									label  اختر المنطقة
+									select#edit_branch_region.form-control.selectpicker(name="RegionId", data-live-search="true", data-size=5)
+										option(value="", style='color:grey; display:none;') اختر المنطقة...
+										for region in regions
+											option(value="#{region.id}") #{region.region_name}
+						.form-group
+							.row
+								.col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+									label اسم مكتب الاصدار
+									input#edit_branch_name.form-control(type="text", name="branch_name", placeholder="اسم مكتب الاصدار")
+									//- get hidden ID has branch_id_edit
+									input#branch_id_edit.form-control(type="hidden", name="id")
+					.modal-footer
+						button#edit_branch_btn.btn.btn-info.btn-lg(type="submit", style="width: 100%;")
+							span.glyphicon.glyphicon-ok-sign
+							|  تعديل
+	#delete.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+		.modal-dialog
+			.modal-content
+				form.form#delete_branch_form(action="/branch/delete_branch", method="post", accept-charset="utf-8", role="form")
+					.modal-header
+						button.close(type="button", data-dismiss="modal", aria-hidden="true")
+							span.glyphicon.glyphicon-remove(aria-hidden="true")
+						h4.modal-title.custom_align إلغاء مكتب أصدار معين
+					.modal-body
+						.alert.alert-danger.h5
+							//- get hidden ID has branch_id_delete
+							input#branch_id_delete.form-control(type="hidden", name="id")               
+							span.glyphicon.glyphicon-warning-sign
+							|  هل تريد فعلا الغاء هذا المكتب ؟
+					.modal-footer
+						button#yesBtn.btn.btn-danger(type="submit")
+							span.glyphicon.glyphicon-ok-sign
+							|  نعم
+						button.btn.btn-default(type="button", data-dismiss="modal")
+							span.glyphicon.glyphicon-remove
+							|  لا
+	script(src='/js/jquery-2.1.1.min.js')
+	script(src='/js/bootstrap.min.js')
+	script(src='/js/bootstrap-select.min.js')
+	script(src='/js/jquery.validate.min.js')
+	script(src='/js/bootstrap-notify.min.js')
+	script(src='/js/helpers.js')
+	script(src='/js/branch.js')

@@ -1,7 +1,6 @@
 
 var models = require("../models");
 module.exports = function (router) {
-
   /* GET Jobs page. */
   router.get('/job', function(req, res) {
     models.Job.findAndCountAll({

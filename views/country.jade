@@ -1,119 +1,118 @@
 extends layout
-
 block content
-  .container-fulid
-    .col-sm-10.col-md-10
-      .panel.panel-default
-        .panel-heading
-          .row
-            .pull-right(style="margin-right: 10px;")
-              h3#h3.panel-title عرض #{title}
-            .col-xs-6.col-md-6
-              form.form#search_country(action="")
-                .input-group
-                  input.form-control(type='text',name="search_name" placeholder='بحث...')
-                  .input-group-btn
-                    button.btn.btn-default(type="submit")
-                      i.glyphicon.glyphicon-search
-            .pull-left(style="margin-left: 10px;")
-              a.btn.btn-success(href='#add', role='button',data-toggle='modal')
-                span.glyphicon.glyphicon-plus
-                span.text-none  إضافة بلد ميلاد
-        .table-responsive
-          table.table.table-bordred.table-striped.table-condensed
-            thead
-              tr.info
-                th.text-center التسلسل
-                th.text-center بلد الميلاد
-                th.text-center  الجنسية ذكور
-                th.text-center الجنسية اناث
-                th.text-center تعديل
-                th.text-center إلغاء
-            tbody
-            for country in countries
-              tr(id="br-#{country.id}", data-name="#{country.country_name}" , data-nationality_male="#{country.nationality_male}", data-nationality_female="#{country.nationality_female}")
-                td.text-center #{country.id}
-                td.text-center #{country.country_name} 
-                td.text-center #{country.nationality_male}
-                td.text-center #{country.nationality_female} 
-                td.text-center
-                  p(data-placement="top", data-toggle="tooltip", title="تعديل")
-                    button.btn.btn-primary.btn-xs.edit_btn(data-title="Edit", data-toggle="modal", data-target="#edit", value="#{country.id}")
-                      span.glyphicon.glyphicon-pencil
-                td.text-center
-                  p(data-placement="top", data-toggle="tooltip", title="إلغاء")
-                    button.btn.btn-danger.btn-xs.delete_btn(data-title="Delete", data-toggle="modal", data-target="#delete", value="#{country.id}")
-                      span.glyphicon.glyphicon-trash
-  #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="add", aria-hidden="true")
-    .modal-dialog
-      .modal-content
-        form.form#add_country_form(action="/country/new_country", method="post", accept-charset="utf-8", role="form")
-          .modal-header
-            button.close(type="button", data-dismiss="modal", aria-hidden="true")
-              span.glyphicon.glyphicon-remove(aria-hidden="true")
-            h4.modal-title.custom_align إضافة بلد ميلاد جديد 
-          .modal-body
-            .form-group
-              .row
-                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
-                  label بلد الميلاد
-                  input#country_name.form-control(type="text", name="country_name", placeholder="اسم بلد الميلاد")
-                  labe2 الجنسية ذكور
-                  input#nationality_male.form-control(type="text", name="nationality_male", placeholder="جنسية رجال")
-                  labe3 الجنسية إناث
-                  input#nationality_female.form-control(type="text", name="nationality_female", placeholder="الجنسية اناث")
-          .modal-footer
-            button#add_country_btn.btn.btn-warning.btn-lg(type="submit", style="width: 100%;")
-              span.glyphicon.glyphicon-ok-sign
-              |  إضافة
-  #edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
-    .modal-dialog
-      .modal-content
-        form.form#edit_country_form(action="/country/edit_country", method="post", accept-charset="utf-8", role="form")
-          .modal-header
-            button.close(type="button", data-dismiss="modal", aria-hidden="true")
-              span.glyphicon.glyphicon-remove(aria-hidden="true")
-            h4.modal-title.custom_align تعديل بلد ميلاد
-          .modal-body
-            .form-group
-              .row
-                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
-                  label اسم بلد الميلاد
-                  input#edit_country_name.form-control(type="text", name="country_name", placeholder="بلد الميلاد")
-                  labe2 الجنسية ذكور
-                  input#edit_nationality_male.form-control(type="text", name="nationality_male", placeholder="الجنسية رجال")
-                  labe3 الجنسية إناث
-                  input#edit_nationality_female.form-control(type="text", name="nationality_female", placeholder="الجنسية اناث")
-                  //- get hidden ID has country_id_edit
-                  input#country_id_edit.form-control(type="hidden", name="id")
-          .modal-footer
-            button#edit_country_btn.btn.btn-info.btn-lg(type="submit", style="width: 100%;")
-              span.glyphicon.glyphicon-ok-sign
-              |  تعديل
-  #delete.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
-    .modal-dialog
-      .modal-content
-        form.form#delete_country_form(action="/country/delete_country", method="post", accept-charset="utf-8", role="form")
-          .modal-header
-            button.close(type="button", data-dismiss="modal", aria-hidden="true")
-              span.glyphicon.glyphicon-remove(aria-hidden="true")
-            h4.modal-title.custom_align إلغاء بلد ميلاد
-          .modal-body
-            .alert.alert-danger.h5
-              //- get hidden ID has country_id_delete
-              input#country_id_delete.form-control(type="hidden", name="id")  
-              span.glyphicon.glyphicon-warning-sign
-              |  هل تريد فعلا الغاء بلد الميلاد ؟
-          .modal-footer
-            button#yesBtn.btn.btn-danger(type="submit")
-              span.glyphicon.glyphicon-ok-sign
-              |  نعم
-            button.btn.btn-default(type="button", data-dismiss="modal")
-              span.glyphicon.glyphicon-remove
-              |  لا
-  script(src='/js/jquery-2.1.1.min.js')
-  script(src='/js/bootstrap.min.js')
-  script(src='/js/jquery.validate.min.js')
-  script(src='/js/bootstrap-notify.min.js')
-  script(src='/js/helpers.js')
-  script(src='/js/country.js')
+	.container-fulid
+		.col-sm-10.col-md-10
+			.panel.panel-default
+				.panel-heading
+					.row
+						.pull-right(style="margin-right: 10px;")
+				h3#h3.panel-title عرض #{title}
+					.col-xs-6.col-md-6
+						form.form#search_country(action="")
+							.input-group
+								input.form-control(type='text',name="search_name" placeholder='بحث...')
+								.input-group-btn
+									button.btn.btn-default(type="submit")
+										i.glyphicon.glyphicon-search
+					.pull-left(style="margin-left: 10px;")
+						a.btn.btn-success(href='#add', role='button',data-toggle='modal')
+							span.glyphicon.glyphicon-plus
+							span.text-none  إضافة بلد ميلاد
+				.table-responsive
+					table.table.table-bordred.table-striped.table-condensed
+						thead
+							tr.info
+								th.text-center التسلسل
+								th.text-center بلد الميلاد
+								th.text-center  الجنسية ذكور
+								th.text-center الجنسية اناث
+								th.text-center تعديل
+								th.text-center إلغاء
+						tbody
+						for country in countries
+							tr(id="br-#{country.id}", data-name="#{country.country_name}" , data-nationality_male="#{country.nationality_male}", data-nationality_female="#{country.nationality_female}")
+								td.text-center #{country.id}
+								td.text-center #{country.country_name} 
+								td.text-center #{country.nationality_male}
+								td.text-center #{country.nationality_female} 
+								td.text-center
+									p(data-placement="top", data-toggle="tooltip", title="تعديل")
+										button.btn.btn-primary.btn-xs.edit_btn(data-title="Edit", data-toggle="modal", data-target="#edit", value="#{country.id}")
+											span.glyphicon.glyphicon-pencil
+								td.text-center
+									p(data-placement="top", data-toggle="tooltip", title="إلغاء")
+										button.btn.btn-danger.btn-xs.delete_btn(data-title="Delete", data-toggle="modal", data-target="#delete", value="#{country.id}")
+											span.glyphicon.glyphicon-trash
+	#add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="add", aria-hidden="true")
+		.modal-dialog
+			.modal-content
+				form.form#add_country_form(action="/country/new_country", method="post", accept-charset="utf-8", role="form")
+					.modal-header
+						button.close(type="button", data-dismiss="modal", aria-hidden="true")
+							span.glyphicon.glyphicon-remove(aria-hidden="true")
+						h4.modal-title.custom_align إضافة بلد ميلاد جديد 
+					.modal-body
+						.form-group
+							.row
+								.col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+									label بلد الميلاد
+									input#country_name.form-control(type="text", name="country_name", placeholder="اسم بلد الميلاد")
+									labe2 الجنسية ذكور
+									input#nationality_male.form-control(type="text", name="nationality_male", placeholder="جنسية رجال")
+									labe3 الجنسية إناث
+									input#nationality_female.form-control(type="text", name="nationality_female", placeholder="الجنسية اناث")
+					.modal-footer
+						button#add_country_btn.btn.btn-warning.btn-lg(type="submit", style="width: 100%;")
+							span.glyphicon.glyphicon-ok-sign
+							|  إضافة
+	#edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+		.modal-dialog
+			.modal-content
+				form.form#edit_country_form(action="/country/edit_country", method="post", accept-charset="utf-8", role="form")
+					.modal-header
+						button.close(type="button", data-dismiss="modal", aria-hidden="true")
+							span.glyphicon.glyphicon-remove(aria-hidden="true")
+						h4.modal-title.custom_align تعديل بلد ميلاد
+					.modal-body
+						.form-group
+							.row
+								.col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+									label اسم بلد الميلاد
+									input#edit_country_name.form-control(type="text", name="country_name", placeholder="بلد الميلاد")
+									labe2 الجنسية ذكور
+									input#edit_nationality_male.form-control(type="text", name="nationality_male", placeholder="الجنسية رجال")
+									labe3 الجنسية إناث
+									input#edit_nationality_female.form-control(type="text", name="nationality_female", placeholder="الجنسية اناث")
+									//- get hidden ID has country_id_edit
+									input#country_id_edit.form-control(type="hidden", name="id")
+					.modal-footer
+						button#edit_country_btn.btn.btn-info.btn-lg(type="submit", style="width: 100%;")
+							span.glyphicon.glyphicon-ok-sign
+							|  تعديل
+	#delete.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+		.modal-dialog
+			.modal-content
+				form.form#delete_country_form(action="/country/delete_country", method="post", accept-charset="utf-8", role="form")
+					.modal-header
+						button.close(type="button", data-dismiss="modal", aria-hidden="true")
+							span.glyphicon.glyphicon-remove(aria-hidden="true")
+						h4.modal-title.custom_align إلغاء بلد ميلاد
+					.modal-body
+						.alert.alert-danger.h5
+							//- get hidden ID has country_id_delete
+							input#country_id_delete.form-control(type="hidden", name="id")  
+							span.glyphicon.glyphicon-warning-sign
+							|  هل تريد فعلا الغاء بلد الميلاد ؟
+					.modal-footer
+						button#yesBtn.btn.btn-danger(type="submit")
+							span.glyphicon.glyphicon-ok-sign
+							|  نعم
+						button.btn.btn-default(type="button", data-dismiss="modal")
+							span.glyphicon.glyphicon-remove
+							|  لا
+	script(src='/js/jquery-2.1.1.min.js')
+	script(src='/js/bootstrap.min.js')
+	script(src='/js/jquery.validate.min.js')
+	script(src='/js/bootstrap-notify.min.js')
+	script(src='/js/helpers.js')
+	script(src='/js/country.js')
