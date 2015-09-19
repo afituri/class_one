@@ -107,7 +107,7 @@ block content
               .row
                 .col-xs-4.col-md-4
                   label  اختر دولة الميلاد
-                  select.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
+                  select#.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') اختر دولة الميلاد...
                     for data in country.rows
                       option(value="", style='color:grey;') #{data.country_name}
