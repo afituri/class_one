@@ -40,21 +40,22 @@ exports.branch_mgr = {
 
   add_branch: function (body, cb) {
     models.Branch.create(body)
-      .then(function (result) {
-        cb("/branch");
-      });
+    .then(function (result) {
+      cb("/branch?msg=3");
+    });
   },
 
   update_branch: function (body, cb) {
     models.Branch.update({
       branch_name: body.branch_name,
       RegionId: body.RegionId
-      } , {
-        where: {
-          id: body.id
-        }
-    }).then(function (result) {
-      cb('/branch');
+    },{
+      where: {
+        id: body.id
+      }
+    })
+    .then(function (result) {
+      cb('/branch?msg=4');
     });
   },
 
@@ -69,4 +70,5 @@ exports.branch_mgr = {
       cb('/branch?msg=2');
     });
   },
+  
 };

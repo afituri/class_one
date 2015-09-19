@@ -5,47 +5,64 @@ $(document).ready(function(){
     return this.optional(element) || /^[أ-ي,ﻻ,' ',ء]+$/i.test(value);
   }, "الرجاء ادخال حروف عربية فقط!");
 
-  /*----------- validate in add Office----------*/
-  $("#add_office_form").validate({
+  /*----------- validate in add & edit Office----------*/
+  $("#add_office_form, #edit_office_form").validate({
+    ignore: ':not(select:hidden, input:visible, textarea:visible)',
     rules:{
+      region:{
+        required: true
+      },
+      BranchId:{
+        required: true
+      },
+      ManucipalityId:{
+        required: true
+      },
       office_name:{
         required: true,
         arabicLettersOnly: true,
       },
+      latitude:{
+        required: true
+      },
+      longitude:{
+        required:true
+      },
     },
     messages:{
+      region:{
+        required: "الرجاء اختيار المنطقة!"
+      },
+      BranchId:{
+        required: "الرجاء اختيار مكتب الاصدار!"
+      },
+      ManucipalityId:{
+        required: "الرجاء اختيار البلدية!"
+      },
       office_name:{
         required: "الرجاء ادخال اسم المنطقة!",
         arabicLettersOnly: "الرجاء ادخال حروف عربية فقط!",
       },
+      latitude:{
+        required: "الرجاء ادخال خط العرض!"
+      },
+      longitude:{
+        required: "الرجاء ادخال خط الطول!"
+      },
+    },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
     },
     highlight: function(element) {
       $(element).closest('.row').addClass('has-error');
     },
     unhighlight: function(element) {
       $(element).closest('.row').removeClass('has-error');
-    },
-  });
-
-  /*----------- validate in edit Office----------*/
-  $("#edit_office_form").validate({
-    rules:{
-      office_name:{
-        required: true,
-        arabicLettersOnly: true,
-      },
-    },
-    messages:{
-      office_name:{
-        required: "الرجاء ادخال اسم المنطقة!",
-        arabicLettersOnly: "الرجاء ادخال حروف عربية فقط!",
-      },
-    },
-    highlight: function(element) {
-      $(element).closest('.row').addClass('has-error').removeClass('has-success');
-    },
-    unhighlight: function(element) {
-      $(element).closest('.row').removeClass('has-error').addClass('has-success');
     },
   });
 
@@ -123,13 +140,22 @@ $(document).ready(function(){
     console.log($(this).val());
     $("#office_id_delete").val($(this).val());
   });
-  if($getMsg["msg"]==1){
-    custNotify("success","نجاح","تم حذف منطقة بنجاح","ok-sign","bounceInDown","bounceOutUp");
+  if ($getMsg["msg"]==1){
+    custNotify("success","نجاح","تم حذف السجل المدني بنجاح","ok-sign","bounceInDown","bounceOutUp");
     replaceUrl('/office');    
   } else if ($getMsg["msg"]==2) {
-    custNotify("danger","خطأ","لا يمكن حذف هذه المنطقة لاعتماد كيانات اخرى عليها","ok-sign","bounceIn","bounceOut");
+    custNotify("danger","خطأ","لا يمكن حذف هذا السجل المدني لاعتماد كيانات اخرى عليها","warning-sign","bounceIn","bounceOut");
+    replaceUrl('/office');
+  } else if ($getMsg["msg"]==3){
+    custNotify("success","نجاح","تمت إضافة سجل مدني جديد بنجاح","ok-sign","bounceInDown","bounceOutUp");
+    replaceUrl('/office');    
+  } else if ($getMsg["msg"]==4) {
+    custNotify("success","نجاح","تم تعديل السجل المدني بنجاح","ok-sign","bounceInDown","bounceOutUp");
     replaceUrl('/office');
   }
 
+  $('.selectpicker').selectpicker().change(function(){
+    $(this).valid()
+  });
 
 });

@@ -23,40 +23,40 @@ exports.office_mgr = {
         where: {
           status: 1
         }
-        }]
-        }).then(function (offices) {
-          models.Region.findAll({
+      }]
+    }).then(function (offices) {
+      models.Region.findAll({
+        where: {
+          status: 1
+        }
+      }).then(function (regions) {
+        models.Branch.findAll({
+          where: {
+            status: 1
+          }
+        }).then(function (branches) {
+          models.Manucipality.findAll({
             where: {
               status: 1
             }
-          }).then(function (regions) {
-            models.Branch.findAll({
-              where: {
-                status: 1
-              }
-            }).then(function (branches) {
-              models.Manucipality.findAll({
-                where: {
-                  status: 1
-                  }
-                }).then(function (manucipalitys) {
-                  cb({
-                    offices: offices,
-                    regions: regions,
-                    branches: branches,
-                    manucipalitys: manucipalitys
-                  });
-                });
-              });
+          }).then(function (manucipalitys) {
+            cb({
+              offices: offices,
+              regions: regions,
+              branches: branches,
+              manucipalitys: manucipalitys
+            });
           });
+        });
       });
-    },
+    });
+  },
   // add new office
   add_office: function (body) {
     models.Office.create(body)
-      .then(function (result) {
-        cb("/office");
-      });
+    .then(function (result) {
+      cb("/office?msg=3");
+    });
   },
   // update office
   update_office: function (body, cb) {
@@ -66,12 +66,12 @@ exports.office_mgr = {
       ManucipalityId: body.ManucipalityId,
       latitude: body.latitude,
       longitude: body.longitude
-    } , {
+    },{
       where: {
         id: body.id
       }
     }).then(function (result) {
-      cb('/office');
+      cb('/office?msg=4');
     });
   },
   // delete office

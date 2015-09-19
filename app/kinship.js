@@ -1,13 +1,6 @@
 var models = require("../models");
 exports.kinship_mgr = {
-
-  add_kinship: function (body, cb) {
-    models.Kinship.create(body)
-      .then(function (result) {
-        cb("/kinship");
-      });
-  },
-
+  /* get  all kinship */
   get_kinship: function (cb) {
     models.Kinship.findAndCountAll({
       where: {
@@ -18,15 +11,23 @@ exports.kinship_mgr = {
     });
   },
 
+  add_kinship: function (body, cb) {
+    models.Kinship.create(body)
+    .then(function (result) {
+      cb("/kinship?msg=3");
+    });
+  },
+
   update_kinship: function (body, cb) {
     models.Kinship.update({
       kinship_name: body.kinship_name
-    } , {
+    }, {
       where: {
         id: body.id
       }
-    }).then(function (result) {
-      cb('/kinship');
+    })
+    .then(function (result) {
+      cb('/kinship?msg=4');
     });
   },
 
@@ -41,4 +42,5 @@ exports.kinship_mgr = {
       cb('/kinship?msg=2');
     });
   },
+
 };

@@ -6,7 +6,8 @@ exports.manucipality_mgr = {
       where: {
         status: 1
       }
-    }).then(function (result) {
+    })
+    .then(function (result) {
       cb(result);
     });
   },
@@ -14,19 +15,20 @@ exports.manucipality_mgr = {
   add_manucipality: function (body, cb) {
     models.Manucipality.create(body)
     .then(function (result) {
-      cb("/manucipality");
+      cb("/manucipality?msg=3");
     });
   },
   // update manucipality
   update_manucipality: function (body, cb) {
     models.Manucipality.update({
       manucipality_name: body.manucipality_name
-    } , {
+    },{
       where: {
         id: body.id
       }
-    }).then(function (result) {
-      cb('/manucipality');
+    })
+    .then(function (result) {
+      cb('/manucipality?msg=4');
     });
   },
   // delete manucipality
@@ -35,9 +37,11 @@ exports.manucipality_mgr = {
       where: {
         id: body.id
       }
-    }).then(function (result) {
+    })
+    .then(function (result) {
       cb('/manucipality?msg=1');
-    }).catch(function (err) {
+    })
+    .catch(function (err) {
       cb('/manucipality?msg=2');
     });
   },
