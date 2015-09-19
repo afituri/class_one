@@ -12,10 +12,26 @@ $(document).ready(function(){
         required: true,
         arabicLettersOnly: true,
       },
+      nationality_male:{
+        required: true,
+        arabicLettersOnly: true,
+      },
+      nationality_female:{
+        required: true,
+        arabicLettersOnly: true,
+      },
     },
     messages:{
       country_name:{
         required: "الرجاء ادخال اسم المنطقة!",
+        arabicLettersOnly: "الرجاء ادخال حروف عربية فقط!",
+      },
+      nationality_male:{
+        required: "الرجاء ادخال الجنسية ذكور!",
+        arabicLettersOnly: "الرجاء ادخال حروف عربية فقط!",
+      },
+      nationality_female:{
+        required: "الرجاء ادخال الجنسية إناث!",
         arabicLettersOnly: "الرجاء ادخال حروف عربية فقط!",
       },
     },
@@ -34,18 +50,34 @@ $(document).ready(function(){
         required: true,
         arabicLettersOnly: true,
       },
+      nationality_male:{
+        required: true,
+        arabicLettersOnly: true,
+      },
+      nationality_female:{
+        required: true,
+        arabicLettersOnly: true,
+      },
     },
     messages:{
       country_name:{
         required: "الرجاء ادخال اسم المنطقة!",
         arabicLettersOnly: "الرجاء ادخال حروف عربية فقط!",
       },
+      nationality_male:{
+        required: "الرجاء ادخال الجنسية ذكور!",
+        arabicLettersOnly: "الرجاء ادخال حروف عربية فقط!",
+      },
+      nationality_female:{
+        required: "الرجاء ادخال الجنسية إناث!",
+        arabicLettersOnly: "الرجاء ادخال حروف عربية فقط!",
+      },
     },
     highlight: function(element) {
-      $(element).closest('.row').addClass('has-error').removeClass('has-success');
+      $(element).closest('.row').addClass('has-error');
     },
     unhighlight: function(element) {
-      $(element).closest('.row').removeClass('has-error').addClass('has-success');
+      $(element).closest('.row').removeClass('has-error');
     },
   });
 
@@ -93,13 +125,18 @@ $(document).ready(function(){
     console.log($(this).val());
     $("#country_id_delete").val($(this).val());
   });
-  if($getMsg["msg"]==1){
+  if ($getMsg["msg"]==1){
     custNotify("success","نجاح","تم حذف بلد الميلاد بنجاح","ok-sign","bounceInDown","bounceOutUp");
     replaceUrl('/country');    
   } else if ($getMsg["msg"]==2) {
     custNotify("danger","خطأ","لا يمكن حذف هذه بلد الميلاد لاعتماد كيانات اخرى عليها","warning-sign","bounceIn","bounceOut");
     replaceUrl('/country');
+  } else if($getMsg["msg"]==3){
+    custNotify("success","نجاح","تمت إضافة بلاد ميلاد جديد بنجاح","ok-sign","bounceInDown","bounceOutUp");
+    replaceUrl('/country');
+  } else if($getMsg["msg"]==4){
+    custNotify("success","نجاح","تم تعديل بلاد الميلاد بنجاح","ok-sign","bounceInDown","bounceOutUp");
+    replaceUrl('/country');
   }
-
 
 });

@@ -15,7 +15,7 @@ exports.job_mgr = {
 	add_job: function (body, cb) {
 		models.Job.create(body)
 			.then(function (result) {
-				cb("/job");
+				cb("/job?msg=3");
 			});
 	},
 	// update job
@@ -28,7 +28,7 @@ exports.job_mgr = {
 				}
 			})
 			.then(function (result) {
-				cb('/job');
+				cb('/job?msg=4');
 			});
 	},
 	// delete job
