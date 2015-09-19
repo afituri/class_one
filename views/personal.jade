@@ -129,6 +129,12 @@ block content
             .form-group
               .row
                 .col-xs-3.col-md-3
+                  label الجنس
+                  select#Gender.form-control.selectpicker(name="Gender", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') الجنس
+                    for data,i in social.gender
+                      option(value="#{i}") #{data}
+                .col-xs-3.col-md-3
                   label الجنسية 
                   select#Nationality_Id.form-control.selectpicker(name="Nationality_Id", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') الجنسية
@@ -142,12 +148,6 @@ block content
                     option(value="", style='colr:grey; display:none;') الحالة الإجتماعية
                     for data,i in social.social_status
                       option(value="#{i}", style='colr:grey;') #{data[0]}
-                .col-xs-3.col-md-3
-                  label الجنس
-                  select#Gender.form-control.selectpicker(name="Gender", data-live-search="true", data-size=5)
-                    option(value="", style='color:grey; display:none;') الجنس
-                    for data,i in social.gender
-                      option(value="#{i}") #{data}
             .form-group
               .row
                 .col-xs-3.col-md-3
