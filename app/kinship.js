@@ -1,49 +1,44 @@
 var models = require("../models");
 exports.kinship_mgr = {
 
-	add_kinship: function (body, cb) {
-		models.Kinship.create(body)
-			.then(function (result) {
-				cb("/kinship");
-			});
-	},
+  add_kinship: function (body, cb) {
+    models.Kinship.create(body)
+      .then(function (result) {
+        cb("/kinship");
+      });
+  },
 
-	get_kinship: function (cb) {
-		models.Kinship.findAndCountAll({
-				where: {
-					status: 1
-				}
-			})
-			.then(function (result) {
-				cb(result);
-			});
-	},
+  get_kinship: function (cb) {
+    models.Kinship.findAndCountAll({
+      where: {
+        status: 1
+      }
+    }).then(function (result) {
+      cb(result);
+    });
+  },
 
-	update_kinship: function (body, cb) {
-		models.Kinship.update({
-				kinship_name: body.kinship_name
-			}, {
-				where: {
-					id: body.id
-				}
-			})
-			.then(function (result) {
-				cb('/kinship');
-			});
+  update_kinship: function (body, cb) {
+    models.Kinship.update({
+      kinship_name: body.kinship_name
+    } , {
+      where: {
+        id: body.id
+      }
+    }).then(function (result) {
+      cb('/kinship');
+    });
+  },
 
-	},
-
-	delete_kinship: function (body, cb) {
-		models.Kinship.destroy({
-				where: {
-					id: body.id
-				}
-			})
-			.then(function (result) {
-				cb('/kinship?msg=1');
-			})
-			.catch(function (err) {
-				cb('/kinship?msg=2');
-			});
-	},
+  delete_kinship: function (body, cb) {
+    models.Kinship.destroy({
+      where: {
+        id: body.id
+      }
+    }).then(function (result) {
+      cb('/kinship?msg=1');
+    }).catch(function (err) {
+      cb('/kinship?msg=2');
+    });
+  },
 };

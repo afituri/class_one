@@ -17,7 +17,7 @@ block content
             .col-xs-6.col-md-6
               form.form#search_personal(action="")  
                 .input-group
-                  input.form-control(type='text',name="search_name" placeholder='بحث...')
+                  input.form-control(type='text',name="search_name" placeholder='بحث')
                   .input-group-btn
                     button.btn.btn-default(type="submit")
                       i.glyphicon.glyphicon-search
@@ -78,121 +78,116 @@ block content
           .modal-body
             .form-group
               .row
-                .col-xs-4.col-md-4
+                .col-xs-3.col-md-3
                   label الاسم
-                  input#personal_firstname.form-control(type="text", name="Arabic_Firstname", placeholder="الاسم الأول")
-                .col-xs-4.col-md-4
-                  label الاب
-                  input#personal_fathername.form-control(type="text", name="Arabic_Fathername", placeholder="اسم الاب")
-                .col-xs-4.col-md-4
-                  label الجد
-                  input#personal_grandfathername.form-control(type="text", name="Arabic_Grandfathername", placeholder="اسم الجد")
-            .form-group
-              .row
-                .col-xs-4.col-md-4
+                  input#Arabic_Firstname.form-control(type="text", name="Arabic_Firstname", placeholder="الاسم")
+                .col-xs-3.col-md-3
+                  label اسم اﻷب
+                  input#Arabic_Fathername.form-control(type="text", name="Arabic_Fathername", placeholder="اسم اﻷب")
+                .col-xs-3.col-md-3
+                  label اسم الجد
+                  input#Arabic_Grandfathername.form-control(type="text", name="Arabic_Grandfathername", placeholder="اسم الجد")
+                .col-xs-3.col-md-3
                   label اللقب
-                  input#personal_familyname.form-control(type="text", name="Arabic_Familyname", placeholder="لقب العائلة")
-                .col-xs-4.col-md-4
-                  label اسم الأم الأول
-                  input#personal_motherfirstname.form-control(type="text", name="Arabic_Motherfirstname", placeholder="اسم الأم ")
-                .col-xs-4.col-md-4
-                  label اسم أب الأم
-                  input#personal_motherfathername.form-control(type="text", name="Arabic_Motherfathername", placeholder="اسم  والد الأم ")
-            .form-group
-              .row
-                .col-xs-4.col-md-4
-                  label اسم جد الأم
-                  input#personal_mothergrandfathername.form-control(type="text", name="Arabic_Mothergrandfathername", placeholder="جد الأم ")
-                .col-xs-4.col-md-4
-                  label لقب الأم
-                  input#personal_motherfamilyname.form-control(type="text", name="Arabic_Motherfamilyname", placeholder="لقب الأم ")
-                .col-xs-4.col-md-4
-                  label تاريخ الميلاد
-                  input#personal_Birth_Date.form-control(type="text", name="Birth_Date", placeholder="تاريخ الميلاد")
+                  input#Arabic_Familyname.form-control(type="text", name="Arabic_Familyname", placeholder="لقب العائلة")
             .form-group
               .row
                 .col-xs-4.col-md-4
                   label  اختر دولة الميلاد
                   select#.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') اختر دولة الميلاد...
+                .col-xs-3.col-md-3
+                  label دولة الميلاد
+                  select.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') دولة الميلاد
                     for data in country.rows
                       option(value="", style='color:grey;') #{data.country_name}
                     //- for country in countries
                     //-   option(value="#{country.id}") #{country.country_name}
-                .col-xs-4.col-md-4
-                  label  اختر مدينة الميلاد
+                .col-xs-3.col-md-3
+                  label مدينة الميلاد
                   select.form-control.selectpicker(name="city.id", data-live-search="true", data-size=5)
-                    option(value="", style='color:grey; display:none;') اختر مدينة الميلاد...
+                    option(value="", style='color:grey; display:none;') مدينة الميلاد
                     //- for city in cities
                     //-   option(value="#{country.id}") #{country.country_name}
-                .col-xs-4.col-md-4
+                .col-xs-3.col-md-3
                   label محل الميلاد   
-                  input#personal_birth_Place.form-control(type="text", name="Birth_Place", placeholder="محل الميلاد")
-
+                  input#Birth_Place.form-control(type="text", name="Birth_Place", placeholder="محل الميلاد")
+                .col-xs-3.col-md-3
+                  label تاريخ الميلاد
+                  input#Birth_Date.form-control(type="text", name="Birth_Date", placeholder="تاريخ الميلاد")
             .form-group
               .row
-                .col-xs-4.col-md-4
-                  label  اختر الجنسية 
+                .col-xs-3.col-md-3
+                  label اسم الأم الأول
+                  input#Arabic_Motherfirstname.form-control(type="text", name="Arabic_Motherfirstname", placeholder="اسم الأم ")
+                .col-xs-3.col-md-3
+                  label اسم أب الأم
+                  input#Arabic_Motherfathername.form-control(type="text", name="Arabic_Motherfathername", placeholder="اسم  والد الأم ")
+                .col-xs-3.col-md-3
+                  label اسم جد الأم
+                  input#Arabic_Mothergrandfathername.form-control(type="text", name="Arabic_Mothergrandfathername", placeholder="اسم جد الأم")
+                .col-xs-3.col-md-3
+                  label لقب الأم
+                  input#Arabic_Motherfamilyname.form-control(type="text", name="Arabic_Motherfamilyname", placeholder="لقب الأم ")
+            .form-group
+              .row
+                .col-xs-3.col-md-3
+                  label الجنس
+                  select#Gender.form-control.selectpicker(name="Gender", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') الجنس
+                    for data,i in social.gender
+                      option(value="#{i}") #{data}
+                .col-xs-3.col-md-3
+                  label الجنسية 
+                  select#Nationality_Id.form-control.selectpicker(name="Nationality_Id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') الجنسية
+                .col-xs-3.col-md-3
+                  label صلة القرابة 
                   select.form-control.selectpicker(name="city.id", data-live-search="true", data-size=5)
-                    option(value="", style='color:grey; display:none;') اختر الجنسية للفرد...
-                .col-xs-4.col-md-4
-                  label  اختر صلة القرابة 
-                  select.form-control.selectpicker(name="city.id", data-live-search="true", data-size=5)
-                    option(value="", style='color:grey; display:none;') اختر صلة القرابة برب الأسرة...
-                .col-xs-4.col-md-4
-                  label  اختر الحالة الإجتماعية
-
-                  select#Socialstatus_Id.form-control.selectpicker(name="city.id", data-live-search="true", data-size=5)
-                    option(value="", style='colr:grey; display:none;') اختر الحالة الإجتماعية...
+                    option(value="", style='color:grey; display:none;') صلة القرابة
+                .col-xs-3.col-md-3
+                  label الحالة الإجتماعية
+                  select#Socialstatus_Id.form-control.selectpicker(name="Socialstatus_Id", data-live-search="true", data-size=5)
+                    option(value="", style='colr:grey; display:none;') الحالة الإجتماعية
                     for data,i in social.social_status
                       option(value="#{i}", style='colr:grey;') #{data[0]}
             .form-group
               .row
-                .col-xs-4.col-md-4
-                  label  اختر الجنس
-                  select.form-control.selectpicker(name="Gender.id", data-live-search="true", data-size=5)
-                    option(value="", style='color:grey; display:none;') اختر الجنس...
-                    for data,i in social.gender
-                      option(value="#{i}", style='color:grey;') #{data}
-
-                .col-xs-4.col-md-4
-                  label  اختر الديانة
-                  select.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
-                    option(value="", style='color:grey; display:none;') اختر الديانة...
+                .col-xs-3.col-md-3
+                  label الديانة
+                  select#Religion_Id.form-control.selectpicker(name="Religion_Id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') الديانة
                     for data,i in social.religion
-                      option(value="#{i}", style='color:grey;') #{data}
-                .col-xs-4.col-md-4
+                      option(value="#{i}") #{data}
+                .col-xs-3.col-md-3
                   label تاريخ الاكتتاب
-                  input#personal_Birth_Date.form-control(type="text", name="Birth_Date", placeholder="تاريخ الميلاد")
-            .form-group
-              .row
-                .col-xs-4.col-md-4
-                  label  اختر جنسية الأم
+                  input#Enlistingdate.form-control(type="text", name="Enlistingdate", placeholder="تاريخ الاكتتاب")
+                .col-xs-3.col-md-3
+                  label جنسية الأم
                   select.form-control.selectpicker(name="Gender.id", data-live-search="true", data-size=5)
-                    option(value="", style='color:grey; display:none;') اختر جنسية أم الفرد...
-                .col-xs-4.col-md-4
+                    option(value="", style='color:grey; display:none;') جنسية اﻷم
+                .col-xs-3.col-md-3
                   label الرقم الوطني
-                  input#personal_Birth_Date.form-control(type="text", name="Birth_Date", placeholder="ادخل الرقم الوطني")
-                .col-xs-4.col-md-4
-                  label  اختر سند القيد
-                  select.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
-                    option(value="", style='color:grey; display:none;') سند قيد المواطن...
-                    for data,i in social.reg_doc_type
-                      option(value="#{i}", style='color:grey;') #{data}
-
+                  input#national_id.form-control(type="text", name="national_id",disabled)
             .form-group
               .row
-                .col-xs-4.col-md-4
-                  label  اختر نوع الجنسية
-                  select.form-control.selectpicker(name="Gender.id", data-live-search="true", data-size=5)
-                    option(value="", style='color:grey; display:none;') اختر نوع الجنسية...
-                .col-xs-4.col-md-4
-                  label تاريخ حصول الجنسية
-                  input#personal_Birth_Date.form-control(type="text", name="Birth_Date", placeholder="تاريخ الجنسية")
-                .col-xs-4.col-md-4
+                .col-xs-3.col-md-3
+                  label سند القيد
+                  select#Regdoctype_Id.form-control.selectpicker(name="Regdoctype_Id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') سند القيد
+                    for data,i in social.reg_doc_type
+                      option(value="#{i}") #{data}
+                .col-xs-3.col-md-3.box
+                  label نوع الجنسية
+                  select#Certification_Type_Id.form-control.selectpicker(name="Certification_Type_Id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') نوع الجنسية
+                .col-xs-3.col-md-3.box
+                  label تاريخ الحصول علي الجنسية
+                  input#Certification_Issuance_Date.form-control(type="text", name="Certification_Issuance_Date", placeholder="تاريخ الجنسية")
+                .col-xs-3.col-md-3.box
                   label رقم ملف الجنسية
-                  input#personal_Birth_Date.form-control(type="text", name="Birth_Date", placeholder="ادخل رقم ملف الجنسية")
-
+                  input#Certification_File_Number.form-control(type="text", name="Certification_File_Number", placeholder="ادخل رقم ملف الجنسية")
           .modal-footer
             button#add_office_btn.btn.btn-warning.btn-lg(type="submit", style="width: 100%;")
               span.glyphicon.glyphicon-ok-sign
@@ -200,9 +195,11 @@ block content
 
   script(src='/js/jquery-2.1.1.min.js')
   script(src='/js/bootstrap.min.js')
+  script(src='/js/moment-with-locales.min.js')
   script(src='/js/jquery.validate.min.js')
   script(src='/js/bootstrap-notify.min.js')
   script(src='/js/bootstrap-select.min.js')
-  script(src='/js/bootstrap-switch.min.js') 
+  script(src='/js/bootstrap-switch.min.js')
+  script(src='/js/bootstrap-datetimepicker.min.js')
   script(src='/js/helpers.js')
   script(src='/js/personal.js')
