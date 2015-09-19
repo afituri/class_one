@@ -59,7 +59,7 @@ exports.office_mgr = {
 	add_office: function (body) {
 		models.Office.create(body)
 			.then(function (result) {
-				cb("/office");
+				cb("/office?msg=3");
 			});
 
 	},
@@ -77,7 +77,7 @@ exports.office_mgr = {
 				}
 			})
 			.then(function (result) {
-				cb('/office');
+				cb('/office?msg=4');
 			});
 	},
 	// delete office

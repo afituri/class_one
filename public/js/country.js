@@ -97,7 +97,7 @@ $(document).ready(function(){
     custNotify("success","نجاح","تم حذف بلد الميلاد بنجاح","ok-sign","bounceInDown","bounceOutUp");
     replaceUrl('/country');    
   } else if ($getMsg["msg"]==2) {
-    custNotify("danger","خطأ","لا يمكن حذف هذه بلد الميلاد لاعتماد كيانات اخرى عليها","ok-sign","bounceIn","bounceOut");
+    custNotify("danger","خطأ","لا يمكن حذف هذه بلد الميلاد لاعتماد كيانات اخرى عليها","warning-sign","bounceIn","bounceOut");
     replaceUrl('/country');
   }
 

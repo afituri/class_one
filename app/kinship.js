@@ -4,7 +4,7 @@ exports.kinship_mgr = {
 	add_kinship: function (body, cb) {
 		models.Kinship.create(body)
 			.then(function (result) {
-				cb("/kinship");
+				cb("/kinship?msg=3");
 			});
 	},
 
@@ -28,7 +28,7 @@ exports.kinship_mgr = {
 				}
 			})
 			.then(function (result) {
-				cb('/kinship');
+				cb('/kinship?msg=4');
 			});
 
 	},

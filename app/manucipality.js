@@ -15,7 +15,7 @@ exports.manucipality_mgr = {
 	add_manucipality: function (body, cb) {
 		models.Manucipality.create(body)
 			.then(function (result) {
-				cb("/manucipality");
+				cb("/manucipality?msg=3");
 			});
 	},
 	// update manucipality
@@ -28,7 +28,7 @@ exports.manucipality_mgr = {
 				}
 			})
 			.then(function (result) {
-				cb('/manucipality');
+				cb('/manucipality?msg=4');
 			});
 	},
 	// delete manucipality
@@ -45,12 +45,4 @@ exports.manucipality_mgr = {
 				cb('/manucipality?msg=2');
 			});
 	},
-
-
-
-
-
-
-
-
 };

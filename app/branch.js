@@ -44,7 +44,7 @@ exports.branch_mgr = {
 	add_branch: function (body, cb) {
 		models.Branch.create(body)
 			.then(function (result) {
-				cb("/branch");
+				cb("/branch?msg=3");
 			});
 	},
 
@@ -58,7 +58,7 @@ exports.branch_mgr = {
 				}
 			})
 			.then(function (result) {
-				cb('/branch');
+				cb('/branch?msg=4');
 			});
 	},
 

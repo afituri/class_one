@@ -6,7 +6,7 @@ $(document).ready(function(){
   }, "الرجاء ادخال حروف عربية فقط!");
 
   /*----------- validate in add Region----------*/
-  $("#add_regin_form").validate({
+  $("#add_region_form").validate({
     rules:{
       region_name:{
         required: true,
@@ -28,7 +28,7 @@ $(document).ready(function(){
   });
 
   /*----------- validate in edit Region----------*/
-  $("#edit_regin_form").validate({
+  $("#edit_region_form").validate({
     rules:{
       region_name:{
         required: true,
@@ -93,9 +93,14 @@ $(document).ready(function(){
     custNotify("success","نجاح","تم حذف منطقة بنجاح","ok-sign","bounceInDown","bounceOutUp");
     replaceUrl('/region');    
   } else if ($getMsg["msg"]==2) {
-    custNotify("danger","خطأ","لا يمكن حذف هذه المنطقة لاعتماد كيانات اخرى عليها","ok-sign","bounceIn","bounceOut");
+    custNotify("danger","خطأ","لا يمكن حذف هذه المنطقة لاعتماد كيانات اخرى عليها","warning-sign","bounceIn","bounceOut");
     replaceUrl('/region');
+  } else if($getMsg["msg"]==3){
+    custNotify("success","نجاح","تمت اضافة منطقة جديدة بنجاح","ok-sign","bounceInDown","bounceOutUp");
+    replaceUrl('/region');   
+  } else if($getMsg["msg"]==4){
+    custNotify("success","نجاح","تم تعديل المنطقة بنجاح","ok-sign","bounceInDown","bounceOutUp");
+    replaceUrl('/region');   
   }
-
 
 });

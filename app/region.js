@@ -13,7 +13,7 @@ exports.region_mgr = {
    /* add new region*/
   add_region : function(body,cb){
     models.Region.create(body).then(function(result) {
-      cb(result);
+      cb('/region?msg=3');
     });
   },
   /* update region*/
@@ -25,7 +25,7 @@ exports.region_mgr = {
         id:body.id
       }
     }).then(function(result){
-      cb(result);
+      cb('/region?msg=4');
     });
   },
   /*delete region  */
