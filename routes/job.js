@@ -8,7 +8,12 @@ module.exports = function (router) {
         status: 1
       }
     }).then(function(result) {
-      res.render('job', { title: 'المهن', jobs:result.rows});
+      res.render('job', { 
+        title: 'المهن', 
+        jobs:result.rows,
+        collapse_one: 'collapse in', 
+        active_one_six: 'active'
+      });
     });
   });
 

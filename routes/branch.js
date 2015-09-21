@@ -8,7 +8,9 @@ module.exports = function (router) {
       res.render('branch', {
         title: 'مكاتب الأصدار',
         branches: result.branch.rows,
-        regions: result.regions
+        regions: result.regions,
+        collapse_one: 'collapse in',
+        active_one_two: 'active'
       });
     });
   });

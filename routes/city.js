@@ -22,7 +22,9 @@ module.exports = function (router) {
           res.render('city', {
           title: 'مدينة الميلاد',
           cities: result.rows,
-          countries: countries
+          countries: countries,
+          collapse_one: 'collapse in', 
+          active_one_eight: 'active'
         });
       })
     });

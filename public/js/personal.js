@@ -3,13 +3,12 @@ $(document).ready(function(){
   $("[name='family_type']").bootstrapSwitch();
 
   $("#Regdoctype_Id").change(function(){
-    $(this).find("option:selected").each(function(){
-        if($(this).attr("value")==2){
-            $(".box").show().addClass("animated fadeIn");
-        }
-        else{
-            $(".box").hide(300);
-        }
+    $(this).find("option:selected").each(function() {
+      if($(this).attr("value")==2) {
+        $(".box").show().addClass("animated fadeIn");
+      } else {
+        $(".box").hide(300);
+      }
     });
   }).change();
 

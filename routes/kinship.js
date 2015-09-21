@@ -8,7 +8,9 @@ module.exports = function (router) {
     kinship.get_kinship(function (result) {
       res.render('kinship', {
         title: 'صلة القرابة',
-        kinships: result.rows
+        kinships: result.rows,
+        collapse_one: 'collapse in', 
+        active_one_five: 'active'
       });
     })
   });

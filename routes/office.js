@@ -11,7 +11,9 @@ module.exports = function (router) {
         offices: result.offices.rows,
         manucipalitys: result.manucipalitys,
         regions: result.regions,
-        branches: result.branches
+        branches: result.branches,
+        collapse_one: 'collapse in', 
+        active_one_four: 'active'
       });
     })
   });

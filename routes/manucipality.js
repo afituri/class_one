@@ -7,7 +7,9 @@ module.exports = function (router) {
     manucipality.get_manucipality(function (result) {
       res.render('manucipality', {
         title: 'البلديات',
-        manucipalitys: result.rows
+        manucipalitys: result.rows,
+        collapse_one: 'collapse in', 
+        active_one_three: 'active'
       });
     })
   });
