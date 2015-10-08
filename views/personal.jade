@@ -42,30 +42,24 @@ block content
                 th.text-center تعديل
                 th.text-center إلغاء
             tbody
-            for personal in personals
-              tr(id="br-#{personal.Personal.id}", data-Arabic_Firstname="#{personal.Personal.Arabic_Firstname}",data-Arabic_Fathername="#{personal.Personal.Arabic_Fathername}",data-Arabic_Grandfathername="#{personal.Personal.Arabic_Grandfathername}",data-Arabic_Familyname="#{personal.Personal.Arabic_Familyname}",data-Arabic_Motherfirstname="#{personal.Personal.Arabic_Motherfirstname}",data-Birth_Date="#{personal.Personal.Birth_Date}",data-Birth_Place="#{personal.Personal.Birth_Place}")  
-                //- Personal هو الاوبجكت اللي فيه البيانات المطلوبة
-                td.text-center #{personal.Personal.Arabic_Firstname}
-                td.text-center #{personal.Personal.Arabic_Fathername}
-                td.text-center #{personal.Personal.Arabic_Grandfathername}
-                td.text-center #{personal.Personal.Arabic_Familyname}
-                td.text-center #{personal.Personal.Arabic_Motherfirstname}
-                td.text-center #{personal.Personal.Birth_Date.getDate()} / #{personal.Personal.Birth_Date.getMonth()+1} / #{personal.Personal.Birth_Date.getFullYear()}
-                td.text-center #{personal.Personal.Birth_Place}
-                td.text-center 
-                  if personal.Personal.Gender==1
-                    span #{personal.Personal.Nationality.nationality_male}
-                  else
-                    span #{personal.Personal.Nationality.nationality_female}
-                td.text-center #{personal.Kinship.kinship_name}
-                td.text-center #{personal.Personal.national_id}
+              tr
+                td.text-center علاء الدين
+                td.text-center احمد
+                td.text-center الطاهر
+                td.text-center السني
+                td.text-center لاشيئ
+                td.text-center 20/05/1991
+                td.text-center طرابلس
+                td.text-center ليبي
+                td.text-center لاشيئ
+                td.text-center 119910334425
                 td.text-center
                   p(data-placement="top", data-toggle="tooltip", title="تعديل")
-                    button.btn.btn-primary.btn-xs.edit_btn(data-title="Edit", data-toggle="modal", data-target="#edit", value="#{personal.Personal.id}")
-                      span.glyphicon.glyphicon-pencil
+                    button.btn.btn-primary.btn-xs.edit_btn(data-title="Edit", data-toggle="modal", data-target="#edit", value="")
+                      span.glyphicon.glyphicon-edit
                 td.text-center
                   p(data-placement="top", data-toggle="tooltip", title="إلغاء")
-                    button.btn.btn-danger.btn-xs.delete_btn(data-title="Delete", data-toggle="modal", data-target="#delete", value="#{personal.Personal.id}")
+                    button.btn.btn-danger.btn-xs.delete_btn(data-title="Delete", data-toggle="modal", data-target="#delete", value="")
                       span.glyphicon.glyphicon-trash
   #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="add", aria-hidden="true")
     .modal-dialog.modal-lg
@@ -92,10 +86,6 @@ block content
                   input#Arabic_Familyname.form-control(type="text", name="Arabic_Familyname", placeholder="لقب العائلة")
             .form-group
               .row
-                .col-xs-4.col-md-4
-                  label  اختر دولة الميلاد
-                  select#.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
-                    option(value="", style='color:grey; display:none;') اختر دولة الميلاد...
                 .col-xs-3.col-md-3
                   label دولة الميلاد
                   select.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
@@ -189,9 +179,148 @@ block content
                   label رقم ملف الجنسية
                   input#Certification_File_Number.form-control(type="text", name="Certification_File_Number", placeholder="ادخل رقم ملف الجنسية")
           .modal-footer
-            button#add_office_btn.btn.btn-warning.btn-lg(type="submit", style="width: 100%;")
+            button#add_office_btn.btn.btn-success.btn-lg(type="submit", style="width: 100%;")
               span.glyphicon.glyphicon-ok-sign
               |  إضافة
+  #edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="add", aria-hidden="true")
+    .modal-dialog.modal-lg
+      .modal-content
+        form.form#add_personal_form(action="/personal/new_personal", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align تعديل فرد جديد لأسرة
+          .modal-body
+            .form-group
+              .row
+                .col-xs-3.col-md-3
+                  label الاسم
+                  input#Arabic_Firstname.form-control(type="text", name="Arabic_Firstname", placeholder="الاسم")
+                .col-xs-3.col-md-3
+                  label اسم اﻷب
+                  input#Arabic_Fathername.form-control(type="text", name="Arabic_Fathername", placeholder="اسم اﻷب")
+                .col-xs-3.col-md-3
+                  label اسم الجد
+                  input#Arabic_Grandfathername.form-control(type="text", name="Arabic_Grandfathername", placeholder="اسم الجد")
+                .col-xs-3.col-md-3
+                  label اللقب
+                  input#Arabic_Familyname.form-control(type="text", name="Arabic_Familyname", placeholder="لقب العائلة")
+            .form-group
+              .row
+                .col-xs-3.col-md-3
+                  label دولة الميلاد
+                  select.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') دولة الميلاد
+                    for data in country.rows
+                      option(value="", style='color:grey;') #{data.country_name}
+                    //- for country in countries
+                    //-   option(value="#{country.id}") #{country.country_name}
+                .col-xs-3.col-md-3
+                  label مدينة الميلاد
+                  select.form-control.selectpicker(name="city.id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') مدينة الميلاد
+                    //- for city in cities
+                    //-   option(value="#{country.id}") #{country.country_name}
+                .col-xs-3.col-md-3
+                  label محل الميلاد   
+                  input#Birth_Place.form-control(type="text", name="Birth_Place", placeholder="محل الميلاد")
+                .col-xs-3.col-md-3
+                  label تاريخ الميلاد
+                  input#Birth_Date.form-control(type="text", name="Birth_Date", placeholder="تاريخ الميلاد")
+            .form-group
+              .row
+                .col-xs-3.col-md-3
+                  label اسم الأم الأول
+                  input#Arabic_Motherfirstname.form-control(type="text", name="Arabic_Motherfirstname", placeholder="اسم الأم ")
+                .col-xs-3.col-md-3
+                  label اسم أب الأم
+                  input#Arabic_Motherfathername.form-control(type="text", name="Arabic_Motherfathername", placeholder="اسم  والد الأم ")
+                .col-xs-3.col-md-3
+                  label اسم جد الأم
+                  input#Arabic_Mothergrandfathername.form-control(type="text", name="Arabic_Mothergrandfathername", placeholder="اسم جد الأم")
+                .col-xs-3.col-md-3
+                  label لقب الأم
+                  input#Arabic_Motherfamilyname.form-control(type="text", name="Arabic_Motherfamilyname", placeholder="لقب الأم ")
+            .form-group
+              .row
+                .col-xs-3.col-md-3
+                  label الجنس
+                  select#Gender.form-control.selectpicker(name="Gender", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') الجنس
+                    for data,i in social.gender
+                      option(value="#{i}") #{data}
+                .col-xs-3.col-md-3
+                  label الجنسية 
+                  select#Nationality_Id.form-control.selectpicker(name="Nationality_Id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') الجنسية
+                .col-xs-3.col-md-3
+                  label صلة القرابة 
+                  select.form-control.selectpicker(name="city.id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') صلة القرابة
+                .col-xs-3.col-md-3
+                  label الحالة الإجتماعية
+                  select#Socialstatus_Id.form-control.selectpicker(name="Socialstatus_Id", data-live-search="true", data-size=5)
+                    option(value="", style='colr:grey; display:none;') الحالة الإجتماعية
+                    for data,i in social.social_status
+                      option(value="#{i}", style='colr:grey;') #{data[0]}
+            .form-group
+              .row
+                .col-xs-3.col-md-3
+                  label الديانة
+                  select#Religion_Id.form-control.selectpicker(name="Religion_Id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') الديانة
+                    for data,i in social.religion
+                      option(value="#{i}") #{data}
+                .col-xs-3.col-md-3
+                  label تاريخ الاكتتاب
+                  input#Enlistingdate.form-control(type="text", name="Enlistingdate", placeholder="تاريخ الاكتتاب")
+                .col-xs-3.col-md-3
+                  label جنسية الأم
+                  select.form-control.selectpicker(name="Gender.id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') جنسية اﻷم
+                .col-xs-3.col-md-3
+                  label الرقم الوطني
+                  input#national_id.form-control(type="text", name="national_id",disabled)
+            .form-group
+              .row
+                .col-xs-3.col-md-3
+                  label سند القيد
+                  select#Regdoctype_Id.form-control.selectpicker(name="Regdoctype_Id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') سند القيد
+                    for data,i in social.reg_doc_type
+                      option(value="#{i}") #{data}
+                .col-xs-3.col-md-3.box
+                  label نوع الجنسية
+                  select#Certification_Type_Id.form-control.selectpicker(name="Certification_Type_Id", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') نوع الجنسية
+                .col-xs-3.col-md-3.box
+                  label تاريخ الحصول علي الجنسية
+                  input#Certification_Issuance_Date.form-control(type="text", name="Certification_Issuance_Date", placeholder="تاريخ الجنسية")
+                .col-xs-3.col-md-3.box
+                  label رقم ملف الجنسية
+                  input#Certification_File_Number.form-control(type="text", name="Certification_File_Number", placeholder="ادخل رقم ملف الجنسية")
+          .modal-footer
+            button#add_office_btn.btn.btn-primary.btn-lg(type="submit", style="width: 100%;")
+              span.glyphicon.glyphicon-edit
+              |  تعديل
+  #delete.modal.fade.font(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type="button", data-dismiss="modal", aria-hidden="true")
+            span.glyphicon.glyphicon-remove(aria-hidden="true")
+          h4.modal-title.custom_align إلغاء شخص معين
+        .modal-body
+          .alert.alert-danger
+            span.glyphicon.glyphicon-warning-sign
+            |  هل انت متأكد من إلغاء هذا الشخص؟
+        .modal-footer
+          button#yes.btn.btn-success(type="button", data-dismiss="modal")
+            span.glyphicon.glyphicon-ok-sign
+            |  نعم
+          button#no.btn.btn-default(type="button", data-dismiss="modal")
+            span.glyphicon.glyphicon-remove
+            |  لا
 
   script(src='/js/jquery-2.1.1.min.js')
   script(src='/js/bootstrap.min.js')

@@ -7,7 +7,7 @@ module.exports = function (router) {
       res.render('region', { title: 'المناطق', 
         regions:result.rows, 
         collapse_one: 'collapse in', 
-        active_one_one: 'active' 
+        active_one_one: 'active'
       });
     });
   });     
