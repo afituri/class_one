@@ -92,7 +92,7 @@ $(document).ready(function(){
     $('#edit_record_number').val(record_number);
     $('#edit_family_record_date').val(family_record_date);
     $('#edit_auto_generated_id').val(auto_generated_id);
-    $('#edit_is_closed').val(is_closed);
+    $('#edit_is_closed').val(1);
     $('#family_id_edit').val(family_id);
   });
 
@@ -106,7 +106,7 @@ $(document).ready(function(){
     custNotify("success","نجاح","تم حذف منطقة بنجاح","ok-sign","bounceInDown","bounceOutUp");
     replaceUrl('/family');    
   } else if ($getMsg["msg"]==2) {
-    custNotify("danger","خطأ","لا يمكن حذف هذه المنطقة لاعتماد كيانات اخرى عليها","ok-sign","bounceIn","bounceOut");
+    custNotify("danger","خطأ","لا يمكن حذف هذه المنطقة لاعتماد كيانات اخرى عليها","warning-sign","bounceIn","bounceOut");
     replaceUrl('/family');
   }
 

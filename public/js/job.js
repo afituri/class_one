@@ -90,11 +90,17 @@ $(document).ready(function(){
     console.log($(this).val());
     $("#job_id_delete").val($(this).val());
   });
-  if($getMsg["msg"]==1){
-    custNotify("success","نجاح","تم حذف منطقة بنجاح","ok-sign","bounceInDown","bounceOutUp");
+  if ($getMsg["msg"]==1){
+    custNotify("success","نجاح","تم حذف المهنة بنجاح","ok-sign","bounceInDown","bounceOutUp");
     replaceUrl('/job');    
   } else if ($getMsg["msg"]==2) {
-    custNotify("danger","خطأ","لا يمكن حذف هذه المنطقة لاعتماد كيانات اخرى عليها","ok-sign","bounceIn","bounceOut");
+    custNotify("danger","خطأ","لا يمكن حذف هذه المهنة لاعتماد كيانات اخرى عليها","warning-sign","bounceIn","bounceOut");
+    replaceUrl('/job');
+  } else if ($getMsg["msg"]==3) {
+    custNotify("success","نجاح","تم إضافة مهنة جديدة بنجاح","ok-sign","bounceIn","bounceOut");
+    replaceUrl('/job');
+  } else if ($getMsg["msg"]==4) {
+    custNotify("success","نجاح","تم تعديل المهنة بنجاح","warning-sign","bounceIn","bounceOut");
     replaceUrl('/job');
   }
 

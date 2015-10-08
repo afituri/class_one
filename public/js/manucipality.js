@@ -90,11 +90,17 @@ $(document).ready(function(){
     console.log($(this).val());
     $("#manucipality_id_delete").val($(this).val());
   });
-  if($getMsg["msg"]==1){
-    custNotify("success","نجاح","تم حذف منطقة بنجاح","ok-sign","bounceInDown","bounceOutUp");
+  if ($getMsg["msg"]==1){
+    custNotify("success","نجاح","تم حذف البلدية بنجاح","ok-sign","bounceInDown","bounceOutUp");
     replaceUrl('/manucipality');    
   } else if ($getMsg["msg"]==2) {
-    custNotify("danger","خطأ","لا يمكن حذف هذه المنطقة لاعتماد كيانات اخرى عليها","ok-sign","bounceIn","bounceOut");
+    custNotify("danger","خطأ","لا يمكن حذف هذه البلدية لاعتماد كيانات اخرى عليها","warning-sign","bounceIn","bounceOut");
+    replaceUrl('/manucipality');
+  } else if ($getMsg["msg"]==3){
+    custNotify("success","نجاح","تمت إضافة بلدية جديدة بنجاح","ok-sign","bounceInDown","bounceOutUp");
+    replaceUrl('/manucipality');    
+  } else if ($getMsg["msg"]==4) {
+    custNotify("success","نجاح","تم تعديل البلدية بنجاح","ok-sign","bounceInDown","bounceOutUp");
     replaceUrl('/manucipality');
   }
 

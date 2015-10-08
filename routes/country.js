@@ -9,8 +9,10 @@ module.exports = function (router) {
       }
     }).then(function (result) {
       res.render('country', {
-      title: 'بلدان الميلاد',
-      countries: result.rows
+        title: 'بلدان الميلاد',
+        countries: result.rows,
+        collapse_one: 'collapse in', 
+        active_one_seven: 'active'
       });
     });
   });

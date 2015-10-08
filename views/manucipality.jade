@@ -16,9 +16,9 @@ block content
                     button.btn.btn-default(type="submit")
                       i.glyphicon.glyphicon-search
             .pull-left(style="margin-left: 10px;")
-              a.btn.btn-success(href='#add', role='button',data-toggle='modal')
+              button.btn.btn-success#fff(href='#add', role='button',data-toggle='modal')
                 span.glyphicon.glyphicon-plus
-                span.text-none  إضافة بلدية
+                span  إضافة بلدية
         .table-responsive
           table.table.table-bordred.table-striped.table-condensed
             thead
@@ -55,7 +55,7 @@ block content
                   label اسم البلدية
                   input#manucipality_name.form-control(type="text", name="manucipality_name", placeholder="اسم البلدية")
           .modal-footer
-            button#add_manucipality_btn.btn.btn-warning.btn-lg(type="submit", style="width: 100%;")
+            button#add_manucipality_btn.btn.btn-warning.btn-lg(type="submit", style="width: 100%;", data-loading-text="جاري التحميل...", autocomplete="off")
               span.glyphicon.glyphicon-ok-sign
               |  إضافة
   #edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
@@ -105,3 +105,36 @@ block content
   script(src='/js/bootstrap-notify.min.js')
   script(src='/js/helpers.js')
   script(src='/js/manucipality.js')
+  script.
+    //- $('#fff').on('click',function(e){
+    //-   e.preventDefault();
+    //-   $('#add_manucipality_btn').prop('disabled', true);
+    //-   if($('#manucipality_name').valid()){
+    //-     $('#add_manucipality_btn').prop('disabled', false);
+    //-       //$('#add_manucipality_form').submit();
+    //-   }
+    //- });
+    //- $("#add_manucipality_form").change(function(){
+    //-   $(this).find("input[name='manucipality_name']").each(function() {
+    //-     $('#add_manucipality_btn').on('click',function(e){
+    //-       e.preventDefault();
+    //-       if($('#add_manucipality_form').valid()){
+    //-         $('#add_manucipality_btn').prop('disabled', true);
+    //-       } else {
+    //-         $('#add_manucipality_btn').prop('disabled', false);
+    //-       }
+    //-     });
+    //-   });
+    //- }).change();
+    $('#add_manucipality_btn').on('click',function(e){
+      e.preventDefault();
+      if($('#add_manucipality_form').valid()){
+        $('#add_manucipality_btn').prop('disabled', true);
+        $('#add_manucipality_form').submit();
+      }
+    });
+    $('.modal.fade').on('hidden.bs.modal', function(){
+      $(this).removeData('bs.modal');
+      $('#add_manucipality_form').validate().resetForm();
+      $('#edit_manucipality_form').validate().resetForm();
+    });
