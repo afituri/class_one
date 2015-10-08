@@ -52,13 +52,15 @@ block content
           .modal-body
             .form-group
               .row
-                .col-xs-6.col-md-6
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
                   label  اختر المنطقة
                   select.form-control.selectpicker(name="RegionId", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') اختر المنطقة...
                     for region in regions
                       option(value="#{region.id}") #{region.region_name}
-                .col-xs-6.col-md-6
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
                   label اسم مكتب الاصدار
                   input#branch_name.form-control(type="text", name="branch_name", placeholder="اسم مكتب الاصدار")
           .modal-footer
@@ -76,13 +78,15 @@ block content
           .modal-body
             .form-group
               .row
-                .col-xs-6.col-md-6
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
                   label  اختر المنطقة
                   select#edit_branch_region.form-control.selectpicker(name="RegionId", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') اختر المنطقة...
                     for region in regions
                       option(value="#{region.id}") #{region.region_name}
-                .col-xs-6.col-md-6
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
                   label اسم مكتب الاصدار
                   input#edit_branch_name.form-control(type="text", name="branch_name", placeholder="اسم مكتب الاصدار")
                   //- get hidden ID has branch_id_edit
