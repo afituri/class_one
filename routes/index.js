@@ -14,7 +14,7 @@ var city = require('./city')(router);
 /* GET home page. */
 router.get('/', function (req, res) {
 	res.render('index', {
-		title: 'Express'
+		title: 'ارئيسيةل'
 	});
 });
 

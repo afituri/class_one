@@ -22,24 +22,20 @@ html
             a.navbar-brand(href='http://www.jquery2dotnet.com') Brand
           #bs-example-navbar-collapse-1.collapse.navbar-collapse
             ul.nav.navbar-nav
-              li.active
-                a(href='#')
+              li(class=(title == 'الرئيسية' ? 'active' : ''))
+                a(href='/')
                   span#glyphicon.glyphicon.glyphicon-home
-                  span  Dashboard
-              li
-                a(href='#')
-                  span#glyphicon.glyphicon.glyphicon-calendar
-                  span   Calendar
-              li.dropdown
+                  span  الـرئـيـسـيـة
+              li.dropdown(class=(title == 'أفراد الأسرة' || 'الأسر' ? 'active' : ''))
                 a.dropdown-toggle(href='#', data-toggle='dropdown')
                   span#glyphicon.glyphicon.glyphicon-list-alt
                   span   إدراج سابق 
                   b.caret
                 ul.dropdown-menu
                   li
-                    a(href='family') أسرة سابقة
+                    a(href='/family') أسرة سابقة
                   li
-                    a(href='personal') فرد لأسرة سابقة
+                    a(href='/personal') فرد لأسرة سابقة
                   li
                     a(href='#') Something else here
                   li.divider

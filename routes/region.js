@@ -4,7 +4,8 @@ module.exports = function (router) {
   /* GET Regions page. */ 
   router.get('/region', function(req, res) {
     region.get_regions(function(result){
-      res.render('region', { title: 'المناطق', 
+      res.render('region', { 
+        title: 'المناطق', 
         regions:result.rows, 
         collapse_one: 'collapse in', 
         active_one_one: 'active'
