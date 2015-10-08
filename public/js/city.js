@@ -8,17 +8,32 @@ $(document).ready(function(){
 
   /*----------- validate in add city----------*/
   $("#add_city_form").validate({
+    ignore: ':not(select:hidden, input:visible, textarea:visible)',
     rules:{
+      CountryId:{
+        required: true
+      },
       city_name:{
         required: true,
-        arabicLettersOnly: true,
+        arabicLettersOnly: true
       },
     },
     messages:{
+      CountryId:{
+        required: "الرجاء اختيار الدولة !"
+      },
       city_name:{
         required: "الرجاء ادخال اسم المنطقة!",
         arabicLettersOnly: "الرجاء ادخال حروف عربية فقط!",
       },
+    },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
     },
     highlight: function(element) {
       $(element).closest('.row').addClass('has-error');
@@ -30,6 +45,7 @@ $(document).ready(function(){
 
   /*----------- validate in edit city----------*/
   $("#edit_city_form").validate({
+    ignore: ':not(select:hidden, input:visible, textarea:visible)',
     rules:{
       city_name:{
         required: true,
@@ -41,6 +57,14 @@ $(document).ready(function(){
         required: "الرجاء ادخال اسم بلد الميلاد!",
         arabicLettersOnly: "الرجاء ادخال حروف عربية فقط!",
       },
+    },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
     },
     highlight: function(element) {
       $(element).closest('.row').addClass('has-error').removeClass('has-success');

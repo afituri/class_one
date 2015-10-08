@@ -52,19 +52,17 @@ block content
           .modal-body
             .form-group
               .row
-                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                .col-xs-6.col-md-6
                   label  اختر الدولة
                   select.form-control.selectpicker(name="CountryId", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') اختر الدولة...
                     for country in countries
                       option(value="#{country.id}") #{country.country_name}
-            .form-group
-              .row
-                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                .col-xs-6.col-md-6
                   label اسم مدينة الميلاد
                   input#city_name.form-control(type="text", name="city_name", placeholder="اسم مدينة الميلاد")
           .modal-footer
-            button#add_city_btn.btn.btn-warning.btn-lg(type="submit", style="width: 100%;")
+            button#add_city_btn.btn.btn-success.btn-lg(type="submit", style="width: 100%;")
               span.glyphicon.glyphicon-ok-sign
               |  إضافة
   #edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
@@ -78,21 +76,19 @@ block content
           .modal-body
             .form-group
               .row
-                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                .col-xs-6.col-md-6
                   label  اختر الدولة
                   select#edit_city_region.form-control.selectpicker(name="CountryId", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') اختر الدولة...
                     for country in countries
                       option(value="#{country.id}") #{country.country_name}
-            .form-group
-              .row
-                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                .col-xs-6.col-md-6
                   label اسم مدينة الميلاد
                   input#edit_city_name.form-control(type="text", name="city_name", placeholder="اسم مدينة الميلاد")
                   //- get hidden ID has city_id_edit
                   input#city_id_edit.form-control(type="hidden", name="id")
           .modal-footer
-            button#edit_city_btn.btn.btn-info.btn-lg(type="submit", style="width: 100%;")
+            button#edit_city_btn.btn.btn-primary.btn-lg(type="submit", style="width: 100%;")
               span.glyphicon.glyphicon-ok-sign
               |  تعديل
   #delete.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
