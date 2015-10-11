@@ -44,25 +44,24 @@ module.exports = function (router) {
 
   /* Add cityes page. */
   router.post('/city/new_city', function (req, res) {
-    models.City.create(req.body)
-      .then(function (result) {
-        res.redirect("/city");
-      });
+    models.City.create(req.body).then(function (result) {
+      res.redirect("/city");
+    });
   });
 
   /* Edit cityes page. */
   router.post('/city/edit_city', function (req, res) {
     models.City.update({
-        city_name: req.body.city_name,
-        CountryId: req.body.CountryId
-      } , {
-        where: {
-          id: req.body.id
-        }
-      }).then(function (result) {
-        res.redirect('/city');
-      });
+      city_name: req.body.city_name,
+      CountryId: req.body.CountryId
+    },{
+      where: {
+        id: req.body.id
+      }
+    }).then(function (result) {
+      res.redirect('/city');
     });
+  });
 
   /* Delete cityes page. */
   router.post('/city/delete_city', function (req, res) {

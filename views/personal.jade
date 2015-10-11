@@ -86,6 +86,12 @@ block content
             .form-group
               .row
                 .col-xs-3.col-md-3
+                  label الجنس
+                  select#Gender.form-control.selectpicker(name="Gender", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') الجنس
+                    for data,i in social.gender
+                      option(value="#{i}") #{data}
+                .col-xs-3.col-md-3
                   label دولة الميلاد
                   select.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') دولة الميلاد
@@ -102,11 +108,11 @@ block content
                 .col-xs-3.col-md-3
                   label محل الميلاد   
                   input#Birth_Place.form-control(type="text", name="Birth_Place", placeholder="محل الميلاد")
+            .form-group
+              .row
                 .col-xs-3.col-md-3
                   label تاريخ الميلاد
                   input#Birth_Date.form-control(type="text", name="Birth_Date", placeholder="تاريخ الميلاد")
-            .form-group
-              .row
                 .col-xs-3.col-md-3
                   label اسم الأم الأول
                   input#Arabic_Motherfirstname.form-control(type="text", name="Arabic_Motherfirstname", placeholder="اسم الأم ")
@@ -116,17 +122,11 @@ block content
                 .col-xs-3.col-md-3
                   label اسم جد الأم
                   input#Arabic_Mothergrandfathername.form-control(type="text", name="Arabic_Mothergrandfathername", placeholder="اسم جد الأم")
-                .col-xs-3.col-md-3
-                  label لقب الأم
-                  input#Arabic_Motherfamilyname.form-control(type="text", name="Arabic_Motherfamilyname", placeholder="لقب الأم ")
             .form-group
               .row
                 .col-xs-3.col-md-3
-                  label الجنس
-                  select#Gender.form-control.selectpicker(name="Gender", data-live-search="true", data-size=5)
-                    option(value="", style='color:grey; display:none;') الجنس
-                    for data,i in social.gender
-                      option(value="#{i}") #{data}
+                  label لقب الأم
+                  input#Arabic_Motherfamilyname.form-control(type="text", name="Arabic_Motherfamilyname", placeholder="لقب الأم ")
                 .col-xs-3.col-md-3
                   label الجنسية 
                   select#Nationality_Id.form-control.selectpicker(name="Nationality_Id", data-live-search="true", data-size=5)

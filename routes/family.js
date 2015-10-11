@@ -7,7 +7,11 @@ module.exports = function (router) {
     family.get_family(function (result) {
       console.log(result.result.rows);
       console.log(result.offices);
-        res.render('family', { title: 'الأسر', familys:result.result.rows,offices: result.offices});
+      res.render('family', { 
+        title: 'الأسر', 
+        familys: result.result.rows,
+        offices: result.offices
+      });
     });
   });
 
