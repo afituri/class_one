@@ -1,7 +1,7 @@
-
 $(document).ready(function(){
   
   $("[data-toggle=tooltip]").tooltip();
+  $("[name='family_type']").bootstrapSwitch();
 
   jQuery.validator.addMethod("arabicLettersOnly", function(value, element) {
     return this.optional(element) || /^[أ-ي,ﻻ,' ',ء]+$/i.test(value);

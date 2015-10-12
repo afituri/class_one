@@ -31,27 +31,52 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         Personal.belongsTo(models.Personal, {
-          as: 'Father', foreignKey : 'Fatherperson_Id',
-          onDelete: "SET NULL"
+          as: 'Father', 
+          foreignKey : {
+            name : 'Fatherperson_Id',
+            allowNull : true
+          },
+          onDelete: "SET NULL",
+          
         });
         Personal.belongsTo(models.Personal, {
-          as: 'Mother', foreignKey : 'Motherperson_Id',
+          as: 'Mother', 
+          foreignKey : {
+            name : 'Motherperson_Id',
+            allowNull : true
+          },
           onDelete: "SET NULL"
         });
         Personal.belongsTo(models.Country, {
-          as: 'Nationality', foreignKey : 'Nationality_Id',
+          as: 'Nationality', 
+          foreignKey : {
+            name : 'Nationality_Id',
+            allowNull : true
+          },
           onDelete: "SET NULL"
         });
         Personal.belongsTo(models.Country, {
-          as: 'Mother_Nationality', foreignKey :'Mothernationality_Id',
+          as: 'Mother_Nationality', 
+          foreignKey : {
+            name : 'Mothernationality_Id',
+            allowNull : true
+          },
           onDelete: "SET NULL"
         });
         Personal.belongsTo(models.Country, {
-          as: 'Father_Nationality', foreignKey : 'Fathernationality_Id',
+          as: 'Father_Nationality', 
+          foreignKey : {
+            name : 'Fathernationality_Id',
+            allowNull : true
+          },
           onDelete: "SET NULL"
         });
         Personal.belongsTo(models.City, {
-          as: 'city_birth', foreignKey : 'city_Id',
+          as: 'city_birth', 
+          foreignKey : {
+            name : 'city_Id',
+            allowNull : true
+          },
           onDelete: "SET NULL"
         });
         Personal.belongsTo(models.Job, {
