@@ -86,13 +86,13 @@ $(document).ready(function(){
         auto_generated_id= $('#br-'+family_id).data('auto_generated_id');
         is_closed= $('#br-'+family_id).data('is_closed');
         family_office= $('#br-'+family_id).data('office_Id');
-             console.log(family_office);
     $('#edit_family_office').selectpicker('val',family_office);
     $('#edit_registry_number').val(registry_number);
     $('#edit_record_number').val(record_number);
     $('#edit_family_record_date').val(family_record_date);
     $('#edit_auto_generated_id').val(auto_generated_id);
-    $('#edit_is_closed').val(1);
+    //$('#edit_is_closed').val(is_closed);
+    $('#edit_is_closed').selectpicker('val',is_closed);
     $('#family_id_edit').val(family_id);
   });
 

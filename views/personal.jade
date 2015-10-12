@@ -89,14 +89,13 @@ block content
                   label الجنس
                   select#Gender.form-control.selectpicker(name="Gender", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') الجنس
-                    for data,i in social.gender
-                      option(value="#{i}") #{data}
+                    
                 .col-xs-3.col-md-3
                   label دولة الميلاد
                   select.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') دولة الميلاد
-                    for data in country.rows
-                      option(value="", style='color:grey;') #{data.country_name}
+                    //- //for data in country.rows
+                    //-   option(value="", style='color:grey;') #{data.country_name}
                     //- for country in countries
                     //-   option(value="#{country.id}") #{country.country_name}
                 .col-xs-3.col-md-3
@@ -139,8 +138,8 @@ block content
                   label الحالة الإجتماعية
                   select#Socialstatus_Id.form-control.selectpicker(name="Socialstatus_Id", data-live-search="true", data-size=5)
                     option(value="", style='colr:grey; display:none;') الحالة الإجتماعية
-                    for data,i in social.social_status
-                      option(value="#{i}", style='colr:grey;') #{data[0]}
+                    //- for data,i in social.social_status
+                    //-   option(value="#{i}", style='colr:grey;') #{data[0]}
             .form-group
               .row
                 .col-xs-3.col-md-3
@@ -210,8 +209,8 @@ block content
                   label دولة الميلاد
                   select.form-control.selectpicker(name="country.id", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') دولة الميلاد
-                    for data in country.rows
-                      option(value="", style='color:grey;') #{data.country_name}
+                    //- for data in country.rows
+                    //-   option(value="", style='color:grey;') #{data.country_name}
                     //- for country in countries
                     //-   option(value="#{country.id}") #{country.country_name}
                 .col-xs-3.col-md-3
