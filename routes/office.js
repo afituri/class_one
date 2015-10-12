@@ -34,7 +34,7 @@ module.exports = function (router) {
 
   /* Delete Offices page. */
   router.post('/Office/delete_Office', function (req, res) {
-    office.delete_Office(req.body,function(result){
+    office.delete_office(req.body,function(result){
       res.redirect(result);
     })
   });

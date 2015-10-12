@@ -52,7 +52,7 @@ exports.office_mgr = {
     });
   },
   // add new office
-  add_office: function (body) {
+  add_office: function (body, cb) {
     models.Office.create(body)
     .then(function (result) {
       cb("/office?msg=3");
