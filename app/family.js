@@ -15,6 +15,7 @@ exports.family_mgr = {
       }]
       })
       .then(function (result) {
+        console.log(result);
         models.Office.findAll({
             where: {
               status: 1

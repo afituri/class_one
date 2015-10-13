@@ -15,15 +15,13 @@ module.exports = function (router) {
     });
   });
 
-
-
   /* Add Family page. */
   router.post('/family/new_family', function (req, res) {
+    console.log(req.body);
     family.add_family(req.body, function (result) {
       res.redirect(result);
     });
   });
-
 
   /* Edit Family page. */
   router.post('/family/edit_family', function (req, res) {
@@ -31,7 +29,6 @@ module.exports = function (router) {
       res.redirect(result);
     })
   });
-
 
   /* Delete Familys page. */
   router.post('/family/delete_family', function (req, res) {
@@ -79,7 +76,5 @@ module.exports = function (router) {
   //     res.send(branches);
   //   })
   // });
-
-
 
 }

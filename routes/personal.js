@@ -1,15 +1,17 @@
 var models = require("../models");
 var constants = require("../data/constants.json");
+var country = require("../app/country")
+  .country_mgr;
 module.exports = function (router) {
   /* GET personals page. */
   router.get('/personal', function (req, res) {
-
-        res.render('personal', {
-          title: 'أفراد الأسرة',
-          personals: result.rows,
-          social: constants,
-          country: Country
-        });
+    /*country.get_country(function(result){
+      console.log(result);*/
+      res.render('personal', {
+        title: 'أفراد الأسرة',
+        social: constants,
+      });
+    //});
   });
 
   /* Add personals page. */
