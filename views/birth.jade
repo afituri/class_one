@@ -49,87 +49,89 @@ block content
   #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
     .modal-dialog.modal-lg
       .modal-content
-        form.form#add_family_form(action="/family/new_family", method="post", accept-charset="utf-8", role="form")
+        form.form(action="", method="post", accept-charset="utf-8", role="form")
           .modal-header
             button.close(type="button", data-dismiss="modal", aria-hidden="true")
               span.glyphicon.glyphicon-remove(aria-hidden="true")
-            h4.modal-title.custom_align إضافة أسر ليبية جديدة
+            h4.modal-title.custom_align إضافة مولود جديد
           .modal-body
             ul.nav.nav-tabs(role="tablist")
               li.active(role="presentation")
                 a(href="#tabOne", aria-controls="tabOne", role="tab", data-toggle="tab") البيانات الشخصية
               li
-                a(href="#tabTow", aria-controls="tabTow", role="tab", data-toggle="tab") بيانات الواقعة 
+                a(href="#tabTow", aria-controls="tabTow", role="tab", data-toggle="tab") بيانات الواقعة - 1
+              li
+                a(href="#tabThree", aria-controls="tabThree", role="tab", data-toggle="tab") بيانات الواقعة - 2
             .tab-content
               #tabOne.tab-pane.active(role="tabpanel")
                 br
                 .row
-                  .col-md-3
+                  .col-xs-3.col-md-3
                     .form-group
                       label اسم المولود
                       input.form-control(type="text", name="", placeholder="اسم المولود")
-                  .col-md-3
+                  .col-xs-3.col-md-3
                     .form-group
                       label جنس المولود
                       input.form-control(type="text", name="", placeholder="جنس المولود")
-                  .col-md-3
+                  .col-xs-3.col-md-3
                     .form-group
                       label تاريخ الميلاد
                       input.form-control(type="text", name="", placeholder="تاريخ الميلاد")
-                  .col-md-3
+                  .col-xs-3.col-md-3
                     .form-group
                       label مكان الميلاد
                       input.form-control(type="text", name="", placeholder="مكان الميلاد")
                 .row
-                  .col-md-3
+                  .col-xs-3.col-md-3
                     .form-group
                       label بلد الميلاد
                       input.form-control(type="text", name="", placeholder="بلد الميلاد")
-                  .col-md-3
+                  .col-xs-3.col-md-3
                     .form-group
                       label مدينة الميلاد
                       input.form-control(type="text", name="", placeholder="مدينة الميلاد")
-                  .col-md-3
+                  .col-xs-3.col-md-3
                     .form-group
                       label اسم اﻷم
                       input.form-control(type="text", name="", placeholder="اسم اﻷم")
-                  .col-md-3
+                  .col-xs-3.col-md-3
                     .form-group
                       label تاريخ اﻹكتيتاب
                       input.form-control(type="text", name="", placeholder="تاريخ اﻹكتيتاب")
               #tabTow.tab-pane(role="tabpanel")
                 br
                 .row
-                  .col-md-3
+                  .col-xs-3.col-md-3
                     .form-group
                       label نوع الولادة
                       input.form-control(type="text", name="", placeholder="Select")
-                  .col-md-3
+                  .col-xs-3.col-md-3
                     .form-group
                       label عدد الاولاد
                       input.form-control(type="text", name="", placeholder="عدد الاولاد")
-                  .col-md-3
+                  .col-xs-3.col-md-3
                     .form-group
-                      label نوع الموبلغ
+                      label نوع المبلغ
                       input.form-control(type="text", name="", placeholder="Select")
-                  .col-md-3
+                  .col-xs-3.col-md-3
                     .form-group
                       label اسم المبلغ
                       input.form-control(type="text", name="", placeholder="اسم المبلغ")
                 .row
-                  .col-md-3
+                  .col-xs-3.col-md-3
                     .form-group
                       label عنوان المبلغ
                       input.form-control(type="text", name="", placeholder="عنوان المبلغ")
-                  .col-md-3
+                  .col-xs-3.col-md-3
                     .form-group
                       label رقم السجل
                       input.form-control(type="text", name="", placeholder="رقم السجل")
-                  .col-md-3
+                  .col-xs-3.col-md-3
                     .form-group
                       label رقم ورقة السجل
                       input.form-control(type="text", name="", placeholder="رقم ورقة السجل")
-                  .col-md-3
+                  .col-xs-3.col-md-3
                     .form-group
                       label مكان الواقعة
                       input.form-control(type="text", name="", placeholder="Select")
@@ -150,6 +152,7 @@ block content
                     .form-group
                       label فيصيلة الدم
                       input.form-control(type="text", name="", placeholder="Select")
+              #tabThree.tab-pane(role="tabpanel")
                 .row
                   .col-md-3
                     .form-group
@@ -165,7 +168,29 @@ block content
                       input.form-control(type="text", name="", placeholder="Select")
                   .col-md-3
                     .form-group
-                      label وزن المولود بالكيلو جرام
+                      label وزن المولود (جرام.الكيلو)
+                      input#weight.form-control(type="text", name="weight", placeholder="وزن المولود بالكيلو والجرام")
+                .row
+                  .col-md-3.col-md-offset-3
+                    .form-group
+                      label طبيب او قابلة
+                      input.form-control(type="text", name="", placeholder="Select")
+                  .col-md-3
+                    .form-group
+                      label اسم الطبيب او القرابة
+                      input.form-control(type="text", name="", placeholder="اسم الطبيب او القرابة")
+                .row
+                  .col-md-4
+                    .form-group
+                      label المنطقة
+                      input.form-control(type="text", name="", placeholder="Select")
+                  .col-md-4
+                    .form-group
+                      label مكتب الاصدار
+                      input.form-control(type="text", name="", placeholder="Select")
+                  .col-md-4
+                    .form-group
+                      label السجل المدني
                       input.form-control(type="text", name="", placeholder="Select")
           .modal-footer
             button.btn.btn-success.btn-lg(type="submit", style="width: 100%;")
@@ -214,6 +239,7 @@ block content
   script(src='/js/moment-with-locales.min.js')
   script(src='/js/bootstrap-datetimepicker.min.js')
   script(src='/js/bootstrap-switch.min.js')
+  script(src='/js/jquery.mask.min.js')
   script(src='/js/helpers.js')
   script(src='/js/birth.js')
   script.
@@ -224,3 +250,4 @@ block content
       locale: 'ar-sa'
     });
     $("[data-toggle=tooltip]").tooltip();
+    $('#weight').mask('0.000');
