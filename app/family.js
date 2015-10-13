@@ -35,7 +35,8 @@ exports.family_mgr = {
 
 
    /* add new family*/
-  add_family: function (body, cb) {
+  add_family: function (body,cb) {
+    console.log(body);
     models.Family.create(body).then(function (result) {
         cb("/family");
       });
