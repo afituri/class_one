@@ -134,6 +134,7 @@ block content
                 .form-group
                   label تاريخ فتح ورقة العائلة
                   input#edit_family_record_date.form-control(type="text", name="FamilyRecordDate", placeholder="تاريخ فتح ورقة العائلة")
+          
               .col-md-6
                 .form-group
                   label الرقم الالي
@@ -192,20 +193,8 @@ block content
   script(src='/js/bootstrap-notify.min.js')
   script(src='/js/moment-with-locales.min.js')
   script(src='/js/bootstrap-switch.min.js')
-  script(src='/js/personal.js')
   script(src='/js/bootstrap-datetimepicker.min.js')
   script(src='/js/helpers.js')
   script(src='/js/family.js')
-  script.
-    $('#edit_family_record_date').datetimepicker({
-      useCurrent: false,
-      viewMode: 'years',
-      format: 'YYYY-MM-DD',
-      locale: 'ar-sa'
-    });
-    $('#add_family_record_date').datetimepicker({
-      useCurrent: false,
-      viewMode: 'years',
-      format: 'YYYY-MM-DD',
-      locale: 'ar-sa'
-    });
+  
+   

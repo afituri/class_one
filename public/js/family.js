@@ -1,4 +1,25 @@
 $(document).ready(function(){
+
+  /* $('#edit_family_record_date').datetimepicker({
+      useCurrent: false,
+      viewMode: 'years',
+      format: 'YYYY-MM-DD',
+      locale: 'ar-sa'
+    });
+    $('#add_family_record_date').datetimepicker({
+      useCurrent: false,
+      viewMode: 'years',
+      format: 'YYYY-MM-DD',
+      locale: 'ar-sa'
+    });*/
+
+
+  $('#edit_family_record_date,#add_family_record_date').datetimepicker({
+    useCurrent: false,
+    viewMode: 'years',
+    format: 'YYYY-MM-DD',
+    locale: 'ar-sa'
+  });
   
   $("[data-toggle=tooltip]").tooltip();
   $("[name='family_type']").bootstrapSwitch();
@@ -10,13 +31,13 @@ $(document).ready(function(){
   /*----------- validate in add Family----------*/
   $("#add_family_form").validate({
     rules:{
-      manucipality_name:{
+      FamilyType:{
         required: true,
         arabicLettersOnly: true,
       },
     },
     messages:{
-      manucipality_name:{
+      FamilyType:{
         required: "الرجاء ادخال اسم المنطقة!",
         arabicLettersOnly: "الرجاء ادخال حروف عربية فقط!",
       },
@@ -50,6 +71,23 @@ $(document).ready(function(){
       $(element).closest('.row').removeClass('has-error').addClass('has-success');
     },
   });
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   /*----------- validate in edit search----------*/
   $("#search_family").validate({
@@ -106,10 +144,10 @@ $(document).ready(function(){
     $("#family_id_delete").val($(this).val());
   });
   if($getMsg["msg"]==1){
-    custNotify("success","نجاح","تم حذف منطقة بنجاح","ok-sign","bounceInDown","bounceOutUp");
+    custNotify("success","نجاح","تم حذف العائلة بنجاح","ok-sign","bounceInDown","bounceOutUp");
     replaceUrl('/family');    
   } else if ($getMsg["msg"]==2) {
-    custNotify("danger","خطأ","لا يمكن حذف هذه المنطقة لاعتماد كيانات اخرى عليها","warning-sign","bounceIn","bounceOut");
+    custNotify("danger","خطأ","لا يمكن حذف هذه العائ لاعتماد كيانات اخرى عليها","warning-sign","bounceIn","bounceOut");
     replaceUrl('/family');
   } else if ($getMsg["msg"]==11) {
     custNotify("success","نجاح","لقد قمت بتعديل الحقول بنجاح","ok-sign","bounceInDown","bounceOut");
