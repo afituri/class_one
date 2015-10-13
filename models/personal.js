@@ -5,28 +5,27 @@ module.exports = function(sequelize, DataTypes) {
     Person_Id: DataTypes.BIGINT(11),
     national_id: DataTypes.STRING(12),
     Arabic_Firstname: DataTypes.STRING (60) ,
-	Arabic_Fathername: DataTypes.STRING (60) ,
-	Arabic_Grandfathername: DataTypes.STRING (60) ,
-	Arabic_Familyname: DataTypes.STRING (60) ,
-	Arabic_Motherfirstname: DataTypes.STRING (200) ,
-	Arabic_Motherfathername: DataTypes.STRING (60) ,
-	Arabic_Mothergrandfathername: DataTypes.STRING (60) ,
-	Arabic_Motherfamilyname: DataTypes.STRING (60) ,
-	Birth_Date: DataTypes.DATEONLY(),
-	Birth_Place: DataTypes.STRING (60) ,
-	Gender: DataTypes.INTEGER (1) ,
-	Religion_Id: DataTypes.INTEGER (1) ,
-	Enlistingdate: DataTypes.DATEONLY(),
-	Socialstatus_Id: DataTypes.INTEGER (2) ,
-	Is_Alive: {type:DataTypes.BOOLEAN(),defaultValue:1},
-	Regdoctype_Id: DataTypes.INTEGER (2) ,
-	Certification_Type_Id: DataTypes.INTEGER (2) ,
-	CertificationMber: DataTypes.STRING (20) ,
-	Certification_File_Number: DataTypes.STRING (20) ,
-	Certification_Issuance_Date: DataTypes.DATEONLY() ,
-	PersonalType:{type:DataTypes.INTEGER(1),defaultValue:1},
-	status:{type:DataTypes.INTEGER(1),defaultValue:1} 
-	      
+  	Arabic_Fathername: DataTypes.STRING (60) ,
+  	Arabic_Grandfathername: DataTypes.STRING (60) ,
+  	Arabic_Familyname: DataTypes.STRING (60) ,
+  	Arabic_Motherfirstname: DataTypes.STRING (200) ,
+  	Arabic_Motherfathername: DataTypes.STRING (60) ,
+  	Arabic_Mothergrandfathername: DataTypes.STRING (60) ,
+  	Arabic_Motherfamilyname: DataTypes.STRING (60) ,
+  	Birth_Date: DataTypes.DATEONLY(),
+  	Birth_Place: DataTypes.STRING (60) ,
+  	Gender: DataTypes.INTEGER (1) ,
+  	Religion_Id: DataTypes.INTEGER (1) ,
+  	Enlistingdate: DataTypes.DATEONLY(),
+  	Socialstatus_Id: DataTypes.INTEGER (2) ,
+  	Is_Alive: {type:DataTypes.BOOLEAN(),defaultValue:1},
+  	Regdoctype_Id: DataTypes.INTEGER (2) ,
+  	Certification_Type_Id: DataTypes.INTEGER (2) ,
+  	CertificationMber: DataTypes.STRING (20) ,
+  	Certification_File_Number: DataTypes.STRING (20) ,
+  	Certification_Issuance_Date: DataTypes.DATEONLY() ,
+  	PersonalType:{type:DataTypes.INTEGER(1),defaultValue:1},
+  	status:{type:DataTypes.INTEGER(1),defaultValue:1} 
   }, {
     classMethods: {
       associate: function(models) {
@@ -88,6 +87,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-
   return Personal;
 };
