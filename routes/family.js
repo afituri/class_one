@@ -25,7 +25,7 @@ module.exports = function (router) {
 
   /* Edit Family page. */
   router.post('/family/edit_family', function (req, res) {
-    family.update_family(req.body, function (result) {
+    family.edit_family (req.body, function (result) {
       res.redirect(result);
     })
   });

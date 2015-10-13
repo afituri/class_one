@@ -111,6 +111,9 @@ $(document).ready(function(){
   } else if ($getMsg["msg"]==2) {
     custNotify("danger","خطأ","لا يمكن حذف هذه المنطقة لاعتماد كيانات اخرى عليها","warning-sign","bounceIn","bounceOut");
     replaceUrl('/family');
+  } else if ($getMsg["msg"]==11) {
+    custNotify("success","نجاح","لقد قمت بتعديل الحقول بنجاح","ok-sign","bounceInDown","bounceOut");
+    replaceUrl('/family');
   }
 
 
