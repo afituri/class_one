@@ -10,6 +10,7 @@ var office = require('./office')(router);
 var family = require('./family')(router);
 var personal = require('./personal')(router);
 var city = require('./city')(router);
+var birth = require('./birth')(router);
 
 /* GET home page. */
 router.get('/', function (req, res) {
