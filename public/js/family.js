@@ -1,4 +1,25 @@
 $(document).ready(function(){
+
+  /* $('#edit_family_record_date').datetimepicker({
+      useCurrent: false,
+      viewMode: 'years',
+      format: 'YYYY-MM-DD',
+      locale: 'ar-sa'
+    });
+    $('#add_family_record_date').datetimepicker({
+      useCurrent: false,
+      viewMode: 'years',
+      format: 'YYYY-MM-DD',
+      locale: 'ar-sa'
+    });*/
+
+
+  $('#edit_family_record_date,#add_family_record_date').datetimepicker({
+    useCurrent: false,
+    viewMode: 'years',
+    format: 'YYYY-MM-DD',
+    locale: 'ar-sa'
+  });
   
   $("[data-toggle=tooltip]").tooltip();
   $("[name='family_type']").bootstrapSwitch();
@@ -10,13 +31,13 @@ $(document).ready(function(){
   /*----------- validate in add Family----------*/
   $("#add_family_form").validate({
     rules:{
-      manucipality_name:{
+      FamilyType:{
         required: true,
         arabicLettersOnly: true,
       },
     },
     messages:{
-      manucipality_name:{
+      FamilyType:{
         required: "الرجاء ادخال اسم المنطقة!",
         arabicLettersOnly: "الرجاء ادخال حروف عربية فقط!",
       },
@@ -50,6 +71,23 @@ $(document).ready(function(){
       $(element).closest('.row').removeClass('has-error').addClass('has-success');
     },
   });
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   /*----------- validate in edit search----------*/
   $("#search_family").validate({
@@ -85,12 +123,15 @@ $(document).ready(function(){
         family_record_date= $('#br-'+family_id).data('family_record_date');
         auto_generated_id= $('#br-'+family_id).data('auto_generated_id');
         is_closed= $('#br-'+family_id).data('is_closed');
-        family_office= $('#br-'+family_id).data('office_Id');
-    $('#edit_family_office').selectpicker('val',family_office);
-    $('#edit_registry_number').val(registry_number);
-    $('#edit_record_number').val(record_number);
-    $('#edit_family_record_date').val(family_record_date);
-    $('#edit_auto_generated_id').val(auto_generated_id);
+        family_office= $('#br-'+family_id).data('officee');
+        family_type= $('#br-'+family_id).data('family_type');
+        office_name= $('#br-'+family_id).data('office_name');
+        $('#FamilyTypeEdit').selectpicker('val',family_type);
+        $('#edit_family_office').selectpicker('val',family_office);
+        $('#edit_registry_number').val(registry_number);
+        $('#edit_record_number').val(record_number);
+        $('#edit_family_record_date').val(family_record_date);
+        $('#edit_auto_generated_id').val(auto_generated_id);
     //$('#edit_is_closed').val(is_closed);
     $('#edit_is_closed').selectpicker('val',is_closed);
     $('#family_id_edit').val(family_id);
@@ -103,10 +144,13 @@ $(document).ready(function(){
     $("#family_id_delete").val($(this).val());
   });
   if($getMsg["msg"]==1){
-    custNotify("success","نجاح","تم حذف منطقة بنجاح","ok-sign","bounceInDown","bounceOutUp");
+    custNotify("success","نجاح","تم حذف العائلة بنجاح","ok-sign","bounceInDown","bounceOutUp");
     replaceUrl('/family');    
   } else if ($getMsg["msg"]==2) {
-    custNotify("danger","خطأ","لا يمكن حذف هذه المنطقة لاعتماد كيانات اخرى عليها","warning-sign","bounceIn","bounceOut");
+    custNotify("danger","خطأ","لا يمكن حذف هذه العائ لاعتماد كيانات اخرى عليها","warning-sign","bounceIn","bounceOut");
+    replaceUrl('/family');
+  } else if ($getMsg["msg"]==11) {
+    custNotify("success","نجاح","لقد قمت بتعديل الحقول بنجاح","ok-sign","bounceInDown","bounceOut");
     replaceUrl('/family');
   }
 

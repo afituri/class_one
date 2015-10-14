@@ -27,6 +27,7 @@ module.exports = function (router) {
 
   /* Edit Offices page. */
   router.post('/office/edit_office', function (req, res) {
+    console.log(req.body);
     office.update_office(req.body, function(result){
       res.redirect(result);
     })
