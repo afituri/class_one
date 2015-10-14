@@ -2,16 +2,16 @@ extends layout
 block content
   .container-fulid
     .col-sm-10.col-md-10
+      .row 
+        .col-md-3
+          .form-group
+            label نوع الاسرة
+            select#FamilyType.form-control.selectpicker(name="FamilyType", data-live-search="true", data-size=5)
+              option(value="1" selected) اسر ليبية
+              option(value="2") اسر مؤقته
+              option(value="3") اسر اجنبية
       .panel.panel-default
         .panel-heading
-          .row 
-              .col-md-6
-                .form-group
-                  label نوع الاسرة
-                  select#FamilyType.form-control.selectpicker(name="FamilyType", data-live-search="true", data-size=5)
-                    option(value="1" selected) اسر ليبية
-                    option(value="2") اسر مؤقته
-                    option(value="3") اسر اجنبية
           .row
             .pull-right(style="margin-right: 10px;")
               h3#h3.panel-title عرض #{title}
@@ -77,6 +77,7 @@ block content
             button.close(type="button", data-dismiss="modal", aria-hidden="true")
               span.glyphicon.glyphicon-remove(aria-hidden="true")
             h4.modal-title.custom_align إضافة أسر ليبية جديدة
+
           .modal-body      
             .row
               .col-md-6
@@ -88,8 +89,7 @@ block content
                   input#add_record_number.form-control(type="text", name="Recordnumber", placeholder="رقم ورقة العائلة")
                 .form-group
                   label تاريخ فتح ورقة العائلة
-                  input#add_family_record_date.form-control(type='text', name='FamilyRecordDate')
-                  //- input#add_family_record_date.form-control(type="text", name="family_record_date", placeholder="تاريخ فتح ورقة العائلة")
+                  input#add_family_record_date.form-control(type='text', name='FamilyRecordDate', placeholder="تاريخ فتح ورقة العائلة")
               .col-md-6  
                 .form-group
                   label الرقم الالي
@@ -101,13 +101,13 @@ block content
                     option(value="1") نشطة 
                     option(value="2") غير نشطة
                 .form-group
-                  label أختار السجل المدني
+                  label السجل المدني
                   select#Office_Id.form-control.selectpicker(name="OfficeId", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') اختر السجل المدني...
                     for office in offices
                       option(value="#{office.id}") #{office.office_name}
           .modal-footer
-            button#add_family_btn.btn.btn-warning.btn-lg(type="button", style="width: 100%;")
+            button#add_family_btn.btn.btn-warning.btn-lg(type="submit", style="width: 100%;")
               span.glyphicon.glyphicon-ok-sign
               |  إضافة
   #edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
@@ -132,7 +132,6 @@ block content
                 .form-group
                   label تاريخ فتح ورقة العائلة
                   input#edit_family_record_date.form-control(type="text", name="FamilyRecordDate", placeholder="تاريخ فتح ورقة العائلة")
-          
               .col-md-6
                 .form-group
                   label الرقم الالي
@@ -143,7 +142,6 @@ block content
                     option(value="", style='color:grey; display:none;') اختر حالة الاسرة...
                     option(value="1") نشطة 
                     option(value="2") غير نشطة
-                
                 .form-group
                    label نوع الاسرة
                     select#FamilyTypeEdit.form-control.selectpicker(name="FamilyType", data-live-search="true", data-size=5,disabled)

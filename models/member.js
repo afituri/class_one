@@ -2,11 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Member = sequelize.define("Member", {
-
-    FromRegistrynumber: DataTypes.STRING(10),
-    FromRecordnumber: DataTypes.STRING(12),
   	status:{type:DataTypes.INTEGER(1),defaultValue:1} 
-	      
   }, {
     classMethods: {
       associate: function(models) {
@@ -34,9 +30,15 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
           }
         });
+        Member.belongsTo(models.Family, {
+          foreignKey : {
+            name : 'from_family_Id',
+            allowNull : true
+          },
+          onDelete: "SET NULL"
+        });
       }
     }
   });
-
   return Member;
 };

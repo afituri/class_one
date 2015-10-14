@@ -3,18 +3,12 @@ var deathreason = require("../app/deathreason").deathreason_mgr;
 module.exports = function (router) {
   /* GET deathreasons page. */
   router.get('/deathreason', function(req, res) {
-    models.deathreason.findAndCountAll({
-      where: {
-        status: 1
-      }
-    }).then(function(result) {
+    deathreason.get_deathreason(function(result){
       res.render('deathreason', { 
-        title: 'سبب الوفاة', 
-        deathreasons:result.rows,
-        collapse_one: 'collapse in', 
-        active_one_nine: 'active'
+        title: 'اسباب الوفيات', 
+        deathreasons:result.rows, 
       });
-    });
+    })
   });
 
   /* Add deathreasons page. */
