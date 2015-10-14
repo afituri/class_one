@@ -2,26 +2,27 @@ var models = require("../models");
 exports.deathreason_mgr = {
   // get all deathreasons
   get_deathreason: function (cb) {
-    models.deathreason.findAndCountAll({
+    models.Deathreason.findAndCountAll({
         where: {
           status: 1
         }
       })
       .then(function (result) {
+        console.log(result.rows);
         cb(result);
       });
   },
   // add new deathreason
   add_deathreason: function (body, cb) {
-    models.deathreason.create(body)
+    models.Deathreason.create(body)
       .then(function (result) {
         cb("/deathreason?msg=3");
       });
   },
   // update deathreason
   update_deathreason: function (body, cb) {
-    models.deathreason.update({
-        deathreason_name: body.deathreason_name
+    models.Deathreason.update({
+        reason_name: body.reason_name
       }, {
         where: {
           id: body.id
@@ -33,7 +34,7 @@ exports.deathreason_mgr = {
   },
   // delete deathreason
   delete_deathreason: function (body, cb) {
-    models.deathreason.destroy({
+    models.Deathreason.destroy({
         where: {
           id: body.id
         }
