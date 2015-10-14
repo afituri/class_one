@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
   $("[name='family_type']").bootstrapSwitch();
-
   $("#Regdoctype_Id").change(function(){
     $(this).find("option:selected").each(function() {
       if($(this).attr("value")==2) {
@@ -11,6 +10,10 @@ $(document).ready(function(){
       }
     });
   }).change();
+
+  $("#Gender").change(function(){
+      
+  });
 
   $('#add').on('hidden.bs.modal', function(){
     $(".box").hide();

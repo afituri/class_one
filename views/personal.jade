@@ -87,8 +87,10 @@ block content
               .row
                 .col-xs-3.col-md-3
                   label الجنس
-                  select#Gender.form-control.selectpicker(name="Gender", data-live-search="true", data-size=5)
+                  select#Gender.form-control.selectpicker(name="Gender",data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') الجنس
+                    for data,i in social.gender
+                      option(value="#{i}") #{data}
                     
                 .col-xs-3.col-md-3
                   label دولة الميلاد
