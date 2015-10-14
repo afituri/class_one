@@ -2,10 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Member = sequelize.define("Member", {
-
-   
   	status:{type:DataTypes.INTEGER(1),defaultValue:1} 
-	      
   }, {
     classMethods: {
       associate: function(models) {
@@ -43,6 +40,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-
   return Member;
 };
