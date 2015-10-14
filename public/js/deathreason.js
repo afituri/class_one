@@ -9,13 +9,13 @@ $(document).ready(function(){
   /*----------- validate in add deathreason----------*/
   $("#add_deathreason_form").validate({
     rules:{
-      deathreason_name:{
+      reason_name:{
         required: true,
         arabicLettersOnly: true,
       },
     },
     messages:{
-      deathreason_name:{
+      reason_name:{
         required: "الرجاء ادخال اسم المنطقة!",
         arabicLettersOnly: "الرجاء ادخال حروف عربية فقط!",
       },
@@ -31,13 +31,13 @@ $(document).ready(function(){
   /*----------- validate in edit deathreason----------*/
   $("#edit_deathreason_form").validate({
     rules:{
-      deathreason_name:{
+      reason_name:{
         required: true,
         arabicLettersOnly: true,
       },
     },
     messages:{
-      deathreason_name:{
+      reason_name:{
         required: "الرجاء ادخال اسم المنطقة!",
         arabicLettersOnly: "الرجاء ادخال حروف عربية فقط!",
       },
