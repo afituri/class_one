@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-  var deathreason = sequelize.define("deathreason", {
+  var Deathreason = sequelize.define("Deathreason", {
     reason_name: DataTypes.STRING (150) ,
     status:{type:DataTypes.INTEGER(1),defaultValue:1} 
   }, {
@@ -10,5 +10,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return deathreason;
+  return Deathreason;
 };
