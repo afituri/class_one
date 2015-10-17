@@ -1,10 +1,9 @@
 var models = require("../models");
-exports.personal_mgr = {
+exports.country_mgr = {
   get_country: function (cb) {
-    models.sequelize.query('', {
-      replacements: []
-    }).then(function () {
-
+    models.sequelize.query('select * from Countries where id=?', {
+    }).then(function (result) {
+    	cb(result);
     });
 
 

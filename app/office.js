@@ -60,6 +60,7 @@ exports.office_mgr = {
   },
   // update office
   update_office: function (body, cb) {
+    console.log(body);
     models.Office.update({
       office_name: body.office_name,
       BranchId: body.BranchId,

@@ -11,11 +11,13 @@ var family = require('./family')(router);
 var personal = require('./personal')(router);
 var city = require('./city')(router);
 var reports = require('./reports')(router);
+var deathreason = require('./deathreason')(router);
+var birth = require('./birth')(router);
 
 /* GET home page. */
 router.get('/', function (req, res) {
 	res.render('index', {
-		title: 'ارئيسيةل'
+		title: 'الرئيسية'
 	});
 });
 

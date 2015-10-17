@@ -5,8 +5,6 @@ module.exports = function (router) {
   /* GET families page. */
   router.get('/family', function (req, res) {
     family.get_family(function (result) {
-      console.log(result.result.rows);
-      console.log(result.offices);
       res.render('family', { 
         title: 'الأسر', 
         familys: result.result.rows,
@@ -15,23 +13,20 @@ module.exports = function (router) {
     });
   });
 
-
-
   /* Add Family page. */
   router.post('/family/new_family', function (req, res) {
+   // console.log(req.body);
     family.add_family(req.body, function (result) {
-      res.redirect(result);
+      res.send(result);
     });
   });
 
-
   /* Edit Family page. */
   router.post('/family/edit_family', function (req, res) {
-    family.update_family(req.body, function (result) {
+    family.edit_family (req.body, function (result) {
       res.redirect(result);
     })
   });
-
 
   /* Delete Familys page. */
   router.post('/family/delete_family', function (req, res) {
@@ -79,7 +74,5 @@ module.exports = function (router) {
   //     res.send(branches);
   //   })
   // });
-
-
 
 }

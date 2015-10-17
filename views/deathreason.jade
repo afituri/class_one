@@ -1,0 +1,140 @@
+extends layout
+
+block content
+  .container-fulid
+    .col-sm-10.col-md-10
+      .panel.panel-default
+        .panel-heading
+          .row
+            .pull-right(style="margin-right: 10px;")
+              h3#h3.panel-title عرض #{title}
+            .col-xs-6.col-md-6
+              form.form#search_deathreason(action="")
+                .input-group
+                  input.form-control(type='text',name="search_name" placeholder='بحث...')
+                  .input-group-btn
+                    button.btn.btn-default(type="submit")
+                      i.glyphicon.glyphicon-search
+            .pull-left(style="margin-left: 10px;")
+              button.btn.btn-success#fff(href='#add', role='button',data-toggle='modal')
+                span.glyphicon.glyphicon-plus
+                span  إضافة سبب وفاة
+        .table-responsive
+          table.table.table-bordred.table-striped.table-condensed
+            thead
+              tr.info
+                th.text-center رقم سبب الوفاة
+                th.text-center اسم سبب الوفاة
+                th.text-center تعديل
+                th.text-center إلغاء
+            tbody
+            for deathreason in deathreasons
+              tr(id="br-#{deathreason.id}", data-name="#{deathreason.reason_name}")
+                td.text-center #{deathreason.id}
+                td.text-center #{deathreason.reason_name} 
+                td.text-center
+                  p(data-placement="top", data-toggle="tooltip", title="تعديل")
+                    button.btn.btn-primary.btn-xs.edit_btn(data-title="Edit", data-toggle="modal", data-target="#edit", value="#{deathreason.id}")
+                      span.glyphicon.glyphicon-pencil
+                td.text-center
+                  p(data-placement="top", data-toggle="tooltip", title="إلغاء")
+                    button.btn.btn-danger.btn-xs.delete_btn(data-title="Delete", data-toggle="modal", data-target="#delete", value="#{deathreason.id}")
+                      span.glyphicon.glyphicon-trash
+  #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="add", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        form.form#add_deathreason_form(action="/deathreason/new_deathreason", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align إضافة سبب وفاة 
+          .modal-body
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label اسم سبب الوفاة
+                  input#reason_name.form-control(type="text", name="reason_name", placeholder="اسم سبب الوفاة")
+          .modal-footer
+            button#add_deathreason_btn.btn.btn-warning.btn-lg(type="submit", style="width: 100%;", data-loading-text="جاري التحميل...", autocomplete="off")
+              span.glyphicon.glyphicon-ok-sign
+              |  إضافة
+  #edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        form.form#edit_deathreason_form(action="/deathreason/edit_deathreason", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align تعديل سبب الوفاة
+          .modal-body
+            .form-group
+              .row
+                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                  label اسم سبب الوفاة
+                  input#edit_deathreason_name.form-control(type="text", name="reason_name", placeholder="اسم سبب الوفاة")
+                  //- get hidden ID has deathreason_id_edit
+                  input#deathreason_id_edit.form-control(type="hidden", name="id")
+          .modal-footer
+            button#edit_deathreason_btn.btn.btn-info.btn-lg(type="submit", style="width: 100%;")
+              span.glyphicon.glyphicon-ok-sign
+              |  تعديل
+  #delete.modal.fade(tabindex="-1", role="dialog", aria-labelledby="delete", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        form.form#delete_deathreason_form(action="/deathreason/delete_deathreason", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align إلغاء سبب وفاة معين
+          .modal-body
+            .alert.alert-danger.h5
+              //- get hidden ID has deathreason_id_delete
+              input#deathreason_id_delete.form-control(type="hidden", name="id")
+              span.glyphicon.glyphicon-warning-sign
+              |  هل تريد فعلا الغاء سبب الوفاء هذا ؟
+          .modal-footer
+            button#yes_btn.btn.btn-danger(type="submit")
+              span.glyphicon.glyphicon-ok-sign
+              |  نعم
+            button.btn.btn-default(type="button", data-dismiss="modal")
+              span.glyphicon.glyphicon-remove
+              |  لا
+  script(src='/js/jquery-2.1.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src='/js/jquery.validate.min.js')
+  script(src='/js/bootstrap-notify.min.js')
+  script(src='/js/helpers.js')
+  script(src='/js/deathreason.js')
+  script.
+    //- $('#fff').on('click',function(e){
+    //-   e.preventDefault();
+    //-   $('#add_deathreason_btn').prop('disabled', true);
+    //-   if($('#deathreason_name').valid()){
+    //-     $('#add_deathreason_btn').prop('disabled', false);
+    //-       //$('#add_deathreason_form').submit();
+    //-   }
+    //- });
+    //- $("#add_deathreason_form").change(function(){
+    //-   $(this).find("input[name='deathreason_name']").each(function() {
+    //-     $('#add_deathreason_btn').on('click',function(e){
+    //-       e.preventDefault();
+    //-       if($('#add_deathreason_form').valid()){
+    //-         $('#add_deathreason_btn').prop('disabled', true);
+    //-       } else {
+    //-         $('#add_deathreason_btn').prop('disabled', false);
+    //-       }
+    //-     });
+    //-   });
+    //- }).change();
+    $('#add_deathreason_btn').on('click',function(e){
+      e.preventDefault();
+      if($('#add_deathreason_form').valid()){
+        $('#add_deathreason_btn').prop('disabled', true);
+        $('#add_deathreason_form').submit();
+      }
+    });
+    $('.modal.fade').on('hidden.bs.modal', function(){
+      $(this).removeData('bs.modal');
+      $('#add_deathreason_form').validate().resetForm();
+      $('#edit_deathreason_form').validate().resetForm();
+    });
