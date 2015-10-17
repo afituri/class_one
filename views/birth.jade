@@ -73,11 +73,12 @@ block content
                   .col-xs-3.col-md-3
                     .form-group
                       label جنس المولود
-                      input.form-control(type="text", name="", placeholder="جنس المولود")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') جنس المولود
                   .col-xs-3.col-md-3
                     .form-group
                       label تاريخ الميلاد
-                      input.form-control(type="text", name="", placeholder="تاريخ الميلاد")
+                      input#Birth_Date.form-control(type="text", name="Birth_Date", placeholder="تاريخ الميلاد")
                   .col-xs-3.col-md-3
                     .form-group
                       label مكان الميلاد
@@ -86,11 +87,13 @@ block content
                   .col-xs-3.col-md-3
                     .form-group
                       label بلد الميلاد
-                      input.form-control(type="text", name="", placeholder="بلد الميلاد")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') بلد الميلاد
                   .col-xs-3.col-md-3
                     .form-group
                       label مدينة الميلاد
-                      input.form-control(type="text", name="", placeholder="مدينة الميلاد")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') مدينة الميلاد
                   .col-xs-3.col-md-3
                     .form-group
                       label اسم اﻷم
@@ -98,22 +101,25 @@ block content
                   .col-xs-3.col-md-3
                     .form-group
                       label تاريخ اﻹكتيتاب
-                      input.form-control(type="text", name="", placeholder="تاريخ اﻹكتيتاب")
+                      input#Enlistingdate.form-control(type="text", name="Enlistingdate", placeholder="تاريخ اﻹكتيتاب")
               #tabTow.tab-pane(role="tabpanel")
                 br
                 .row
                   .col-xs-3.col-md-3
                     .form-group
                       label نوع الولادة
-                      input.form-control(type="text", name="", placeholder="Select")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') نوع الولادة
                   .col-xs-3.col-md-3
                     .form-group
                       label عدد الاولاد
-                      input.form-control(type="text", name="", placeholder="عدد الاولاد")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') عدد الاولاد
                   .col-xs-3.col-md-3
                     .form-group
                       label نوع المبلغ
-                      input.form-control(type="text", name="", placeholder="Select")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') نوع المبلغ
                   .col-xs-3.col-md-3
                     .form-group
                       label اسم المبلغ
@@ -134,38 +140,47 @@ block content
                   .col-xs-3.col-md-3
                     .form-group
                       label مكان الواقعة
-                      input.form-control(type="text", name="", placeholder="Select")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') مكان الواقعة
                 .row
                   .col-md-3
                     .form-group
                       label كيفية الولادة
-                      input.form-control(type="text", name="", placeholder="Select")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') كيفية الولادة
                   .col-md-3
                     .form-group
                       label نوع التبليغ
-                      input.form-control(type="text", name="", placeholder="Select")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') نوع التبليغ
                   .col-md-3
                     .form-group
                       label حالة المولود
-                      input.form-control(type="text", name="", placeholder="Select")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') حالة المولود
                   .col-md-3
                     .form-group
                       label فيصيلة الدم
-                      input.form-control(type="text", name="", placeholder="Select")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') فيصيلة الدم
               #tabThree.tab-pane(role="tabpanel")
+                br
                 .row
                   .col-md-3
                     .form-group
                       label حالة الولادة
-                      input.form-control(type="text", name="", placeholder="Select")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') حالة الولادة
                   .col-md-3
                     .form-group
                       label حالة المولود الصحية
-                      input.form-control(type="text", name="", placeholder="Select")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') حالة المولود الصحية
                   .col-md-3
                     .form-group
                       label مدة الحمل
-                      input.form-control(type="text", name="", placeholder="Select")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') مدة الحمل
                   .col-md-3
                     .form-group
                       label وزن المولود (جرام.الكيلو)
@@ -174,7 +189,8 @@ block content
                   .col-md-3.col-md-offset-3
                     .form-group
                       label طبيب او قابلة
-                      input.form-control(type="text", name="", placeholder="Select")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') طبيب او قابلة
                   .col-md-3
                     .form-group
                       label اسم الطبيب او القرابة
@@ -183,15 +199,18 @@ block content
                   .col-md-4
                     .form-group
                       label المنطقة
-                      input.form-control(type="text", name="", placeholder="Select")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') المنطقة
                   .col-md-4
                     .form-group
                       label مكتب الاصدار
-                      input.form-control(type="text", name="", placeholder="Select")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') مكتب الاصدار
                   .col-md-4
                     .form-group
                       label السجل المدني
-                      input.form-control(type="text", name="", placeholder="Select")
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') السجل المدني
           .modal-footer
             button.btn.btn-success.btn-lg(type="submit", style="width: 100%;")
               span.glyphicon.glyphicon-plus
@@ -243,7 +262,7 @@ block content
   script(src='/js/helpers.js')
   script(src='/js/birth.js')
   script.
-    $('#edit_family_record_date').datetimepicker({
+    $('#Birth_Date, #Enlistingdate').datetimepicker({
       useCurrent: false,
       viewMode: 'years',
       format: 'YYYY-MM-DD',

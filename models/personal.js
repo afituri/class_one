@@ -36,7 +36,6 @@ module.exports = function(sequelize, DataTypes) {
             allowNull : true
           },
           onDelete: "SET NULL",
-          
         });
         Personal.belongsTo(models.Personal, {
           as: 'Mother', 
