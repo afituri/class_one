@@ -25,12 +25,22 @@ exports.family_mgr = {
           });
       });
     },
+
+    get_family_by_registry_number : function(reg,cb){
+       var reg=reg+"%";
+       models.sequelize.query('select * from Families as f,Offices as o where  f.Registrynumber LIKE ? and o.id=f.OfficeId', {
+       replacements:[reg]
+       }).then(function (result) {
+        console.log(result[0]);
+        cb(result[0]);
+       });
+
+    },
   
 
 
    /* add new family*/
   add_family: function (body,cb) {
-    console.log(body);
     models.Family.create(body).then(function (result) {
         cb(true);
       }).catch(function (err) {

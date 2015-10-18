@@ -1,4 +1,8 @@
 $(document).ready(function(){
+/*  $('body').on('click','#open_personal', function(){
+
+  });*/
+
   $('body').on('click', '#add_family_btn', function(e){
   var isvalidate=$("#add_family_form").valid();
   if(isvalidate){

@@ -64,7 +64,7 @@ block content
                 td.text-center #{family.Office.office_name}
                 td.text-center
                   p(data-placement="top", data-toggle="tooltip", title="أضافة فرد")
-                    a.btn.btn-primary.btn-xs.edit_btn(data-title="add_personal", data-toggle="modal", href="/personal")
+                    a#open_personal.btn.btn-primary.btn-xs.edit_btn(href="/personal/#{family.id}",value="#{family.id}")
                       span.glyphicon.glyphicon-plus
                 td.text-center
                   p(data-placement="top", data-toggle="tooltip", title="تعديل")
