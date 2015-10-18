@@ -12,12 +12,7 @@ exports.country_mgr = {
     }).then(function (result) {
       cb(result);
     });
-
   },
   
 
-
-
-
-
-  };
+};
