@@ -39,5 +39,9 @@ module.exports = function (router) {
       res.redirect(result);
     })
   });
-
+  router.get('/Office/get_Office/:id', function (req, res) {
+    office.get_office_by_branch_id(req.params.id, function (result) {
+      res.send(result);
+    });
+  });
 }
