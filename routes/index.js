@@ -10,6 +10,7 @@ var office = require('./office')(router);
 var family = require('./family')(router);
 var personal = require('./personal')(router);
 var city = require('./city')(router);
+var reports = require('./reports')(router);
 var deathreason = require('./deathreason')(router);
 var birth = require('./birth')(router);
 
