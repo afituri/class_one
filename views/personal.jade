@@ -77,13 +77,14 @@ block content
           .modal-body
             ul.nav.nav-tabs(role="tablist")
               li.active(role="presentation")
-                a(href="#tabOne", aria-controls="tabOne", role="tab", data-toggle="tab") البيانات الشخصية
+                a(href="#tabOne", aria-controls="tabOne", role="tab", data-toggle="tab") البيانات الشخصية - 1
               li
-                a(href="#tabTow", aria-controls="tabTow", role="tab", data-toggle="tab") الاسرة القادم منها
-              //- li
-              //-   a(href="#tabThree", aria-controls="tabThree", role="tab", data-toggle="tab") بيانات الواقعة - 2
+                a(href="#tabTwo", aria-controls="tabTwo", role="tab", data-toggle="tab") البيانات الشخصية - 2
+              li
+                a(href="#tabThree", aria-controls="tabThree", role="tab", data-toggle="tab") الاسرة القادم منها
             .tab-content
               #tabOne.tab-pane.active(role="tabpanel")
+                br
                 .form-group
                   .row
                     .col-xs-3.col-md-3
@@ -125,20 +126,6 @@ block content
                       label تاريخ الميلاد
                       input#Birth_Date.form-control(type="text", name="Birth_Date", placeholder="تاريخ الميلاد")
                     .col-xs-3.col-md-3
-                      label اسم الأم الأول
-                      input#Arabic_Motherfirstname.form-control(type="text", name="Arabic_Motherfirstname", placeholder="اسم الأم ")
-                    .col-xs-3.col-md-3
-                      label اسم أب الأم
-                      input#Arabic_Motherfathername.form-control(type="text", name="Arabic_Motherfathername", placeholder="اسم  والد الأم ")
-                    .col-xs-3.col-md-3
-                      label اسم جد الأم
-                      input#Arabic_Mothergrandfathername.form-control(type="text", name="Arabic_Mothergrandfathername", placeholder="اسم جد الأم")
-                .form-group
-                  .row
-                    .col-xs-3.col-md-3
-                      label لقب الأم
-                      input#Arabic_Motherfamilyname.form-control(type="text", name="Arabic_Motherfamilyname", placeholder="لقب الأم ")
-                    .col-xs-3.col-md-3
                       label الجنسية 
                       select#Nationality_Id.form-control.selectpicker(name="Nationality", data-live-search="true", data-size=5)
                         option(value="", style='color:grey; display:none;') الجنسية
@@ -158,7 +145,6 @@ block content
                       label الديانة
                       select#Religion_Id.form-control.selectpicker(name="Religion_Id", data-live-search="true", data-size=5)
                         option(value="", style='color:grey; display:none;') الديانة
-                        
                     .col-xs-3.col-md-3
                       label تاريخ الاكتتاب
                       input#Enlistingdate.form-control(type="text", name="Enlistingdate", placeholder="تاريخ الاكتتاب")
@@ -168,10 +154,69 @@ block content
                         option(value="", style='color:grey; display:none;') جنسية اﻷم
                         for i in country
                           option(value="#{i.id}") #{i.nationality_female}
-
                     .col-xs-3.col-md-3
                       label الرقم الوطني
                       input#national_id.form-control(type="text", name="national_id")
+              #tabTwo.tab-pane(role="tabpanel")
+                br
+                .form-group
+                  .row
+                    .col-md-3
+                      label المهنة
+                      select#JobId.form-control.selectpicker(name="JobId", data-live-search="true", data-size=5)
+                        option(value="", style='color:grey; display:none;') المهنة
+                .form-group
+                  .row
+                    .col-xs-4.col-md-4
+                      label حالة اﻷب
+                      select#father_status.form-control.selectpicker(name="father_status", data-live-search="true", data-size=5)
+                        option(value="", style='color:grey; display:none;') حالة اﻷب
+                        option(value="1") موجود
+                        option(value="2") غير موجود
+                    .insert_father_name.hide
+                      .col-xs-2.col-md-2
+                        label اسم اﻷب الأول
+                        input#Arabic_Fatherfirstname.form-control(type="text", name="Arabic_Fatherfirstname", placeholder="اسم الأم ")
+                      .col-xs-2.col-md-2
+                        label اسم أب اﻷب
+                        input#Arabic_Fatherfathername.form-control(type="text", name="Arabic_Fatherfathername", placeholder="اسم  والد الأم ")
+                      .col-xs-2.col-md-2
+                        label اسم جد اﻷب
+                        input#Arabic_Fathergrandfathername.form-control(type="text", name="Arabic_Fathergrandfathername", placeholder="اسم جد الأم")
+                      .col-xs-2.col-md-2
+                        label لقب اﻷب
+                        input#Arabic_Fatherfamilyname.form-control(type="text", name="Arabic_Fatherfamilyname", placeholder="لقب الأم ")
+                    .select_father_name.hide
+                      .col-md-8
+                        label اسم اﻷب بالكامل
+                        select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                          option(value="", style='color:grey; display:none;') اختر اسم اﻷب بالكامل
+                .form-group
+                  .row
+                    .col-xs-4.col-md-4
+                      label حالة اﻷم
+                      select#mother_status.form-control.selectpicker(name="mother_status", data-live-search="true", data-size=5)
+                        option(value="", style='color:grey; display:none;') حالة اﻷم
+                        option(value="1") موجودة
+                        option(value="2") غير موجودة
+                    .insert_mother_name.hide
+                      .col-xs-2.col-md-2
+                        label اسم الأم الأول
+                        input#Arabic_Motherfirstname.form-control(type="text", name="Arabic_Motherfirstname", placeholder="اسم الأم ")
+                      .col-xs-2.col-md-2
+                        label اسم أب الأم
+                        input#Arabic_Motherfathername.form-control(type="text", name="Arabic_Motherfathername", placeholder="اسم  والد الأم ")
+                      .col-xs-2.col-md-2
+                        label اسم جد الأم
+                        input#Arabic_Mothergrandfathername.form-control(type="text", name="Arabic_Mothergrandfathername", placeholder="اسم جد الأم")
+                      .col-xs-2.col-md-2
+                        label لقب الأم
+                        input#Arabic_Motherfamilyname.form-control(type="text", name="Arabic_Motherfamilyname", placeholder="لقب الأم ")
+                    .select_mother_name.hide
+                      .col-md-8
+                        label اسم اﻷم بالكامل
+                        select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                          option(value="", style='color:grey; display:none;') اختر اسم اﻷم بالكامل
                 .form-group
                   .row
                     .col-xs-3.col-md-3
@@ -190,38 +235,13 @@ block content
                     .col-xs-3.col-md-3.box
                       label رقم ملف الجنسية
                       input#Certification_File_Number.form-control(type="text", name="Certification_File_Number", placeholder="ادخل رقم ملف الجنسية")
-              #tabTow.tab-pane(role="tabpanel")
+              #tabThree.tab-pane(role="tabpanel")
                 .panel.panel-default
-                  .panel-heading
-                    .row
-                      .pull-right(style="margin-right: 10px;")
-                        h5#h5.panel-title الاسرة القادم منها
-                      //- span.pull-left.btn.btn-info(style="margin-left: 10px;")
-                      //-   i.glyphicon.glyphicon-chevron-down(style="top: 4px;")
-                      //-   | 
-                      //-   span بحث متقدم
-                      //- .col-xs-6.col-md-6
-                      //-   .input-group
-                      //-     input.form-control#student_search(type='text', placeholder='بحث...رقم القيد...')
-                      //-     .input-group-btn
-                            button.btn.btn-info#student_searchbtn
-                              i.glyphicon.glyphicon-search
-                              | 
-                              span بحث
-                  br            
+                  br
                   .panel-body
                     .row
-                      .col-md-10.col-md-offset-1
-                        .row
-                          .col-md-4
-                            .input-group
-                              input.search-query.form-control#family_Registrynumber(name="family_Registrynumber",type='text', placeholder='رقم القيد')
-                              //- .input-group-btn
-                              //-   button.btn.btn-info#student_searchbtn
-                              //-     i.glyphicon.glyphicon-search
-                              //-     | 
-                              //-     span بحث
-                          
+                      .col-md-4.col-md-offset-4
+                        input.search-query.form-control#family_Registrynumber(name="family_Registrynumber",type='text', placeholder='بحث برقم القيد فقط')      
                   br
                   .table-responsive
                     table.table.table-bordred.table-striped.table-condensed
@@ -357,7 +377,7 @@ block content
                     option(value="", style='color:grey; display:none;') جنسية اﻷم
                 .col-xs-3.col-md-3
                   label الرقم الوطني
-                  input#national_id.form-control(type="text", name="national_id",disabled)
+                  input#national_id.form-control(type="text", name="national_id", placeholder="الرقم الوطني")
             .form-group
               .row
                 .col-xs-3.col-md-3
