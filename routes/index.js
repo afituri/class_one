@@ -13,7 +13,7 @@ var city = require('./city')(router);
 var reports = require('./reports')(router);
 var deathreason = require('./deathreason')(router);
 var birth = require('./birth')(router);
-
+var marriage = require('./marriage')(router);
 /* GET home page. */
 router.get('/', function (req, res) {
 	res.render('index', {
