@@ -6,12 +6,6 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        Member.belongsTo(models.Office, {
-          onDelete: "restrict",
-          foreignKey: {
-            allowNull: false
-          }
-        });
         Member.belongsTo(models.Kinship, {
           onDelete: "restrict",
           foreignKey: {
@@ -32,7 +26,7 @@ module.exports = function(sequelize, DataTypes) {
         });
         Member.belongsTo(models.Family, {
           foreignKey : {
-            name : 'from_family_Id',
+            name : 'from_familyId',
             allowNull : true
           },
           onDelete: "SET NULL"
