@@ -60,7 +60,6 @@ exports.office_mgr = {
   },
   // update office
   update_office: function (body, cb) {
-    console.log(body);
     models.Office.update({
       office_name: body.office_name,
       BranchId: body.BranchId,
@@ -73,6 +72,16 @@ exports.office_mgr = {
       }
     }).then(function (result) {
       cb('/office?msg=4');
+    });
+  },
+  // get office by branch id
+  get_office_by_branch_id :function(id,cb){
+    models.Office.findAll({
+      where:{
+        BranchId:id
+      }
+    }).then(function(result){
+      cb(result);
     });
   },
   // delete office

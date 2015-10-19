@@ -13,6 +13,9 @@ var city = require('./city')(router);
 var reports = require('./reports')(router);
 var deathreason = require('./deathreason')(router);
 var birth = require('./birth')(router);
+var marriage = require('./marriage')(router);
+var divorce = require('./divorce')(router);
+
 
 /* GET home page. */
 router.get('/', function (req, res) {
