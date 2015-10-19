@@ -36,4 +36,36 @@ module.exports = function (router) {
     });
   });
 
+  // this certificateOfFamilyStatus // widght A4
+  router.get('/certificateOfFamilyStatus', function(req, res, next) {
+    jsr.render({
+      template: {
+        content:  fs.readFileSync(path.join(__dirname, "../views/reports/certificateOfFamilyStatus.html"), "utf8"),
+        phantom:{
+          format: 'A4',
+        },
+        recipe: "phantom-pdf",
+      },
+      // data:{allResults : results , national:nationality}
+    }).then(function (response) {
+      response.result.pipe(res);
+    });
+  });
+
+  // this certificateSociaSituation // widght A4
+  router.get('/certificateSociaSituation', function(req, res, next) {
+    jsr.render({
+      template: {
+        content:  fs.readFileSync(path.join(__dirname, "../views/reports/certificateSociaSituation.html"), "utf8"),
+        phantom:{
+          format: 'A4',
+        },
+        recipe: "phantom-pdf",
+      },
+      // data:{allResults : results , national:nationality}
+    }).then(function (response) {
+      response.result.pipe(res);
+    });
+  });
+
 }
