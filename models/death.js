@@ -3,7 +3,6 @@
 module.exports = function(sequelize, DataTypes) {
   var Death = sequelize.define("Death", {
     death_date: DataTypes.DATEONLY(),
-    register_date: DataTypes.DATEONLY(),
     children_no: DataTypes.TIME(),
     inform_date: DataTypes.DATEONLY(),
     pod_type: DataTypes.INTEGER(1),

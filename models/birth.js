@@ -7,7 +7,6 @@ module.exports = function(sequelize, DataTypes) {
     informer_type: DataTypes.INTEGER(1),
     informer_name: DataTypes.STRING(150),
     informer_address: DataTypes.TEXT(),
-    register_date: DataTypes.DATEONLY(),
     record_no: DataTypes.STRING(20),
     record_paper_no: DataTypes.STRING(20),
     place_of_birth: DataTypes.INTEGER(1),
