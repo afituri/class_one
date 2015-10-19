@@ -3,6 +3,7 @@
 module.exports = function(sequelize, DataTypes) {
   var Marriage = sequelize.define("Marriage", {
     marriage_date: DataTypes.DATEONLY(),
+    register_date: DataTypes.DATEONLY(),
     marriage_place: DataTypes.TEXT(),
     contract_number: DataTypes.STRING(20),
     record_marriage_nu: DataTypes.STRING(20),

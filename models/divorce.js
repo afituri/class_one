@@ -3,6 +3,7 @@
 module.exports = function(sequelize, DataTypes) {
   var Divorce = sequelize.define("Divorce", {
     divorce_date: DataTypes.DATEONLY(),
+    register_date: DataTypes.DATEONLY(),
     divorce_place: DataTypes.TEXT(),
     contract_number: DataTypes.STRING(20),
     record_divorce_nu: DataTypes.STRING(20),
