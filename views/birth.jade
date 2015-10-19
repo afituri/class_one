@@ -31,25 +31,30 @@ block content
                 th.text-center تعديل
                 th.text-center إلغاء
             tbody
-              tr
-                td.text-center الرقم الوطني
-                td.text-center الاسم رباعي
-                td.text-center تاريخ الميلاد
-                td.text-center مكان الميلاد
-                td.text-center صلة القرابة
-                td.text-center الجنسية
-                td.text-center
-                  p(data-placement="top", data-toggle="tooltip", title="تعديل")
-                    button.btn.btn-primary.btn-xs.edit_btn(data-toggle="modal", data-target="#edit")
-                      span.glyphicon.glyphicon-edit
-                td.text-center
-                  p(data-placement="top", data-toggle="tooltip", title="إلغاء")
-                    button.btn.btn-danger.btn-xs.delete_btn(data-toggle="modal", data-target="#delete")
-                      span.glyphicon.glyphicon-trash
+              for per in personals
+                tr
+                  td.text-center #{per.Personal.national_id}
+                  td.text-center #{per.Personal.Arabic_Firstname} #{per.Personal.Arabic_Fathername} #{per.Personal.Arabic_Grandfathername} #{per.Personal.Arabic_Familyname}
+                  td.text-center #{per.Personal.Birth_Date.getDate()} / #{per.Personal.Birth_Date.getMonth() - 1} /#{per.Personal.Birth_Date.getFullYear()}
+                  td.text-center #{per.Personal.Birth_Place}
+                  td.text-center #{per.Kinship.kinship_name}
+                  td.text-center 
+                    if per.Personal.Gender==1
+                      |#{per.Personal.Nationality.nationality_male}
+                    else 
+                      |#{per.Personal.Nationality.nationality_female}
+                  td.text-center
+                    p(data-placement="top", data-toggle="tooltip", title="تعديل")
+                      button.btn.btn-primary.btn-xs.edit_btn(data-toggle="modal", data-target="#edit",value="#{per.Personal.id}")
+                        span.glyphicon.glyphicon-edit
+                  td.text-center
+                    p(data-placement="top", data-toggle="tooltip", title="إلغاء")
+                      button.btn.btn-danger.btn-xs.delete_btn(data-toggle="modal", data-target="#delete",value="#{per.Personal.id}")
+                        span.glyphicon.glyphicon-trash
   #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
     .modal-dialog.modal-lg
       .modal-content
-        form.form(action="", method="post", accept-charset="utf-8", role="form")
+        form.form(action="/birth/new_birth", method="post", accept-charset="utf-8", role="form")
           .modal-header
             button.close(type="button", data-dismiss="modal", aria-hidden="true")
               span.glyphicon.glyphicon-remove(aria-hidden="true")
@@ -96,12 +101,23 @@ block content
                   .col-xs-3.col-md-3
                     .form-group
                       label مدينة الميلاد
-                      select#Cities.form-control.selectpicker(name="Birth_Place", data-live-search="true", data-size=5)
+                      select#Cities.form-control.selectpicker(name="city_Id", data-live-search="true", data-size=5)
                         option(value="", style='colr:grey; display:none;') مدينة الميلاد
                   .col-xs-3.col-md-3
                     .form-group
                       label اسم اﻷم
-                      input.form-control(type="text", name="", placeholder="اسم اﻷم")
+                      for per in personals
+                          if per.Kinship.id==1
+                            input(type="hidden",name="Fathernationality_Id",value="#{per.Personal.id}")
+                            input(type="hidden",name="OfficeId",value="#{per.Family.OfficeId}")
+                            input(type="hidden",name="FamilyId",value="#{per.Family.id}")
+                      select.form-control.selectpicker(name="Motherperson_Id", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') اسم اﻷم
+                        for per in personals
+                          if per.Kinship.id==2
+                            option(value="#{per.Personal.id}") #{per.Personal.Arabic_Firstname} #{per.Personal.Arabic_Fathername} #{per.Personal.Arabic_Grandfathername} #{per.Personal.Arabic_Familyname}
+
+                      //- input.form-control(type="text", name="", placeholder="اسم اﻷم")
                   .col-xs-3.col-md-3
                     .form-group
                       label تاريخ اﻹكتيتاب
@@ -206,7 +222,7 @@ block content
                   .col-xs-3.col-md-3
                     .form-group
                       label حالة الولادة
-                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                      select.form-control.selectpicker(name="birth_state", data-live-search="true", data-size=5)
                         option(value="", style='colr:grey; display:none;') حالة الولادة
                         option(value="1") شرعي
                         option(value="2") غير شرعي
@@ -258,7 +274,7 @@ block content
                   .col-xs-4.col-md-4
                     .form-group
                       label السجل المدني
-                      select#Offices.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                      select#Offices.form-control.selectpicker(name="OfficeIdw", data-live-search="true", data-size=5)
                         option(value="", style='colr:grey; display:none;') السجل المدني
           .modal-footer
             button.btn.btn-success.btn-lg(type="submit", style="width: 100%;")
