@@ -1,5 +1,48 @@
 $(document).ready(function(){
-  $("[name='family_type']").bootstrapSwitch();
+
+  // insert data 
+ /* $('body').on('click', '#save', function (e) {
+    e.preventDefault();
+    $('#formDepartment').submit();
+  });
+
+  $("#formDepartment").submit(function(e) {
+    var isvalidate=$("#formDepartment").valid();
+    if(isvalidate){
+      $.post("/department/updateDepartment", $("form").serializeObject(), function(data, error){
+        if(data.stat !=true){
+        } */
+  $('body').on('click', '#add_personal_btn', function(e){
+    var path=document.URL;
+    var familyid=path.split('/').pop();
+     e.preventDefault();
+    $('#add_personal_form').submit();
+    /*obj={national_id:$('#national_id').val(),
+        Arabic_Firstname: $('#Arabic_Firstname').val() ,
+        Arabic_Fathername: $('#Arabic_Fathername').val(),
+        Arabic_Grandfathername: $('#Arabic_Grandfathername').val() ,
+        Arabic_Familyname: $('#Arabic_Familyname').val(),
+        Arabic_Motherfirstname:$('#Arabic_Motherfirstname').val(),
+        Arabic_Motherfathername:$('#Arabic_Motherfathername').val(),
+        Arabic_Mothergrandfathername:$('#Arabic_Mothergrandfathername').val(),
+        Arabic_Motherfamilyname:$('#Arabic_Motherfamilyname').val(),
+        Birth_Date:$('#Birth_Date').val(),
+        Birth_Place:$('#Birth_Place').val(),
+        Gender : $('#Gender').val(),
+        Religion_Id : $('#Religion_Id').val(),
+        Enlistingdate: $('Enlistingdate').val(),
+        Socialstatus_Id : $('#Socialstatus_Id').val(),
+    }*/
+
+    $.post('/insert_personal',$("#add_personal_form").serializeObject(),function(result){ 
+      if(result==true){
+        window.location.href='/personal/'+familyid;
+      }
+
+    });
+  });
+
+  $("[name='family_type'],[name='Is_Alive']").bootstrapSwitch();
 
   $("#Regdoctype_Id").change(function(){
     $(this).find("option:selected").each(function() {
