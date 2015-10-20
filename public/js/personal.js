@@ -1,11 +1,36 @@
 $(document).ready(function(){
   $("[name='family_type']").bootstrapSwitch();
+
   $("#Regdoctype_Id").change(function(){
     $(this).find("option:selected").each(function() {
       if($(this).attr("value")==2) {
         $(".box").show().addClass("animated fadeIn");
       } else {
         $(".box").hide(300);
+      }
+    });
+  }).change();
+
+  $("#mother_status").change(function(){
+    $(this).find("option:selected").each(function() {
+      if($(this).attr("value")==2) {
+        $(".insert_mother_name").removeClass("hide").addClass("animated fadeIn");
+        $(".select_mother_name").addClass("hide");
+      } else if($(this).attr("value")==1) {
+        $(".select_mother_name").removeClass("hide").addClass("animated fadeIn");
+        $(".insert_mother_name").addClass("hide");
+      }
+    });
+  }).change();
+
+  $("#father_status").change(function(){
+    $(this).find("option:selected").each(function() {
+      if($(this).attr("value")==2) {
+        $(".insert_father_name").removeClass("hide").addClass("animated fadeIn");
+        $(".select_father_name").addClass("hide");
+      } else if($(this).attr("value")==1) {
+        $(".select_father_name").removeClass("hide").addClass("animated fadeIn");
+        $(".insert_father_name").addClass("hide");
       }
     });
   }).change();

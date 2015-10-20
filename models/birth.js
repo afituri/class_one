@@ -15,6 +15,7 @@ module.exports = function(sequelize, DataTypes) {
     newborn_state: DataTypes.INTEGER(1),
     newborn_health: DataTypes.INTEGER(1),
     pregnancy_period: DataTypes.INTEGER(1),
+    blood_type: DataTypes.INTEGER(1),
     weight: DataTypes.FLOAT(),
     midwife_type: DataTypes.INTEGER(1),
     midwife_name: DataTypes.STRING(150),
