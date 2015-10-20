@@ -31,4 +31,10 @@ exports.member_mgr = {
     });
   },
 
+  add_members : function(body,cb){
+    models.Member.create(body).then(function(result) {
+      cb(result);
+    });
+  },
+
 };

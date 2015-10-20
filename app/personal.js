@@ -7,5 +7,12 @@ exports.personal_mgr = {
     .then(function (result) {
       cb(result);
    });
-  }
+  },
+
+  add_personal : function(body,cb){
+    models.Personal.create(body).then(function(result) {
+      cb(result);
+    });
+  },
+  
 };
