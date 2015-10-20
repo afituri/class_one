@@ -8,6 +8,24 @@ $(document).ready(function(){
     e.preventDefault();
     $('#search_marriage_F').submit();
   });
+  //#save_Marriage
+  $('body').on('click', '#save_Marriage', function (e) {
+    if($("input[type='radio'].radioBtnClass").is(':checked')) {
+    var card_type = $("input[type='radio'].radioBtnClass:checked").val();
+    }
+    alert("id : "+card_type);
+    alert($("#tbody #mariage"+card_type).text());
+    alert($("#tbody #mariag"+card_type).text());
+    alert($("#tbody #maria"+card_type).text());
+
+    // select the radio by its id
+    // bind a function to the change event
+      
+    
+/*    alert($('input[name="radio_M"]:checked').val());
+    alert($('input:radio[name="radio_M"]').filter(":checked").val());
+    alert(jq("input[name='radio_M']:checked").val());*/
+  });
 
   $("#search_marriage_F").submit(function(e) {
     console.log($("form").serializeObject().searchVal_F);
@@ -55,12 +73,12 @@ $(document).ready(function(){
           var monthIndex = date.getMonth();
           var year = date.getFullYear();
           $("#tbody").append('<tr>'+
-            '<td class="text-center">'+data.result[i].Arabic_Familyname+'</td>'+
-            '<td class="text-center">'+year+"-"+monthIndex+"-"+day+'</td>'+
-            '<td class="text-center">'+data.result[i].kinship_name+'</td>'+
-            '<td class="text-center">'+
-            '<p data-placement="top", data-toggle="tooltip", title="تحديد">'+
-            '<input type="radio",value="'+data.result[i].Person_Id+'", name="radio_M"></input></p></td>');
+            '<td class="text-center" id='+"mariage"+data.result[i].Person_Id+'>'+data.result[i].Arabic_Familyname+'</td>'+
+            '<td class="text-center" id='+"mariag"+data.result[i].Person_Id+'>'+year+"-"+monthIndex+"-"+day+'</td>'+
+            '<td class="text-center" id='+"maria"+data.result[i].Person_Id+'>'+data.result[i].kinship_name+'</td>'+
+            '<td class="text-center" >'+
+            '<p >'+
+            '<input class="radioBtnClass" id="mariag" type="radio" value="'+data.result[i].Person_Id+'", name="radio_M"></input></p></td>');
          };
 
         }
