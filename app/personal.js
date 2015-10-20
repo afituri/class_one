@@ -7,5 +7,14 @@ exports.personal_mgr = {
     .then(function (result) {
       cb(result);
    });
+  },
+  get_personal_by_Registrynumber : function(id,cb){
+    console.log(id);
+    models.sequelize.query('select * from Personals as p,Families as f,Members as m,Kinships as k where  m.PersonalId=p.id and  m.FamilyId=f.id and m.KinshipId=k.id and f.Registrynumber=? and p.Gender=?', {
+      replacements: [id.val, id.gender]
+    })
+    .then(function (result) {	
+      cb(result);
+   });
   }
 };
