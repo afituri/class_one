@@ -25,6 +25,7 @@ module.exports = function(sequelize, DataTypes) {
           }
         });
         Member.belongsTo(models.Family, {
+          as : 'from_family',
           foreignKey : {
             name : 'from_familyId',
             allowNull : true
