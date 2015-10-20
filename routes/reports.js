@@ -10,7 +10,7 @@ module.exports = function (router) {
       template: {
         content:  fs.readFileSync(path.join(__dirname, "../views/reports/deathCertificate.html"), "utf8"),
         phantom:{
-          orientation: "landscape",
+          format: 'A4',
         },
         recipe: "phantom-pdf",
       },
@@ -20,24 +20,52 @@ module.exports = function (router) {
     });
   });
 
-  //   // this noOfLocaleObs // widght A4
-  // router.get('/noOfLocaleObs', function(req, res, next) {
-  //   console.log(office[1].office_name_ar);
-  //   reportMgr.getAllNoOfLocaleObs(function(arr1,arr2,arr3,arr4,arr5,arr6){
-  //     jsr.render({
-  //       template: { 
-  //         content:  fs.readFileSync(path.join(__dirname, "../views/reports/noOfLocaleObs.html"), "utf8"),
-  //         phantom:{
-  //           orientation: "landscape"
-  //         },
-  //         recipe: "phantom-pdf",
-  //         helpers:resultsNoOfLocaleObs.toString()
-  //       },
-  //       data:{office:office,arr1:arr1,arr2:arr2,arr3:arr3,arr4:arr4,arr5:arr5,arr6:arr6,officePar:office}
-  //     }).then(function (response) {
-  //       response.result.pipe(res);
-  //     });
-  //   });
-  // });
+  // this deathCertificate // widght A4
+  router.get('/birthCertificate', function(req, res, next) {
+    jsr.render({
+      template: {
+        content:  fs.readFileSync(path.join(__dirname, "../views/reports/birthCertificate.html"), "utf8"),
+        phantom:{
+          format: 'A4',
+        },
+        recipe: "phantom-pdf",
+      },
+      // data:{allResults : results , national:nationality}
+    }).then(function (response) {
+      response.result.pipe(res);
+    });
+  });
+
+  // this certificateOfFamilyStatus // widght A4
+  router.get('/certificateOfFamilyStatus', function(req, res, next) {
+    jsr.render({
+      template: {
+        content:  fs.readFileSync(path.join(__dirname, "../views/reports/certificateOfFamilyStatus.html"), "utf8"),
+        phantom:{
+          format: 'A4',
+        },
+        recipe: "phantom-pdf",
+      },
+      // data:{allResults : results , national:nationality}
+    }).then(function (response) {
+      response.result.pipe(res);
+    });
+  });
+
+  // this certificateSociaSituation // widght A4
+  router.get('/certificateSociaSituation', function(req, res, next) {
+    jsr.render({
+      template: {
+        content:  fs.readFileSync(path.join(__dirname, "../views/reports/certificateSociaSituation.html"), "utf8"),
+        phantom:{
+          format: 'A4',
+        },
+        recipe: "phantom-pdf",
+      },
+      // data:{allResults : results , national:nationality}
+    }).then(function (response) {
+      response.result.pipe(res);
+    });
+  });
 
 }

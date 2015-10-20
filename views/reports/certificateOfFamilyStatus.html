@@ -1,0 +1,265 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>jsreport <%= version %></title>
+    <link rel="stylesheet" type="text/css" href="http://localhost:3000/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:3000/css/bootstrap-rtl.min.css">
+    <style>
+      .break { 
+        page-break-before: always; 
+      }
+      @media print {
+        footer { 
+          page-break-after: always;
+        }
+      }
+      @font-face {
+        font-family: 'Droid Arabic Kufi';
+        src : url("http://localhost:3000/fonts/DroidKufi-Regular.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: 'Droid Arabic Naskh';
+        src : url("http://localhost:3000/fonts/droidarabicnaskh/DroidNaskh-Regular.ttf") format("truetype");
+      }
+      body {
+        /*font-family: 'Droid Arabic Kufi', sans-serif;*/
+        font-family: 'Droid Arabic Naskh', serif;
+        font-size: 12px;
+      }
+      .table,.table>thead>tr>th,.table>tbody>tr>td{
+        font-size: 10px;
+        border: 1px solid #000;
+      }
+      .condensed>thead>tr>th, .condensed>tbody>tr>td {
+        padding: 5px;
+      }
+      .fontSize{
+        font-size: 35px;
+      }
+      .fontSizeSmallWords{
+        font-size: 9px;
+      }
+      .square {
+        border-radius: 3px;
+        border: 1px solid gray;
+        padding: 5px;
+      }
+      .ppppp {
+        background: gray;
+      }
+      p.threee {
+        border-radius: 3px;
+        border: 1px solid gray;
+        padding: 5px;
+      }
+      p.stamp {
+        border-radius: 3px;
+        border: 1px solid gray;
+        padding: 5px;
+        width: 91px;
+        height: 101px;
+      }
+      .fontSizeStamp{
+        font-size: 10px;
+      }
+      .rcorners3 {
+        border-radius: 3px;
+        border: 1px solid gray;
+        padding: 7px;
+      }
+    </style>
+    <meta charset="utf-8"/>
+  </head>
+  <body>
+    <div class="pull-left fontSizeSmallWords">
+      <div> نموذج رقم <span>(</span>49 مكرر<span>)</span></div>
+    </div>
+    <div style="height: 21px;"></div>
+    <div class="row">
+      <div class="text-center fontSize">
+        <div> دولة ليبيا </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="text-center">
+          <h1> الشعــــــــار </h1>
+        </div>
+      </div>
+    </div>
+    <div>________________________________________________________________________________________________________________________</div>
+    <br>
+    <div class="text-center">
+      <div> مكتب السجل المدني <span>:</span> طرابلس المركز </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4">
+        <p class="threee">
+           رقم قيد الـعـائـلة <span>:</span> 131314 
+           <br>
+           رقم ورقة العائلة <span>:</span> 1234413 
+        </p>
+      </div>
+      <div class="col-xs-8">
+        <h5 class="fontSize">
+          شهادة بالوضع العائلي
+        </h5>
+      </div>
+    </div>
+    <br>
+    <div class="panel rcorners3">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="ppppp"> يشهد مكتب السجل المدني بـ <span>:</span> طرابلس المركز </div>
+        </div>
+      </div>
+      <div style="height: 13px;"></div>
+      <div class="row">
+        <div class="col-xs-8">
+          <div> بأن السيدة <span>:</span> أميره الجيلاني محمد </div>
+        </div>
+        <div class="col-xs-4">
+          <div> ولقبها <span>:</span> خليفة </div>
+        </div>
+      </div>
+      <div style="height: 13px;"></div>
+      <div class="row">
+        <div class="col-xs-4">
+          <div> ورقم بطاقتها الشخصية <span>:</span> /////////// </div>
+        </div>
+        <div class="col-xs-4">
+          <div> وتاريخ صدورها <span>:</span> ////////// </div>
+        </div>
+        <div class="col-xs-4">
+          <div> وجه صدورها <span>:</span> ////////// </div>
+        </div>
+      </div>
+      <div style="height: 13px;"></div>
+      <div class="row">
+        <div class="col-xs-6">
+          <div> وأسم والدها <span>:</span> الجيلاني </div>
+        </div>
+        <div class="col-xs-6">
+          <div> وأسم والدتها <span>:</span> بثينة سالم أحمد </div>
+        </div>
+      </div>
+      <div style="height: 13px;"></div>
+      <div class="row">
+        <div class="col-xs-6">
+          <div> من منطقة <span>:</span> //////////// </div>
+        </div>
+        <div class="col-xs-6">
+          <div> مسجلة بالسجل المدني تحت رقم <span>:</span> //////////// </div>
+        </div>
+      </div>
+      <div style="height: 13px;"></div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div> وأن عائلتها تتألف كالاتي </div>
+        </div>
+      </div>
+      <!-- <table border="1" style="width:100%"> -->
+      <div style="height: 13px;"></div>
+      <table class="table table-bordered">
+        <tr>
+          <th> الرقم الوطني </th>
+          <th> الاسم </th>    
+          <tH> اللقب </th>
+          <th> أسم الاب </th>
+          <th> أسم الام </th>
+          <th> صلة القرابة </th>
+          <th> تاريخ الميلاد </th>
+          <th> محل الميلاد </th>
+        </tr>
+        <tr>
+          <td> 119890002959 </td>
+          <td> محمد </td>
+          <td> هبال </td>
+          <td> الجيلاني </td>
+          <td> بثينة سالم أحمد </td>
+          <td> رب الاسرة </td>
+          <td> 1976/01/16 </td>    
+          <td> طرابلس </td>
+        </tr>
+        <tr>
+          <td> 119890002959 </td>
+          <td> محمد </td>
+          <td> هبال </td>
+          <td> الجيلاني </td>
+          <td> بثينة سالم أحمد </td>
+          <td> رب الاسرة </td>
+          <td> 1976/01/16 </td>    
+          <td> طرابلس </td>
+        </tr>
+        <tr>
+          <td> 119890002959 </td>
+          <td> محمد </td>
+          <td> هبال </td>
+          <td> الجيلاني </td>
+          <td> بثينة سالم أحمد </td>
+          <td> رب الاسرة </td>
+          <td> 1976/01/16 </td>    
+          <td> طرابلس </td>
+        </tr>
+        <tr>
+          <td> 119890002959 </td>
+          <td> محمد </td>
+          <td> هبال </td>
+          <td> الجيلاني </td>
+          <td> بثينة سالم أحمد </td>
+          <td> رب الاسرة </td>
+          <td> 1976/01/16 </td>    
+          <td> طرابلس </td>
+        </tr>
+        <tr>
+          <td> 119890002959 </td>
+          <td> محمد </td>
+          <td> هبال </td>
+          <td> الجيلاني </td>
+          <td> بثينة سالم أحمد </td>
+          <td> رب الاسرة </td>
+          <td> 1976/01/16 </td>    
+          <td> طرابلس </td>
+        </tr>
+      </table>
+      <div style="height: 13px;"></div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div> أعطيت هذه الشهادة بناء على طلبها وقيدت بسجل الشهادات رقم <span>:</span> //////////// </div>
+        </div>
+      </div>
+      <div style="height: 13px;"></div>
+      <div class="row">
+        <div class="col-xs-6">
+          <div> وصدرت بتاريخ <span>:</span> 27/05/2015 </div>
+        </div>
+        <div class="col-xs-6">
+          <div> الموافق <span>:</span> السابع والعشرون من مايو عام ألفان وخمسة عشر </div>
+        </div>
+      </div>
+    </div> <!-- end panel -->
+    <div style="height: 50px;"></div>
+    <div class="container-fluid">
+      <div class="row square">
+        <div class="col-xs-4">
+          <h5 class="text-center">
+            توقيع الموظف المختص
+          </h5>
+          <hr>
+        </div>
+        <div class="col-xs-4">
+          <h5 class="text-center">
+            ختم السجل المدني
+          </h5>
+          <hr>
+        </div>
+        <div class="col-xs-4">
+          <h5 class="text-center">
+            توقيع أمين السجل المدني
+          </h5>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
