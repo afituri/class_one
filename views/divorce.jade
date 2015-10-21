@@ -62,70 +62,97 @@ block content
               span.glyphicon.glyphicon-remove(aria-hidden="true")
             h4.modal-title.custom_align بيانات واقعة ألطﻻق
           .modal-body
-            h4.modal-title أسم الزوج : 
-            br  
-            h4.text-center بيانات الزوجة
+            h4.modal-title أسم الزوج 
             hr
-            .form-group            
-              .row
-                .col-xs-4.col-md-4
-                  label الزوجات
-                  select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
-                    option(value="", style='colr:grey; display:none;') أسم الزوجة
-                    option(value="") فاطمة علي مفتاح ابو مختار
-                .col-xs-4.col-md-4
-                  label تاريخ ميلاد الزوجة
-                  label.form-control 2001/02/10
-                .col-xs-4.col-md-4
-                  label هل ترغب في حضانة الاطفال ؟
-                  select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
-                    option(value="", style='colr:grey; display:none;') أسم الزوجة
-              .row      
-                .col-xs-5.col-md-5
-                  label هل ترغب المطلقة في العودة إلى أسرتها السابقة ؟
-                  select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
-                    option(value="", style='colr:grey; display:none;') أسم الزوجة       
-
-                   
-            h4.text-center بيانات الواقعة
-            hr            
-            .row    
-              .col-xs-3.col-md-3
-                .form-group
-                  label أختر المدينة
-                  select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
-                    option(value="", style='colr:grey; display:none;') أختر المدينة
-              .col-xs-3.col-md-3
-                .form-group
-                  label أختار المنطقة
-                  select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
-                    option(value="", style='colr:grey; display:none;') أختار المنطقة
-              .col-xs-3.col-md-3
-                .form-group
-                  label السجل المدني لواقعة الطﻻق
-                  select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
-                    option(value="", style='colr:grey; display:none;') السجل المدني 
-              .col-xs-3.col-md-3
-                .form-group
-                  label مكان الطﻻق
-                  input.form-control(type="text", name="", placeholder="عقد الطﻻق")      
-            .row
-              .col-xs-3.col-md-3
-                .form-group
-                  label تاريخ الطﻻق
-                  input#Enlistingdate.form-control(type="text", name="Enlistingdate", placeholder="تاريخ الطﻻق")
-              .col-xs-3.col-md-3
-                .form-group
-                  label رقم عقد الطﻻق
-                  input.form-control(type="text", name="", placeholder="رقم عقد الطﻻق")
-              .col-xs-3.col-md-3
-                .form-group
-                  label رقم سجل الطﻻق
-                  input.form-control(type="text", name="", placeholder="رقم سجل الطﻻق")
-              .col-xs-3.col-md-3
-                .form-group
-                  label تاريخ تسجيل الطﻻق
-                  input#Enlistingdate.form-control(type="text", name="Enlistingdate", placeholder="تاريخ اﻹكتيتاب")
+            ul.nav.nav-tabs(role="tablist")
+              li.active(role="presentation")
+                a(href="#tabOne", aria-controls="tabOne", role="tab", data-toggle="tab") بينات الزوجة
+              li
+                a(href="#tabTwo", aria-controls="tabTwo", role="tab", data-toggle="tab") بيانات الواقعة
+            .tab-content
+              #tabOne.tab-pane.active(role="tabpanel")
+                .form-group            
+                  .row
+                    .col-xs-4.col-md-4
+                      label الزوجات
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') أسم الزوجة
+                        option(value="") فاطمة علي مفتاح ابو مختار
+                    .col-xs-4.col-md-4
+                      label تاريخ ميلاد الزوجة
+                      label.form-control 2001/02/10
+                    .col-xs-4.col-md-4
+                      label هل ترغب في حضانة الاطفال ؟
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') أسم الزوجة
+                  br
+                  .row     
+                    .col-xs-4.col-md-4
+                      label هل ترغب الزوجة في حضانة الاطفال ؟
+                    .col-xs-2.col-md-2  
+                      input#toggle-child(type='checkbox',data-on="نعم",data-off="لا", data-toggle='toggle')
+                  br
+                  br
+                  #child-table  
+                    .table-responsive
+                      table.table.table-bordred.table-striped.table-condensed
+                        thead
+                          tr.info
+                            th.text-center رقم الاسرة
+                            th.text-center رقم القيد
+                            th.text-center رقم ورقة العائلة
+                            th.text-center الرقم الالي
+                            th.text-center حالة الاسرة
+                            th.text-center نوع الاسرة
+                            th.text-center السجل المدني
+                            th.text-center اضافة فرد
+                        tbody#family_table    
+                        
+              #tabTwo.tab-pane(role="tabpanel") 
+                br
+                .row    
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label أختر المدينة
+                      select.form-control.selectpicker#get_region(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') أختر المدينة
+                        for region in regions
+                          option(value="#{region.id}") #{region.region_name}
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label أختار المنطقة
+                      select.form-control.selectpicker#get_branch(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') أختار المنطقة
+                        for i in branches
+                          option(value="#{i.id} ")  #{i.branch_name} 
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label السجل المدني لواقعة الطﻻق
+                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') السجل المدني 
+                        //- for j in offices
+                        //-   option(value="#{j.id} ")  #{j.office_name} 
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label مكان الطﻻق
+                      input.form-control(type="text", name="", placeholder="عقد الطﻻق")      
+                .row
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label تاريخ الطﻻق
+                      input#Enlistingdate.form-control(type="text", name="Enlistingdate", placeholder="تاريخ الطﻻق")
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label رقم عقد الطﻻق
+                      input.form-control(type="text", name="", placeholder="رقم عقد الطﻻق")
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label رقم سجل الطﻻق
+                      input.form-control(type="text", name="", placeholder="رقم سجل الطﻻق")
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label تاريخ تسجيل الطﻻق
+                      input#Enlistingdate.form-control(type="text", name="Enlistingdate", placeholder="تاريخ اﻹكتيتاب")                 
           .modal-footer
             button.btn.btn-success.btn-lg(type="submit", style="width: 100%;")
               span.glyphicon.glyphicon
@@ -173,15 +200,9 @@ block content
   script(src='/js/moment-with-locales.min.js')
   script(src='/js/bootstrap-datetimepicker.min.js')
   script(src='/js/bootstrap-switch.min.js')
+  script(src='/js/bootstrap-toggle.min.js') 
   script(src='/js/jquery.mask.min.js')
+  script(src='/js/divorce.js')  
   script(src='/js/helpers.js')
-  //- script(src='/js/birth.js')
-  script.
-    $('#Birth_Date, #Enlistingdate').datetimepicker({
-      useCurrent: false,
-      viewMode: 'years',
-      format: 'YYYY-MM-DD',
-      locale: 'ar-sa'
-    });
-    $("[data-toggle=tooltip]").tooltip();
-    $('#weight').mask('0.000');
+
+    
