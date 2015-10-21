@@ -39,6 +39,30 @@ module.exports = function (router) {
     });
   });
 
+
+   router.post('/insert_personal', function (req, res) {
+    console.log(req.body);
+    var kinshipId = req.body.KinshipId;
+    delete req.body.KinshipId;
+    delete req.body.Motherperson_Id;
+    //delete req.body.mother_status;
+    personal.add_personal(req.body,function(result){
+      member={KinshipId:kinshipId,PersonalId:result[0].insertId,FamilyId:familyId};
+      personal.insert_Members(member,function(resultt){
+        res.send(true);
+      });
+    }); 
+  });
+
+
+
+  //delete_personal
+
+  router.get('/delete_personal/:id', function (req, res) {
+    personal.delete_personal(req.params.id,function  (result){
+      res.send(result);
+    });
+  });
  
   router.get('/personal/get_city/:id', function (req, res) {
     city.get_city(req.params.id,function  (result){
@@ -63,26 +87,13 @@ module.exports = function (router) {
   router.get('/get_registry/:reg', function (req, res) {
     family.get_family_by_registry_number(req.params.reg,function(result){
      res.send(result);   
-    })
-  });
-
-  /* Add personals page. */
-  router.post('/insert_personal', function (req, res) {
-    console.log(req.body);
-    if(req.body.Is_Alive == undefined){
-      req.body.Is_Alive=2;
-    } else {
-      req.body.Is_Alive=1;
-    }
-    var kinshipId = req.body.KinshipId;
-    delete req.body.KinshipId;
-    delete req.body.mother_status;
-    personal.add_personal(req.body,function(result){
-      console.log(result);
-      member={KinshipId:kinshipId,OfficeId:2,PersonalId:result[0].insertId,FamilyId:familyId};
-      personal.insert_Members(member,function(result){
-        res.redirect("/personal/"+FamilyId);
-      });
     });
   });
+
+ 
+
+
+
+    
+  
 }
