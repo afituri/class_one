@@ -8,27 +8,61 @@ var family = require("../app/family")
   .family_mgr;
 var personal = require("../app/personal")
   .personal_mgr;
+var kinship = require("../app/kinship")
+  .kinship_mgr
+var job = require("../app/job")
+  .job_mgr;
 module.exports = function (router) {
   /* GET personals page. */
+  var familyId;
   router.get('/personal/:id', function (req, res) {
+    familyId=req.params.id;
     family.get_family(function (family) {
       personal.get_personal(req.params.id,function (personal){
         country.get_country(function (country){
-          //console.log(personal[0]);
-          //console.log(country);
-          res.render('personal', { 
-          title: 'أفراد الأسرة', 
-          familys: family.result.rows,
-          offices: family.offices,
-          personal: personal[0],
-          social: constants,
-          country:country[0],
+          kinship.get_kinship(function (kinship){
+            job.get_job(function(job){ 
+              res.render('personal', { 
+                title: 'أفراد الأسرة', 
+                familys: family.result.rows,
+                kinship: kinship.rows,
+                job : job.rows,
+                offices: family.offices,
+                personal: personal[0],
+                social: constants,
+                country:country,
+              });
+            });
           });
-        })
-      })
+        });
+      });
     });
   });
 
+
+   router.post('/insert_personal', function (req, res) {
+    console.log(req.body);
+    var kinshipId = req.body.KinshipId;
+    delete req.body.KinshipId;
+    delete req.body.Motherperson_Id;
+    //delete req.body.mother_status;
+    personal.add_personal(req.body,function(result){
+      member={KinshipId:kinshipId,PersonalId:result[0].insertId,FamilyId:familyId};
+      personal.insert_Members(member,function(resultt){
+        res.send(true);
+      });
+    }); 
+  });
+
+
+
+  //delete_personal
+
+  router.get('/delete_personal/:id', function (req, res) {
+    personal.delete_personal(req.params.id,function  (result){
+      res.send(result);
+    });
+  });
  
   router.get('/personal/get_city/:id', function (req, res) {
     city.get_city(req.params.id,function  (result){
@@ -38,7 +72,7 @@ module.exports = function (router) {
 
   router.get('/get_country', function (req, res) {
     country.get_country(function  (result){
-      res.send(result[0]);
+      res.send(result);
     });
   });
 
@@ -50,24 +84,16 @@ module.exports = function (router) {
     res.send(constants.religion);
   });
   
-   router.get('/get_registry/:reg', function (req, res) {
-    console.log(req.params.reg);
+  router.get('/get_registry/:reg', function (req, res) {
     family.get_family_by_registry_number(req.params.reg,function(result){
      res.send(result);   
-    })
-    
-  });
-
- 
-  
-
-  /* Add personals page. */
-  router.post('/personal/new_personal', function (req, res) {
-    delete req.body.personal
-    models.Personal.create(req.body).then(function (result) {
-      res.redirect("/personal");
     });
   });
 
+ 
 
+
+
+    
+  
 }

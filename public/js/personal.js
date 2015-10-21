@@ -1,5 +1,102 @@
 $(document).ready(function(){
-  $("[name='family_type']").bootstrapSwitch();
+
+  // insert data 
+ /* $('body').on('click', '#save', function (e) {
+    e.preventDefault();
+    $('#formDepartment').submit();
+  });
+
+  $("#formDepartment").submit(function(e) {
+    var isvalidate=$("#formDepartment").valid();
+    if(isvalidate){
+      $.post("/department/updateDepartment", $("form").serializeObject(), function(data, error){
+        if(data.stat !=true){
+        } */
+
+  
+  $('body').on('click', '#remove', function(e){
+    $('#delete_it').val($(this).val());
+  });
+
+  $('body').on('click', '#delete_it', function(e){
+    //alert($(this).val());
+    var path=document.URL;
+    var familyid=path.split('/').pop();
+    $.get('/delete_personal/'+$(this).val(),function(result){ 
+         if(result){
+ 
+           window.location.href='/personal/'+familyid; 
+           custNotify("success","نجاح","تم حذف السجل المدني بنجاح","ok-sign","bounceInDown","bounceOutUp");
+         }
+    });
+  });
+
+
+
+ 
+
+
+  $('body').on('click', '#add_personal_btn', function(e){
+    var path=document.URL;
+    var familyid=path.split('/').pop();
+    var Is_Alive;
+    if($("#Is_Alive").is(":checked")==true){
+      Is_Alive=1;
+    } else { 
+      Is_Alive=2;
+    }
+    var PersonalType;
+    if($("#type1").is(":checked")==true){
+      PersonalType=1;
+    } 
+    if($("#type2").is(":checked")==true){
+      PersonalType=2; 
+    }
+    if($("#type3").is(":checked")==true){
+      PersonalType=3;
+    }
+    obj={
+        PersonalType : PersonalType,
+        Is_Alive :Is_Alive,
+        national_id:$('#national_id').val(),
+        Arabic_Firstname: $('#Arabic_Firstname').val() ,
+        Arabic_Fathername: $('#Arabic_Fathername').val(),
+        Arabic_Grandfathername: $('#Arabic_Grandfathername').val() ,
+        Arabic_Familyname: $('#Arabic_Familyname').val(),
+        Arabic_Motherfirstname:$('#Arabic_Motherfirstname').val(),
+        Arabic_Motherfathername:$('#Arabic_Motherfathername').val(),
+        Arabic_Mothergrandfathername:$('#Arabic_Mothergrandfathername').val(),
+        Arabic_Motherfamilyname:$('#Arabic_Motherfamilyname').val(),
+        Birth_Date:$('#Birth_Date').val(),
+        Birth_Place:$('#Birth_Place').val(),
+        Gender : $('#Gender').val(),
+        Religion_Id : $('#Religion_Id').val(),
+        Enlistingdate: $('#Enlistingdate').val(),
+        Socialstatus_Id : $('#Socialstatus_Id').val(),
+        city_id : $('#city_id').val(),
+        KinshipId: $('#kinship').val(),
+        Mothernationality_Id : $('#Mothernationality_Id').val(),
+        Fathernationality_Id : $('#Fathernationality_Id ').val(),
+        JobId : $('JobId').val(),
+        Arabic_Motherfirstname: $('#Arabic_Motherfirstname').val(),
+        Arabic_Motherfathername: $('#Arabic_Motherfathername').val(),
+        Arabic_Mothergrandfathername: $('#Arabic_Mothergrandfathername').val(),
+        Arabic_Motherfamilyname: $('#Arabic_Motherfamilyname').val(),
+        Motherperson_Id: $('#Motherperson_Id').val(),
+        Regdoctype_Id: $('#Regdoctype_Id').val(),
+        Certification_Type_Id: $('#Certification_Type_Id').val(),
+        Certification_Issuance_Date: $('#Certification_Issuance_Date').val(),
+        Certification_File_Number: $('#Certification_File_Number').val(),
+        CertificationMber: $('#CertificationMber').val(),
+        Nationality_Id:$('#Nationality_Id').val(),
+    }
+    $.post('/insert_personal',obj,function(result){ 
+      alert(result);
+        window.location.href='/personal/'+familyid;
+    });
+  });
+
+  $("[name='family_type'],[name='Is_Alive']").bootstrapSwitch();
 
   $("#Regdoctype_Id").change(function(){
     $(this).find("option:selected").each(function() {
@@ -37,9 +134,11 @@ $(document).ready(function(){
 
   $("#country").change(function(){
     $('#city_id').empty();
+    
     $.get('/personal/get_city/'+$(this).val(),function(result){ 
       for(i in result){
-        $('#city_id').append("<option value = '"+result[i].id+"'>"+result[i].city_name+"</option>").selectpicker('refresh');
+        var x=result[i].id;
+        $('#city_id').append("<option value ='"+x+"'>"+result[i].city_name+"</option>").selectpicker('refresh');
       }
     });
   });
