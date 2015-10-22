@@ -51,9 +51,18 @@ module.exports = function (router) {
       Arabic_Motherfathername:req.body.Arabic_Motherfathername,
       Arabic_Mothergrandfathername:req.body.Arabic_Mothergrandfathername,
       Arabic_Motherfamilyname:req.body.Arabic_Motherfamilyname,
-      Nationality_Id:req.body.Nationality_Id
+      Nationality_Id:req.body.Nationality_Id,
+      Religion_Id:req.body.Religion_Id,
+      Socialstatus_Id:req.body.Socialstatus_Id,
+      Regdoctype_Id:req.body.Regdoctype_Id,
+      Certification_Type_Id:req.body.Certification_Type_Id,
+      CertificationMber:req.body.CertificationMber,
+      Certification_File_Number:req.body.Certification_File_Number,
+      Certification_Issuance_Date:req.body.Certification_Issuance_Date,
+      Mothernationality_Id:req.body.Mothernationality_Id,
+      Fathernationality_Id:req.body.Nationality_Id
    };
-    personal.add_personal(personal_c,function(result){
+    personal.add_personal_model(personal_c,function(result){
       var members_c={
         KinshipId:3,
         PersonalId:result.id,

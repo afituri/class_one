@@ -37,7 +37,7 @@ block content
                   tr
                     td.text-center #{per.Personal.national_id}
                     td.text-center #{per.Personal.Arabic_Firstname} #{per.Personal.Arabic_Fathername} #{per.Personal.Arabic_Grandfathername} #{per.Personal.Arabic_Familyname}
-                    td.text-center #{per.Personal.Birth_Date.getDate()} / #{per.Personal.Birth_Date.getMonth() - 1} /#{per.Personal.Birth_Date.getFullYear()}
+                    td.text-center #{per.Personal.Birth_Date.getDate()} / #{per.Personal.Birth_Date.getMonth() + 1} /#{per.Personal.Birth_Date.getFullYear()}
                     td.text-center #{per.Personal.Birth_Place}
                     td.text-center #{per.Kinship.kinship_name}
                     td.text-center 
@@ -111,7 +111,7 @@ block content
                       label اسم اﻷم
                       if q
                         for per in personals
-                            if per.Kinship.id==1
+                            if per.leader==1
                               input(type="hidden",name="Fatherperson_Id",value="#{per.Personal.id}")
                               input(type="hidden",name="OfficeId",value="#{per.Family.OfficeId}")
                               input(type="hidden",name="FamilyId",value="#{per.Family.id}")
@@ -119,17 +119,32 @@ block content
                               input(type="hidden",name="Arabic_Grandfathername",value="#{per.Personal.Arabic_Fathername}")
                               input(type="hidden",name="Arabic_Familyname",value="#{per.Personal.Arabic_Familyname}")
                               input(type="hidden",name="Nationality_Id",value="#{per.Personal.Nationality_Id}")
+                              input(type="hidden",name="Religion_Id",value="#{per.Personal.Religion_Id}")
+
+                              input(type="hidden",name="Socialstatus_Id",value="#{per.Personal.Socialstatus_Id}")
+                              input(type="hidden",name="Regdoctype_Id",value="#{per.Personal.Regdoctype_Id}")
+                              input(type="hidden",name="Certification_Type_Id",value="#{per.Personal.Certification_Type_Id}")
+                              input(type="hidden",name="CertificationMber",value="#{per.Personal.CertificationMber}")
+                              input(type="hidden",name="Certification_File_Number",value="#{per.Personal.Certification_File_Number}")
+                              input(type="hidden",name="Certification_Issuance_Date",value="#{per.Personal.Certification_Issuance_Date}")
                                 
-                            if per.Kinship.id==2
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                            if per.leader==2
                               input(type="hidden",name="Arabic_Motherfirstname",value="#{per.Personal.Arabic_Firstname}")
                               input(type="hidden",name="Arabic_Motherfathername",value="#{per.Personal.Arabic_Fathername}")
                               input(type="hidden",name="Arabic_Mothergrandfathername",value="#{per.Personal.Arabic_Grandfathername}")
                               input(type="hidden",name="Arabic_Motherfamilyname",value="#{per.Personal.Arabic_Familyname}")
-
+                              input(type="hidden",name="Mothernationality_Id",value="#{per.Personal.Nationality_Id}")
                         select.form-control.selectpicker(name="Motherperson_Id", data-live-search="true", data-size=5)
                           option(value="", style='colr:grey; display:none;') اسم اﻷم
                           for per in personals
-                            if per.Kinship.id==2
+                            if per.leader==2
                               option(value="#{per.Personal.id}") #{per.Personal.Arabic_Firstname} #{per.Personal.Arabic_Fathername} #{per.Personal.Arabic_Grandfathername} #{per.Personal.Arabic_Familyname}
 
                       //- input.form-control(type="text", name="", placeholder="اسم اﻷم")
