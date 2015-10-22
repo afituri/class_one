@@ -51,7 +51,7 @@ block content
                           span.glyphicon.glyphicon-edit
                     td.text-center
                       p(data-placement="top", data-toggle="tooltip", title="إلغاء")
-                        button.btn.btn-danger.btn-xs.delete_btn(data-toggle="modal", data-target="#delete",value="#{per.Personal.id}")
+                        button#delete_btn.btn.btn-danger.btn-xs.delete_btn(data-toggle="modal", data-target="#delete",value="#{per.Personal.id}")
                           span.glyphicon.glyphicon-trash
   #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
     .modal-dialog.modal-lg
@@ -320,7 +320,7 @@ block content
   #delete.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
     .modal-dialog
       .modal-content
-        form.form#delete_family_form(action="/family/delete_family", method="post", accept-charset="utf-8", role="form")
+        form.form#delete_family_form(action="/birth/delete_birth", method="post", accept-charset="utf-8", role="form")
           .modal-header
             button.close(type="button", data-dismiss="modal", aria-hidden="true")
               span.glyphicon.glyphicon-remove(aria-hidden="true")
@@ -328,7 +328,8 @@ block content
           .modal-body
             .alert.alert-danger.h5
               //- get hidden ID has family_id_delete
-              input#family_id_delete.form-control(type="hidden", name="id")               
+              input#birth_id_delete.form-control(type="hidden", name="idp")    
+              input(type="hidden",name="query",value="#{query}")           
               span.glyphicon.glyphicon-warning-sign
               |  هل تريد فعلا الغاء هذه الأسرة ؟
           .modal-footer

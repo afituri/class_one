@@ -10,6 +10,10 @@ $(document).ready(function(){
     }
 
   });
+  $('body').on('click','#delete_btn', function(){
+    var id = $(this).val();
+    $('#birth_id_delete').val(id);
+  });
   $('#region').on('change', function(){
     var id = $(this).val();
     $('#Branches').empty();

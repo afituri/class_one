@@ -102,4 +102,25 @@ module.exports = function (router) {
       });
     });  
   });
+  router.post('/birth/delete_birth',function (req, res) {
+    models.Birth.destroy({
+      where: {
+        PersonalId: req.body.idp
+      }
+    }).then(function(result){
+      models.Member.destroy({
+        where: {
+          PersonalId: req.body.idp
+        }
+      }).then(function(result){
+        models.Personal.destroy({
+          where: {
+            id: req.body.idp
+          }
+        }).then(function(result){
+          res.redirect('/birth?q='+req.body.query);
+        });
+      });
+    });
+  });
 }
