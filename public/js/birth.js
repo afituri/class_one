@@ -1,5 +1,16 @@
 $(document).ready(function(){
-  $('body').on('change', '#region', function(){
+  $('#region_show').hide();
+  
+  $('#newborn_reporting').on('change', function(){
+    var id = $(this).val();
+    if(id==2){
+      $('#region_show').show();
+    }else{
+      $('#region_show').hide();
+    }
+
+  });
+  $('#region').on('change', function(){
     var id = $(this).val();
     $('#Branches').empty();
     $('#Offices').empty();
@@ -12,7 +23,7 @@ $(document).ready(function(){
     });
   });
 
-  $('body').on('change', '#Branches', function(){
+  $('#Branches').on('change', function(){
     var id = $(this).val();
     $('#Offices').empty();
     $('#Offices').selectpicker('refresh');
@@ -24,7 +35,7 @@ $(document).ready(function(){
     });
   });
 
-  $('body').on('change', '#country', function(){
+  $('#country').on('change', function(){
     var id = $(this).val();
     $('#Cities').empty();
     $.get('/city/get_city/'+id,function(data){

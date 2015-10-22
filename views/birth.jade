@@ -128,13 +128,6 @@ block content
                               input(type="hidden",name="Certification_File_Number",value="#{per.Personal.Certification_File_Number}")
                               input(type="hidden",name="Certification_Issuance_Date",value="#{per.Personal.Certification_Issuance_Date}")
                                 
-                                
-                                
-                                
-                                
-                                
-                                
-                                
                             if per.leader==2
                               input(type="hidden",name="Arabic_Motherfirstname",value="#{per.Personal.Arabic_Firstname}")
                               input(type="hidden",name="Arabic_Motherfathername",value="#{per.Personal.Arabic_Fathername}")
@@ -219,7 +212,7 @@ block content
                   .col-xs-3.col-md-3
                     .form-group
                       label نوع التبليغ
-                      select.form-control.selectpicker(name="newborn_reporting", data-live-search="true", data-size=5)
+                      select#newborn_reporting.form-control.selectpicker(name="newborn_reporting", data-live-search="true", data-size=5)
                         option(value="", style='colr:grey; display:none;') نوع التبليغ
                         option(value="1") تبليغ ولادة
                         option(value="2") طبق الاصل
@@ -288,7 +281,7 @@ block content
                     .form-group
                       label اسم الطبيب او القرابة
                       input.form-control(type="text", name="midwife_name", placeholder="اسم الطبيب او القرابة")
-                .row
+                .row#region_show
                   .col-xs-4.col-md-4
                     .form-group
                       label المنطقة
