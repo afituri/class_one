@@ -2,7 +2,7 @@ var models = require("../models");
 exports.personal_mgr = {
 
   get_personal : function(id,cb){
-    models.sequelize.query('select *,p.id as pid from Personals as p,Countries as c where  c.id=p.Nationality_Id and  p.id in (select PersonalId from Members where FamilyId=?)', {
+    models.sequelize.query('select *,p.id as pid,k.id as kid from Members  as m,Personals as p,Countries as c,Kinships as k where p.id =m.PersonalId and k.id = m.KinshipId  and c.id=p.Nationality_Id and  p.id in (select PersonalId from Members where FamilyId=?)', {
       replacements: [id]
     })
     .then(function (result) {
