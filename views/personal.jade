@@ -126,10 +126,7 @@ block content
                         option(value="", style='color:grey; display:none;') مدينة الميلاد
                     .col-md-3
                       label محل الميلاد
-                      select#Birth_Place.form-control.selectpicker(name="Birth_Place", data-live-search="true", data-size=5)
-                        option(value="", style='color:grey; display:none;') محل الميلاد
-                        for i,u in social.place_of_birth
-                          option(value="#{u}") #{i}
+                      input#Birth_Place.form-control(type="text", name="Birth_Place", placeholder="محل الميلاد")
                 .form-group
                   .row
                     .col-xs-3.col-md-3

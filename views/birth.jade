@@ -10,7 +10,7 @@ block content
             .col-xs-6.col-md-6
               form.form#search_family(action="")
                 .input-group
-                  input.form-control(type='text',name="q" placeholder='بحث...برقم القيد فقط')
+                  input.form-control(type='text',name="q" placeholder='بحث...برقم القيد فقط' value="#{query}")
                   .input-group-btn
                     button.btn.btn-default(type="submit")
                       i.glyphicon.glyphicon-search
@@ -77,6 +77,7 @@ block content
                     .form-group
                       label اسم المولود
                       input.form-control(type="text", name="Arabic_Firstname", placeholder="اسم المولود")
+                      input(type="hidden",name="query",value="#{query}")
                   .col-xs-3.col-md-3
                     .form-group
                       label جنس المولود
@@ -114,6 +115,17 @@ block content
                               input(type="hidden",name="Fatherperson_Id",value="#{per.Personal.id}")
                               input(type="hidden",name="OfficeId",value="#{per.Family.OfficeId}")
                               input(type="hidden",name="FamilyId",value="#{per.Family.id}")
+                              input(type="hidden",name="Arabic_Fathername",value="#{per.Personal.Arabic_Firstname}")
+                              input(type="hidden",name="Arabic_Grandfathername",value="#{per.Personal.Arabic_Fathername}")
+                              input(type="hidden",name="Arabic_Familyname",value="#{per.Personal.Arabic_Familyname}")
+                              input(type="hidden",name="Nationality_Id",value="#{per.Personal.Nationality_Id}")
+                                
+                            if per.Kinship.id==2
+                              input(type="hidden",name="Arabic_Motherfirstname",value="#{per.Personal.Arabic_Firstname}")
+                              input(type="hidden",name="Arabic_Motherfathername",value="#{per.Personal.Arabic_Fathername}")
+                              input(type="hidden",name="Arabic_Mothergrandfathername",value="#{per.Personal.Arabic_Grandfathername}")
+                              input(type="hidden",name="Arabic_Motherfamilyname",value="#{per.Personal.Arabic_Familyname}")
+
                         select.form-control.selectpicker(name="Motherperson_Id", data-live-search="true", data-size=5)
                           option(value="", style='colr:grey; display:none;') اسم اﻷم
                           for per in personals
@@ -208,7 +220,7 @@ block content
                   .col-xs-3.col-md-3
                     .form-group
                       label فيصيلة الدم
-                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                      select.form-control.selectpicker(name="blood_type", data-live-search="true", data-size=5)
                         option(value="", style='colr:grey; display:none;') فيصيلة الدم
                         option(value="1") O−
                         option(value="2") O+
