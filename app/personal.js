@@ -51,7 +51,6 @@ exports.personal_mgr = {
     }).then(function (result) {
       cb(true);
     }).catch(function (err) {
-      console.log(err);
       cb(false);
     });
   }

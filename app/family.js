@@ -1,6 +1,14 @@
 var models = require("../models");
 exports.family_mgr = {
   /* get  all families */
+  get_personal_by_family_id : function(id,cb){
+    models.sequelize.query('select * from Personals as p, Members as m where m.FamilyId=? and m.PersonalId=p.id', {
+      replacements:[id]
+    }).then(function (result) {
+      cb(result[0]);
+    });
+  },
+
   get_family : function(cb){
     models.Family.findAndCountAll({
         where: {
@@ -28,7 +36,7 @@ exports.family_mgr = {
 
     get_family_by_registry_number : function(reg,cb){
        var reg=reg+"%";
-       models.sequelize.query('select * from Families as f,Offices as o where  f.Registrynumber LIKE ? and o.id=f.OfficeId', {
+       models.sequelize.query('select *,f.id as fid from Families as f,Offices as o where  f.Registrynumber LIKE ? and o.id=f.OfficeId', {
        replacements:[reg]
        }).then(function (result) {
         console.log(result[0]);
