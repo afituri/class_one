@@ -86,7 +86,16 @@ module.exports = function (router) {
   
   router.get('/get_registry/:reg', function (req, res) {
     family.get_family_by_registry_number(req.params.reg,function(result){
+      console.log(result);
      res.send(result);   
+    });
+  });
+
+
+  router.get('/get_Personal_in_family/:id', function (req, res) {
+    family.get_personal_by_family_id(req.params.id,function(result){
+      console.log(result);
+      res.send(true);
     });
   });
 
