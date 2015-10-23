@@ -22,6 +22,7 @@ module.exports = function (router) {
         country.get_country(function (country){
           kinship.get_kinship(function (kinship){
             job.get_job(function(job){ 
+              console.log(personal[0]);
               res.render('personal', { 
                 title: 'أفراد الأسرة', 
                 familys: family.result.rows,
@@ -95,7 +96,7 @@ module.exports = function (router) {
   router.get('/get_Personal_in_family/:id', function (req, res) {
     family.get_personal_by_family_id(req.params.id,function(result){
       console.log(result);
-      res.send(true);
+      res.send(result);
     });
   });
 
