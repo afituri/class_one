@@ -10,7 +10,7 @@ block content
             .col-xs-6.col-md-6
               form.form#search_family(action="")
                 .input-group
-                  input.form-control(type='text',name="q" placeholder='بحث...برقم القيد فقط')
+                  input.form-control(type='text',name="q" placeholder='بحث...برقم القيد فقط' value="#{query}")
                   .input-group-btn
                     button.btn.btn-default(type="submit")
                       i.glyphicon.glyphicon-search
@@ -37,7 +37,7 @@ block content
                   tr
                     td.text-center #{per.Personal.national_id}
                     td.text-center #{per.Personal.Arabic_Firstname} #{per.Personal.Arabic_Fathername} #{per.Personal.Arabic_Grandfathername} #{per.Personal.Arabic_Familyname}
-                    td.text-center #{per.Personal.Birth_Date.getDate()} / #{per.Personal.Birth_Date.getMonth() - 1} /#{per.Personal.Birth_Date.getFullYear()}
+                    td.text-center #{per.Personal.Birth_Date.getDate()} / #{per.Personal.Birth_Date.getMonth() + 1} /#{per.Personal.Birth_Date.getFullYear()}
                     td.text-center #{per.Personal.Birth_Place}
                     td.text-center #{per.Kinship.kinship_name}
                     td.text-center 
@@ -51,7 +51,7 @@ block content
                           span.glyphicon.glyphicon-edit
                     td.text-center
                       p(data-placement="top", data-toggle="tooltip", title="إلغاء")
-                        button.btn.btn-danger.btn-xs.delete_btn(data-toggle="modal", data-target="#delete",value="#{per.Personal.id}")
+                        button#delete_btn.btn.btn-danger.btn-xs.delete_btn(data-toggle="modal", data-target="#delete",value="#{per.Personal.id}")
                           span.glyphicon.glyphicon-trash
   #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
     .modal-dialog.modal-lg
@@ -77,6 +77,7 @@ block content
                     .form-group
                       label اسم المولود
                       input.form-control(type="text", name="Arabic_Firstname", placeholder="اسم المولود")
+                      input(type="hidden",name="query",value="#{query}")
                   .col-xs-3.col-md-3
                     .form-group
                       label جنس المولود
@@ -110,14 +111,33 @@ block content
                       label اسم اﻷم
                       if q
                         for per in personals
-                            if per.Kinship.id==1
+                            if per.leader==1
                               input(type="hidden",name="Fatherperson_Id",value="#{per.Personal.id}")
                               input(type="hidden",name="OfficeId",value="#{per.Family.OfficeId}")
                               input(type="hidden",name="FamilyId",value="#{per.Family.id}")
+                              input(type="hidden",name="Arabic_Fathername",value="#{per.Personal.Arabic_Firstname}")
+                              input(type="hidden",name="Arabic_Grandfathername",value="#{per.Personal.Arabic_Fathername}")
+                              input(type="hidden",name="Arabic_Familyname",value="#{per.Personal.Arabic_Familyname}")
+                              input(type="hidden",name="Nationality_Id",value="#{per.Personal.Nationality_Id}")
+                              input(type="hidden",name="Religion_Id",value="#{per.Personal.Religion_Id}")
+
+                              input(type="hidden",name="Socialstatus_Id",value="#{per.Personal.Socialstatus_Id}")
+                              input(type="hidden",name="Regdoctype_Id",value="#{per.Personal.Regdoctype_Id}")
+                              input(type="hidden",name="Certification_Type_Id",value="#{per.Personal.Certification_Type_Id}")
+                              input(type="hidden",name="CertificationMber",value="#{per.Personal.CertificationMber}")
+                              input(type="hidden",name="Certification_File_Number",value="#{per.Personal.Certification_File_Number}")
+                              input(type="hidden",name="Certification_Issuance_Date",value="#{per.Personal.Certification_Issuance_Date}")
+                                
+                            if per.leader==2
+                              input(type="hidden",name="Arabic_Motherfirstname",value="#{per.Personal.Arabic_Firstname}")
+                              input(type="hidden",name="Arabic_Motherfathername",value="#{per.Personal.Arabic_Fathername}")
+                              input(type="hidden",name="Arabic_Mothergrandfathername",value="#{per.Personal.Arabic_Grandfathername}")
+                              input(type="hidden",name="Arabic_Motherfamilyname",value="#{per.Personal.Arabic_Familyname}")
+                              input(type="hidden",name="Mothernationality_Id",value="#{per.Personal.Nationality_Id}")
                         select.form-control.selectpicker(name="Motherperson_Id", data-live-search="true", data-size=5)
                           option(value="", style='colr:grey; display:none;') اسم اﻷم
                           for per in personals
-                            if per.Kinship.id==2
+                            if per.leader==2
                               option(value="#{per.Personal.id}") #{per.Personal.Arabic_Firstname} #{per.Personal.Arabic_Fathername} #{per.Personal.Arabic_Grandfathername} #{per.Personal.Arabic_Familyname}
 
                       //- input.form-control(type="text", name="", placeholder="اسم اﻷم")
@@ -192,7 +212,7 @@ block content
                   .col-xs-3.col-md-3
                     .form-group
                       label نوع التبليغ
-                      select.form-control.selectpicker(name="newborn_reporting", data-live-search="true", data-size=5)
+                      select#newborn_reporting.form-control.selectpicker(name="newborn_reporting", data-live-search="true", data-size=5)
                         option(value="", style='colr:grey; display:none;') نوع التبليغ
                         option(value="1") تبليغ ولادة
                         option(value="2") طبق الاصل
@@ -208,7 +228,7 @@ block content
                   .col-xs-3.col-md-3
                     .form-group
                       label فيصيلة الدم
-                      select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                      select.form-control.selectpicker(name="blood_type", data-live-search="true", data-size=5)
                         option(value="", style='colr:grey; display:none;') فيصيلة الدم
                         option(value="1") O−
                         option(value="2") O+
@@ -261,7 +281,7 @@ block content
                     .form-group
                       label اسم الطبيب او القرابة
                       input.form-control(type="text", name="midwife_name", placeholder="اسم الطبيب او القرابة")
-                .row
+                .row#region_show
                   .col-xs-4.col-md-4
                     .form-group
                       label المنطقة
@@ -300,7 +320,7 @@ block content
   #delete.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
     .modal-dialog
       .modal-content
-        form.form#delete_family_form(action="/family/delete_family", method="post", accept-charset="utf-8", role="form")
+        form.form#delete_family_form(action="/birth/delete_birth", method="post", accept-charset="utf-8", role="form")
           .modal-header
             button.close(type="button", data-dismiss="modal", aria-hidden="true")
               span.glyphicon.glyphicon-remove(aria-hidden="true")
@@ -308,7 +328,8 @@ block content
           .modal-body
             .alert.alert-danger.h5
               //- get hidden ID has family_id_delete
-              input#family_id_delete.form-control(type="hidden", name="id")               
+              input#birth_id_delete.form-control(type="hidden", name="idp")    
+              input(type="hidden",name="query",value="#{query}")           
               span.glyphicon.glyphicon-warning-sign
               |  هل تريد فعلا الغاء هذه الأسرة ؟
           .modal-footer
