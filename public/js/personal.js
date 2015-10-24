@@ -34,6 +34,17 @@ $(document).ready(function(){
   $('body').on('click', '#family_come_from', function(e){
     if($("input[type='radio'].radioBtnClass").is(':checked')) {
     get_famly_fromId= $("input[type='radio'].radioBtnClass:checked").val();
+    $('#Motherperson_Id').empty();
+    $('#Motherperson_Id').append('<option value="">اختر اسم اﻷم بالكامل </option>').selectpicker('refresh');
+    $.get('/get_Personal_in_family/'+get_famly_fromId,function(result){
+      for(i in result){
+          if(result[i].KinshipId==2){ 
+            //$('#three').hide();
+            $('#Motherperson_Id').append('<option value='+result[i].id+'  > '+result[i].Arabic_Firstname+' '+result[i].Arabic_Fathername+' '+result[i].Arabic_Grandfathername+' '+result[i].Arabic_Familyname+' </option>').selectpicker('refresh');;
+          } 
+        }
+    });
+
     }
   });
 
@@ -43,17 +54,21 @@ $(document).ready(function(){
     var familyid=path.split('/').pop();
     $('#Motherperson_Id').empty();
     if($(this).val()==3){
+      $('#three').hide();
       $('#Motherperson_Id').append('<option value="">اختر اسم اﻷم بالكامل </option>').selectpicker('refresh');
       $.get('/get_Personal_in_family/'+familyid,function(result){
         for(i in result){
           if(result[i].KinshipId==2){ 
-            $('#three').hide();
+            //$('#three').hide();
             $('#Motherperson_Id').append('<option value='+result[i].id+'  > '+result[i].Arabic_Firstname+' '+result[i].Arabic_Fathername+' '+result[i].Arabic_Grandfathername+' '+result[i].Arabic_Familyname+' </option>').selectpicker('refresh');;
           } 
         }
        });
     } else { 
+      $('#Motherperson_Id').empty();
+      $('#Motherperson_Id').append('<option value="">اختر اسم اﻷم بالكامل </option>').selectpicker('refresh');
       $('#three').show();
+
     }
    });
 
@@ -93,6 +108,10 @@ $(document).ready(function(){
     e.preventDefault();
     var isvalidate=$("#add_personal_form").valid();
     if(isvalidate){ 
+      if($("input[type='radio'].radioBtnClass").is(':checked')) {
+        get_famly_fromId= $("input[type='radio'].radioBtnClass:checked").val();
+      }
+      alert(get_famly_fromId);
       var path=document.URL;
       var familyid=path.split('/').pop();
       var Is_Alive;
@@ -146,6 +165,7 @@ $(document).ready(function(){
         CertificationMber: $('#CertificationMber').val(),
         Nationality_Id:$('#Nationality_Id').val(),
         Motherperson_Id:$('#Motherperson_Id').val(),
+        from_familyId:get_famly_fromId,
     }
       $.post('/insert_personal',obj,function(result){ 
           window.location.href='/personal/'+familyid;
