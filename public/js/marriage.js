@@ -8,27 +8,8 @@ $(document).ready(function(){
     e.preventDefault();
     $('#search_marriage_F').submit();
   });
-  //#save_Marriage
-  $('body').on('click', '#save_Marriage', function (e) {
-    if($("input[type='radio'].radioBtnClass").is(':checked')) {
-    var card_type = $("input[type='radio'].radioBtnClass:checked").val();
-    }
-    alert("id : "+card_type);
-    alert($("#tbody #mariage"+card_type).text());
-    alert($("#tbody #mariag"+card_type).text());
-    alert($("#tbody #maria"+card_type).text());
-
-    // select the radio by its id
-    // bind a function to the change event
-      
-    
-/*    alert($('input[name="radio_M"]:checked').val());
-    alert($('input:radio[name="radio_M"]').filter(":checked").val());
-    alert(jq("input[name='radio_M']:checked").val());*/
-  });
 
   $("#search_marriage_F").submit(function(e) {
-    console.log($("form").serializeObject().searchVal_F);
     var isvalidate=$("#search_marriage_F").valid();
     if(isvalidate){
     $.post("/searchMarriage", $("#search_marriage_F").serializeObject(), function(data, error){
@@ -36,7 +17,6 @@ $(document).ready(function(){
           alert("no");
         } 
         else {
-         console.log(data.result[0]);
          $("#tbody_F").empty();
          for (var i = 0; i < data.result.length; i++) {
           date = new Date(data.result[i].Birth_Date);
@@ -49,7 +29,8 @@ $(document).ready(function(){
             '<td class="text-center">'+data.result[i].kinship_name+'</td>'+
             '<td class="text-center">'+
             '<p data-placement="top", data-toggle="tooltip", title="تحديد">'+
-            '<input type="radio",value="'+data.result[i].Person_Id+'", name="radio_F"></input></p></td>');
+            '<input id='+"mariage"+data.result[i].PersonalId+' name="Familid" type="hidden" value="'+data.result[i].FamilyId+'"></input>'+
+            '<input class="radioBtnClass" type="radio" value="'+data.result[i].PersonalId+'"  name="radio_F"></input></p></td>');
          };
         }
       });
@@ -65,7 +46,6 @@ $(document).ready(function(){
           alert("no");
         } 
         else {
-         console.log(data.result[0]);
          $("#tbody").empty();
          for (var i = 0; i < data.result.length; i++) {
           date = new Date(data.result[i].Birth_Date);
@@ -73,12 +53,14 @@ $(document).ready(function(){
           var monthIndex = date.getMonth();
           var year = date.getFullYear();
           $("#tbody").append('<tr>'+
-            '<td class="text-center" id='+"mariage"+data.result[i].Person_Id+'>'+data.result[i].Arabic_Familyname+'</td>'+
-            '<td class="text-center" id='+"mariag"+data.result[i].Person_Id+'>'+year+"-"+monthIndex+"-"+day+'</td>'+
-            '<td class="text-center" id='+"maria"+data.result[i].Person_Id+'>'+data.result[i].kinship_name+'</td>'+
+            '<td class="text-center">'+data.result[i].Arabic_Familyname+'</td>'+
+            '<td class="text-center">'+year+"-"+monthIndex+"-"+day+'</td>'+
+            '<td class="text-center">'+data.result[i].kinship_name+'</td>'+
             '<td class="text-center" >'+
-            '<p >'+
-            '<input class="radioBtnClass" id="mariag" type="radio" value="'+data.result[i].Person_Id+'", name="radio_M"></input></p></td>');
+            '<p data-placement="top", data-toggle="tooltip", title="تحديد">'+
+            '<input id='+"mariag"+data.result[i].PersonalId+' name="Familidm" type="hidden" value="'+data.result[i].FamilyId+'"></input>'+
+            '<input id='+"maria"+data.result[i].PersonalId+' name="OfficeId" type="hidden" value="'+data.result[i].OfficeId+'"></input>'+
+            '<input class="radioBtn" id="mariag" type="radio" value="'+data.result[i].PersonalId+'", name="radio_M"></input></p></td>');
          };
 
         }
@@ -87,12 +69,56 @@ $(document).ready(function(){
     return false
 
     });
+
  $('.add_marriage').on('click',function(){
-    // var myDataAttr = $(this).val();
-    // alert("oh man");
-    // $('#name').val($('[data-id = "'+myDataAttr+'"]').data('name'));
-    // $('#name_en').val($('[data-id = "'+myDataAttr+'"]').data('name_en'));
-    // $('#id').val($('[data-id = "'+myDataAttr+'"]').data('id'));
+   if($("input[type='radio'].radioBtn").is(':checked')) {
+    var card_type = $("input[type='radio'].radioBtn:checked").val();
+    }
+    if($("input[type='radio'].radioBtnClass").is(':checked')) {
+    var card_typee = $("input[type='radio'].radioBtnClass:checked").val();
+    }
+    $('#husband_personal_Id').val(card_type);
+    $('#husband_family_Id').val($("#tbody #mariag"+card_type).val());
+    $('#wife_personal_Id').val(card_typee);
+    $('#wife_family_Id').val($("#tbody_F #mariage"+card_typee).val());
+    $('#OfficeId').val($("#tbody #maria"+card_type).val());
   });
 
+ $('body').on('click', '#save_Marriage', function (e) {
+    e.preventDefault();
+    $('#new_marriage').submit();
+  });
+
+ $("#new_marriage").submit(function(e) {
+     var isvalidate=$("#new_marriage").valid();
+    if(isvalidate){
+      $.post("/add_new_marriage", $("#new_marriage").serializeObject(), function(data, error){
+        if(data){
+        window.location.href ="/marriage?msg=22";
+        } else {
+        window.location.href ="/marriage?msg=33";
+        }
+      });
+    }
+    return false
+  });
+
+if($getMsg["msg"]==1){
+  custNotify("success","نجاح","تم حذف العائلة بنجاح","ok-sign","bounceInDown","bounceOutUp");
+  replaceUrl('/marriage');    
+} else if ($getMsg["msg"]==2) {
+  custNotify("danger","خطأ","لا يمكن حذف هذه العائ لاعتماد كيانات اخرى عليها","warning-sign","bounceIn","bounceOut");
+  replaceUrl('/marriage');
+} else if ($getMsg["msg"]==11) {
+  custNotify("success","نجاح","لقد قمت بتعديل الحقول بنجاح","ok-sign","bounceInDown","bounceOut");
+  replaceUrl('/marriage');
+} else if ($getMsg["msg"]==22) {
+  $('#add').modal('hide');
+  custNotify("success","نجاح","لقد قمت باضافة واقة بنجاح","ok-sign","bounceInDown","bounceOut");
+  replaceUrl('/marriage');
+} else if ($getMsg["msg"]==33) {
+   $('#add').modal('hide');
+  custNotify("danger","خطأ","الرجاء تعبئة جميع البيانات بالطريقة الصحيحة","warning-sign","bounceIn","bounceOut");
+  replaceUrl('/marriage');
+}
 });

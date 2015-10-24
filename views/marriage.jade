@@ -4,8 +4,12 @@ block content
     .col-sm-10.col-md-10
       .pull-right(style="margin-left: 10px;")
         a.btn.btn-success.add_marriage(href='#add', role='button',data-toggle='modal')
-          span.text-none  تسجيل واقعة
           span.glyphicon.glyphicon-plus
+          span.text-none  تسجيل واقعة
+      .pull-right(style="margin-left: 10px;")
+        a.btn.btn-primary(href='#', role='button')
+          span.glyphicon.glyphicon-tasks  
+          span.text-none  عرض واقعات الزواج     
   br
   br        
   .container-fulid      
@@ -71,58 +75,73 @@ block content
                 td.text-center
                 td.text-center
                 td.text-center
-                td.text-center#id
+                td.text-center
                                     
   #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
     .modal-dialog.modal-lg
       .modal-content
-        form.form(action="", method="post", accept-charset="utf-8", role="form")
+        form#new_marriage.form(method="post", accept-charset="utf-8", role="form")
           .modal-header
             button.close(type="button", data-dismiss="modal", aria-hidden="true")
               span.glyphicon.glyphicon-remove(aria-hidden="true")
-            h4.modal-title.custom_align بيانات واقعة الزواج
+            h4.modal-title.custom_align بيانات واقعة الزواج 
           .modal-body
             .row
               .col-xs-3.col-md-3
                 .form-group
+                  label نوع الزواج
+                  select#marriage_type.form-control.selectpicker(name="marriage_type", data-live-search="true", data-size=5)
+                            option(value="", style='color:grey; display:none;') نوع الزواج
+                            option(value="1") زواج عن طريق المأذون  
+                            option(value="2") زواج عن طريق المحكمة
+              .col-xs-3.col-md-3
+                .form-group
                   label تاريخ الزواج
-                  input#Birth_Date.form-control(type="text", name="", placeholder="تاريخ الزواج")
+                  input#marriage_date.form-control(type="text", name="marriage_date", placeholder="تاريخ الزواج")
               .col-xs-3.col-md-3
                 .form-group
                   label مكان الزواج
-                  input.form-control(type="text", name="", placeholder="مكان الزواج")
+                  input#marriage_place.form-control(type="text", name="marriage_place", placeholder="مكان الزواج")
               .col-xs-3.col-md-3
                 .form-group
                   label رقم عقد الزواج
-                  input.form-control(type="text", name="", placeholder="رقم عقد الزواج")
+                  input#contract_number.form-control(type="text", name="contract_number", placeholder="رقم عقد الزواج")
+            .row  
               .col-xs-3.col-md-3
                 .form-group
                   label رقم سجل الزواج
-                  input.form-control(type="text", name="", placeholder="رقم سجل الزواج")
-            .row
+                  input#record_marriage_nu.form-control(type="text", name="record_marriage_nu", placeholder="رقم سجل الزواج")
+              .col-xs-3.col-md-3
+                .form-group
+                  label تاريخ سجل الزواج
+                  input#inform_date.form-control(type="text", name="inform_date", placeholder="تاريخ سجل الزواج")
               .col-xs-3.col-md-3
                 .form-group
                   label رقم ورقة العائلة
-                  input.form-control(type="text", name="", placeholder="رقم ورقة العائلة")
+                  input#Recordnumber.form-control(type="text", name="Recordnumber", placeholder="رقم ورقة العائلة")
               .col-xs-3.col-md-3
                 .form-group
                   label تاريخ فتح ورقة العائلة
-                  input#Birth_Date.form-control(type="text", name="Birth_Date", placeholder="تاريخ فتح ورقة العائلة")
-              .col-xs-3.col-md-3
-                .form-group
-                  label رقم السجل
-                  input.form-control(type="text", name="", placeholder="رقم السجل")
-              .col-xs-3.col-md-3
-                .form-group
-                  label رقم ورقة السجل
-                  input.form-control(type="text", name="", placeholder="رقم ورقة السجل")
-            .row
+                  input#FamilyRecordDate.form-control(type="text", name="FamilyRecordDate", placeholder="تاريخ فتح ورقة العائلة")
+            .row  
               .col-xs-3.col-md-3
                 .form-group
                   label رقم القيد الجديد
-                  input.form-control(type="text", name="", placeholder="رقم القيد الجديد")
+                  input#Registrynumber.form-control(type="text", name="Registrynumber", placeholder="رقم القيد الجديد")
+              .col-xs-3.col-md-3
+                .form-group
+                  label مدينة الزواج    
+                  select#CityId.form-control.selectpicker(name="CityId", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') المدينة...
+                    for city in citys
+                      option(value="#{city.id}") #{city.city_name}
+                  input#husband_personal_Id(name="husband_personal_Id",type="hidden")
+                  input#husband_family_Id(name="husband_family_Id",type="hidden")
+                  input#wife_personal_Id(name="wife_personal_Id",type="hidden")
+                  input#wife_family_Id(name="wife_family_Id",type="hidden")
+                  input#OfficeId(name="OfficeId",type="hidden") 
           .modal-footer
-            button#save_Marriage.btn.btn-success.btn-lg(type="button", style="width: 100%;")
+            button#save_Marriage.btn.btn-success.btn-lg(style="width: 100%;", data-dismiss="modal", aria-hidden="true")
               span.glyphicon.glyphicon-plus
               |  إضافة
   script(src='/js/jquery-2.1.1.min.js')
@@ -137,7 +156,7 @@ block content
   script(src='/js/helpers.js')
   script(src='/js/marriage.js')
   script.
-    $('#Birth_Date').datetimepicker({
+    $('#marriage_date, #inform_date, #FamilyRecordDate').datetimepicker({
       useCurrent: false,
       viewMode: 'years',
       format: 'YYYY-MM-DD',
