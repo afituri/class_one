@@ -3,11 +3,11 @@ block content
   .container-fulid
     .col-sm-10.col-md-10
       .form-group
-        input.form-control(type="radio", name="family_type", checked="", data-inverse="true", data-label-text="اسر ليبية", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
+        input#type1.form-control(type="radio", name="family_type", checked="", data-inverse="true", data-label-text="اسر ليبية", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
         span(style="margin-right:30px;")
-        input.form-control(type="radio", name="family_type", data-inverse="true", data-label-text="اسر مؤقته", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
+        input#type2.form-control(type="radio", name="family_type", data-inverse="true", data-label-text="اسر مؤقته", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
         span(style="margin-right:30px;")
-        input.form-control(type="radio", name="family_type", data-inverse="true", data-label-text="اسر اجنبية", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
+        input#type3.form-control(type="radio", name="family_type", data-inverse="true", data-label-text="اسر اجنبية", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
       .panel.panel-default
         .panel-heading
           .row
@@ -32,7 +32,7 @@ block content
                 th.text-center الأب
                 th.text-center الجد
                 th.text-center اللقب
-                th.text-center أسم الأم
+                //- th.text-center أسم الأم
                 th.text-center تاريخ الميلاد
                 th.text-center مكان الميلاد
                 th.text-center الجنسية
@@ -47,7 +47,7 @@ block content
                   td.text-center #{i.Arabic_Fathername}
                   td.text-center #{i.Arabic_Grandfathername}
                   td.text-center #{i.Arabic_Familyname}
-                  td.text-center #{i.Arabic_Motherfirstname} #{i.Arabic_Motherfamilyname}
+                  //- td.text-center #{i.Arabic_Motherfirstname} #{i.Arabic_Motherfamilyname}
                   td.text-center #{i.Birth_Date.getFullYear()}/#{i.Birth_Date.getMonth()+1}/#{i.Birth_Date.getDate()}
                   td.text-center #{i.Birth_Place}
                   td.text-center
@@ -56,7 +56,8 @@ block content
                     if i.Gender == 2
                       | #{i.nationality_female}
 
-                  td.text-center إبن
+                  td.text-center #{i.kinship_name}
+
                   td.text-center #{i.national_id}
                   td.text-center
                     p(data-placement="top", data-toggle="tooltip", title="تعديل")
@@ -64,12 +65,12 @@ block content
                         span.glyphicon.glyphicon-edit
                   td.text-center
                     p(data-placement="top", data-toggle="tooltip", title="إلغاء")
-                      button.btn.btn-danger.btn-xs.delete_btn(data-title="Delete", data-toggle="modal", data-target="#delete", value="")
+                      button#remove.btn.btn-danger.btn-xs.delete_btn(value="#{i.pid}",data-title="Delete", data-toggle="modal", data-target="#delete")
                         span.glyphicon.glyphicon-trash
   #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="add", aria-hidden="true")
     .modal-dialog.modal-lg
       .modal-content
-        form.form#add_personal_form(action="", method="post", accept-charset="utf-8", role="form")
+        form.form#add_personal_form(role="form")
           .modal-header
             button.close(type="button", data-dismiss="modal", aria-hidden="true")
               span.glyphicon.glyphicon-remove(aria-hidden="true")
@@ -80,7 +81,7 @@ block content
                 a(href="#tabOne", aria-controls="tabOne", role="tab", data-toggle="tab") البيانات الشخصية - 1
               li
                 a(href="#tabTwo", aria-controls="tabTwo", role="tab", data-toggle="tab") البيانات الشخصية - 2
-              li
+              li#three
                 a(href="#tabThree", aria-controls="tabThree", role="tab", data-toggle="tab") الاسرة القادم منها
             .tab-content
               #tabOne.tab-pane.active(role="tabpanel")
@@ -90,7 +91,7 @@ block content
                     .col-xs-3.col-xs-offset-1.col-md-3.col-md-offset-1
                       label هل هو حي او متوفي 
                       br
-                      input.form-control(type="checkbox", name="Is_Alive", data-inverse="true", data-label-text="الحالة", data-off-text="متوفي", data-on-text="حي", data-off-color="danger", checked)
+                      input#Is_Alive.form-control(type="checkbox", name="Is_Alive", data-inverse="true", data-label-text="الحالة", data-off-text="متوفي", data-on-text="حي", data-off-color="danger", checked)
                 .form-group
                   .row
                     .col-xs-3.col-md-3
@@ -115,7 +116,7 @@ block content
                           option(value="#{u}") #{i}  
                     .col-xs-3.col-md-3
                       label دولة الميلاد
-                      select#country.form-control.selectpicker(data-live-search="true", data-size=5)
+                      select#country.form-control.selectpicker(name="country", data-live-search="true", data-size=5)
                         option(value="", style='color:grey; display:none;') دولة الميلاد
                         for data in country
                           option(value="#{data.id}") #{data.country_name}
@@ -125,15 +126,15 @@ block content
                         option(value="", style='color:grey; display:none;') مدينة الميلاد
                     .col-md-3
                       label محل الميلاد
-                      select#Birth_Place.form-control.selectpicker(name="Birth_Place", data-live-search="true", data-size=5)
-                        option(value="", style='color:grey; display:none;') محل الميلاد
-                        for i,u in social.place_of_birth
-                          option(value="#{u}") #{i}
+                      input#Birth_Place.form-control(type="text", name="Birth_Place", placeholder="محل الميلاد")
                 .form-group
                   .row
                     .col-xs-3.col-md-3
                       label تاريخ الميلاد
                       input#Birth_Date.form-control(type="text", name="Birth_Date", placeholder="تاريخ الميلاد")
+                    .col-xs-3.col-md-3
+                      label تاريخ الاكتتاب
+                      input#Enlistingdate.form-control(type="text", name="Enlistingdate", placeholder="تاريخ الاكتتاب")
                     .col-xs-3.col-md-3
                       label الجنسية 
                       select#Nationality_Id.form-control.selectpicker(name="Nationality_Id", data-live-search="true", data-size=5)
@@ -144,21 +145,20 @@ block content
                         option(value="", style='color:grey; display:none;') صلة القرابة
                         for i in kinship
                           option(value="#{i.id}") #{i.kinship_name}
+              #tabTwo.tab-pane(role="tabpanel")
+                br
+                .form-group
+                  .row
                     .col-xs-3.col-md-3
                       label الحالة الإجتماعية
                       select#Socialstatus_Id.form-control.selectpicker(name="Socialstatus_Id", data-live-search="true", data-size=5)
                         option(value="", style='colr:grey; display:none;') الحالة الإجتماعية
                         //- for data,i in social.social_status
                         //-   option(value="#{i}", style='colr:grey;') #{data[0]}
-                .form-group
-                  .row
                     .col-xs-3.col-md-3
                       label الديانة
                       select#Religion_Id.form-control.selectpicker(name="Religion_Id", data-live-search="true", data-size=5)
                         option(value="", style='color:grey; display:none;') الديانة
-                    .col-xs-3.col-md-3
-                      label تاريخ الاكتتاب
-                      input#Enlistingdate.form-control(type="text", name="Enlistingdate", placeholder="تاريخ الاكتتاب")
                     .col-xs-3.col-md-3
                       label جنسية الأم
                       select#Mothernationality_Id.form-control.selectpicker(name="Mothernationality_Id", data-live-search="true", data-size=5)
@@ -171,8 +171,6 @@ block content
                         option(value="", style='color:grey; display:none;') جنسية الأب
                         for i in country
                           option(value="#{i.id}") #{i.nationality_male}
-              #tabTwo.tab-pane(role="tabpanel")
-                br
                 .form-group
                   .row
                     .col-md-3
@@ -181,34 +179,6 @@ block content
                         option(value="", style='color:grey; display:none;') المهنة
                         for i in job
                           option(value="#{i.id}") #{i.job_name}
-                    
-
-                //.form-group
-                  .row
-                    .col-xs-4.col-md-4
-                      label حالة اﻷب
-                      select#father_status.form-control.selectpicker(name="father_status", data-live-search="true", data-size=5)
-                        option(value="", style='color:grey; display:none;') حالة اﻷب
-                        option(value="1") موجود
-                        option(value="2") غير موجود
-                    .insert_father_name.hide
-                      .col-xs-2.col-md-2
-                        label اسم اﻷب الأول
-                        input#Arabic_Fatherfirstname.form-control(type="text", name="Arabic_Fatherfirstname", placeholder="اسم الأم ")
-                      .col-xs-2.col-md-2
-                        label اسم أب اﻷب
-                        input#Arabic_Fatherfathername.form-control(type="text", name="Arabic_Fatherfathername", placeholder="اسم  والد الأم ")
-                      .col-xs-2.col-md-2
-                        label اسم جد اﻷب
-                        input#Arabic_Fathergrandfathername.form-control(type="text", name="Arabic_Fathergrandfathername", placeholder="اسم جد الأم")
-                      .col-xs-2.col-md-2
-                        label لقب اﻷب
-                        input#Arabic_Fatherfamilyname.form-control(type="text", name="Arabic_Fatherfamilyname", placeholder="لقب الأم ")
-                    .select_father_name.hide
-                      .col-md-8
-                        label اسم اﻷب بالكامل
-                        select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
-                          option(value="", style='color:grey; display:none;') اختر اسم اﻷب بالكامل
                 .form-group
                   .row
                     .col-xs-4.col-md-4
@@ -217,24 +187,25 @@ block content
                         option(value="", style='color:grey; display:none;') حالة اﻷم
                         option(value="1") موجودة
                         option(value="2") غير موجودة
-                    .insert_mother_name.hide
-                      .col-xs-2.col-md-2
-                        label اسم الأم الأول
-                        input#Arabic_Motherfirstname.form-control(type="text", name="Arabic_Motherfirstname", placeholder="اسم الأم ")
-                      .col-xs-2.col-md-2
-                        label اسم أب الأم
-                        input#Arabic_Motherfathername.form-control(type="text", name="Arabic_Motherfathername", placeholder="اسم  والد الأم ")
-                      .col-xs-2.col-md-2
-                        label اسم جد الأم
-                        input#Arabic_Mothergrandfathername.form-control(type="text", name="Arabic_Mothergrandfathername", placeholder="اسم جد الأم")
-                      .col-xs-2.col-md-2
-                        label لقب الأم
-                        input#Arabic_Motherfamilyname.form-control(type="text", name="Arabic_Motherfamilyname", placeholder="لقب الأم ")
-                    .select_mother_name.hide
-                      .col-md-8
-                        label اسم اﻷم بالكامل
-                        select.form-control.selectpicker(name="", data-live-search="true", data-size=5)
-                          option(value="", style='color:grey; display:none;') اختر اسم اﻷم بالكامل
+                    .col-xs-8.col-md-8
+                      .row#insert_mother_name.hide
+                          .col-xs-3.col-md-3
+                            label اسم الأم الأول
+                            input#Arabic_Motherfirstname.form-control(type="text", name="Arabic_Motherfirstname", placeholder="اسم الأم ")
+                          .col-xs-3.col-md-3
+                            label اسم أب الأم
+                            input#Arabic_Motherfathername.form-control(type="text", name="Arabic_Motherfathername", placeholder="اسم  والد الأم ")
+                          .col-xs-3.col-md-3
+                            label اسم جد الأم
+                            input#Arabic_Mothergrandfathername.form-control(type="text", name="Arabic_Mothergrandfathername", placeholder="اسم جد الأم")
+                          .col-xs-3.col-md-3
+                            label لقب الأم
+                            input#Arabic_Motherfamilyname.form-control(type="text", name="Arabic_Motherfamilyname", placeholder="لقب الأم ")
+                      .row#select_mother_name.hide
+                          .col-xs-12.col-md-12
+                            label اسم اﻷم بالكامل
+                            select#Motherperson_Id.form-control.selectpicker(name="Motherperson_Id", data-live-search="true", data-size=5)
+                              option(value="", style='color:grey; display:none;') اختر اسم اﻷم بالكامل
                 .form-group
                   .row
                     .col-xs-3.col-md-3
@@ -437,7 +408,7 @@ block content
             span.glyphicon.glyphicon-warning-sign
             |  هل انت متأكد من إلغاء هذا الشخص؟
         .modal-footer
-          button#yes.btn.btn-success(type="button", data-dismiss="modal")
+          button#delete_it.btn.btn-success(type="button", data-dismiss="modal")
             span.glyphicon.glyphicon-ok-sign
             |  نعم
           button#no.btn.btn-default(type="button", data-dismiss="modal")

@@ -107,15 +107,13 @@ block content
           .modal-body
             .form-group
               .row
-                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                .col-xs-6.col-md-6
                   label  اختر المنطقة
                   select#region_edit.form-control.selectpicker(name="region", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') اختر المنطقة...
                     for region in regions
                       option(value="#{region.id}") #{region.region_name}
-            .form-group
-              .row
-                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                .col-xs-6.col-md-6
                   label  اختر مكتب الاصار
                   select#edit_office_branch.form-control.selectpicker(name="BranchId", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') اختر مكتب الاصدار...
@@ -123,27 +121,23 @@ block content
                       option(value="#{branch.id}") #{branch.branch_name}
             .form-group
               .row
-                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                .col-xs-6.col-md-6
                   label  اختر البلدية
                   select#edit_office_manucipality.form-control.selectpicker(name="ManucipalityId", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') اختر البلدية...
                     for manucipality in manucipalitys
                       option(value="#{manucipality.id}") #{manucipality.manucipality_name}
-            .form-group
-              .row
-                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                .col-xs-6.col-md-6
                   label اسم السجل المدني
                   input#edit_office_name.form-control(type="text", name="office_name", placeholder="اسم السجل المدني")
                   //- get hidden ID has name office_id_edit
                   input#office_id_edit.form-control(type="hidden", name="id")
             .form-group
               .row
-                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                .col-xs-6.col-md-6
                   label خط العرض
                   input#edit_latitude.form-control(type="text", name="latitude", placeholder="خط العرض")
-            .form-group
-              .row
-                .col-xs-8.col-xs-offset-2.col-md-8.col-md-offset-2
+                .col-xs-6.col-md-6
                   label خط الطول
                   input#edit_longitude.form-control(type="text", name="longitude", placeholder="خط الطول")
             .modal-footer

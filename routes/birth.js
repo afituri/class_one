@@ -22,12 +22,12 @@ module.exports = function (router) {
               var q=true;
             }
             res.render('birth', {
-            title : "افراد الاسرة" ,regions:result.rows,countrys:countrys,personals:fpersonals,q:q
+            title : "افراد الاسرة" ,regions:result.rows,countrys:countrys,personals:fpersonals,q:q,query:id
             });
           });
         }else{
           res.render('birth', {
-            title : "افراد الاسرة" ,regions:result.rows,countrys:countrys,q:false
+            title : "افراد الاسرة" ,regions:result.rows,countrys:countrys,q:false,query:""
           });
         }
       });
@@ -35,20 +35,39 @@ module.exports = function (router) {
   });
 
   router.post('/birth/new_birth',function (req, res) {
-    var personal_c={};
-    personal_c['Arabic_Firstname']=req.body.Arabic_Firstname;
-    personal_c['Gender']=req.body.Gender;
-    personal_c['Birth_Date']=req.body.Birth_Date;
-    personal_c['Birth_Place']=req.body.Birth_Place;
-    personal_c['city_Id']=req.body.city_Id;
-    personal_c['Fatherperson_Id']=req.body.Fatherperson_Id;
-    personal_c['Motherperson_Id']=req.body.Motherperson_Id;
-    personal_c['Enlistingdate']=req.body.Enlistingdate;
-    personal.add_personal(personal_c,function(result){
-      var members_c={};
-      members_c['KinshipId']=3;
-      members_c['PersonalId']=result.id;
-      members_c['FamilyId']=req.body.FamilyId;
+    var personal_c={
+      Arabic_Firstname:req.body.Arabic_Firstname,
+      Gender:req.body.Gender,
+      Birth_Date:req.body.Birth_Date,
+      Birth_Place:req.body.Birth_Place,
+      city_Id:req.body.city_Id,
+      Fatherperson_Id:req.body.Fatherperson_Id,
+      Motherperson_Id:req.body.Motherperson_Id,
+      Enlistingdate:req.body.Enlistingdate,
+      Arabic_Fathername:req.body.Arabic_Fathername,
+      Arabic_Grandfathername:req.body.Arabic_Grandfathername,
+      Arabic_Familyname:req.body.Arabic_Familyname,
+      Arabic_Motherfirstname:req.body.Arabic_Motherfirstname,
+      Arabic_Motherfathername:req.body.Arabic_Motherfathername,
+      Arabic_Mothergrandfathername:req.body.Arabic_Mothergrandfathername,
+      Arabic_Motherfamilyname:req.body.Arabic_Motherfamilyname,
+      Nationality_Id:req.body.Nationality_Id,
+      Religion_Id:req.body.Religion_Id,
+      Socialstatus_Id:req.body.Socialstatus_Id,
+      Regdoctype_Id:req.body.Regdoctype_Id,
+      Certification_Type_Id:req.body.Certification_Type_Id,
+      CertificationMber:req.body.CertificationMber,
+      Certification_File_Number:req.body.Certification_File_Number,
+      Certification_Issuance_Date:req.body.Certification_Issuance_Date,
+      Mothernationality_Id:req.body.Mothernationality_Id,
+      Fathernationality_Id:req.body.Nationality_Id
+   };
+    personal.add_personal_model(personal_c,function(result){
+      var members_c={
+        KinshipId:3,
+        PersonalId:result.id,
+        FamilyId:req.body.FamilyId
+      };
       member.add_members(members_c,function(result1){
         if(req.body.newborn_reporting==2){
           var id_office=req.body.OfficeIdw;
@@ -74,11 +93,39 @@ module.exports = function (router) {
           midwife_type: req.body.midwife_type,
           midwife_name: req.body.midwife_name,
           PersonalId:result.id,
-          OfficeId:id_office
+          OfficeId:id_office,
+          blood_type:req.body.blood_type
         }
         birth.add_birth(birth_c,function(result2){
+          res.redirect('/birth?q='+req.body.query);
         });
       });
     });  
+  });
+  router.post('/birth/delete_birth',function (req, res) {
+    birth.delete_birth(req.body,function(result){
+      res.redirect('/birth?q='+req.body.query);
+    });
+  });
+  router.post('/birth/edit_birth',function (req, res) {
+    
+    id = req.body.PersonalId
+    q=req.body.query;
+    delete req.body.OfficeId;
+    delete req.body.PersonalId;
+    delete req.body.query;
+    birth.edit_birth(req.body,id,function(result){
+      res.redirect('/birth?q='+q);
+    });
+  });
+  
+  router.get('/birth/get_birth/:id',function (req, res) {
+    birth.get_birth(req.params.id,function(result){
+      if(result){
+        res.send(result);
+      }else{
+        res.send(false);
+      }
+    });
   });
 }
