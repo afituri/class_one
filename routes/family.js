@@ -6,7 +6,9 @@ module.exports = function (router) {
   router.get('/family', function (req, res) {
     family.get_family(function (result) {
       res.render('family', { 
-        title: 'الأسر', 
+        title: 'الأسر',
+        collapse_two: 'in', 
+        active_two_one: 'active',
         familys: result.result.rows,
         offices: result.offices
       });

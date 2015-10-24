@@ -27,7 +27,13 @@ module.exports = function (router) {
           });
         }else{
           res.render('birth', {
-            title : "افراد الاسرة" ,regions:result.rows,countrys:countrys,q:false,query:""
+            title : "افراد الاسرة",
+            collapse_three: 'in', 
+            active_three_one: 'active',
+            regions:result.rows,
+            countrys:countrys,
+            q:false,
+            query:""
           });
         }
       });
