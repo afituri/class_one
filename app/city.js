@@ -7,5 +7,14 @@ exports.city_mgr = {
       cb(result);
     });
   },
-
+  get_city_all: function (cb) {
+    models.City.findAndCountAll({
+        where: {
+          status: 1
+        }
+      })
+      .then(function (result) {
+        cb(result);
+      });
+  },
 };

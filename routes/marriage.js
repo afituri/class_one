@@ -1,16 +1,21 @@
 var models = require("../models");
 var personal = require("../app/personal")
   .personal_mgr
+var marriage = require("../app/marriage")
+  .marriage_mgr
+var city = require("../app/city")
+  .city_mgr  
 module.exports = function (router) {
 
   router.get('/marriage', function(req, res) {
-    res.render('marriage', {
-      title : "افراد الاسرة" 
+    city.get_city_all(function(result){
+      res.render('marriage', {
+        title : "واقعة زواج",citys:result.rows
+      });
     });
   });
 
   router.post('/searchMarriage', function(req, res) {
-    console.log(req.body);
     if(req.body.searchVal){
       var value={val:req.body.searchVal,gender:1}
     }else{
@@ -18,10 +23,26 @@ module.exports = function (router) {
     }
     personal.get_personal_by_Registrynumber(value,function (personal){
       var rel = {result : personal[0] ,stat : true}; 
-      console.log(rel);
       res.send(rel);
     });
-    // res.send(constants.social_status);
+  });
+
+  router.post('/add_new_marriage', function(req, res) {
+    marriage.add_family(req.body, function (result) {
+      marriage.update_member(req.body,result, function (result) {
+        marriage.add_new_marriage(req.body, function (result) {
+          res.send(result);
+        });
+      });
+    });
+  }); 
+
+  router.get('/marriage/marriages', function(req, res) {
+    marriage.get_marriage(function (result) {
+      res.render('view_marriage', {
+        title : "عرض واقعات الزواج" ,marriages:result.rows
+      });
+    });
   });
 
 }
