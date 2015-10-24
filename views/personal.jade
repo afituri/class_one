@@ -3,11 +3,12 @@ block content
   .container-fulid
     .col-sm-10.col-md-10
       .form-group
-        input#type1.form-control(type="radio", name="family_type", checked="", data-inverse="true", data-label-text="اسر ليبية", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
+        lable.h4(style="padding-left:10px;") عرض نوع الاسر حسب النوع
+        input#type1.form-control(type="radio", name="family_type", checked="", data-inverse="true", data-label-text="ليبية", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
         span(style="margin-right:30px;")
-        input#type2.form-control(type="radio", name="family_type", data-inverse="true", data-label-text="اسر مؤقته", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
+        input#type2.form-control(type="radio", name="family_type", data-inverse="true", data-label-text="مؤقته", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
         span(style="margin-right:30px;")
-        input#type3.form-control(type="radio", name="family_type", data-inverse="true", data-label-text="اسر اجنبية", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
+        input#type3.form-control(type="radio", name="family_type", data-inverse="true", data-label-text="اجنبية", data-off-text="لا", data-on-text="نعم", data-off-color="danger")
       .panel.panel-default
         .panel-heading
           .row
@@ -414,14 +415,13 @@ block content
           button#no.btn.btn-default(type="button", data-dismiss="modal")
             span.glyphicon.glyphicon-remove
             |  لا
-
   script(src='/js/jquery-2.1.1.min.js')
   script(src='/js/bootstrap.min.js')
+  script(src='/js/bootstrap-switch.min.js')
   script(src='/js/moment-with-locales.min.js')
   script(src='/js/jquery.validate.min.js')
   script(src='/js/bootstrap-notify.min.js')
   script(src='/js/bootstrap-select.min.js')
-  script(src='/js/bootstrap-switch.min.js')
   script(src='/js/bootstrap-datetimepicker.min.js')
   script(src='/js/helpers.js')
   script(src='/js/personal.js')
