@@ -47,7 +47,7 @@ block content
                         |#{per.Personal.Nationality.nationality_female}
                     td.text-center
                       p(data-placement="top", data-toggle="tooltip", title="تعديل")
-                        button.btn.btn-primary.btn-xs.edit_btn(data-toggle="modal", data-target="#edit",value="#{per.Personal.id}")
+                        button#edit_btn.btn.btn-primary.btn-xs.edit_btn(data-toggle="modal", data-target="",value="#{per.Personal.id}")
                           span.glyphicon.glyphicon-edit
                     td.text-center
                       p(data-placement="top", data-toggle="tooltip", title="إلغاء")
@@ -304,17 +304,170 @@ block content
               span.glyphicon.glyphicon-plus
               |  إضافة
   #edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
-    .modal-dialog
+    .modal-dialog.modal-lg
       .modal-content
-        form.form#edit_family_form(action="/family/edit_family", method="post", accept-charset="utf-8", role="form")
+        form.form(action="/birth/edit_birth", method="post", accept-charset="utf-8", role="form")
           .modal-header
             button.close(type="button", data-dismiss="modal", aria-hidden="true")
               span.glyphicon.glyphicon-remove(aria-hidden="true")
-            h4.modal-title.custom_align تعديل بيانات الأسرة
+            h4.modal-title.custom_align#edit_name 
           .modal-body
-            .row
-          .modal-footer
-            button#edit_family_btn.btn.btn-info.btn-lg(type="submit", style="width: 100%;")
+            ul.nav.nav-tabs(role="tablist")
+              li.active(role="presentation")
+                a(href="#editOne", aria-controls="editOne", role="tab", data-toggle="tab") البيانات الشخصية
+              li
+                a(href="#editTow", aria-controls="editTow", role="tab", data-toggle="tab") بيانات الواقعة - 1
+            .tab-content
+              #editOne.tab-pane.active(role="tabpanel")
+                br
+                .row
+                  input#PersonalId_edit(type="hidden",name="PersonalId")
+                  input(type="hidden",name="query",value="#{query}") 
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label نوع الولادة 
+                      select#birth_type_edit.form-control.selectpicker(name="birth_type", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') نوع الولادة
+                        option(value="1") فردية
+                        option(value="2") توأم
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label عدد الاولاد
+                      select#children_no_edit.form-control.selectpicker(name="children_no", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') عدد الاولاد
+                        option(value="1") 1
+                        option(value="2") 2
+                        option(value="3") 3
+                        option(value="4") 4
+                        option(value="5") 5
+                        option(value="6") 6
+                        option(value="7") 7
+                        option(value="8") 8
+                        option(value="9") 9
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label نوع المبلغ
+                      select#informer_type_edit.form-control.selectpicker(name="informer_type", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') نوع المبلغ
+                        option(value="1") فرد 
+                        option(value="2") جهة
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label اسم المبلغ
+                      input#informer_name_edit.form-control(type="text", name="informer_name", placeholder="اسم المبلغ")
+                .row
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label عنوان المبلغ
+                      input#informer_address_edit.form-control(type="text", name="informer_address", placeholder="عنوان المبلغ")
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label رقم السجل
+                      input#record_no_edit.form-control(type="text", name="record_no", placeholder="رقم السجل")
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label رقم ورقة السجل
+                      input#record_paper_no_edit.form-control(type="text", name="record_paper_no", placeholder="رقم ورقة السجل")
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label مكان الواقعة
+                      select#place_of_birth_edit.form-control.selectpicker(name="place_of_birth", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') مكان الواقعة
+                        option(value="1") مستشفى
+                        option(value="2") منزل
+                        option(value="3") مكان آخر
+                .row
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label كيفية الولادة
+                      select#newborn_type_edit.form-control.selectpicker(name="newborn_type", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') كيفية الولادة
+                        option(value="1") طبيعية
+                        option(value="2") قيصرية
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label نوع التبليغ
+                      select#newborn_reporting_edit.form-control.selectpicker(name="newborn_reporting", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') نوع التبليغ
+                        option(value="1") تبليغ ولادة
+                        option(value="2") طبق الاصل
+                        option(value="3") لجنة اساقط القيد
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label حالة المولود
+                      select#newborn_state_edit.form-control.selectpicker(name="newborn_state", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') حالة المولود
+                        option(value="1") ولد حيا
+                        option(value="2") ولد ميتا
+                        option(value="3") مات اثناء الولادة
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label فيصيلة الدم
+                      select#blood_type_edit.form-control.selectpicker(name="blood_type", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') فيصيلة الدم
+                        option(value="1") O−
+                        option(value="2") O+
+                        option(value="3") A−
+                        option(value="4") A+
+                        option(value="5") B−
+                        option(value="6") B+
+                        option(value="7") AB−
+                        option(value="8") AB+
+              #editTow.tab-pane(role="tabpanel")
+                br
+                .row
+
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label حالة المولود الصحية
+                      select#newborn_health_edit.form-control.selectpicker(name="newborn_health", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') حالة المولود الصحية
+                        option(value="1") سليم
+                        option(value="2") معاق
+                        
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label مدة الحمل
+                      select#pregnancy_period_edit.form-control.selectpicker(name="pregnancy_period", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') مدة الحمل
+                        option(value="1") كامل النمو
+                        option(value="2") اقل من سبعة اشهر
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label وزن المولود (جرام.الكيلو)
+                      input#weight_edit.form-control(type="text", name="weight", placeholder="وزن المولود بالكيلو والجرام")
+                .row
+                  .col-xs-6.col-md-6
+                    .form-group
+                      label طبيب او قابلة
+                      select#midwife_type_edit.form-control.selectpicker(name="midwife_type", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') طبيب او قابلة
+                        option(value="1") دكتور
+                        option(value="2") قابلة
+                  .col-xs-6.col-md-6
+                    .form-group
+                      label اسم الطبيب او القرابة
+                      input#midwife_name_edit.form-control(type="text", name="midwife_name", placeholder="اسم الطبيب او القرابة")
+                .row#region_show_edit
+                  .col-xs-4.col-md-4
+                    .form-group
+                      label المنطقة
+                      select#region_edit.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='color:grey; display:none;') اختر المنطقة...
+                        for region in regions
+                          option(value="#{region.id}") #{region.region_name}
+                  .col-xs-4.col-md-4
+                    .form-group
+                      label مكتب الاصدار
+                      select#Branches_edit.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') مكتب الاصدار
+                  .col-xs-4.col-md-4
+                    .form-group
+                      label السجل المدني
+                      select#Offices_edit.form-control.selectpicker(name="OfficeId", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') السجل المدني
+  
+            button.btn.btn-info.btn-lg(type="submit", style="width: 100%;")
               span.glyphicon.glyphicon-ok-sign
               |  تعديل
   #delete.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")

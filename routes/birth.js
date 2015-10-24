@@ -103,24 +103,29 @@ module.exports = function (router) {
     });  
   });
   router.post('/birth/delete_birth',function (req, res) {
-    models.Birth.destroy({
-      where: {
-        PersonalId: req.body.idp
+    birth.delete_birth(req.body,function(result){
+      res.redirect('/birth?q='+req.body.query);
+    });
+  });
+  router.post('/birth/edit_birth',function (req, res) {
+    
+    id = req.body.PersonalId
+    q=req.body.query;
+    delete req.body.OfficeId;
+    delete req.body.PersonalId;
+    delete req.body.query;
+    birth.edit_birth(req.body,id,function(result){
+      res.redirect('/birth?q='+q);
+    });
+  });
+  
+  router.get('/birth/get_birth/:id',function (req, res) {
+    birth.get_birth(req.params.id,function(result){
+      if(result){
+        res.send(result);
+      }else{
+        res.send(false);
       }
-    }).then(function(result){
-      models.Member.destroy({
-        where: {
-          PersonalId: req.body.idp
-        }
-      }).then(function(result){
-        models.Personal.destroy({
-          where: {
-            id: req.body.idp
-          }
-        }).then(function(result){
-          res.redirect('/birth?q='+req.body.query);
-        });
-      });
     });
   });
 }
