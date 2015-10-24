@@ -71,12 +71,18 @@ $(document).ready(function(){
     });
 
  $('.add_marriage').on('click',function(){
-   if($("input[type='radio'].radioBtn").is(':checked')) {
+  if($("input[type='radio'].radioBtn").is(':checked')) {
     var card_type = $("input[type='radio'].radioBtn:checked").val();
-    }
-    if($("input[type='radio'].radioBtnClass").is(':checked')) {
+  }
+  if($("input[type='radio'].radioBtnClass").is(':checked')) {
     var card_typee = $("input[type='radio'].radioBtnClass:checked").val();
-    }
+  }
+  if (!card_type && !card_typee) {
+    custNotify("danger","خطأ","الرجاء اختيار اسرة المتزوج!","warning-sign","bounceIn","bounceOut");
+    $('.add_marriage').attr('href', '#');
+  } else {
+    $('.add_marriage').attr('href', '#add');
+  }
     $('#husband_personal_Id').val(card_type);
     $('#husband_family_Id').val($("#tbody #mariag"+card_type).val());
     $('#wife_personal_Id').val(card_typee);
