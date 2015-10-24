@@ -122,7 +122,13 @@ module.exports = function (router) {
   router.get('/birth/get_birth/:id',function (req, res) {
     birth.get_birth(req.params.id,function(result){
       if(result){
-        res.send(result);
+        birth.get_birth_office(result.OfficeId,function(offic){
+          obj={
+            result:result,
+            offic:offic
+          }
+          res.send(obj);
+        });
       }else{
         res.send(false);
       }

@@ -15,6 +15,13 @@ exports.birth_mgr = {
       cb(result);
     });
   },
+  get_birth_office : function(id,cb){
+    models.sequelize.query('SELECT `o`.`id` AS office ,`b`.`id` AS branche , `r`.`id` AS region FROM `Offices` o , `Branches` b , `Regions` r WHERE `o`.`id` = `b`.`id` AND `b`.`id` = `r`.`id` AND `o`.`id` =?', { 
+      replacements: [id]
+    }).then(function (result) {
+      cb(result[0]);
+    });
+  },
   add_birth : function(body,cb){
     models.Birth.create(body).then(function(result) {
       cb(result);
