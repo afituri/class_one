@@ -299,23 +299,7 @@ $(document).ready(function(){
     format: 'YYYY-MM-DD',
     locale: 'ar-sa'
   });
-
-  /*----------- Global custom valitation functions----------*/
-  jQuery.validator.addMethod("arabicLettersOnly", function(value, element) {
-  return this.optional(element) || /^[أ-ي,ﻻ,ء]+$/i.test(value);
-  }, "الرجاء ادخال حروف عربية فقط!");
-  jQuery.validator.addMethod("arabicLettersWithSpacesOnly", function(value, element) {
-    return this.optional(element) || /^[أ-ي,ﻻ,ء," "]+$/i.test(value);
-  }, "الرجاء ادخال حروف عربية فقط!"); 
-  jQuery.validator.addMethod("englishLettersWithSpacesOnly", function(value, element) {
-    return this.optional(element) || /^[a-z," "]+$/i.test(value);
-  }, "الرجاء ادخال حروف انجليزية فقط!");
-  jQuery.validator.addMethod("greaterThan",function(value, element, params) {
-    if (!/Invalid|NaN/.test(new Date(value))) {
-        return new Date(value) > new Date($(params).val());
-    }
-    return isNaN(value) && isNaN($(params).val()) || (Number(value) > Number($(params).val())); 
-  },'يجب ان يكون تاريخ الاكتتاب اكبر من الميلاد!');
+  
   /*----------- validate in add Family----------*/
   $("#add_personal_form").validate({
     ignore: ':not(select:hidden, input:visible, textarea:visible)',
@@ -560,9 +544,5 @@ $(document).ready(function(){
   $('#add').on('hidden.bs.modal', function(){
     $(this).removeData('bs.modal');
     $('#add_personal_form').validate().resetForm();
-  });
-
-  $('.selectpicker').selectpicker().change(function(){
-    $(this).valid()
   });
 });
