@@ -35,7 +35,14 @@ module.exports = function (router) {
         });
       });
     });
-  });
+  }); 
 
+  router.get('/marriage/marriages', function(req, res) {
+    marriage.get_marriage(function (result) {
+      res.render('view_marriage', {
+        title : "عرض واقعات الزواج" ,marriages:result.rows
+      });
+    });
+  });
 
 }
