@@ -13,6 +13,10 @@ $(document).ready(function(){
         if(data.stat !=true){
         } */
 
+  $('body').on('click', '#add_personal_btn', function (e) {
+    e.preventDefault();
+    $('#add_personal_form').submit();
+  });
   
   $('body').on('click', '#remove', function(e){
     $('#delete_it').val($(this).val());
@@ -463,25 +467,25 @@ $(document).ready(function(){
         $("#Certification_Type_Id").rules("add", {
           required: true,
           messages: {
-            required: "الرجاء اختيار نوع الجنسية!",
+            required: "<h6>الرجاء اختيار نوع الجنسية!</h6>",
           }
         });   
         $("#Certification_Issuance_Date").rules("add", {
           required: true,
           messages: {
-            required: "الرجاء ادخال تاريخ الجنسية!",
+            required: "<h6>الرجاء ادخال تاريخ الجنسية!</h6>",
           }
         });
         $("#Certification_File_Number").rules("add", {
           required: true,
           messages: {
-            required: "الرجاء ادخال رقم الملف!",
+            required: "<h6>الرجاء ادخال رقم الملف!</h6>",
           }
         });
         $("#CertificationMber").rules("add", {
           required: true,
           messages: {
-            required: "الرجاء ادخال رقم الشهادة!",
+            required: "<h6>الرجاء ادخال رقم الشهادة!</h6>",
           }
         });
       } else {
@@ -499,14 +503,44 @@ $(document).ready(function(){
       if($(this).attr("value")==2) {
         $("#insert_mother_name").removeClass("hide");
         $("#select_mother_name").addClass("hide");
+        $("#Arabic_Motherfirstname").rules("add", {
+          required: true,
+          messages: {
+            required: "<h6>الرجاء ادخال اسم اﻷم!</h6>",
+          }
+        });
+        $("#Arabic_Motherfathername").rules("add", {
+          required: true,
+          messages: {
+            required: "<h6>الرجاء ادخال والد اﻷم!</h6>",
+          }
+        });   
+        $("#Arabic_Mothergrandfathername").rules("add", {
+          required: true,
+          messages: {
+            required: "<h6>الرجاء ادخال جد اﻷم!</h6>",
+          }
+        });
+        $("#Arabic_Motherfamilyname").rules("add", {
+          required: true,
+          messages: {
+            required: "<h6>الرجاء ادخال لقب اﻷم!</h6>",
+          }
+        });
       } else if($(this).attr("value")==1) {
         $("#select_mother_name").removeClass("hide");
         $("#insert_mother_name").addClass("hide");
+        $("#Motherperson_Id").rules("add", {
+          required: true,
+          messages: {
+            required: "الرجاء اختيار اسم اﻷم!",
+          }
+        });
       }
     });
   }).change();
 
-  $("form").on('submit', function () {
+  $("#add_personal_form").on('submit', function () {
     var isValid = $(this).valid();
     if (this.hasChildNodes('.nav.nav-tabs')) {
       var validator = $(this).validate();
@@ -522,10 +556,12 @@ $(document).ready(function(){
       // do stuff
     }
   });
+
   $('#add').on('hidden.bs.modal', function(){
     $(this).removeData('bs.modal');
     $('#add_personal_form').validate().resetForm();
   });
+
   $('.selectpicker').selectpicker().change(function(){
     $(this).valid()
   });
