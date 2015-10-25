@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
   	Religion_Id: DataTypes.INTEGER (1) ,
   	Enlistingdate: DataTypes.DATEONLY(),
   	Socialstatus_Id: DataTypes.INTEGER (2) ,
-  	Is_Alive: {type:DataTypes.BOOLEAN(),defaultValue:1},
+  	Is_Alive: DataTypes.INTEGER (1) ,
   	Regdoctype_Id: DataTypes.INTEGER (2) ,
   	Certification_Type_Id: DataTypes.INTEGER (2) ,
   	CertificationMber: DataTypes.STRING (20) ,
