@@ -13,10 +13,10 @@ $(document).ready(function(){
     var path=document.URL;
     var familyid=path.split('/').pop();
     $.get('/delete_personal/'+$(this).val(),function(result){ 
-       if(result){
+       //if(result){
          window.location.href='/personal/'+familyid; 
          custNotify("success","نجاح","تم حذف السجل المدني بنجاح","ok-sign","bounceInDown","bounceOutUp");
-       }
+       //}
     });
   });
 
