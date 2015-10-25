@@ -330,6 +330,10 @@ $(document).ready(function(){
     $(this).removeData('bs.modal');
     $('#new_birth_form').validate().resetForm();
   });
+  
+  $('.selectpicker').selectpicker().change(function(){
+    $(this).valid()
+  });
   // Add New Born Validation End
 
 });

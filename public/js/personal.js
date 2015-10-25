@@ -484,7 +484,7 @@ $(document).ready(function(){
 
   $("#mother_status").change(function(){
     $(this).find("option:selected").each(function() {
-      if($(this).attr("value")==2) {
+      if($(this).attr("value")===2) {
         $("#insert_mother_name").removeClass("hide");
         $("#select_mother_name").addClass("hide");
         $("#Arabic_Motherfirstname").rules("add", {
@@ -511,7 +511,7 @@ $(document).ready(function(){
             required: "<h6>الرجاء ادخال لقب اﻷم!</h6>",
           }
         });
-      } else if($(this).attr("value")==1) {
+      } else if($(this).attr("value")===1) {
         $("#select_mother_name").removeClass("hide");
         $("#insert_mother_name").addClass("hide");
         $("#Motherperson_Id").rules("add", {
@@ -523,6 +523,15 @@ $(document).ready(function(){
       }
     });
   }).change();
+
+  $('#add').on('hidden.bs.modal', function(){
+    $(this).removeData('bs.modal');
+    $('#add_personal_form').validate().resetForm();
+  });
+
+  $('.selectpicker').selectpicker().change(function(){
+    $(this).valid()
+  });
 
   $("#add_personal_form").on('submit', function () {
     var isValid = $(this).valid();
@@ -541,8 +550,4 @@ $(document).ready(function(){
     }
   });
 
-  $('#add').on('hidden.bs.modal', function(){
-    $(this).removeData('bs.modal');
-    $('#add_personal_form').validate().resetForm();
-  });
 });
