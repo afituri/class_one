@@ -72,7 +72,8 @@ module.exports = function (router) {
       var members_c={
         KinshipId:3,
         PersonalId:result.id,
-        FamilyId:req.body.FamilyId
+        FamilyId:req.body.FamilyId,
+        from_familyId:req.body.FamilyId
       };
       member.add_members(members_c,function(result1){
         if(req.body.newborn_reporting==2){
@@ -114,7 +115,6 @@ module.exports = function (router) {
     });
   });
   router.post('/birth/edit_birth',function (req, res) {
-    
     id = req.body.PersonalId
     q=req.body.query;
     father_office=req.body.OfficeId;
