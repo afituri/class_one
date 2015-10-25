@@ -10,15 +10,6 @@ exports.personal_mgr = {
    });
   },
 
-  add_personal : function(body,cb){
-    models.sequelize.query('INSERT INTO `Personals` SET ?', {
-      replacements: [body]
-    })
-    .then(function (result) {
-      console.log(result);
-      cb(result);
-   });
-  },
   add_personal_model : function(body,cb){
     models.Personal.create(body).then(function(result) {
       cb(result);
@@ -34,13 +25,9 @@ exports.personal_mgr = {
   },
 
   insert_Members:function(body,cb){
-    models.sequelize.query('INSERT INTO `Members` SET ?', {
-      replacements: [body]
-    })
-    .then(function (result) {
-      console.log(result);
+    models.Member.create(body).then(function(result) {
       cb(result);
-   });
+    });
   },
 
   delete_personal: function (id, cb) {
@@ -69,10 +56,5 @@ exports.personal_mgr = {
       cb(false);
     });
   }
-
-
-
-
-
 
 };

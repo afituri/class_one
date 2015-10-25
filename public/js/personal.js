@@ -1,5 +1,19 @@
 $(document).ready(function(){
 
+  // insert data 
+ /* $('body').on('click', '#save', function (e) {
+    e.preventDefault();
+    $('#formDepartment').submit();
+  });
+
+  $("#formDepartment").submit(function(e) {
+    var isvalidate=$("#formDepartment").valid();
+    if(isvalidate){
+      $.post("/department/updateDepartment", $("form").serializeObject(), function(data, error){
+        if(data.stat !=true){
+        } */
+
+
   $('body').on('click', '#add_personal_btn', function (e) {
     e.preventDefault();
     $('#add_personal_form').submit();
@@ -62,11 +76,11 @@ $(document).ready(function(){
   $('#add_personal_form').submit(function(e) {
     e.preventDefault();
     var isvalidate=$("#add_personal_form").valid();
+    alert(isvalidate);
     if(isvalidate){ 
       if($("input[type='radio'].radioBtnClass").is(':checked')) {
         get_famly_fromId= $("input[type='radio'].radioBtnClass:checked").val();
       }
-      alert(get_famly_fromId);
       var path=document.URL;
       var familyid=path.split('/').pop();
       var Is_Alive;
