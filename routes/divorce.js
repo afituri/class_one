@@ -17,7 +17,10 @@ module.exports = function (router) {
       region.get_regions(function(result1) {
         country.get_country(function(countrys){
           res.render('divorce', {
-            title : "واقعة الطﻻق",familys: result.result.rows,
+            title : "واقعة الطﻻق",
+            collapse_three: 'in', 
+            active_three_three: 'active',
+            familys: result.result.rows,
             regions:result1.rows,
             countrys:countrys
           });

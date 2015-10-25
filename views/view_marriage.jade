@@ -2,85 +2,57 @@ extends layout
 block content
   .container-fulid
     .col-sm-10.col-md-10
-      .pull-right(style="margin-left: 10px;")
-        a.btn.btn-success.add_marriage(role='button',data-toggle='modal')
-          span.glyphicon.glyphicon-plus
-          span.text-none  تسجيل واقعة
-      .pull-right(style="margin-left: 10px;")
-        a.btn.btn-primary(href='/marriage/marriages', role='button')
-          span.glyphicon.glyphicon-tasks  
-          span.text-none  عرض واقعات الزواج     
-  br
-  br        
-  .container-fulid      
-    .col-sm-5.col-md-5
       .panel.panel-default
         .panel-heading
           .row
             .pull-right(style="margin-right: 10px;")
-              h3#h3.panel-title اسرة الزوج
-            .col-xs-9.col-md-9
-              form#search_marriage.form(role="form",name='search_marriage')
+              h3#h3.panel-title عرض
+            .col-xs-6.col-md-6
+              form.form(action="")
                 .input-group
-                  input#searchVal.form-control(type='text',name="searchVal" placeholder='بحث...برقم القيد فقط')
+                  input.form-control(type='text',name="search_name" placeholder='بحث...')
                   .input-group-btn
-                    button#search.btn.btn-default
+                    button.btn.btn-default(type="submit")
                       i.glyphicon.glyphicon-search
-            //- .pull-left(style="margin-left: 10px;")
-            //-   a.btn.btn-success(href='#add', role='button',data-toggle='modal')
-            //-     span.glyphicon.glyphicon-plus
-            //-     span.text-none  إضافة مولود جديد
+            .pull-left(style="margin-left: 10px;")
+              a.btn.btn-success(href='/marriage', role='button',data-toggle='modal')
+                span.glyphicon.glyphicon-plus
+                span.text-none  إضافة واقعة زواج
         .table-responsive
           table.table.table-bordred.table-striped.table-condensed
             thead
               tr.info
-                th.text-center الاسم رباعي
-                th.text-center تاريخ الميلاد
-                th.text-center صلة القرابة
-                th.text-center اختيار
-            tbody#tbody
+                th.text-center الزوج
+                th.text-center الزوجة
+                th.text-center تاريخ الزواج
+                th.text-center مكان الزواج
+                th.text-center رقم عقد الزواج
+                th.text-center رقم ورقة العائلة
+                th.text-center رقم القيد
+                th.text-center تعديل
+                th.text-center إلغاء
+            tbody
+            for marriage in marriages
               tr
-                td.text-center 
-                td.text-center 
-                td.text-center 
+                td.text-center A
+                td.text-center B
+                td.text-center #{marriage.marriage_date}
+                td.text-center #{marriage.marriage_place}
+                td.text-center #{marriage.contract_number}
+                td.text-center 111
+                td.text-center 222
                 td.text-center
-  
-    .col-sm-5.col-md-5
-      .panel.panel-default
-        .panel-heading
-          .row
-            .pull-right(style="margin-right: 10px;")
-              h3#h3.panel-title اسرة الزوجة
-            .col-xs-9.col-md-9
-              form#search_marriage_F.form(role="form",name='search_marriage_F')
-                .input-group
-                  input#searchVal_F.form-control(type='text',name="searchVal_F" placeholder='بحث...برقم القيد فقط')
-                  .input-group-btn
-                    button#search_F.btn.btn-default
-                      i.glyphicon.glyphicon-search
-            //- .pull-left(style="margin-left: 10px;")
-            //-   a.btn.btn-success(href='#add', role='button',data-toggle='modal')
-            //-     span.glyphicon.glyphicon-plus
-            //-     span.text-none  إضافة مولود جديد
-        .table-responsive
-          table.table.table-bordred.table-striped.table-condensed
-            thead
-              tr.info
-                th.text-center الاسم رباعي
-                th.text-center تاريخ الميلاد
-                th.text-center صلة القرابة
-                th.text-center اختيار
-            tbody#tbody_F
-              tr
+                  p(data-placement="top", data-toggle="tooltip", title="تعديل")
+                    button.btn.btn-primary.btn-xs.edit_btn(data-title="Edit", data-toggle="modal", data-target="#edit", value="")
+                      span.glyphicon.glyphicon-pencil
                 td.text-center
-                td.text-center
-                td.text-center
-                td.text-center
-                                    
-  #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+                  p(data-placement="top", data-toggle="tooltip", title="إلغاء")
+                    button.btn.btn-danger.btn-xs.delete_btn(data-title="Delete", data-toggle="modal", data-target="#delete", value="")
+                      span.glyphicon.glyphicon-trash
+  #edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
     .modal-dialog.modal-lg
       .modal-content
-        form#new_marriage.form(method="post", accept-charset="utf-8", role="form")
+        form#edit_marriage.form(method="post", accept-charset="utf-8", role="form")
           .modal-header
             button.close(type="button", data-dismiss="modal", aria-hidden="true")
               span.glyphicon.glyphicon-remove(aria-hidden="true")
@@ -91,9 +63,9 @@ block content
                 .form-group
                   label نوع الزواج
                   select#marriage_type.form-control.selectpicker(name="marriage_type", data-live-search="true", data-size=5)
-                    option(value="", style='color:grey; display:none;') نوع الزواج
-                    option(value="1") زواج عن طريق المأذون  
-                    option(value="2") زواج عن طريق المحكمة
+                            option(value="", style='color:grey; display:none;') نوع الزواج
+                            option(value="1") زواج عن طريق المأذون  
+                            option(value="2") زواج عن طريق المحكمة
               .col-xs-3.col-md-3
                 .form-group
                   label تاريخ الزواج
@@ -124,7 +96,7 @@ block content
                   label تاريخ فتح ورقة العائلة
                   input#FamilyRecordDate.form-control(type="text", name="FamilyRecordDate", placeholder="تاريخ فتح ورقة العائلة")
             .row  
-              .col-xs-3.col-xs-offset-3.col-md-3.col-md-offset-3
+              .col-xs-3.col-md-3
                 .form-group
                   label رقم القيد الجديد
                   input#Registrynumber.form-control(type="text", name="Registrynumber", placeholder="رقم القيد الجديد")
@@ -133,8 +105,8 @@ block content
                   label مدينة الزواج    
                   select#CityId.form-control.selectpicker(name="CityId", data-live-search="true", data-size=5)
                     option(value="", style='color:grey; display:none;') المدينة...
-                    for city in citys
-                      option(value="#{city.id}") #{city.city_name}
+                    //- for city in citys
+                    //-   option(value="#{city.id}") #{city.city_name}
                   input#husband_personal_Id(name="husband_personal_Id",type="hidden")
                   input#husband_family_Id(name="husband_family_Id",type="hidden")
                   input#wife_personal_Id(name="wife_personal_Id",type="hidden")
@@ -142,25 +114,38 @@ block content
                   input#OfficeId(name="OfficeId",type="hidden") 
           .modal-footer
             button#save_Marriage.btn.btn-success.btn-lg(style="width: 100%;", data-dismiss="modal", aria-hidden="true")
-              span.glyphicon.glyphicon-plus
-              |  إضافة
+              span.glyphicon.glyphicon-edit
+              |  تعديل
+  #delete.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        form.form#delete(action="#", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align إلغاء واقعة زواج
+          .modal-body
+            .alert.alert-danger.h5
+              //- get hidden ID has family_id_delete
+              input.form-control(type="hidden", name="id")               
+              span.glyphicon.glyphicon-warning-sign
+              |  هل تريد فعلا الغاء هذه الواقعة ؟
+          .modal-footer
+            button.btn.btn-danger(type="submit")
+              span.glyphicon.glyphicon-ok-sign
+              |  نعم
+            button.btn.btn-default(type="button", data-dismiss="modal")
+              span.glyphicon.glyphicon-remove
+              |  لا
   script(src='/js/jquery-2.1.1.min.js')
   script(src='/js/bootstrap.min.js')
   script(src='/js/bootstrap-select.min.js')
   script(src='/js/jquery.validate.min.js')
   script(src='/js/bootstrap-notify.min.js')
   script(src='/js/moment-with-locales.min.js')
-  script(src='/js/bootstrap-datetimepicker.min.js')
   script(src='/js/bootstrap-switch.min.js')
-  script(src='/js/jquery.mask.min.js')
+  script(src='/js/bootstrap-datetimepicker.min.js')
   script(src='/js/helpers.js')
-  script(src='/js/marriage.js')
-  script.
-    $('#marriage_date, #inform_date, #FamilyRecordDate').datetimepicker({
-      useCurrent: false,
-      viewMode: 'years',
-      format: 'YYYY-MM-DD',
-      locale: 'ar-sa'
-    });
-    $("[data-toggle=tooltip]").tooltip();
-    $('#weight').mask('0.000');
+  //- script(src='/js/family.js')
+  
+   

@@ -27,7 +27,13 @@ module.exports = function (router) {
           });
         }else{
           res.render('birth', {
-            title : "افراد الاسرة" ,regions:result.rows,countrys:countrys,q:false,query:""
+            title : "افراد الاسرة",
+            collapse_three: 'in', 
+            active_three_one: 'active',
+            regions:result.rows,
+            countrys:countrys,
+            q:false,
+            query:""
           });
         }
       });
@@ -103,24 +109,35 @@ module.exports = function (router) {
     });  
   });
   router.post('/birth/delete_birth',function (req, res) {
-    models.Birth.destroy({
-      where: {
-        PersonalId: req.body.idp
-      }
-    }).then(function(result){
-      models.Member.destroy({
-        where: {
-          PersonalId: req.body.idp
-        }
-      }).then(function(result){
-        models.Personal.destroy({
-          where: {
-            id: req.body.idp
+    birth.delete_birth(req.body,function(result){
+      res.redirect('/birth?q='+req.body.query);
+    });
+  });
+  router.post('/birth/edit_birth',function (req, res) {
+    
+    id = req.body.PersonalId
+    q=req.body.query;
+    delete req.body.OfficeId;
+    delete req.body.PersonalId;
+    delete req.body.query;
+    birth.edit_birth(req.body,id,function(result){
+      res.redirect('/birth?q='+q);
+    });
+  });
+  
+  router.get('/birth/get_birth/:id',function (req, res) {
+    birth.get_birth(req.params.id,function(result){
+      if(result){
+        birth.get_birth_office(result.OfficeId,function(offic){
+          obj={
+            result:result,
+            offic:offic
           }
-        }).then(function(result){
-          res.redirect('/birth?q='+req.body.query);
+          res.send(obj);
         });
-      });
+      }else{
+        res.send(false);
+      }
     });
   });
 }

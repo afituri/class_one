@@ -44,11 +44,13 @@ module.exports = function (router) {
    router.post('/insert_personal', function (req, res) {
     console.log(req.body);
     var kinshipId = req.body.KinshipId;
+    from_familyId=req.body.from_familyId;
     delete req.body.KinshipId;
     delete req.body.Motherperson_Id;
+    delete req.body.from_familyId;
     //delete req.body.mother_status;
     personal.add_personal(req.body,function(result){
-      member={KinshipId:kinshipId,PersonalId:result[0].insertId,FamilyId:familyId};
+      member={from_familyId:from_familyId,KinshipId:kinshipId,PersonalId:result[0].insertId,FamilyId:familyId};
       personal.insert_Members(member,function(resultt){
         res.send(true);
       });
