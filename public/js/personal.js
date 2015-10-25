@@ -299,23 +299,7 @@ $(document).ready(function(){
     format: 'YYYY-MM-DD',
     locale: 'ar-sa'
   });
-
-  /*----------- Global custom valitation functions----------*/
-  jQuery.validator.addMethod("arabicLettersOnly", function(value, element) {
-  return this.optional(element) || /^[أ-ي,ﻻ,ء]+$/i.test(value);
-  }, "الرجاء ادخال حروف عربية فقط!");
-  jQuery.validator.addMethod("arabicLettersWithSpacesOnly", function(value, element) {
-    return this.optional(element) || /^[أ-ي,ﻻ,ء," "]+$/i.test(value);
-  }, "الرجاء ادخال حروف عربية فقط!"); 
-  jQuery.validator.addMethod("englishLettersWithSpacesOnly", function(value, element) {
-    return this.optional(element) || /^[a-z," "]+$/i.test(value);
-  }, "الرجاء ادخال حروف انجليزية فقط!");
-  jQuery.validator.addMethod("greaterThan",function(value, element, params) {
-    if (!/Invalid|NaN/.test(new Date(value))) {
-        return new Date(value) > new Date($(params).val());
-    }
-    return isNaN(value) && isNaN($(params).val()) || (Number(value) > Number($(params).val())); 
-  },'يجب ان يكون تاريخ الاكتتاب اكبر من الميلاد!');
+  
   /*----------- validate in add Family----------*/
   $("#add_personal_form").validate({
     ignore: ':not(select:hidden, input:visible, textarea:visible)',
@@ -500,7 +484,7 @@ $(document).ready(function(){
 
   $("#mother_status").change(function(){
     $(this).find("option:selected").each(function() {
-      if($(this).attr("value")==2) {
+      if($(this).attr("value")===2) {
         $("#insert_mother_name").removeClass("hide");
         $("#select_mother_name").addClass("hide");
         $("#Arabic_Motherfirstname").rules("add", {
@@ -527,7 +511,7 @@ $(document).ready(function(){
             required: "<h6>الرجاء ادخال لقب اﻷم!</h6>",
           }
         });
-      } else if($(this).attr("value")==1) {
+      } else if($(this).attr("value")===1) {
         $("#select_mother_name").removeClass("hide");
         $("#insert_mother_name").addClass("hide");
         $("#Motherperson_Id").rules("add", {
@@ -539,6 +523,15 @@ $(document).ready(function(){
       }
     });
   }).change();
+
+  $('#add').on('hidden.bs.modal', function(){
+    $(this).removeData('bs.modal');
+    $('#add_personal_form').validate().resetForm();
+  });
+
+  $('.selectpicker').selectpicker().change(function(){
+    $(this).valid()
+  });
 
   $("#add_personal_form").on('submit', function () {
     var isValid = $(this).valid();
@@ -557,12 +550,4 @@ $(document).ready(function(){
     }
   });
 
-  $('#add').on('hidden.bs.modal', function(){
-    $(this).removeData('bs.modal');
-    $('#add_personal_form').validate().resetForm();
-  });
-
-  $('.selectpicker').selectpicker().change(function(){
-    $(this).valid()
-  });
 });

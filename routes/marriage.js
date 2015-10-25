@@ -10,7 +10,10 @@ module.exports = function (router) {
   router.get('/marriage', function(req, res) {
     city.get_city_all(function(result){
       res.render('marriage', {
-        title : "واقعة زواج",citys:result.rows
+        title : "واقعة زواج",
+        collapse_three: 'in', 
+        active_three_four: 'active',
+        citys:result.rows
       });
     });
   });
