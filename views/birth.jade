@@ -387,6 +387,7 @@ block content
                   .col-xs-3.col-md-3
                     .form-group
                       label نوع التبليغ
+                      input#Office_edit(type="hidden",name="OfficeId",value="")
                       select#newborn_reporting_edit.form-control.selectpicker(name="newborn_reporting", data-live-search="true", data-size=5)
                         option(value="", style='colr:grey; display:none;') نوع التبليغ
                         option(value="1") تبليغ ولادة
@@ -464,7 +465,7 @@ block content
                   .col-xs-4.col-md-4
                     .form-group
                       label السجل المدني
-                      select#Offices_edit.form-control.selectpicker(name="OfficeId", data-live-search="true", data-size=5)
+                      select#Offices_edit.form-control.selectpicker(name="OfficeIdw", data-live-search="true", data-size=5)
                         option(value="", style='colr:grey; display:none;') السجل المدني
   
             button.btn.btn-info.btn-lg(type="submit", style="width: 100%;")

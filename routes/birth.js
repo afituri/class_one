@@ -111,7 +111,12 @@ module.exports = function (router) {
     
     id = req.body.PersonalId
     q=req.body.query;
-    delete req.body.OfficeId;
+    father_office=req.body.OfficeId;
+    offic_id=req.body.OfficeIdw;
+    if(req.body.newborn_reporting==2){
+      req.body.OfficeId=offic_id;
+    }
+    delete req.body.OfficeIdw;
     delete req.body.PersonalId;
     delete req.body.query;
     birth.edit_birth(req.body,id,function(result){
@@ -123,11 +128,14 @@ module.exports = function (router) {
     birth.get_birth(req.params.id,function(result){
       if(result){
         birth.get_birth_office(result.OfficeId,function(offic){
-          obj={
-            result:result,
-            offic:offic
-          }
-          res.send(obj);
+          birth.get_father_offece(req.params.id,function(foffice){
+            obj={
+              result:result,
+              offic:offic,
+              foffice:foffice.Family.OfficeId
+            }
+            res.send(obj);
+          });
         });
       }else{
         res.send(false);
