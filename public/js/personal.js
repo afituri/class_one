@@ -13,11 +13,11 @@ $(document).ready(function(){
         if(data.stat !=true){
         } */
 
-  $('body').on('click', '#add_personal_btn', function (e) {
+ /* $('body').on('click', '#add_personal_btn', function (e) {
     e.preventDefault();
     $('#add_personal_form').submit();
   });
-  
+  */
   $('body').on('click', '#remove', function(e){
     $('#delete_it').val($(this).val());
   });
@@ -108,14 +108,14 @@ $(document).ready(function(){
     $('#add_personal_form').submit();
   });*/
 
-  $('body').on('click', '#add_personal_btn', function(e){
+  $('body').on('click','#add_personal_btn', function(e){
     e.preventDefault();
     var isvalidate=$("#add_personal_form").valid();
+    alert(isvalidate);
     if(isvalidate){ 
       if($("input[type='radio'].radioBtnClass").is(':checked')) {
         get_famly_fromId= $("input[type='radio'].radioBtnClass:checked").val();
       }
-      alert(get_famly_fromId);
       var path=document.URL;
       var familyid=path.split('/').pop();
       var Is_Alive;
