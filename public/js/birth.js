@@ -81,10 +81,11 @@ $(document).ready(function(){
         $('#weight_edit').val(data.result.weight);
         $('#midwife_type_edit').selectpicker('val',data.result.midwife_type);        
         $('#midwife_name_edit').val(data.result.midwife_name);
+        $('#Office_edit').val(data.foffice);
         if(data.result.newborn_reporting==2){
           $('#region_show_edit').show();
           region(data.offic[0].region,data.offic[0].branche);
-          Branches(data.offic[0].branche,data.offic[0].offic);
+          Branches(data.offic[0].branche,data.offic[0].office);
           $('#region_edit').selectpicker('val',data.offic[0].region);
         }else{
           $('#region_show_edit').hide();
@@ -109,7 +110,12 @@ $(document).ready(function(){
     $('#Offices_edit').append("<option value = '' style='colr:grey; display:none;'> السجل المدني</option>").selectpicker('refresh');
     $.get('/branch/get_branch/'+id,function(data){
       for(key in data){
-        $('#Branches_edit').append("<option value = '"+data[key].id+"'>"+data[key].branch_name+"</option>").selectpicker('refresh');
+        if(data[key].id==ids){
+          var select = 'selected';
+        }else{
+          var select = ''
+        }
+        $('#Branches_edit').append("<option value = '"+data[key].id+"' "+select+">"+data[key].branch_name+"</option>").selectpicker('refresh');
       }
     });  
   };
@@ -119,7 +125,12 @@ $(document).ready(function(){
     $.get('/Office/get_Office/'+id,function(data){
       $('#Offices_edit').append("<option value = '' style='colr:grey; display:none;'> السجل المدني</option>").selectpicker('refresh');
       for(key in data){
-        $('#Offices_edit').append("<option value = '"+data[key].id+"'>"+data[key].office_name+"</option>").selectpicker('refresh');
+        if(data[key].id==ids){
+          var select = 'selected';
+        }else{
+          var select = ''
+        }
+        $('#Offices_edit').append("<option value = '"+data[key].id+"' "+select+">"+data[key].office_name+"</option>").selectpicker('refresh');
       }
     });
   };
