@@ -22,13 +22,13 @@ module.exports = function(sequelize, DataTypes) {
           },
           onDelete: "restrict",
         });
-        Divorce.belongsTo(models.Family, {
-          foreignKey : {
-            name : 'husband_family_Id',
-            allowNull : true
-          },
-          onDelete: "restrict",
-        });
+        // Divorce.belongsTo(models.Family, {
+        //   foreignKey : {
+        //     name : 'husband_family_Id',
+        //     allowNull : true
+        //   },
+        //   onDelete: "restrict",
+        // });
         Divorce.belongsTo(models.Personal, {
           as: 'Wife', 
           foreignKey : {
@@ -37,13 +37,13 @@ module.exports = function(sequelize, DataTypes) {
           },
           onDelete: "restrict",
         });
-        Divorce.belongsTo(models.Family, {
-          foreignKey : {
-            name : 'wife_family_Id',
-            allowNull : true
-          },
-          onDelete: "restrict",
-        });
+        // Divorce.belongsTo(models.Family, {
+        //   foreignKey : {
+        //     name : 'wife_family_Id',
+        //     allowNull : true
+        //   },
+        //   onDelete: "restrict",
+        // });
         Divorce.belongsTo(models.Office, {
           onDelete: "restrict",
           foreignKey: {
