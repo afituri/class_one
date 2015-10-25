@@ -36,8 +36,23 @@ exports.personal_mgr = {
         id: id
       }
     }).then(function (result) {
+      console.log(result);
       cb(true);
     }).catch(function (err) {
+      console.log(err);
+      cb(false);
+    });
+  },
+   delete_Members: function (id, cb) {
+    models.Member.destroy({
+      where: {
+        PersonalId: id
+      }
+    }).then(function (result) {
+      console.log(result);
+      cb(true);
+    }).catch(function (err) {
+      console.log(err);
       cb(false);
     });
   }

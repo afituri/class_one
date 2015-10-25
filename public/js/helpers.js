@@ -70,8 +70,4 @@ $(document).ready(function(){
     }
     return isNaN(value) && isNaN($(params).val()) || (Number(value) > Number($(params).val())); 
   },'يجب ان يكون تاريخ الاكتتاب اكبر من الميلاد!');
-
-  $('.selectpicker').selectpicker().change(function(){
-    $(this).valid()
-  });
 });
