@@ -57,19 +57,13 @@ module.exports = function (router) {
     }); 
   });
 
-
-
   //delete_personal
-  
-
   router.get('/delete_personal/:id', function (req, res) {
     personal.delete_Members(req.params.id,function  (result){
-
-    personal.delete_personal(req.params.id,function  (result){
-
-      res.send(result);
-    }); 
-  });
+      personal.delete_personal(req.params.id,function  (result){
+        res.send(result);
+      }); 
+    });
   });
  
   router.get('/personal/get_city/:id', function (req, res) {
