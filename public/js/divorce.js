@@ -29,8 +29,7 @@ $(document).ready(function(){
       $("#tabtow").hide(0);
     }
   });
-  /*........Branches........*/
-  /*........................*/
+
   $('body').on('change', '#region', function(){
     var id = $(this).val();
     $('#Branches').empty();
@@ -66,15 +65,15 @@ $(document).ready(function(){
     });
   });
   /*---------------*/
-  $('body').on('change', '#country', function(){
-    var id = $(this).val();
-    $('#Cities').empty();
-    $.get('/city/get_city/'+id,function(data){
-      for(key in data){
-          $('#Cities').append("<option value = '"+data[key].id+"'>"+data[key].city_name+"</option>").selectpicker('refresh');
-        }
-    });
-  });
+  // $('body').on('change', '#country', function(){
+  //   var id = $(this).val();
+  //   $('#Cities').empty();
+  //   $.get('/city/get_city/'+id,function(data){
+  //     for(key in data){
+  //         $('#Cities').append("<option value = '"+data[key].id+"'>"+data[key].city_name+"</option>").selectpicker('refresh');
+  //       }
+  //   });
+  // });
 /*---------------------*/
 /*........waif......*/
   $.fn.open_family = function(){
@@ -151,6 +150,19 @@ $(document).ready(function(){
     });
   });
   /*_________________________*/
+  /*----------*/
+  $("#FamilyType").hide(0);
+  $('body').on('change', '#wife_bt_family', function(){
+    var id = $(this).val();
+    if(id == 1)
+    {
+     $("#FamilyType").show(100);
+    }
+    else {
+      $("#FamilyType").hide(100);
+    }
+  });
+  /*////////////////////*/
 
 
 });    

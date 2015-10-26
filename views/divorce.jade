@@ -108,6 +108,13 @@ block content
                         option(value="", style='color:grey; display:none;') اختر نوع الاسرة...
                         option(value="1") نشطة 
                         option(value="2") غير نشطة
+                  .col-xs-4.col-md-4
+                    label نوع الاسرة
+                    select.form-control.selectpicker(name="FamilyType", data-live-search="true", data-size=5)
+                      option(value="", style='color:grey; display:none;') نوع الاسرة
+                      option(value="1") ليبية
+                      option(value="2") مؤقتة 
+                      option(value="3") أجنبية       
                                    
                         
               #tabThree.tab-pane(role="tabpanel") 
@@ -156,19 +163,19 @@ block content
                     .form-group
                       label بلد الطﻻق
                       select#country.form-control.selectpicker(name="", data-live-search="true", data-size=5)
-                        option(value="", style='colr:grey; display:none;') بلد الميلاد
+                        option(value="", style='colr:grey; display:none;') بلد الطﻻق
                         for country in countrys
                           option(value="#{country.id}") #{country.country_name}
                   .col-xs-3.col-md-3
                     .form-group
                       label مدينة الطﻻق
                       select#Cities.form-control.selectpicker(name="city_Id", data-live-search="true", data-size=5)
-                        option(value="", style='colr:grey; display:none;') مدينة الميلاد   
+                        option(value="", style='colr:grey; display:none;') مدينة الطﻻق   
                   .col-xs-3.col-md-3
                     .form-group
                       label حالة الطﻻق 
                       select#divorce_type.form-control.selectpicker(name="divorce_type", data-live-search="true", data-size=5)
-                        option(value="", style='colr:grey; display:none;') حلبة الطﻻق    
+                        option(value="", style='colr:grey; display:none;') حالة الطﻻق    
                         option(value="1") طﻻق محكمة
                         option(value="2") طﻻق مؤذون                   
           .modal-footer
