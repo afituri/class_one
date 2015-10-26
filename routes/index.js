@@ -13,6 +13,7 @@ var city = require('./city')(router);
 var reports = require('./reports')(router);
 var deathreason = require('./deathreason')(router);
 var birth = require('./birth')(router);
+var death = require('./death')(router);
 var marriage = require('./marriage')(router);
 var divorce = require('./divorce')(router);
 
