@@ -22,27 +22,44 @@ module.exports = function (router) {
       var value={val:req.body.searchVal_F,gender:2}
     }
     personal.get_personal_by_Registrynumber(value,function (personal){
-      var rel = {result : personal[0] ,stat : true}; 
+      var rel = {result : personal ,stat : true}; 
       res.send(rel);
     });
   });
 
   router.post('/add_new_marriage', function(req, res) {
-    marriage.add_family(req.body, function (result) {
-      marriage.update_member(req.body,result, function (result) {
-        marriage.add_new_marriage(req.body, function (result) {
-          res.send(result);
+    if(req.body.Socialstatus_Id == 2)
+    {
+      marriage.update_member_wife(req.body, function (result) {
+          marriage.add_new_marriage(req.body, function (result) {
+            res.send(result);
+          });
+        });
+
+    }else{
+      marriage.add_family(req.body, function (result) {
+        marriage.update_member(req.body,result, function (result) {
+          marriage.add_new_marriage(req.body, function (result) {
+            res.send(result);
+          });
         });
       });
-    });
+    }
   }); 
 
   router.get('/marriage/marriages', function(req, res) {
     marriage.get_marriage(function (result) {
-      res.render('view_marriage', {
-        title : "عرض واقعات الزواج" ,marriages:result.rows
+      city.get_city_all(function(city){
+        res.render('view_marriage', {
+          title : "عرض واقعات الزواج" ,marriages:result,citys:city.rows
+        });
       });
-    });
+    });  
   });
 
+  router.post('/update_marriage', function(req, res) {
+    marriage.edit_marriage(req.body, function (result) {
+      res.send(result);
+    });
+  });
 }

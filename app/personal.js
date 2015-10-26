@@ -25,11 +25,27 @@ exports.personal_mgr = {
     });
   },
   get_personal_by_Registrynumber : function(id,cb){
-    models.sequelize.query('select * from Personals as p,Families as f,Members as m,Kinships as k where m.PersonalId=p.id and m.FamilyId=f.id and m.KinshipId=k.id and f.Registrynumber=? and p.Gender=?', {
-    replacements: [id.val, id.gender]
-    })
-    .then(function (result) {
-    cb(result);
+    models.Member.findAll({
+      include: [{
+        model: models.Family,
+        where: {
+          status: 1,
+          Registrynumber:id.val
+        }
+      },{
+        model: models.Personal,
+        where: {
+          status: 1,
+          Gender:id.gender
+        }
+      },{
+        model: models.Kinship,
+        where: {
+          status: 1
+        }
+      }]
+    }).then(function(result) {
+      cb(result);
     });
   },
 
