@@ -20,6 +20,16 @@ $(document).ready(function(){
         else {
          $("#tbody_F").empty();
          for (var i = 0; i < data.result.length; i++) {
+           if(data.result[i].Family.FamilyType == 1)
+          {
+            var Family_Type = "ليبية";
+          } else if(data.result[i].Family.FamilyType == 2)
+          {
+            var Family_Type = "مؤقته";
+          } else if(data.result[i].Family.FamilyType == 3)
+          {
+            var Family_Type = "اجانب";
+          }
           date = new Date(data.result[i].Personal.Birth_Date);
           var day = date.getDate();
           var monthIndex = date.getMonth();
@@ -28,6 +38,7 @@ $(document).ready(function(){
             '<td class="text-center">'+data.result[i].Personal.Arabic_Familyname+' '+data.result[i].Personal.Arabic_Grandfathername+' '+data.result[i].Personal.Arabic_Fathername+' '+data.result[i].Personal.Arabic_Firstname+'</td>'+
             '<td class="text-center">'+year+"-"+monthIndex+"-"+day+'</td>'+
             '<td class="text-center">'+data.result[i].Kinship.kinship_name+'</td>'+
+            '<td class="text-center">'+Family_Type+'</td>'+
             '<td class="text-center">'+
             '<p data-placement="top", data-toggle="tooltip", title="تحديد">'+
             '<input id='+"mariage"+data.result[i].PersonalId+' name="Familid" type="hidden" value="'+data.result[i].FamilyId+'"></input>'+
@@ -49,6 +60,16 @@ $(document).ready(function(){
         else {
          $("#tbody").empty();
          for (var i = 0; i < data.result.length; i++) {
+          if(data.result[i].Family.FamilyType == 1)
+          {
+            var Family_Type = "ليبية";
+          } else if(data.result[i].Family.FamilyType == 2)
+          {
+            var Family_Type = "مؤقته";
+          } else if(data.result[i].Family.FamilyType == 3)
+          {
+            var Family_Type = "اجانب";
+          }
           date = new Date(data.result[i].Personal.Birth_Date);
           var day = date.getDate();
           var monthIndex = date.getMonth()+1;
@@ -57,6 +78,7 @@ $(document).ready(function(){
             '<td class="text-center">'+data.result[i].Personal.Arabic_Familyname+' '+data.result[i].Personal.Arabic_Grandfathername+' '+data.result[i].Personal.Arabic_Fathername+' '+data.result[i].Personal.Arabic_Firstname+'</td>'+
             '<td class="text-center">'+year+"-"+monthIndex+"-"+day+'</td>'+
             '<td class="text-center">'+data.result[i].Kinship.kinship_name+'</td>'+
+            '<td class="text-center">'+Family_Type+'</td>'+
             '<td class="text-center" >'+
             '<p data-placement="top", data-toggle="tooltip", title="تحديد">'+
             '<input id='+"mariag"+data.result[i].PersonalId+' name="Familidm" type="hidden" value="'+data.result[i].FamilyId+'"></input>'+
