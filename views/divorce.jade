@@ -181,20 +181,6 @@ block content
             button.btn.btn-success.btn-lg(type="submit", style="width: 100%;")
               span.glyphicon.glyphicon
               |  حفظ
-  #edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
-    .modal-dialog
-      .modal-content
-        form.form#edit_family_form(action="/family/edit_family", method="post", accept-charset="utf-8", role="form")
-          .modal-header
-            button.close(type="button", data-dismiss="modal", aria-hidden="true")
-              span.glyphicon.glyphicon-remove(aria-hidden="true")
-            h4.modal-title.custom_align تعديل بيانات الأسرة
-          .modal-body
-            .row
-          .modal-footer
-            button#edit_family_btn.btn.btn-info.btn-lg(type="submit", style="width: 100%;")
-              span.glyphicon.glyphicon-ok-sign
-              |  تعديل
   script(src='/js/jquery-2.1.1.min.js')
   script(src='/js/bootstrap.min.js')
   script(src='/js/bootstrap-select.min.js')

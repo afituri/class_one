@@ -108,7 +108,6 @@ $(document).ready(function(){
       $.fn.open_family();   
      });
   });
-  /*--------------------*/
   /*.........dath......*/
   $("#back").hide(0);
   $('#waif_name').on('change', function(){
@@ -148,18 +147,4 @@ $(document).ready(function(){
 
     }
   });
-  // $("#FamilyType").hide(0);
-  // $('body').on('change', '#wife_bt_family', function(){
-  //   var id = $(this).val();
-  //   if(id == 1)
-  //   {
-  //    $("#FamilyType").show(100);
-  //   }
-  //   else {
-  //     $("#FamilyType").hide(100);
-  //   }
-  // });
-  /*////////////////////*/
-
-
 });    
