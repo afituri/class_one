@@ -159,7 +159,6 @@ $(document).ready(function(){
     $('#delete_marriage').val(id);
   });
 
-AD
 if($getMsg["msg"]==1){
   custNotify("success","نجاح","تم حذف العائلة بنجاح","ok-sign","bounceInDown","bounceOutUp");
   replaceUrl('/marriage');    
