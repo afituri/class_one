@@ -54,4 +54,20 @@ $(document).ready(function(){
     window.history.pushState("","",url);
   }
 
+  /*----------- Global custom valitation functions----------*/
+  jQuery.validator.addMethod("arabicLettersOnly", function(value, element) {
+  return this.optional(element) || /^[أ-ي,ﻻ,ء]+$/i.test(value);
+  }, "الرجاء ادخال حروف عربية فقط!");
+  jQuery.validator.addMethod("arabicLettersWithSpacesOnly", function(value, element) {
+    return this.optional(element) || /^[أ-ي,ﻻ,ء," "]+$/i.test(value);
+  }, "الرجاء ادخال حروف عربية فقط!"); 
+  jQuery.validator.addMethod("englishLettersWithSpacesOnly", function(value, element) {
+    return this.optional(element) || /^[a-z," "]+$/i.test(value);
+  }, "الرجاء ادخال حروف انجليزية فقط!");
+  jQuery.validator.addMethod("greaterThan",function(value, element, params) {
+    if (!/Invalid|NaN/.test(new Date(value))) {
+        return new Date(value) > new Date($(params).val());
+    }
+    return isNaN(value) && isNaN($(params).val()) || (Number(value) > Number($(params).val())); 
+  },'يجب ان يكون تاريخ الاكتتاب اكبر من الميلاد!');
 });

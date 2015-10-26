@@ -27,7 +27,13 @@ module.exports = function (router) {
           });
         }else{
           res.render('birth', {
-            title : "افراد الاسرة" ,regions:result.rows,countrys:countrys,q:false,query:""
+            title : "افراد الاسرة",
+            collapse_three: 'in', 
+            active_three_one: 'active',
+            regions:result.rows,
+            countrys:countrys,
+            q:false,
+            query:""
           });
         }
       });
@@ -66,7 +72,8 @@ module.exports = function (router) {
       var members_c={
         KinshipId:3,
         PersonalId:result.id,
-        FamilyId:req.body.FamilyId
+        FamilyId:req.body.FamilyId,
+        from_familyId:req.body.FamilyId
       };
       member.add_members(members_c,function(result1){
         if(req.body.newborn_reporting==2){
@@ -108,10 +115,14 @@ module.exports = function (router) {
     });
   });
   router.post('/birth/edit_birth',function (req, res) {
-    
     id = req.body.PersonalId
     q=req.body.query;
-    delete req.body.OfficeId;
+    father_office=req.body.OfficeId;
+    offic_id=req.body.OfficeIdw;
+    if(req.body.newborn_reporting==2){
+      req.body.OfficeId=offic_id;
+    }
+    delete req.body.OfficeIdw;
     delete req.body.PersonalId;
     delete req.body.query;
     birth.edit_birth(req.body,id,function(result){
@@ -122,7 +133,16 @@ module.exports = function (router) {
   router.get('/birth/get_birth/:id',function (req, res) {
     birth.get_birth(req.params.id,function(result){
       if(result){
-        res.send(result);
+        birth.get_birth_office(result.OfficeId,function(offic){
+          birth.get_father_offece(req.params.id,function(foffice){
+            obj={
+              result:result,
+              offic:offic,
+              foffice:foffice.Family.OfficeId
+            }
+            res.send(obj);
+          });
+        });
       }else{
         res.send(false);
       }

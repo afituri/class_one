@@ -68,4 +68,21 @@ module.exports = function (router) {
     });
   });
 
+  // this is test for aladdin, please don't remove it
+  router.get('/deathCertificateTest', function(req, res, next) {
+    jsr.render({
+      template: {
+        content:  fs.readFileSync(path.join(__dirname, "../views/reports/deathCertificateTest.html"), "utf8"),
+        phantom:{
+          format: 'A4',
+        },
+        recipe: "phantom-pdf",
+        engine: "jsrender"
+      },
+      // data:{allResults : results , national:nationality}
+    }).then(function (response) {
+      response.result.pipe(res);
+    });
+  })
+
 }

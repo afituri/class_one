@@ -56,7 +56,7 @@ block content
   #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
     .modal-dialog.modal-lg
       .modal-content
-        form.form(action="/birth/new_birth", method="post", accept-charset="utf-8", role="form")
+        form#new_birth_form.form(action="/birth/new_birth", method="post", accept-charset="utf-8", role="form")
           .modal-header
             button.close(type="button", data-dismiss="modal", aria-hidden="true")
               span.glyphicon.glyphicon-remove(aria-hidden="true")
@@ -91,13 +91,17 @@ block content
                       input#Birth_Date.form-control(type="text", name="Birth_Date", placeholder="تاريخ الميلاد")
                   .col-xs-3.col-md-3
                     .form-group
-                      label مكان الميلاد
-                      input.form-control(type="text", name="Birth_Place", placeholder="مكان الميلاد")
+                      label تاريخ اﻹكتتاب
+                      input#Enlistingdate.form-control(type="text", name="Enlistingdate", placeholder="تاريخ اﻹكتتاب")
                 .row
                   .col-xs-3.col-md-3
                     .form-group
+                      label مكان الميلاد
+                      input.form-control(type="text", name="Birth_Place", placeholder="مكان الميلاد")
+                  .col-xs-3.col-md-3
+                    .form-group
                       label بلد الميلاد
-                      select#country.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                      select#country.form-control.selectpicker(name="country", data-live-search="true", data-size=5)
                         option(value="", style='colr:grey; display:none;') بلد الميلاد
                         for country in countrys
                           option(value="#{country.id}") #{country.country_name}
@@ -141,10 +145,6 @@ block content
                               option(value="#{per.Personal.id}") #{per.Personal.Arabic_Firstname} #{per.Personal.Arabic_Fathername} #{per.Personal.Arabic_Grandfathername} #{per.Personal.Arabic_Familyname}
 
                       //- input.form-control(type="text", name="", placeholder="اسم اﻷم")
-                  .col-xs-3.col-md-3
-                    .form-group
-                      label تاريخ اﻹكتيتاب
-                      input#Enlistingdate.form-control(type="text", name="Enlistingdate", placeholder="تاريخ اﻹكتيتاب")
               #tabTow.tab-pane(role="tabpanel")
                 br
                 .row
@@ -227,9 +227,9 @@ block content
                         option(value="3") مات اثناء الولادة
                   .col-xs-3.col-md-3
                     .form-group
-                      label فيصيلة الدم
+                      label فصيلة الدم
                       select.form-control.selectpicker(name="blood_type", data-live-search="true", data-size=5)
-                        option(value="", style='colr:grey; display:none;') فيصيلة الدم
+                        option(value="", style='colr:grey; display:none;') فصيلة الدم
                         option(value="1") O−
                         option(value="2") O+
                         option(value="3") A−
@@ -387,6 +387,7 @@ block content
                   .col-xs-3.col-md-3
                     .form-group
                       label نوع التبليغ
+                      input#Office_edit(type="hidden",name="OfficeId",value="")
                       select#newborn_reporting_edit.form-control.selectpicker(name="newborn_reporting", data-live-search="true", data-size=5)
                         option(value="", style='colr:grey; display:none;') نوع التبليغ
                         option(value="1") تبليغ ولادة
@@ -464,7 +465,7 @@ block content
                   .col-xs-4.col-md-4
                     .form-group
                       label السجل المدني
-                      select#Offices_edit.form-control.selectpicker(name="OfficeId", data-live-search="true", data-size=5)
+                      select#Offices_edit.form-control.selectpicker(name="OfficeIdw", data-live-search="true", data-size=5)
                         option(value="", style='colr:grey; display:none;') السجل المدني
   
             button.btn.btn-info.btn-lg(type="submit", style="width: 100%;")

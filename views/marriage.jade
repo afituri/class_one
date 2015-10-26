@@ -3,7 +3,7 @@ block content
   .container-fulid
     .col-sm-10.col-md-10
       .pull-right(style="margin-left: 10px;")
-        a.btn.btn-success.add_marriage(href='#add', role='button',data-toggle='modal')
+        a.btn.btn-success.add_marriage(role='button',data-toggle='modal')
           span.glyphicon.glyphicon-plus
           span.text-none  تسجيل واقعة
       .pull-right(style="margin-left: 10px;")
@@ -91,9 +91,9 @@ block content
                 .form-group
                   label نوع الزواج
                   select#marriage_type.form-control.selectpicker(name="marriage_type", data-live-search="true", data-size=5)
-                            option(value="", style='color:grey; display:none;') نوع الزواج
-                            option(value="1") زواج عن طريق المأذون  
-                            option(value="2") زواج عن طريق المحكمة
+                    option(value="", style='color:grey; display:none;') نوع الزواج
+                    option(value="1") زواج عن طريق المأذون  
+                    option(value="2") زواج عن طريق المحكمة
               .col-xs-3.col-md-3
                 .form-group
                   label تاريخ الزواج
@@ -124,7 +124,7 @@ block content
                   label تاريخ فتح ورقة العائلة
                   input#FamilyRecordDate.form-control(type="text", name="FamilyRecordDate", placeholder="تاريخ فتح ورقة العائلة")
             .row  
-              .col-xs-3.col-md-3
+              .col-xs-3.col-xs-offset-3.col-md-3.col-md-offset-3
                 .form-group
                   label رقم القيد الجديد
                   input#Registrynumber.form-control(type="text", name="Registrynumber", placeholder="رقم القيد الجديد")

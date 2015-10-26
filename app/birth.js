@@ -15,6 +15,31 @@ exports.birth_mgr = {
       cb(result);
     });
   },
+  get_birth_office : function(id,cb){
+    models.sequelize.query('SELECT `o`.`id` AS office ,`b`.`id` AS branche , `r`.`id` AS region FROM `Offices` o , `Branches` b , `Regions` r WHERE `o`.`BranchId` = `b`.`id` AND `b`.`RegionId` = `r`.`id` AND `o`.`id` =?', { 
+      replacements: [id]
+    }).then(function (result) {
+      cb(result[0]);
+    });
+  },
+  get_father_offece: function(id,cb){
+    models.Member.findOne({
+      include: [{
+        model: models.Family,
+        where: {
+          status: 1,
+        }
+      },{
+        model: models.Personal,
+        where: {
+          status: 1,
+          id:id
+        },
+      }]
+    }).then(function(result) {
+      cb(result);
+    });
+  },
   add_birth : function(body,cb){
     models.Birth.create(body).then(function(result) {
       cb(result);

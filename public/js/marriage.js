@@ -13,9 +13,9 @@ $(document).ready(function(){
   $("#search_marriage_F").submit(function(e) {
     var isvalidate=$("#search_marriage_F").valid();
     if(isvalidate){
-    $.post("/searchMarriage", $("#search_marriage_F").serializeObject(), function(data, error){
-        if(data.stat !=true){
-          alert("no");
+      $.post("/searchMarriage", $("#search_marriage_F").serializeObject(), function(data, error){
+        if(!data.result[0]){
+          custNotify("danger","خطأ","رقم القيد المدخل غير موجود الرجاء التأكد!","warning-sign","bounceIn","bounceOut");
         } 
         else {
          $("#tbody_F").empty();
@@ -32,19 +32,19 @@ $(document).ready(function(){
             '<p data-placement="top", data-toggle="tooltip", title="تحديد">'+
             '<input id='+"mariage"+data.result[i].PersonalId+' name="Familid" type="hidden" value="'+data.result[i].FamilyId+'"></input>'+
             '<input class="radioBtnClass" type="radio" value="'+data.result[i].PersonalId+'"  name="radio_F"></input></p></td>');
-         };
+          };
         }
       });
     }
     return false
-});
+  });
 
   $("#search_marriage").submit(function(e) {
     var isvalidate=$("#search_marriage").valid();
     if(isvalidate){
       $.post("/searchMarriage", $("#search_marriage").serializeObject(), function(data, error){
-        if(data.stat !=true){
-          alert("no");
+        if(!data.result[0]){
+          custNotify("danger","خطأ","رقم القيد المدخل غير موجود الرجاء التأكد!","warning-sign","bounceIn","bounceOut");
         } 
         else {
          $("#tbody").empty();
@@ -66,20 +66,19 @@ $(document).ready(function(){
             '<input id='+"Registrynumber"+data.result[i].PersonalId+' name="Registrynumber" type="hidden" value="'+data.result[i].Family.Registrynumber+'"></input>'+
             '<input id='+"maria"+data.result[i].PersonalId+' name="OfficeId" type="hidden" value="'+data.result[i].Family.OfficeId+'"></input>'+
             '<input class="radioBtn" id="mariag" type="radio" value="'+data.result[i].PersonalId+'", name="radio_M"></input></p></td>');
-         };
-
+          };
         }
       });
     }
     return false
-
-    });
+  });
 //////////////////////add new marriage //////////////////
+
  $('.add_marriage').on('click',function(){
-   if($("input[type='radio'].radioBtn").is(':checked')) {
+  if($("input[type='radio'].radioBtn").is(':checked')) {
     var card_type = $("input[type='radio'].radioBtn:checked").val();
-    }
-    if($("input[type='radio'].radioBtnClass").is(':checked')) {
+  }
+  if($("input[type='radio'].radioBtnClass").is(':checked')) {
     var card_typee = $("input[type='radio'].radioBtnClass:checked").val();
     }
     if($("#tbody #Social"+card_type).val() == 2)
@@ -92,6 +91,12 @@ $(document).ready(function(){
           $('#Registrynumber').val($("#tbody #Registrynumber"+card_type).val()).prop( "disabled", true );
     }
 
+  if (!card_type || !card_typee) {
+    custNotify("danger","خطأ","الرجاء اختيار lن اسرة الزوج والزوجة مع بعض!","warning-sign","bounceIn","bounceOut");
+    $('.add_marriage').attr('href', '#');
+  } else {
+    $('.add_marriage').attr('href', '#add');
+  }
     $('#husband_personal_Id').val(card_type);
     $('#husband_family_Id').val($("#tbody #mariag"+card_type).val());
     $('#wife_personal_Id').val(card_typee);
@@ -106,7 +111,7 @@ $(document).ready(function(){
   });
 
  $("#new_marriage").submit(function(e) {
-     var isvalidate=$("#new_marriage").valid();
+    var isvalidate=$("#new_marriage").valid();
     if(isvalidate){
       $.post("/add_new_marriage", $("#new_marriage").serializeObject(), function(data, error){
         if(data){
@@ -148,12 +153,13 @@ $(document).ready(function(){
     return false;
  });
 //////////////////////// delete marriage//////////////////////////////
+
  $('body').on('click','.delete_btn', function(){
     var id = $(this).val();
     $('#delete_marriage').val(id);
   });
 
-
+AD
 if($getMsg["msg"]==1){
   custNotify("success","نجاح","تم حذف العائلة بنجاح","ok-sign","bounceInDown","bounceOutUp");
   replaceUrl('/marriage');    

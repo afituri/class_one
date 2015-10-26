@@ -13,6 +13,7 @@ $(document).ready(function(){
         if(data.stat !=true){
         } */
 
+
   $('body').on('click', '#add_personal_btn', function (e) {
     e.preventDefault();
     $('#add_personal_form').submit();
@@ -23,37 +24,34 @@ $(document).ready(function(){
   });
 
   $('body').on('click', '#delete_it', function(e){
-    //alert($(this).val());
     var path=document.URL;
     var familyid=path.split('/').pop();
     $.get('/delete_personal/'+$(this).val(),function(result){ 
-       if(result){
-         window.location.href='/personal/'+familyid; 
-         custNotify("success","نجاح","تم حذف السجل المدني بنجاح","ok-sign","bounceInDown","bounceOutUp");
-       }
+       //if(result){
+      window.location.href='/personal/'+familyid; 
+      custNotify("success","نجاح","تم حذف السجل المدني بنجاح","ok-sign","bounceInDown","bounceOutUp");
+       //}
     });
   });
 
  var get_famly_fromId;
   $('body').on('click', '#family_come_from', function(e){
     if($("input[type='radio'].radioBtnClass").is(':checked')) {
-    get_famly_fromId= $("input[type='radio'].radioBtnClass:checked").val();
-    $('#Motherperson_Id').empty();
-    $('#Motherperson_Id').append('<option value="">اختر اسم اﻷم بالكامل </option>').selectpicker('refresh');
-    $.get('/get_Personal_in_family/'+get_famly_fromId,function(result){
-      for(i in result){
-          if(result[i].KinshipId==2){ 
-            //$('#three').hide();
-            $('#Motherperson_Id').append('<option value='+result[i].id+'  > '+result[i].Arabic_Firstname+' '+result[i].Arabic_Fathername+' '+result[i].Arabic_Grandfathername+' '+result[i].Arabic_Familyname+' </option>').selectpicker('refresh');;
-          } 
-        }
-    });
-
+      get_famly_fromId= $("input[type='radio'].radioBtnClass:checked").val();
+      $('#Motherperson_Id').empty();
+      $('#Motherperson_Id').append('<option value="">اختر اسم اﻷم بالكامل </option>').selectpicker('refresh');
+      $.get('/get_Personal_in_family/'+get_famly_fromId,function(result){
+        for(i in result){
+            if(result[i].KinshipId==2){ 
+              $('#Motherperson_Id').append('<option value='+result[i].id+'  > '+result[i].Arabic_Firstname+' '+result[i].Arabic_Fathername+' '+result[i].Arabic_Grandfathername+' '+result[i].Arabic_Familyname+' </option>').selectpicker('refresh');;
+            } 
+          }
+      });
     }
   });
 
   //#kinship
-   $('body').on('change', '#kinship', function(e){
+  $('body').on('change', '#kinship', function(e){
     var path=document.URL;
     var familyid=path.split('/').pop();
     $('#Motherperson_Id').empty();
@@ -72,50 +70,17 @@ $(document).ready(function(){
       $('#Motherperson_Id').empty();
       $('#Motherperson_Id').append('<option value="">اختر اسم اﻷم بالكامل </option>').selectpicker('refresh');
       $('#three').show();
-
     }
-   });
+  });
 
-
-
- 
-
-/*
-  $('body').on('click', '#add_personal_btn', function(e){
-    var path=document.URL;
-    var familyid=path.split('/').pop();
-    var Is_Alive;
-    if($("#Is_Alive").is(":checked")==true){
-      Is_Alive=1;
-    } else { 
-      Is_Alive=2;
-    }
-    var PersonalType;
-    if($("#type1").is(":checked")==true){
-      PersonalType=1;
-    } 
-    if($("#type2").is(":checked")==true){
-      PersonalType=2; 
-    }
-    if($("#type3").is(":checked")==true){
-      PersonalType=3;
-    }
-    
-  });*/
-
-  /*$('body').on('click', '#add_personal_btn', function (e) {
-    e.preventDefault();
-    $('#add_personal_form').submit();
-  });*/
-
-  $('body').on('click', '#add_personal_btn', function(e){
+  $('#add_personal_form').submit(function(e) {
     e.preventDefault();
     var isvalidate=$("#add_personal_form").valid();
+    alert(isvalidate);
     if(isvalidate){ 
       if($("input[type='radio'].radioBtnClass").is(':checked')) {
         get_famly_fromId= $("input[type='radio'].radioBtnClass:checked").val();
       }
-      alert(get_famly_fromId);
       var path=document.URL;
       var familyid=path.split('/').pop();
       var Is_Alive;
@@ -175,25 +140,22 @@ $(document).ready(function(){
           window.location.href='/personal/'+familyid;
       });
     } else {
-      return false;
+      var isValid = $("#add_personal_form").valid();
+      if (this.hasChildNodes('.nav.nav-tabs')) {
+        var validator = $(this).validate();
+        $("#add_personal_form").find("input").each(function () {
+          if (!validator.element(this)) {
+            isValid = false;
+            $('a[href=#' + $(this).closest('.tab-pane:not(.active)').attr('id') + ']').tab('show');
+            return false;
+          }
+        });
+      }
+      // return false;
     }
   });
 
   $("[name='family_type'],[name='Is_Alive']").bootstrapSwitch();
-
-
-
-  // $("#father_status").change(function(){
-  //   $(this).find("option:selected").each(function() {
-  //     if($(this).attr("value")==2) {
-  //       $(".insert_father_name").removeClass("hide").addClass("animated fadeIn");
-  //       $(".select_father_name").addClass("hide");
-  //     } else if($(this).attr("value")==1) {
-  //       $(".select_father_name").removeClass("hide").addClass("animated fadeIn");
-  //       $(".insert_father_name").addClass("hide");
-  //     }
-  //   });
-  // }).change();
 
   $("#country").change(function(){
     $('#city_id').empty();
@@ -230,9 +192,9 @@ $(document).ready(function(){
         $('#family_table').append("<tr><td class=text-center>"+result[i].fid+"</td><td class=text-center>"+result[i].Registrynumber+"</td><td class=text-center>"+result[i].Recordnumber+"</td><td class=text-center>"+result[i].Autogenerated_Id+"</td><td class=text-center>"+Is_Closed+"</td><td class=text-center>"+FamilyType+"</td><td class=text-center>"+result[i].office_name+"</td><td class=text-center><p data-placement=\"top\" data-toggle=\"tooltip\" title=\"أختار\"> \
           <input value="+result[i].fid+" id=\"family_come_from\" type=\"radio\" name=\"family_come_from\" class=\"radioBtnClass\"/> \
           </p></td></tr>");
-        } 
-      });
+      } 
     });
+  });
 
   $("#Gender").change(function(){
     // 1 for male and 2 for female
@@ -299,23 +261,7 @@ $(document).ready(function(){
     format: 'YYYY-MM-DD',
     locale: 'ar-sa'
   });
-
-  /*----------- Global custom valitation functions----------*/
-  jQuery.validator.addMethod("arabicLettersOnly", function(value, element) {
-  return this.optional(element) || /^[أ-ي,ﻻ,ء]+$/i.test(value);
-  }, "الرجاء ادخال حروف عربية فقط!");
-  jQuery.validator.addMethod("arabicLettersWithSpacesOnly", function(value, element) {
-    return this.optional(element) || /^[أ-ي,ﻻ,ء," "]+$/i.test(value);
-  }, "الرجاء ادخال حروف عربية فقط!"); 
-  jQuery.validator.addMethod("englishLettersWithSpacesOnly", function(value, element) {
-    return this.optional(element) || /^[a-z," "]+$/i.test(value);
-  }, "الرجاء ادخال حروف انجليزية فقط!");
-  jQuery.validator.addMethod("greaterThan",function(value, element, params) {
-    if (!/Invalid|NaN/.test(new Date(value))) {
-        return new Date(value) > new Date($(params).val());
-    }
-    return isNaN(value) && isNaN($(params).val()) || (Number(value) > Number($(params).val())); 
-  },'يجب ان يكون تاريخ الاكتتاب اكبر من الميلاد!');
+  
   /*----------- validate in add Family----------*/
   $("#add_personal_form").validate({
     ignore: ':not(select:hidden, input:visible, textarea:visible)',
@@ -527,6 +473,7 @@ $(document).ready(function(){
             required: "<h6>الرجاء ادخال لقب اﻷم!</h6>",
           }
         });
+        $("#Motherperson_Id").rules( 'remove', 'required' );
       } else if($(this).attr("value")==1) {
         $("#select_mother_name").removeClass("hide");
         $("#insert_mother_name").addClass("hide");
@@ -536,26 +483,13 @@ $(document).ready(function(){
             required: "الرجاء اختيار اسم اﻷم!",
           }
         });
+        $("#Arabic_Motherfirstname").rules( 'remove', 'required' );
+        $("#Arabic_Motherfathername").rules( 'remove', 'required' );
+        $("#Arabic_Mothergrandfathername").rules( 'remove', 'required' );
+        $("#Arabic_Motherfamilyname").rules( 'remove', 'required' );
       }
     });
   }).change();
-
-  $("#add_personal_form").on('submit', function () {
-    var isValid = $(this).valid();
-    if (this.hasChildNodes('.nav.nav-tabs')) {
-      var validator = $(this).validate();
-      $(this).find("input").each(function () {
-        if (!validator.element(this)) {
-          isValid = false;
-          $('a[href=#' + $(this).closest('.tab-pane:not(.active)').attr('id') + ']').tab('show');
-          return false;
-        }
-      });
-    }
-    if (isValid) {
-      // do stuff
-    }
-  });
 
   $('#add').on('hidden.bs.modal', function(){
     $(this).removeData('bs.modal');
@@ -565,4 +499,22 @@ $(document).ready(function(){
   $('.selectpicker').selectpicker().change(function(){
     $(this).valid()
   });
+
+  // $("#add_personal_form").on('submit', function () {
+  //   var isValid = $(this).valid();
+  //   if (this.hasChildNodes('.nav.nav-tabs')) {
+  //     var validator = $(this).validate();
+  //     $(this).find("input").each(function () {
+  //       if (!validator.element(this)) {
+  //         isValid = false;
+  //         $('a[href=#' + $(this).closest('.tab-pane:not(.active)').attr('id') + ']').tab('show');
+  //         return false;
+  //       }
+  //     });
+  //   }
+  //   if (isValid) {
+  //     // do stuff
+  //   }
+  // });
+
 });
