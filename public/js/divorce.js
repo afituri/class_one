@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $('#inform_date, #divorce_date').datetimepicker({
+  $('#inform_date, #divorce_date,#add_family_record_date').datetimepicker({
     useCurrent: false,
     viewMode: 'years',
     format: 'YYYY-MM-DD',
@@ -20,16 +20,6 @@ $(document).ready(function(){
     }
   });
   /*...........*/
-  $("#tabtow").hide(0);
-  $('body').on('change', '#wife_bt_family', function(){
-    var id = $(this).val();
-    if(id == 2){
-      $("#tabtow").show(100);
-    }else if (id =1){
-      $("#tabtow").hide(0);
-    }
-  });
-
   $('body').on('change', '#region', function(){
     var id = $(this).val();
     $('#Branches').empty();
@@ -64,39 +54,28 @@ $(document).ready(function(){
         }
     });
   });
-  /*---------------*/
-  // $('body').on('change', '#country', function(){
-  //   var id = $(this).val();
-  //   $('#Cities').empty();
-  //   $.get('/city/get_city/'+id,function(data){
-  //     for(key in data){
-  //         $('#Cities').append("<option value = '"+data[key].id+"'>"+data[key].city_name+"</option>").selectpicker('refresh');
-  //       }
-  //   });
-  // });
-/*---------------------*/
-/*........waif......*/
+  /*---------------------*/
   $.fn.open_family = function(){
     $('#open_family').on('click', function(){
      var id = $(this).val();
+      $.get('/divorce/father/'+id,function(result){
+        $('#father_name').empty();
+        $('#father_name').append("<h4 class='modal-title'>أسم الزوج :<input type = 'hidden' name='father_name' value="+result[0].Personal.Person_Id+"></input><label > "+result[0].Personal.Arabic_Firstname+" "+result[0].Personal.Arabic_Fathername+" "+result[0].Personal.Arabic_Grandfathername+" "+result[0].Personal.Arabic_Familyname+"</label></h4>");
+      });
       $.get('/divorce/'+id,function(result){
-      $('#waif_name').empty();
-      $('#father_name').empty();
-
-      $('#father_name').append("<h4 class='modal-title'>أسم الزوج :<input type = 'hidden' name='father_name' value="+result.fathers[0][0].Person_Id+"></input><label > "+result.fathers[0][0].Arabic_Firstname+" "+result.fathers[0][0].Arabic_Fathername+" "+result.fathers[0][0].Arabic_Grandfathername+" "+result.fathers[0][0].Arabic_Familyname+"</label></h4>");
-      $('#waif_name').append("<option value = '' style='colr:grey; display:none;'> أسم الزوجة </option>").selectpicker('refresh');
-        for(i in result.wifes){
-          $('#waif_name').append('<option value='+result.wifes[0][i].Person_Id+'">'+result.wifes[0][i].Arabic_Firstname+' '+result.wifes[0][i].Arabic_Fathername+' '+result.wifes[0][i].Arabic_Grandfathername+' '+result.wifes[0][i].Arabic_Familyname+'</option>').selectpicker('refresh');
+        $('#waif_name').empty();      
+        $('#waif_name').append("<option value = '' style='colr:grey; display:none;'> أسم الزوجة </option>").selectpicker('refresh');
+        for(i in result){
+          $('#waif_name').append('<option value='+result[i].Personal.Person_Id+'">'+result[i].Personal.Arabic_Firstname+' '+result[i].Personal.Arabic_Fathername+' '+result[i].Personal.Arabic_Grandfathername+' '+result[i].Personal.Arabic_Familyname+'</option>').selectpicker('refresh');
         }
       });
-    });
-  };  
+    });  
+  }; 
   /*----------------*/
   $('#search_button').on('click', function(){
     var id = $('#search_input').val();
     $.get('/divorce/search_family/'+id,function(result){
         $('#family_table').empty()
-        // $('#waif_name').append("<option value = '' style='colr:grey; display:none;'> أسم الزوجة</option>").selectpicker('refresh');
         if (result.Is_Closed == 1){
           var Is_Closed = "نشطة";
         }
@@ -131,18 +110,24 @@ $(document).ready(function(){
   });
   /*--------------------*/
   /*.........dath......*/
+  $("#back").hide(0);
   $('#waif_name').on('change', function(){
     var id = $(this).val();
-    $('#data').empty();
+    $('#data1').empty();
     $('#family_chiled_table').empty();
     $.get('/divorce/Personal/'+id,function(result){
-      $('#data').append('<label class="form-control">'+new Date(result.Birth_Date).getFullYear()+'/'+new Date(result.Birth_Date).getMonth()+'/'+new Date(result.Birth_Date).getDate()+'</label>');
+      if (result) {
+        $("#back").show(100);
+        $('#data1').append(''+new Date(result.Birth_Date).getFullYear()+'/'+new Date(result.Birth_Date).getMonth()+'/'+new Date(result.Birth_Date).getDate()+'');
+      }else
+      {
+       $('#data1').empty();
+       $("#data").hide(100);
+      }
     });
-  /*..........suns........*/ 
+    /*..........suns.child.......*/ 
     $.get('/divorce/suns/'+id,function(result){
-      console.log("suns");
       for (i in result){
-
         $('#family_chiled_table').append("<tr><td class=text-center>"+result[i].Arabic_Firstname+" "+result[i].Arabic_Fathername+" "+result[i].Arabic_Grandfathername+" "+result[i].Arabic_Familyname+"</td><td class=text-center>"+new Date(result[i].Birth_Date).getFullYear()+'/'+new Date(result[i].Birth_Date).getMonth()+'/'+new Date(result[i].Birth_Date).getDate()+"</td><td class=text-center>"+result[i].Arabic_Motherfirstname+" "+result[i].Arabic_Motherfathername+" "+result[i].Arabic_Mothergrandfathername+" "+result[i].Arabic_Motherfamilyname+"</td><td class=text-center><p data-placement=\"top\" data-toggle=\"tooltip\" title=\"أختار\"> \
         <input id=\"family_come_from\" type=\"checkbox\" name=\"son[]\" class=\"form-control\" value='"+result[i].id+"'/> \
         </p></td></tr>");
@@ -150,18 +135,30 @@ $(document).ready(function(){
     });
   });
   /*_________________________*/
-  /*----------*/
-  $("#FamilyType").hide(0);
+  $("#tabtow").hide(0);
+  $("#child").hide(0);
   $('body').on('change', '#wife_bt_family', function(){
     var id = $(this).val();
-    if(id == 1)
-    {
-     $("#FamilyType").show(100);
-    }
-    else {
-      $("#FamilyType").hide(100);
+    if(id == 2){
+      $("#tabtow").show(100);
+      $("#child").show(100);
+    }else if (id =1){
+      $("#tabtow").hide(0);
+      $("#child").hide(100);
+
     }
   });
+  // $("#FamilyType").hide(0);
+  // $('body').on('change', '#wife_bt_family', function(){
+  //   var id = $(this).val();
+  //   if(id == 1)
+  //   {
+  //    $("#FamilyType").show(100);
+  //   }
+  //   else {
+  //     $("#FamilyType").hide(100);
+  //   }
+  // });
   /*////////////////////*/
 
 
