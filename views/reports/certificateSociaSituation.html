@@ -126,16 +126,16 @@
     <div class="row">
       <div class="col-xs-4 col-xs-offset-4 text-center">
         <p class="threee">
-           الرقم الوطني <span>:</span> 119890002059
+           الرقم الوطني <span>:</span> {{Results.Personal.national_id}}
         </p>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-4">
         <p class="threee">
-           رقم قيد الـعـائـلة <span>:</span> 131314 
+           رقم قيد الـعـائـلة <span>:</span> {{Results.Family.Registrynumber}} 
            <br>
-           رقم ورقة العائلة <span>:</span> 1234413 
+           رقم ورقة العائلة <span>:</span> {{Results.Family.Recordnumber}}  
         </p>
       </div>
     </div>
@@ -143,22 +143,22 @@
     <div class="panel rcorners3">
       <div class="row">
         <div class="col-xs-12">
-          <div class="ppppp" > يشهد مكتب السجل المدني بـ <span>:</span><b style="background-color:#DDDDE0 !important;"> طرابلس المركز </b></div>
+          <div class="ppppp" > يشهد مكتب السجل المدني بـ <span>:</span><b style="background-color:#DDDDE0 !important;"> {{Results.Family.Office.office_name}} </b></div>
         </div>
       </div>
       <div style="height: 9px;"></div>
       <div class="row">
         <div class="col-xs-6">
-          <div> بأن السيد <span>:</span><b style="background-color:#DDDDE0 !important;"> محمود عبدالسلام رمضان </b></div>
+          <div> بأن السيد <span>:</span><b style="background-color:#DDDDE0 !important;"> {{Results.Personal.Arabic_Firstname}} {{Results.Personal.Arabic_Fathername}} {{Results.Personal.Arabic_Grandfathername}}  </b></div>
         </div>
         <div class="col-xs-6">
-          <div> ولقبه <span>:</span><b style="background-color:#DDDDE0 !important;"> خليفة </b></div>
+          <div> ولقبه <span>:</span><b style="background-color:#DDDDE0 !important;"> {{Results.Personal.Arabic_Familyname}} </b></div>
         </div>
       </div>
       <div style="height: 9px;"></div>
       <div class="row">
         <div class="col-xs-6">
-          <div> وتاريخ ميلاده <span>:</span><b style="background-color:#DDDDE0 !important;"> 28/1/2004 </b></div>
+          <div> وتاريخ ميلاده <span>:</span><b style="background-color:#DDDDE0 !important;"> {{date}}</b></div>
         </div>
         <div class="col-xs-6">
           <div> محل إقامته <span>:</span><b style="background-color:#DDDDE0 !important;"> ////////// </b></div>
@@ -179,19 +179,19 @@
       <div style="height: 9px;"></div>
       <div class="row">
         <div class="col-xs-6">
-          <div> وأسم والده <span>:</span><b style="background-color:#DDDDE0 !important;"> عبدالسلام </b></div>
+          <div> وأسم والده <span>:</span><b style="background-color:#DDDDE0 !important;"> {{Results.Personal.Arabic_Fathername}} </b></div>
         </div>
         <div class="col-xs-6">
-          <div> ولقبه <span>:</span><b style="background-color:#DDDDE0 !important;"> خليفة </b></div>
+          <div> ولقبه <span>:</span><b style="background-color:#DDDDE0 !important;"> {{Results.Personal.Arabic_Familyname}} </b></div>
         </div>
       </div>
       <div style="height: 9px;"></div>
       <div class="row">
         <div class="col-xs-6">
-          <div> وأسم والدته <span>:</span><b style="background-color:#DDDDE0 !important;"> اميرة </b></div>
+          <div> وأسم والدته <span>:</span><b style="background-color:#DDDDE0 !important;"> {{Results.Personal.Arabic_Motherfirstname}} </b></div>
         </div>
         <div class="col-xs-6">
-          <div> ولقبها <span>:</span><b style="background-color:#DDDDE0 !important;"> هبال </b></div>
+          <div> ولقبها <span>:</span><b style="background-color:#DDDDE0 !important;"> {{Results.Personal.Arabic_Motherfamilyname}} </b></div>
         </div>
       </div>
       <div style="height: 9px;"></div>
@@ -201,7 +201,8 @@
         </div>
       </div>
       <div style="height: 9px;"></div>
-      <div class="row">
+      {{{certificateSociaSituation Results child}}}
+      <!-- <div class="row">
         <div class="col-xs-6">
           <div> لم يسبق له الزواج <span>:</span><b style="background-color:#DDDDE0 !important;"> ////////// </b></div>
         </div>
@@ -254,18 +255,18 @@
           </div>
         </div>
       </div>
-      <div style="height: 9px;"></div>
+      <div style="height: 9px;"></div>-->
       <div class="row">
         <div class="col-xs-12">
           <div> صدرت في <span>:</span>
-            <b style="background-color:#DDDDE0 !important;"> 27/05/2015 </b>
+            <b style="background-color:#DDDDE0 !important;"> {{nowdate}} </b>
           </div>
         </div>
-      </div>
+      </div> 
       <div style="height: 9px;"></div>
       <div class="row">
         <div class="col-xs-12">
-          <div> الموفق <span>:</span><b style="background-color:#DDDDE0 !important;"> السابع والعشرون من مايو عام ألفان وخمسة عشر </b></div>
+          <div> الموفق <span>:</span><b style="background-color:#DDDDE0 !important;"> {{ardate}} </b></div>
         </div>
       </div>
     </div> <!-- end panel -->
