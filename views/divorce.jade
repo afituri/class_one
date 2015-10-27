@@ -1,4 +1,5 @@
 extends layout
+block loginStyle
 block content       
   .container-fulid      
     .col-sm-10.col-md-10
@@ -25,10 +26,8 @@ block content
                 th.text-center حالة الاسرة
                 th.text-center نوع الاسرة
                 th.text-center السجل المدني
-                th.text-center اضافة فرد
-            tbody#family_table
-  
-                                      
+                th.text-center اضافة واقعة
+            tbody#family_table        
   #add.modal.fade(tabindex="-1",role="dialog", aria-labelledby="edit", aria-hidden="true")
     .modal-dialog.modal-lg
       .modal-content
@@ -54,21 +53,24 @@ block content
                     .col-xs-4.col-md-4
                       label الزوجات
                       select#waif_name.form-control.selectpicker(name="waif_name", data-live-search="true", data-size=5)
-                    .col-xs-3.col-md-3
-                      label تاريخ ميلاد الزوجة
-                      #data 
-                    .col-xs-5.col-md-5
-                      label هل ترغب المطلقة في العودة إلى أسرتها السابقة ؟
-                      select#wife_bt_family.form-control.selectpicker(name="wife_bt_family", data-live-search="true", data-size=5)
-                        option(value="", style='color:grey; display:none;') العودة للاسرة السابقة...
-                        option(value="1") نعم
-                        option(value="2") لا
-                  br
-                  .row     
+            
                     .col-xs-4.col-md-4
-                      label هل ترغب الزوجة في حضانة الاطفال ؟
-                    .col-xs-2.col-md-2  
-                      input#toggle-child(name = "wife_custody",type='checkbox', data-on="نعم",data-off="لا", data-toggle='toggle')
+                      label تاريخ ميﻻد الزوجة
+                      label.form-control#data1
+                    #back     
+                      .col-xs-4.col-md-4
+                        label هل ترغب المطلقة للعودة لأسرتها السابقة ؟
+                        select#wife_bt_family.form-control.selectpicker(name="wife_bt_family", data-live-search="true", data-size=5)
+                          option(value="", style='color:grey; display:none;') العودة للاسرة السابقة...
+                          option(value="1") نعم
+                          option(value="2") لا
+                  br
+                  #child  
+                    .row     
+                      .col-xs-4.col-md-4
+                        label هل ترغب الزوجة في حضانة الاطفال ؟
+                      .col-xs-2.col-md-2  
+                        input#toggle-child(name = "wife_custody",type='checkbox', data-on="نعم",data-off="لا", data-toggle='toggle')
                   br
                   br
                   #child-table  
@@ -108,8 +110,13 @@ block content
                         option(value="", style='color:grey; display:none;') اختر نوع الاسرة...
                         option(value="1") نشطة 
                         option(value="2") غير نشطة
-                                   
-                        
+                  .col-xs-4.col-md-4
+                    label نوع الاسرة
+                    select.form-control.selectpicker(name="FamilyType", data-live-search="true", data-size=5)
+                      option(value="", style='color:grey; display:none;') نوع الاسرة
+                      option(value="1") ليبية
+                      option(value="2") مؤقتة 
+                      option(value="3") أجنبية                     
               #tabThree.tab-pane(role="tabpanel") 
                 br
                 .row    
@@ -156,60 +163,25 @@ block content
                     .form-group
                       label بلد الطﻻق
                       select#country.form-control.selectpicker(name="", data-live-search="true", data-size=5)
-                        option(value="", style='colr:grey; display:none;') بلد الميلاد
+                        option(value="", style='colr:grey; display:none;') بلد الطﻻق
                         for country in countrys
                           option(value="#{country.id}") #{country.country_name}
                   .col-xs-3.col-md-3
                     .form-group
                       label مدينة الطﻻق
                       select#Cities.form-control.selectpicker(name="city_Id", data-live-search="true", data-size=5)
-                        option(value="", style='colr:grey; display:none;') مدينة الميلاد   
+                        option(value="", style='colr:grey; display:none;') مدينة الطﻻق   
                   .col-xs-3.col-md-3
                     .form-group
                       label حالة الطﻻق 
                       select#divorce_type.form-control.selectpicker(name="divorce_type", data-live-search="true", data-size=5)
-                        option(value="", style='colr:grey; display:none;') حلبة الطﻻق    
+                        option(value="", style='colr:grey; display:none;') حالة الطﻻق    
                         option(value="1") طﻻق محكمة
                         option(value="2") طﻻق مؤذون                   
           .modal-footer
             button.btn.btn-success.btn-lg(type="submit", style="width: 100%;")
               span.glyphicon.glyphicon
               |  حفظ
-  #edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
-    .modal-dialog
-      .modal-content
-        form.form#edit_family_form(action="/family/edit_family", method="post", accept-charset="utf-8", role="form")
-          .modal-header
-            button.close(type="button", data-dismiss="modal", aria-hidden="true")
-              span.glyphicon.glyphicon-remove(aria-hidden="true")
-            h4.modal-title.custom_align تعديل بيانات الأسرة
-          .modal-body
-            .row
-          .modal-footer
-            button#edit_family_btn.btn.btn-info.btn-lg(type="submit", style="width: 100%;")
-              span.glyphicon.glyphicon-ok-sign
-              |  تعديل
-  #delete.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
-    .modal-dialog
-      .modal-content
-        form.form#delete_family_form(action="/family/delete_family", method="post", accept-charset="utf-8", role="form")
-          .modal-header
-            button.close(type="button", data-dismiss="modal", aria-hidden="true")
-              span.glyphicon.glyphicon-remove(aria-hidden="true")
-            h4.modal-title.custom_align إلغاء أسرة معين
-          .modal-body
-            .alert.alert-danger.h5
-              //- get hidden ID has family_id_delete
-              input#family_id_delete.form-control(type="hidden", name="id")               
-              span.glyphicon.glyphicon-warning-sign
-              |  هل تريد فعلا الغاء هذه الأسرة ؟
-          .modal-footer
-            button#yesBtn.btn.btn-success(type="submit")
-              span.glyphicon.glyphicon-ok-sign
-              |  نعم
-            button.btn.btn-default(type="button", data-dismiss="modal")
-              span.glyphicon.glyphicon-remove
-              |  لا
   script(src='/js/jquery-2.1.1.min.js')
   script(src='/js/bootstrap.min.js')
   script(src='/js/bootstrap-select.min.js')

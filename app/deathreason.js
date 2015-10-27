@@ -8,7 +8,6 @@ exports.deathreason_mgr = {
         }
       })
       .then(function (result) {
-        console.log(result.rows);
         cb(result);
       });
   },

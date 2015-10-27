@@ -341,7 +341,7 @@ $(document).ready(function(){
    // alert($('#saveUrl').val());
     window.location.href='/personal/'+familyid+'?msg=1'; 
     $.get('/delete_personal/'+$(this).val(),function(result){ 
-         window.location.href='/personal/'+familyid+"?msg=1"; 
+        window.location.href='/personal/'+familyid+"?msg=1"; 
     });
   });
 

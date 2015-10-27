@@ -107,6 +107,7 @@ module.exports = function (router) {
     }); 
   });
 
+
   router.get('/delete_personal/:id', function (req, res) {
     personal.delete_Members(req.params.id,function  (result){
       personal.delete_personal(req.params.id,function  (result){

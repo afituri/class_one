@@ -5,6 +5,7 @@ var member = require('../app/member').member_mgr;
 var personal = require('../app/personal').personal_mgr;
 var birth = require('../app/birth').birth_mgr;
 var url=require('url');
+var helpers = require('../app/helpers').helpers_mgr;
 module.exports = function (router) {
 
   router.get('/birth', function (req, res) {
@@ -72,7 +73,8 @@ module.exports = function (router) {
       var members_c={
         KinshipId:3,
         PersonalId:result.id,
-        FamilyId:req.body.FamilyId
+        FamilyId:req.body.FamilyId,
+        from_familyId:req.body.FamilyId
       };
       member.add_members(members_c,function(result1){
         if(req.body.newborn_reporting==2){
@@ -114,7 +116,6 @@ module.exports = function (router) {
     });
   });
   router.post('/birth/edit_birth',function (req, res) {
-    
     id = req.body.PersonalId
     q=req.body.query;
     father_office=req.body.OfficeId;
@@ -146,6 +147,11 @@ module.exports = function (router) {
       }else{
         res.send(false);
       }
+    });
+  });
+  router.get('/birth/date',function (req, res) {
+    helpers.date_later(new Date(),function(result){
+      console.log(result);
     });
   });
 }

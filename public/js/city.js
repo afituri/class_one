@@ -1,7 +1,4 @@
 $(document).ready(function(){
-  
-  $("[data-toggle=tooltip]").tooltip();
-
   jQuery.validator.addMethod("arabicLettersOnly", function(value, element) {
     return this.optional(element) || /^[أ-ي,ﻻ,' ',ء]+$/i.test(value);
   }, "الرجاء ادخال حروف عربية فقط!");
