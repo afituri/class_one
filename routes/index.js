@@ -13,15 +13,23 @@ var city = require('./city')(router);
 var reports = require('./reports')(router);
 var deathreason = require('./deathreason')(router);
 var birth = require('./birth')(router);
+var death = require('./death')(router);
 var marriage = require('./marriage')(router);
 var divorce = require('./divorce')(router);
 
 
-/* GET home page. */
+/* GET login page. */
 router.get('/', function (req, res) {
-	res.render('index', {
-		title: 'الرئيسية'
-	});
+  res.render('login', {
+    title: 'شاشة الدخول'
+  });
+});
+
+/* GET home page. */
+router.get('/home', function (req, res) {
+  res.render('index', {
+    title: 'الرئيسية'
+  });
 });
 
 module.exports = router;

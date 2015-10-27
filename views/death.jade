@@ -1,0 +1,209 @@
+extends layout
+block loginStyle
+block content
+  .container-fulid
+    .col-sm-10.col-md-10
+      .panel.panel-default
+        .panel-heading
+          .row
+            .pull-right(style="margin-right: 10px;")
+              h3#h3.panel-title عرض #{title}
+            .col-xs-6.col-md-6
+              form.form#search_family(action="")
+                .input-group
+                  input.form-control(type='text',name="q" placeholder='بحث...برقم القيد فقط' value="#{query}")
+                  .input-group-btn
+                    button.btn.btn-default(type="submit")
+                      i.glyphicon.glyphicon-search
+        .table-responsive
+          table.table.table-bordred.table-striped.table-condensed
+            thead
+              tr.info
+                th.text-center الرقم الوطني
+                th.text-center الاسم رباعي
+                th.text-center تاريخ الميلاد
+                th.text-center مكان الميلاد
+                th.text-center صلة القرابة
+                th.text-center الجنسية
+                th.text-center حالة المواطن
+                th.text-center أضافة واقعة
+                th.text-center تعديل واقعة
+            tbody
+              if q
+                for per in personals
+                  tr                   
+                    td.text-center #{per.Personal.national_id}
+                    td.text-center #{per.Personal.Arabic_Firstname} #{per.Personal.Arabic_Fathername} #{per.Personal.Arabic_Grandfathername} #{per.Personal.Arabic_Familyname}
+                    td.text-center #{per.Personal.Birth_Date.getDate()} / #{per.Personal.Birth_Date.getMonth() + 1} /#{per.Personal.Birth_Date.getFullYear()}
+                    td.text-center #{per.Personal.Birth_Place}
+                    td.text-center #{per.Kinship.kinship_name}
+                    td.text-center 
+                      if per.Personal.Gender==1
+                        |#{per.Personal.Nationality.nationality_male}
+                      else 
+                        |#{per.Personal.Nationality.nationality_female}                        
+                    if per.Personal.Is_Alive==1
+                      td.text-center حي
+                      td.text-center
+                        p(data-placement="top", data-toggle="tooltip", title="واقعة وفاء")
+                          button.btn.btn-success.btn-xs.edit_btn#add_death(data-toggle="modal", data-target="#add",value="#{per.Personal.id}")
+                            span.glyphicon.glyphicon-plus 
+                      td.text-center
+                        p(data-placement="top", data-toggle="tooltip", title="تعديل واقعة وفاة")
+                          button.btn.btn-primary.btn-xs.edit_death_no
+                            span.glyphicon.glyphicon-edit      
+                    else 
+                      td.text-center(style="background-color : #FF7D7D") متوفي 
+                      td.text-center
+                        p(data-placement="top", data-toggle="tooltip", title="هذا الشخص متوفي")
+                          button.btn.btn-success.btn-xs.edit_btn#add_death(data-toggle="modal",disabled, data-target="#add",value="#{per.Personal.id}")
+                            span.glyphicon.glyphicon-plus
+                      td.text-center
+                        p(data-placement="top", data-toggle="tooltip", title="تعديل واقعة وفاة")
+                          button.btn.btn-primary.btn-xs.edit_btn#edit_death(data-toggle="modal", data-target="#edit",value="#{per.Personal.id}")
+                            span.glyphicon.glyphicon-edit                               
+
+  #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+    .modal-dialog.modal-lg
+      .modal-content
+        form#new_birth_form.form(action="/death/new_death", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align إضافة مولود جديد
+          .modal-body
+            ul.nav.nav-tabs(role="tablist")
+              li.active(role="presentation")
+                a(href="#tabOne", aria-controls="tabOne", role="tab", data-toggle="tab") بيانات الواقعة - 1
+              li
+                a(href="#tabTow", aria-controls="tabTow", role="tab", data-toggle="tab") بيانات الواقعة - 2
+            .tab-content 
+              #tabOne.tab-pane.active(role="tabpanel")
+                br
+                .row
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label بلد الوفاء
+                      select#country.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') بلد الوفاء
+                        for country in countrys
+                          option(value="#{country.id}") #{country.country_name}
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label مدينة الوفاء
+                      select#Cities.form-control.selectpicker(name="city_Id", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') مدينة الوفاء
+                  .col-xs-3.col-md-3      
+                    .form-group
+                      label محل الوفاة
+                      input.form-control(type="text", name="pod_area", placeholder="محل الوفاة")
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label تاريخ الوفاة
+                      input#death_date.form-control(type="text", name="death_date", placeholder="تاريخ الوفاة")
+                .row
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label زمن الوفاة
+                      input.form-control(type="text", name="death_time", placeholder="زمن الوفاة")
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label تاريخ تبليغ الوفاة
+                      input#inform_date.form-control(type="text", name="inform_date", placeholder="تاريخ تبليغ الوفاة")
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label  واقعة الوفاة
+                      select.form-control.selectpicker(name="pod_type", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') واقعة الوفاة
+                        option(value="1") مستشفى
+                        option(value="2") منزل
+                        option(value="3") مكان آخر
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label سبب الوفاة
+                      select.form-control.selectpicker(name="DeathreasonId", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') سبب الوفاء
+                        for reason in deathreason
+                          option(value="#{reason.id}") #{reason.reason_name}
+                .row      
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label حالة الوفاء
+                      select#death_type.form-control.selectpicker(name="death_type", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') حالة الوفاء
+                        option(value="1") وفاء طبيعية
+                        option(value="2") وفاء غير طبيعية
+                  #unatural_type      
+                    .col-xs-3.col-md-3
+                      .form-group
+                        label سبب الوفاء غير طبيعية
+                        select.form-control.selectpicker(name="unatural_type", data-live-search="true", data-size=5)
+                          option(value="", style='colr:grey; display:none;') سبب الوفاء غير طبيعية
+                          option(value="1") حادث  
+                          option(value="2") مرض
+                          option(value="3") قتل
+                  .col-xs-6.col-md-6
+                    .form-group      
+                      label(for='pod_description') وصف مكان الوفاء:
+                      textarea#pod_description.form-control(name = "pod_description" ,rows='2')  
+              #tabTow.tab-pane(role="tabpanel")
+                br
+                .row
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label اسم الدكتور
+                      input.form-control(type="text", name="doctor_name", placeholder="اسم الدكتور")
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label التقرير الطبي
+                      input.form-control(type="text", name="medical_report", placeholder="التقرير الطبي")
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label رقم سجل الوفيات
+                      input.form-control(type="text", name="record_no", placeholder="اسرقم سجل الوفايات")
+                  .col-xs-3.col-md-3
+                    .form-group
+                      label رقم ورقة الوفيات
+                      input.form-control(type="text", name="record_paper_no", placeholder="رقم ورقة الوفايات")
+                .row
+                  .col-xs-4.col-md-4
+                    .form-group
+                      label المنطقة
+                      select#region.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='color:grey; display:none;') اختر المنطقة...
+                        for region in regions
+                          option(value="#{region.id}") #{region.region_name}
+                  .col-xs-4.col-md-4
+                    .form-group
+                      label مكتب الاصدار
+                      select#Branches.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') مكتب الاصدار
+                  .col-xs-4.col-md-4
+                    .form-group
+                      label السجل المدني
+                      select#Offices.form-control.selectpicker(name="OfficeId", data-live-search="true", data-size=5)
+                        option(value="", style='colr:grey; display:none;') السجل المدني
+          .modal-footer
+            button.btn.btn-success.btn-lg(type="submit", style="width: 100%;")
+              span.glyphicon.glyphicon-plus
+              |  إضافة
+  script(src='/js/jquery-2.1.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src='/js/bootstrap-select.min.js')
+  script(src='/js/jquery.validate.min.js')
+  script(src='/js/bootstrap-notify.min.js')
+  script(src='/js/moment-with-locales.min.js')
+  script(src='/js/bootstrap-datetimepicker.min.js')
+  script(src='/js/bootstrap-switch.min.js')
+  script(src='/js/jquery.mask.min.js')
+  script(src='/js/helpers.js')
+  script(src='/js/death.js')
+  script.
+    $('#death_date, #inform_date').datetimepicker({
+      useCurrent: false,
+      viewMode: 'years',
+      format: 'YYYY-MM-DD',
+      locale: 'ar-sa'
+    });
+    $("[data-toggle=tooltip]").tooltip();
+    $('#weight').mask('0.000');

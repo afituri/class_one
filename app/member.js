@@ -27,6 +27,7 @@ exports.member_mgr = {
         }
       }]
     }).then(function(result) {
+      console.log(result);
       cb(result);
     });
   },
