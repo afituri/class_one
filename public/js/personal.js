@@ -76,7 +76,6 @@ $(document).ready(function(){
   $('#add_personal_form').submit(function(e) {
     e.preventDefault();
     var isvalidate=$("#add_personal_form").valid();
-    alert(isvalidate);
     if(isvalidate){ 
       if($("input[type='radio'].radioBtnClass").is(':checked')) {
         get_famly_fromId= $("input[type='radio'].radioBtnClass:checked").val();
