@@ -18,15 +18,18 @@ block content
               .form-top-left
                 i.fa.fa-lock
             .form-bottom
-              form.login-form(role="form", action="", method="post")
-                .form-group
+              form#login_form.login-form(role="form", action="", method="post")
+                .form-group.text-right
                   label.sr-only(for="form-username") Username
-                  input.form-username.form-control(type="text", name="", placeholder="اسم المستخدم")
+                  input#user_email.form-username.form-control(type="text", name="user_email", placeholder="اسم المستخدم")
                 .form-group
                   label.sr-only(for="form-password") Password
-                  input.form-password.form-control(type="password", name="", placeholder="كلمة المرور")
+                  input#user_password.form-password.form-control(type="password", name="user_password", placeholder="كلمة المرور")
                 button.btn(type="submit") 
                   span دخول
   script(src='/js/jquery-2.1.1.min.js')
   script(src='/js/bootstrap.min.js')
+  script(src='/js/jquery.validate.min.js')
+  script(src='/js/bootstrap-notify.min.js')
+  script(src='/js/helpers.js')
   script(src='/js/login.js')
