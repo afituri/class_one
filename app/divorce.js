@@ -1,16 +1,57 @@
 var models = require("../models");
 exports.divorce_mgr = {
   get_wife: function (id,cb) {
-    models.sequelize.query('SELECT * FROM Personals as p , Families as f ,Kinships as k ,Members as m WHERE p.id = m.PersonalId and m.FamilyId = f.id and m.KinshipId = 2 and m.KinshipId = k.id  and f.id =?', { 
-      replacements: [id]
-    }).then(function (result) {
+    models.Member.findAll({
+      where: {
+        status: 1,
+        KinshipId : 2
+      },
+      include: [{
+        model: models.Family,
+        where: {
+          status: 1,
+          id:id
+        }
+      },{
+        model: models.Personal,
+        where: {
+          status: 1,
+        }
+      },{
+        model: models.Kinship,
+        where: {
+          status: 1
+        }
+      }]
+    }).then(function(result) {
       cb(result);
     });
   },
   get_father: function (id,cb) {
-    models.sequelize.query('SELECT * FROM Personals as p , Families as f ,Kinships as k ,Members as m WHERE p.id = m.PersonalId and m.FamilyId = f.id and m.KinshipId = 1 and m.KinshipId = k.id  and f.id =?', { 
-      replacements: [id]
-    }).then(function (result) {
+    console.log(id);
+    models.Member.findAll({
+      where: {
+        status: 1,
+        KinshipId :1
+      },
+      include: [{
+        model: models.Family,
+        where: {
+          status: 1,
+          id:id
+        }
+      },{
+        model: models.Personal,
+        where: {
+          status: 1,
+        }
+      },{
+        model: models.Kinship,
+        where: {
+          status: 1
+        }
+      }]
+    }).then(function(result) {
       cb(result);
     });
   },
@@ -40,7 +81,6 @@ exports.divorce_mgr = {
       replacements: [id]
     }).then(function (result) {
       FamId =  result[0][0].from_familyId;
-      console.log(FamId);
         models.sequelize.query('UPDATE `Members` SET `FamilyId`= ?  WHERE `PersonalId` = ? ', { 
       replacements: [FamId,id]
       }).then(function (result1) {
@@ -83,14 +123,5 @@ exports.divorce_mgr = {
       }).catch(function (err) {
         cb(false);
       });
-  },
-  get_family_by_registry_number : function(reg,cb){
-    var reg=reg+"%";
-    models.sequelize.query('select *,f.id as fid from Families as f,Offices as o where  f.Registrynumber LIKE ? and o.id=f.OfficeId', {
-    replacements:[reg]
-    }).then(function (result) {
-      console.log(result[0]);
-      cb(result[0]);
-    });
   },
 };
