@@ -1,0 +1,32 @@
+extends layout
+block contantStyle
+block navigation
+block cPanel
+block content
+  .top-content.font
+    .inner-bg
+      .container
+        .row
+          .col-xs-2.col-xs-offset-5.col-md-2.col-md-offset-5
+            img.img-responsive(src='/img/Logo.png')
+        .row
+          .col-sm-6.col-sm-offset-3.form-box
+            .form-top
+              .form-top-right
+                h3.text-right شاشة الدخول
+                p الرجاء ادخال اسم المستخدم وكلمة المرور
+              .form-top-left
+                i.fa.fa-lock
+            .form-bottom
+              form.login-form(role="form", action="", method="post")
+                .form-group
+                  label.sr-only(for="form-username") Username
+                  input.form-username.form-control(type="text", name="", placeholder="اسم المستخدم")
+                .form-group
+                  label.sr-only(for="form-password") Password
+                  input.form-password.form-control(type="password", name="", placeholder="كلمة المرور")
+                button.btn(type="submit") 
+                  span دخول
+  script(src='/js/jquery-2.1.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src='/js/login.js')
