@@ -1,0 +1,140 @@
+extends layout
+block loginStyle
+block content
+  .container-fulid
+    .col-sm-10.col-md-10
+      .panel.panel-default
+        .panel-heading
+          .row
+            .pull-right(style="margin-right: 10px;")
+              h3.panel-title عرض #{title}
+            .col-xs-6.col-md-6
+              form.form#search_user(role="form")
+                .input-group
+                  input.form-control(type='text',name="search_user" placeholder='بحث...')
+                  .input-group-btn
+                    button.btn.btn-default(type="submit")
+                      i.glyphicon.glyphicon-search
+            .pull-left(style="margin-left: 10px;")
+              a.btn.btn-success(href='#add', role='button',data-toggle='modal')
+                span.glyphicon.glyphicon-plus
+                span.text-none  إضافة مستخدم
+        .table-responsive
+          table.table.table-bordred.table-striped.table-condensed
+            thead
+              tr.info
+                th.text-center اسم المستخدم
+                th.text-center البريد الالكتروني
+                th.text-center رقم الهاتف
+                th.text-center تعديل
+                th.text-center إلغاء
+            tbody
+              tr
+                td.text-center Aladdin
+                td.text-center alaaden3000@gmail.com
+                td.text-center 0926487264
+                td.text-center
+                  p(data-placement="top", data-toggle="tooltip", title="تعديل")
+                    button.btn.btn-primary.btn-xs.edit_btn(data-title="Edit", data-toggle="modal", data-target="#edit", value="")
+                      span.glyphicon.glyphicon-pencil
+                td.text-center
+                  p(data-placement="top", data-toggle="tooltip", title="إلغاء")
+                    button.btn.btn-danger.btn-xs.delete_btn(data-title="Delete", data-toggle="modal", data-target="#delete", value="")
+                      span.glyphicon.glyphicon-trash
+  #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="add", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        form.form#add_user_form(action="", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align إضافة مستحدم جديد
+          .modal-body
+            .row
+              .col-xs-6.col-md-6
+                .form-group
+                  lable اسم المستحدم
+                  input#user_name.form-control(type="text", name="user_name", placeholder="اسم المستخدم")
+              .col-xs-6.col-md-6
+                .form-group
+                  lable رقم الهاتف
+                  input#user_phone.form-control(type="text", name="user_phone", placeholder="رقم الهاتف")
+            .row
+              .col-xs-6.col-md-6
+                .form-group
+                  lable البريد الالكتروني
+                  input#user_email.form-control(type="text", name="user_email", placeholder="البريد الالكتروني")
+              .col-xs-6.col-md-6
+                .form-group
+                  lable تأكيد البريد الالكتروني
+                  input#user_confirm_email.form-control(type="text", name="user_confirm_email", placeholder="تأكيد البريد الالكتروني")
+            .row
+              .col-xs-6.col-md-6
+                .form-group
+                  lable كلمة المرور
+                  input#user_password.form-control(type="password", name="user_password", placeholder="كلمة المرور")
+              .col-xs-6.col-md-6
+                .form-group
+                  lable تأكيد كلمة المرور
+                  input#user_confirm_password.form-control(type="password", name="user_confirm_password", placeholder="تأكيد كلمة المرور")
+          .modal-footer
+            button#add_user_btn.btn.btn-success.btn-lg(type="submit", style="width: 100%;")
+              span.glyphicon.glyphicon-ok-sign
+              |  إضافة
+  #edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        form.form#edit_user_form(action="", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align تعديل مستخدم
+          .modal-body
+            .row
+              .col-xs-6.col-md-6
+                .form-group
+                  lable اسم المستحدم
+                  input#edit_user_name.form-control(type="text", name="edit_user_name", placeholder="اسم المستخدم")
+              .col-xs-6.col-md-6
+                .form-group
+                  lable رقم الهاتف
+                  input#edit_user_phone.form-control(type="text", name="edit_user_phone", placeholder="رقم الهاتف")
+            .row
+              .col-xs-6.col-md-6
+                .form-group
+                  lable كلمة المرور
+                  input#edit_user_password.form-control(type="password", name="edit_user_password", placeholder="كلمة المرور")
+              .col-xs-6.col-md-6
+                .form-group
+                  lable تأكيد كلمة المرور
+                  input#edit_user_confirm_password.form-control(type="password", name="edit_user_confirm_password", placeholder="تأكيد كلمة المرور")
+          .modal-footer
+            button#edit_user_btn.btn.btn-info.btn-lg(type="submit", style="width: 100%;")
+              span.glyphicon.glyphicon-ok-sign
+              |  تعديل
+  #delete.modal.fade(tabindex="-1", role="dialog", aria-labelledby="delete", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        form.form#delete_user_form(action="", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align إلغاء مستخدم
+          .modal-body
+            .alert.alert-danger.h5
+              span.glyphicon.glyphicon-warning-sign
+              |  هل فعلا تريد حذف هذا المستخدم ؟
+          .modal-footer
+            button#delete_user_btn.btn.btn-danger(type="submit")
+              span.glyphicon.glyphicon-ok-sign
+              |  نعم
+            button.btn.btn-default(type="button", data-dismiss="modal")
+              span.glyphicon.glyphicon-remove
+              |  لا
+  script(src='/js/jquery-2.1.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src='/js/bootstrap-select.min.js')
+  script(src='/js/jquery.validate.min.js')
+  script(src='/js/bootstrap-notify.min.js')
+  script(src='/js/helpers.js')
+  script(src='/js/users.js')

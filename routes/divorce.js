@@ -3,15 +3,13 @@ var family = require("../app/family")
   .family_mgr;
 var divorce = require("../app/divorce")
   .divorce_mgr;
-// var branch = require('../app/branch')
-//   .branch_mgr;
 var office = require("../app/office")
   .office_mgr;
 var country = require('../app/country').country_mgr;
 
 var region = require('../app/region').region_mgr;
 module.exports = function (router) {
-
+  /*--------------*/
   router.get('/divorce', function (req, res) {
     family.get_family(function (result) {
       region.get_regions(function(result1) {
@@ -32,20 +30,19 @@ module.exports = function (router) {
   var familyId;
   router.get('/divorce/:id', function (req, res) {
     familyId=req.params.id;
-      divorce.get_wife(familyId,function (wife){  
-        divorce.get_father(familyId,function (father){
-          var names = {
-          wifes : wife,
-          fathers :  father,
-          };
-          res.send(names);
-        })
-      })
+    divorce.get_wife(familyId,function (wife){ 
+     res.send(wife);
+    })
+  });
+  /*-------------*/
+  router.get('/divorce/father/:id', function (req, res) {
+    divorce.get_father(req.params.id,function (father){
+      res.send(father);
+    })
   });
   /*-----------*/
   router.get('/divorce/search_family/:id', function (req, res) {
-      divorce.get_family_by_registry_number(req.params.id,function (family){
-        console.log(family[0]);
+      family.get_family_by_registry_number(req.params.id,function (family){
         res.send(family[0]);
      })
   });
@@ -63,9 +60,8 @@ module.exports = function (router) {
       res.send(per[0]);
     })
   });
-/*==================*/
+  /*==================*/
   router.post('/divorce/new_divorce',function (req, res) {
-    console.log(req.body);
     if(req.body.wife_bt_family == '1'){
       wife_personal_Id = req.body.waif_name;
       divorce.updet_wife_fmly(wife_personal_Id,function(result){
@@ -115,7 +111,6 @@ module.exports = function (router) {
         CityId : req.body.city_Id,
         divorce_type : req.body.divorce_type
       };
-      console.log(divorce_c);
       divorce.add_divorce(divorce_c,function(result2){
         res.redirect('/divorce');  
       });

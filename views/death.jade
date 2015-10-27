@@ -1,4 +1,5 @@
 extends layout
+block loginStyle
 block content
   .container-fulid
     .col-sm-10.col-md-10
@@ -30,8 +31,7 @@ block content
             tbody
               if q
                 for per in personals
-                  tr
-                    
+                  tr                   
                     td.text-center #{per.Personal.national_id}
                     td.text-center #{per.Personal.Arabic_Firstname} #{per.Personal.Arabic_Fathername} #{per.Personal.Arabic_Grandfathername} #{per.Personal.Arabic_Familyname}
                     td.text-center #{per.Personal.Birth_Date.getDate()} / #{per.Personal.Birth_Date.getMonth() + 1} /#{per.Personal.Birth_Date.getFullYear()}
@@ -41,8 +41,7 @@ block content
                       if per.Personal.Gender==1
                         |#{per.Personal.Nationality.nationality_male}
                       else 
-                        |#{per.Personal.Nationality.nationality_female}
-                        
+                        |#{per.Personal.Nationality.nationality_female}                        
                     if per.Personal.Is_Alive==1
                       td.text-center حي
                       td.text-center
@@ -62,8 +61,8 @@ block content
                       td.text-center
                         p(data-placement="top", data-toggle="tooltip", title="تعديل واقعة وفاة")
                           button.btn.btn-primary.btn-xs.edit_btn#edit_death(data-toggle="modal", data-target="#edit",value="#{per.Personal.id}")
-                            span.glyphicon.glyphicon-edit          
-                               
+                            span.glyphicon.glyphicon-edit                               
+
   #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
     .modal-dialog.modal-lg
       .modal-content
