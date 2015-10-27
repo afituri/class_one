@@ -20,9 +20,9 @@ var divorce = require('./divorce')(router);
 
 /* GET home page. */
 router.get('/', function (req, res) {
-	res.render('index', {
-		title: 'الرئيسية'
-	});
+  res.render('index', {
+    title: 'الرئيسية'
+  });
 });
 
 module.exports = router;
