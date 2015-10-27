@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function (req, res) {
   res.render('users', {
     title: 'المستخدمين',
-    users_active: 'active'
+    users_active: 'active',
   });
 });
 
