@@ -48,7 +48,7 @@
         width: 145px;
         height: 91px;
       }
-      .ppppp {
+      .JsBarcode.all.min.jsppppp {
         background: gray;
       }
       p.threee {
@@ -62,7 +62,9 @@
         padding: 7px;
       }
     </style>
-    <meta charset="utf-8"/>
+    <script src="http://localhost:3000/js/jquery-2.1.1.min.js"></script>
+    <script src="http://localhost:3000/js/JsBarcode.all.min.js"></script>
+    <script src="http://localhost:3000/js/barcode.js"></script>
   </head>
   <body>
     <div class="row">
@@ -298,11 +300,10 @@
         </div>
       </div>
     </div>
-    <div style="height: 11px;"></div>
+    <div style="height: 20px;"></div>
      <div class="row">
       <div class="col-xs-3 col-xs-offset-9">
-        <p class="barcode">
-        </p>
+        <img id="barcode">
       </div>
     </div>
   </body>

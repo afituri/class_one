@@ -10,6 +10,47 @@ exports.personal_mgr = {
    });
   },
 
+  edit_personal_model :function(body,id,cb){
+     models.Personal.update(body, {
+    where: {
+      id:id
+    }
+  }).then(function(result) {
+      cb(result);
+    });
+
+  },
+
+
+  edit_Members:function(body,id,cb){
+     models.Member.update(body, {
+    where: {
+      PersonalId:id
+    }
+  }).then(function(result) {
+      cb(result);
+    });
+
+  },
+
+
+  get_personal_only : function(id,cb){
+     models.Personal.findAndCountAll({
+      where: {
+        id: id
+      }
+    }).then(function(personal) {
+      models.Member.findAndCountAll({
+      where: {
+        PersonalId: id
+      }
+    }).then(function(member) {
+      cb({personal:personal.rows,member:member.rows});
+    });
+    });
+  
+  },
+
   add_personal_model : function(body,cb){
     models.Personal.create(body).then(function(result) {
       cb(result);
