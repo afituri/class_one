@@ -16,6 +16,20 @@ exports.personal_mgr = {
     });
   },
   get_personal_by_Registrynumber : function(id,cb){
+    if(id.gender==2){
+      var obj={
+          status: 1,
+          Gender:id.gender,
+          Socialstatus_Id:{
+            $ne:2
+          }
+        };
+    }else{
+      var obj={
+          status: 1,
+          Gender:id.gender,
+        };
+    }
     models.Member.findAll({
       include: [{
         model: models.Family,
@@ -25,10 +39,7 @@ exports.personal_mgr = {
         }
       },{
         model: models.Personal,
-        where: {
-          status: 1,
-          Gender:id.gender
-        }
+        where:obj 
       },{
         model: models.Kinship,
         where: {
