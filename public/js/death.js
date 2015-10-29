@@ -123,6 +123,8 @@ $(document).ready(function(){
     $(this).removeData('bs.modal');
     $('#new_birth_form').validate().resetForm();
   });
-  // Add New Born Validation End
+  $('.edit_death_no').on('click',function(){
 
+    custNotify("danger","خطأ","هذا الشخص غير متوفي!","warning-sign","bounceIn","bounceOut");
+  });
 });

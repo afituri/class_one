@@ -2,12 +2,38 @@ var models = require("../models");
 exports.family_mgr = {
   /* get  all families */
   get_personal_by_family_id : function(id,cb){
-    models.sequelize.query('select * from Personals as p, Members as m where m.FamilyId=? and m.PersonalId=p.id', {
+    models.sequelize.query('select *,p.id as pid from Personals as p, Members as m where m.FamilyId=? and m.PersonalId=p.id', {
       replacements:[id]
     }).then(function (result) {
       cb(result[0]);
     });
   },
+  get_family_by_id : function(id,cb){
+    models.Family.findAndCountAll({
+        where: {
+          status: 1,
+          id:id
+        },
+        order: '`id` ASC',
+        include: [{
+          model: models.Office,
+          where: {
+            status: 1
+          }
+      }]
+      })
+      .then(function (result) {
+        models.Office.findAll({
+            where: {
+              status: 1
+            }
+          })
+          .then(function (offices) {
+            cb({result:result,offices:offices})
+          });
+      });
+    },
+
 
   get_family : function(cb){
     models.Family.findAndCountAll({
