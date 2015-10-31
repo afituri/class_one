@@ -5,7 +5,6 @@ module.exports = function (router) {
   var path = require("path");
   var member = require('../app/member').member_mgr;
   var helpers = require('../app/helpers').helpers_mgr;
-
   // this deathCertificate // widght A4
   router.get('/deathCertificate', function(req, res, next) {
     jsr.render({
