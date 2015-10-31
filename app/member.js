@@ -2,12 +2,19 @@ var models = require("../models");
 exports.member_mgr = {
   get_family_members : function(id,cb){
     models.Member.findAll({
+      order: '`id` ASC',
       include: [{
         model: models.Family,
         where: {
           status: 1,
           Registrynumber:id
-        }
+        },
+        include:[{
+          model: models.Office,
+          where: {
+            status: 1,
+          },
+        }]
       },{
         model: models.Personal,
         where: {
@@ -19,6 +26,12 @@ exports.member_mgr = {
           where: {
             status: 1,
           }
+        },{
+          model: models.City,
+          as: 'city_birth',
+          where: {
+            status: 1,
+          }
         }]
       },{
         model: models.Kinship,
@@ -27,7 +40,6 @@ exports.member_mgr = {
         }
       }]
     }).then(function(result) {
-      console.log(result);
       cb(result);
     });
   },
