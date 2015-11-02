@@ -78,6 +78,7 @@ html
                             span.input-group-btn
                               button.btn.btn-primary(type='button')
                                 | Go!
+
             ul.nav.navbar-nav.navbar-right
               li.dropdown
                 a.dropdown-toggle(href='#', data-toggle='dropdown')
@@ -222,6 +223,29 @@ html
                     else
                       span.glyphicon.glyphicon-folder-close
                     span  الواقعات
+            .panel.panel-default
+              .panel-heading
+                h4.panel-title
+                  a(data-toggle='collapse', data-parent='#accordion', href='#collapseFour')
+                    if collapse_three
+                      span.glyphicon.glyphicon-folder-open
+                    else
+                      span.glyphicon.glyphicon-folder-close
+                    span  التقــارير
+
+              #collapseFour.panel-collapse.collapse(class=collapse_three)
+                .panel-body
+                  table.table
+                    tr
+                      td(class=active_three_one)
+                        span.glyphicon.glyphicon-tasks
+                        a(href='/report_family')  شهادة الميلاد والوفاة
+                    tr
+                      td(class=active_three_two)
+                        span.glyphicon.glyphicon-tasks
+                        a(href='#')  تقارير اخري
+
+
               #collapseThree.panel-collapse.collapse(class=collapse_three)
                 .panel-body
                   table.table

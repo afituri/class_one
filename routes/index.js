@@ -12,6 +12,7 @@ var personal = require('./personal')(router);
 var city = require('./city')(router);
 var reports = require('./reports')(router);
 var report_family = require('./report_family')(router);
+var report_personal = require('./report_personal')(router);
 var deathreason = require('./deathreason')(router);
 var birth = require('./birth')(router);
 var death = require('./death')(router);

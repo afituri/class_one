@@ -1,0 +1,71 @@
+extends layout
+block loginStyle
+block content
+  .container-fulid
+    .col-sm-10.col-md-10
+      
+      .panel.panel-default
+        .panel-heading
+          .row
+            .pull-right(style="margin-right: 10px;")
+              h3#h3.panel-title عرض #{title}
+            .col-xs-6.col-md-6
+              form.form#search_personal(action="")  
+                .input-group
+                  input.form-control(type='text',name="search_name" placeholder='بحث')
+                  .input-group-btn
+                    button.btn.btn-default(type="submit")
+                      i.glyphicon.glyphicon-search
+            
+        .table-responsive
+          table.table.table-bordred.table-striped.table-condensed
+            thead
+              tr.info
+                th.text-center الاسم
+                th.text-center الأب
+                th.text-center الجد
+                th.text-center اللقب
+                //- th.text-center أسم الأم
+                th.text-center تاريخ الميلاد
+                th.text-center مكان الميلاد
+                th.text-center الجنسية
+                th.text-center صلة القرابة
+                th.text-center الرقم الوطني
+                th.text-center شهادة ميلاد
+                th.text-center شهادة الوفاة
+            tbody
+              for i in personal
+                tr
+                  td.text-center #{i.Arabic_Firstname}
+                  td.text-center #{i.Arabic_Fathername}
+                  td.text-center #{i.Arabic_Grandfathername}
+                  td.text-center #{i.Arabic_Familyname}
+           
+                  td.text-center #{i.Birth_Date.getFullYear()}/#{i.Birth_Date.getMonth()+1}/#{i.Birth_Date.getDate()}
+                  td.text-center #{i.Birth_Place}
+                  td.text-center
+                    if i.Gender == 1
+                      | #{i.nationality_male}
+                    if i.Gender == 2
+                      | #{i.nationality_female}
+
+                  td.text-center #{i.kinship_name}
+                  td.text-center #{i.national_id}
+                  td.text-center
+                    p(data-placement="top", data-toggle="tooltip", title="تعديل")
+                      a#porn.btn.btn-primary.btn-xs.edit_btn(herf="/deathCertificate",value="#{i.pid}")
+                        span.glyphicon.glyphicon-file
+                  td.text-center
+                    p(data-placement="top", data-toggle="tooltip", title="إلغاء")
+                      button#deth.btn.btn-primary.btn-xs.edit_btn(value="#{i.pid}",data-title="Delete", data-toggle="modal", data-target="#delete")
+                        span.glyphicon.glyphicon-file
+  script(src='/js/jquery-2.1.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src='/js/bootstrap-switch.min.js')
+  script(src='/js/moment-with-locales.min.js')
+  script(src='/js/jquery.validate.min.js')
+  script(src='/js/bootstrap-notify.min.js')
+  script(src='/js/bootstrap-select.min.js')
+  script(src='/js/bootstrap-datetimepicker.min.js')
+  script(src='/js/helpers.js')
+ 
