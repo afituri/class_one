@@ -6,8 +6,8 @@ module.exports = function (router) {
     family.get_family(function (result) {
       res.render('report_family', { 
         title: 'الأسر',
-        collapse_two: 'in', 
-        active_two_one: 'active',
+        collapse_four: 'in', 
+        active_four_one: 'active',
         familys: result.result.rows,
         offices: result.offices
       });

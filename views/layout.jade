@@ -223,29 +223,6 @@ html
                     else
                       span.glyphicon.glyphicon-folder-close
                     span  الواقعات
-            .panel.panel-default
-              .panel-heading
-                h4.panel-title
-                  a(data-toggle='collapse', data-parent='#accordion', href='#collapseFour')
-                    if collapse_three
-                      span.glyphicon.glyphicon-folder-open
-                    else
-                      span.glyphicon.glyphicon-folder-close
-                    span  التقــارير
-
-              #collapseFour.panel-collapse.collapse(class=collapse_three)
-                .panel-body
-                  table.table
-                    tr
-                      td(class=active_three_one)
-                        span.glyphicon.glyphicon-tasks
-                        a(href='/report_family')  شهادة الميلاد والوفاة
-                    tr
-                      td(class=active_three_two)
-                        span.glyphicon.glyphicon-tasks
-                        a(href='#')  تقارير اخري
-
-
               #collapseThree.panel-collapse.collapse(class=collapse_three)
                 .panel-body
                   table.table
@@ -265,30 +242,25 @@ html
                       td(class=active_three_four)
                         span.glyphicon.glyphicon-tasks
                         a(href='/marriage')  واقـــعـــة زواج
-            //-.panel.panel-default
+            .panel.panel-default
               .panel-heading
                 h4.panel-title
                   a(data-toggle='collapse', data-parent='#accordion', href='#collapseFour')
-                    span.glyphicon.glyphicon-file
-                    span  Reports
+                    if collapse_four
+                      span.glyphicon.glyphicon-folder-open
+                    else
+                      span.glyphicon.glyphicon-folder-close
+                    span  التقــارير
               #collapseFour.panel-collapse.collapse(class=collapse_four)
                 .panel-body
                   table.table
                     tr
                       td(class=active_four_one)
-                        span.glyphicon.glyphicon-usd
-                        a(href='#')  Sales
+                        span.glyphicon.glyphicon-tasks
+                        a(href='/report_family')  شهادة الميلاد والوفاة
                     tr
                       td(class=active_four_two)
-                        span.glyphicon.glyphicon-user
-                        a(href='#')  Customers
-                    tr
-                      td(class=active_four_three)
                         span.glyphicon.glyphicon-tasks
-                        a(href='#')  Products
-                    tr
-                      td(class=active_four_four)
-                        span.glyphicon.glyphicon-shopping-cart
-                        a(href='#')  Shopping Cart
+                        a(href='#')  تقارير اخري
     block content
     
