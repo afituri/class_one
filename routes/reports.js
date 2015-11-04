@@ -5,7 +5,6 @@ module.exports = function (router) {
   var path = require("path");
   var member = require('../app/member').member_mgr;
   var helpers = require('../app/helpers').helpers_mgr;
-
   // this deathCertificate // widght A4
   router.get('/deathCertificate', function(req, res, next) {
     jsr.render({
@@ -39,18 +38,21 @@ module.exports = function (router) {
   });
 
   // this certificateOfFamilyStatus // widght A4
-  router.get('/certificateOfFamilyStatus', function(req, res, next) {
-    jsr.render({
-      template: {
-        content:  fs.readFileSync(path.join(__dirname, "../views/reports/certificateOfFamilyStatus.html"), "utf8"),
-        phantom:{
-          format: 'A4',
+  router.get('/certificateOfFamilyStatus/:id', function(req, res, next) {
+    member.get_family_members(req.params.id,function(result){
+      jsr.render({
+        template: {
+          content:  fs.readFileSync(path.join(__dirname, "../views/reports/certificateOfFamilyStatus.html"), "utf8"),
+          phantom:{
+            format: 'A4',
+          },
+          recipe: "phantom-pdf",
+          helpers: certificateOfFamilyStatus.toString()
         },
-        recipe: "phantom-pdf",
-      },
-      // data:{allResults : results , national:nationality}
-    }).then(function (response) {
-      response.result.pipe(res);
+        data:{Results : result}
+      }).then(function (response) {
+        response.result.pipe(res);
+      });
     });
   });
 
@@ -353,6 +355,140 @@ module.exports = function (router) {
     }).then(function (response) {
       response.result.pipe(res);
     });
-  })
+  });
+
+  function certificateOfFamilyStatus(data){
+    if(data[0].Personal.Gender==1){
+      var sir = 'السيد';
+      var fname = 'ولقبه';
+      var id_pirs = 'بطاقته';
+      var father = 'والده';
+      var mother = 'والدته';
+      var family = 'عائلته';
+    }else{
+      var sir = 'السيدة';
+      var fname = 'ولقبها';
+      var id_pirs = 'بطاقتها';
+      var father = 'والدها';
+      var mother = 'والدتها';
+      var family = 'عائلتها';
+    }
+    var html='';
+      html+='<div class="row">\
+      <div class="col-xs-8 col-xs-offset-4">\
+        <div class="fontSizeOfficeName">\
+          <div> مكتب السجل المدني <span>:</span>'+data[0].Family.Office.office_name+'</div>\
+        </div>\
+      </div>\
+    </div>\
+    <div class="row">\
+      <div class="col-xs-4">\
+        <p class="threee fontSizeBody">\
+           رقم قيد الـعـائـلة <span>:</span>'+data[0].Family.Registrynumber+'<br>\
+           رقم ورقة العائلة <span>:</span>'+data[0].Family.Recordnumber+'</p>\
+      </div>\
+      <div class="col-xs-8">\
+        <h5 class="fontSize text-right">\
+          شهادة بالوضع العائلي\
+        </h5>\
+      </div>\
+    </div>\
+    <div style="height: 9px;"></div>\
+    <div class="panel rcorners3 fontSizeBody">\
+      <div class="row">\
+        <div class="col-xs-12">\
+          <div class="ppppp"> يشهد مكتب السجل المدني بـ <span>:</span>'+data[0].Family.Office.office_name+'</div>\
+        </div>\
+      </div>\
+      <div style="height: 9px;"></div>\
+      <div class="row">\
+        <div class="col-xs-8">\
+          <div> بأن '+sir+' <span>:</span>'+data[0].Personal.Arabic_Firstname+' '+data[0].Personal.Arabic_Fathername+' '+data[0].Personal.Arabic_Grandfathername+ '</div>\
+        </div>\
+        <div class="col-xs-4">\
+          <div> '+fname+' <span>:</span> '+data[0].Personal.Arabic_Familyname+' </div>\
+        </div>\
+      </div>\
+      <div style="height: 9px;"></div>\
+      <div class="row">\
+        <div class="col-xs-4">\
+          <div> ورقم '+id_pirs+' الشخصية <span>:</span> /////////// </div>\
+        </div>\
+        <div class="col-xs-4">\
+          <div> وتاريخ صدورها <span>:</span> ////////// </div>\
+        </div>\
+        <div class="col-xs-4">\
+          <div> وجه صدورها <span>:</span> ////////// </div>\
+        </div>\
+      </div>\
+      <div style="height: 9px;"></div>\
+      <div class="row">\
+        <div class="col-xs-6">\
+          <div> وأسم '+father+' <span>:</span> '+data[0].Personal.Arabic_Fathername+' '+data[0].Personal.Arabic_Grandfathername+' '+data[0].Personal.Arabic_Familyname+ ' </div>\
+        </div>\
+        <div class="col-xs-6">\
+          <div> وأسم '+mother+' <span>:</span> '+data[0].Personal.Arabic_Motherfirstname+' '+data[0].Personal.Arabic_Motherfathername+' '+data[0].Personal.Arabic_Mothergrandfathername+ '</div></div>\
+      </div>\
+      <div style="height: 9px;"></div>\
+      <div class="row">\
+        <div class="col-xs-6">\
+          <div> من منطقة <span>:</span> '+data[0].Personal.city_birth.city_name+' </div>\
+        </div>\
+        <div class="col-xs-6">\
+          <div> مسجلة بالسجل المدني تحت رقم <span>:</span> '+data[0].Family.Registrynumber+' </div>\
+        </div>\
+      </div>\
+      <div style="height: 9px;"></div>\
+      <div class="row">\
+        <div class="col-xs-12">\
+          <div> وأن '+family+' تتألف كالاتي </div>\
+        </div>\
+      </div>\
+      <div style="height: 11px;"></div>\
+      <table class="table table-bordered fontSizeBody">\
+        <tr>\
+          <th> الرقم الوطني </th>\
+          <th> الاسم </th>\
+          <tH> اللقب </th>\
+          <th> أسم الاب </th>\
+          <th> أسم الام </th>\
+          <th> صلة القرابة </th>\
+          <th> تاريخ الميلاد </th>\
+          <th> محل الميلاد </th>\
+        </tr>';
+        for ( i in data){
+          var d = new Date(data[i].Personal.Birth_Date);
+          if(data[i].Personal.national_id==null){
+            var national_id = ''
+          }else{
+            var national_id = data[i].Personal.national_id;
+          }
+          html+= '<tr>\
+              <td> '+national_id+' </td>\
+              <td> '+data[i].Personal.Arabic_Firstname+' </td>\
+              <td> '+data[i].Personal.Arabic_Familyname+' </td>\
+              <td> '+data[i].Personal.Arabic_Fathername+' </td>\
+              <td> '+data[i].Personal.Arabic_Motherfirstname+' '+data[i].Personal.Arabic_Motherfathername+' '+data[i].Personal.Arabic_Mothergrandfathername+ ' </td><td> '+data[i].Kinship.kinship_name+' </td>\
+              <td> '+d.getDate()+' / '+parseFloat(d.getMonth()+1)+' / '+d.getFullYear()+'</td><td> '+data[0].Personal.city_birth.city_name+' </td>\
+            </tr>';
+        }
+        html+= '</table>\
+      <div style="height: 11px;"></div>\
+      <div class="row">\
+        <div class="col-xs-12">\
+          <div> أعطيت هذه الشهادة بناء على طلبها وقيدت بسجل الشهادات رقم <span>:</span> //////////// </div>\
+        </div>\
+      </div>\
+      <div style="height: 9px;"></div>\
+      <div class="row">\
+        <div class="col-xs-6">\
+          <div> وصدرت بتاريخ <span>:</span> 27/05/2015 </div>\
+        </div>\
+        <div class="col-xs-6">\
+          <div> الموافق <span>:</span> السابع والعشرون من مايو عام ألفان وخمسة عشر </div>\
+        </div>\
+      </div>';
+    return html;
+  }
 
 }

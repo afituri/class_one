@@ -78,6 +78,7 @@ html
                             span.input-group-btn
                               button.btn.btn-primary(type='button')
                                 | Go!
+
             ul.nav.navbar-nav.navbar-right
               li.dropdown
                 a.dropdown-toggle(href='#', data-toggle='dropdown')
@@ -241,30 +242,25 @@ html
                       td(class=active_three_four)
                         span.glyphicon.glyphicon-tasks
                         a(href='/marriage')  واقـــعـــة زواج
-            //-.panel.panel-default
+            .panel.panel-default
               .panel-heading
                 h4.panel-title
                   a(data-toggle='collapse', data-parent='#accordion', href='#collapseFour')
-                    span.glyphicon.glyphicon-file
-                    span  Reports
+                    if collapse_four
+                      span.glyphicon.glyphicon-folder-open
+                    else
+                      span.glyphicon.glyphicon-folder-close
+                    span  التقــارير
               #collapseFour.panel-collapse.collapse(class=collapse_four)
                 .panel-body
                   table.table
                     tr
                       td(class=active_four_one)
-                        span.glyphicon.glyphicon-usd
-                        a(href='#')  Sales
+                        span.glyphicon.glyphicon-tasks
+                        a(href='/report_family')  شهادة الميلاد والوفاة
                     tr
                       td(class=active_four_two)
-                        span.glyphicon.glyphicon-user
-                        a(href='#')  Customers
-                    tr
-                      td(class=active_four_three)
                         span.glyphicon.glyphicon-tasks
-                        a(href='#')  Products
-                    tr
-                      td(class=active_four_four)
-                        span.glyphicon.glyphicon-shopping-cart
-                        a(href='#')  Shopping Cart
+                        a(href='#')  تقارير اخري
     block content
     

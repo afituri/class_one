@@ -200,30 +200,195 @@ $(document).ready(function(){
     $('#delete_marriage').val(id);
   });
 
-if($getMsg["msg"]==1){
-  custNotify("success","نجاح","تم حذف العائلة بنجاح","ok-sign","bounceInDown","bounceOutUp");
-  replaceUrl('/marriage');    
-} else if ($getMsg["msg"]==2) {
-  custNotify("danger","خطأ","لا يمكن حذف هذه العائ لاعتماد كيانات اخرى عليها","warning-sign","bounceIn","bounceOut");
-  replaceUrl('/marriage');
-} else if ($getMsg["msg"]==11) {
-  custNotify("success","نجاح","لقد قمت بتعديل الحقول بنجاح","ok-sign","bounceInDown","bounceOut");
-  replaceUrl('/marriage');
-} else if ($getMsg["msg"]==22) {
-  $('#add').modal('hide');
-  custNotify("success","نجاح","لقد قمت باضافة واقة بنجاح","ok-sign","bounceInDown","bounceOut");
-  replaceUrl('/marriage');
-} else if ($getMsg["msg"]==33) {
-   $('#add').modal('hide');
-  custNotify("danger","خطأ","الرجاء تعبئة جميع البيانات بالطريقة الصحيحة","warning-sign","bounceIn","bounceOut");
-  replaceUrl('/marriage');
-} else if ($getMsg["msg"]==4) {
-  $('#add').modal('hide');
-  custNotify("success","نجاح","لقد قمت بتعديل الواقعة بنجاح","ok-sign","bounceInDown","bounceOut");
-  replaceUrl('/marriage/marriages');
-} else if ($getMsg["msg"]==5) {
-  $('#add').modal('hide');
-  custNotify("danger","خطأ","الرجاء تعبئة جميع البيانات بالطريقة الصحيحة","warning-sign","bounceIn","bounceOut");
-  replaceUrl('/marriage/marriages');
-} 
+  if($getMsg["msg"]==1){
+    custNotify("success","نجاح","تم حذف العائلة بنجاح","ok-sign","bounceInDown","bounceOutUp");
+    replaceUrl('/marriage');    
+  } else if ($getMsg["msg"]==2) {
+    custNotify("danger","خطأ","لا يمكن حذف هذه العائ لاعتماد كيانات اخرى عليها","warning-sign","bounceIn","bounceOut");
+    replaceUrl('/marriage');
+  } else if ($getMsg["msg"]==11) {
+    custNotify("success","نجاح","لقد قمت بتعديل الحقول بنجاح","ok-sign","bounceInDown","bounceOut");
+    replaceUrl('/marriage');
+  } else if ($getMsg["msg"]==22) {
+    $('#add').modal('hide');
+    custNotify("success","نجاح","لقد قمت باضافة واقة بنجاح","ok-sign","bounceInDown","bounceOut");
+    replaceUrl('/marriage');
+  } else if ($getMsg["msg"]==33) {
+     $('#add').modal('hide');
+    custNotify("danger","خطأ","الرجاء تعبئة جميع البيانات بالطريقة الصحيحة","warning-sign","bounceIn","bounceOut");
+    replaceUrl('/marriage');
+  } else if ($getMsg["msg"]==4) {
+    $('#add').modal('hide');
+    custNotify("success","نجاح","لقد قمت بتعديل الواقعة بنجاح","ok-sign","bounceInDown","bounceOut");
+    replaceUrl('/marriage/marriages');
+  } else if ($getMsg["msg"]==5) {
+    $('#add').modal('hide');
+    custNotify("danger","خطأ","الرجاء تعبئة جميع البيانات بالطريقة الصحيحة","warning-sign","bounceIn","bounceOut");
+    replaceUrl('/marriage/marriages');
+  }
+  /*----------- validate in add Marriage----------*/
+  $("#new_marriage").validate({
+    ignore: ':not(select:hidden, input:visible, textarea:visible)',
+    ignore:[],
+    rules:{
+      marriage_type:{
+        required: true
+      },
+      marriage_date:{
+        required: true
+      },
+      marriage_place:{
+        required: true
+      },
+      contract_number:{
+        required: true
+      },
+      record_marriage_nu:{
+        required: true
+      },
+      inform_date:{
+        required: true
+      },
+      Recordnumber:{
+        required: true
+      },
+      FamilyRecordDate:{
+        required: true
+      },
+      Registrynumber:{
+        required: true
+      },
+      CityId:{
+        required: true
+      }
+    },
+    messages:{
+      marriage_type:{
+        required: "الرجاء اختيار نوع الزواج!"
+      },
+      marriage_date:{
+        required: "الرجاء ادخال تاريخ الزواج!"
+      },
+      marriage_place:{
+        required: "الرجاء ادخال مكان الزواج!"
+      },
+      contract_number:{
+        required: "الرجاء ادخال رقم العقد!"
+      },
+      record_marriage_nu:{
+        required: "الرجاء ادخال رقم السجل!"
+      },
+      inform_date:{
+        required: "الرجاء ادخال تاريخ السجل!"
+      },
+      Recordnumber:{
+        required: "الرجاء ادخال رقم ورقة العائلة!"
+      },
+      FamilyRecordDate:{
+        required: "الرجاء اختيار تاريخ فتح ورقة العائلة!"
+      },
+      Registrynumber:{
+        required: "الرجاء ادخال رقم القيد الجديد!"
+      },
+      CityId:{
+        required: "الرجاء اختيار مدينة الزواج!"
+      }
+    },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
+    },
+    highlight: function(element) {
+      $(element).closest('.row').addClass('has-error');
+    },
+    unhighlight: function(element) {
+      $(element).closest('.row').removeClass('has-error');
+    },
+  });
+  $("#edit_marriage").validate({
+    ignore: ':not(select:hidden, input:visible, textarea:visible)',
+    ignore:[],
+    rules:{
+      marriage_type:{
+        required: true
+      },
+      marriage_date:{
+        required: true
+      },
+      marriage_place:{
+        required: true
+      },
+      contract_number:{
+        required: true
+      },
+      record_marriage_nu:{
+        required: true
+      },
+      inform_date:{
+        required: true
+      },
+      Recordnumber:{
+        required: true
+      },
+      FamilyRecordDate:{
+        required: true
+      },
+      Registrynumber:{
+        required: true
+      },
+      CityId:{
+        required: true
+      }
+    },
+    messages:{
+      marriage_type:{
+        required: "الرجاء اختيار نوع الزواج!"
+      },
+      marriage_date:{
+        required: "الرجاء ادخال تاريخ الزواج!"
+      },
+      marriage_place:{
+        required: "الرجاء ادخال مكان الزواج!"
+      },
+      contract_number:{
+        required: "الرجاء ادخال رقم العقد!"
+      },
+      record_marriage_nu:{
+        required: "الرجاء ادخال رقم السجل!"
+      },
+      inform_date:{
+        required: "الرجاء ادخال تاريخ السجل!"
+      },
+      Recordnumber:{
+        required: "الرجاء ادخال رقم ورقة العائلة!"
+      },
+      FamilyRecordDate:{
+        required: "الرجاء اختيار تاريخ فتح ورقة العائلة!"
+      },
+      Registrynumber:{
+        required: "الرجاء ادخال رقم القيد الجديد!"
+      },
+      CityId:{
+        required: "الرجاء اختيار مدينة الزواج!"
+      }
+    },
+    errorClass: 'custom-error',
+    errorPlacement: function (error, element) {
+      if ($(element).is('select')) {
+          element.next().after(error);
+      } else {
+          error.insertAfter(element);
+      }
+    },
+    highlight: function(element) {
+      $(element).closest('.row').addClass('has-error');
+    },
+    unhighlight: function(element) {
+      $(element).closest('.row').removeClass('has-error');
+    },
+  });
 });
