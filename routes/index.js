@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var login = require('../app/login')(router);
 var region = require('./region')(router);
 var country = require('./country')(router);
 var manucipality = require('./manucipality')(router);
@@ -16,6 +17,8 @@ var birth = require('./birth')(router);
 var death = require('./death')(router);
 var marriage = require('./marriage')(router);
 var divorce = require('./divorce')(router);
+var user = require('./user')(router);
+
 
 
 /* GET login page. */

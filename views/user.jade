@@ -44,7 +44,7 @@ block content
   #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="add", aria-hidden="true")
     .modal-dialog
       .modal-content
-        form.form#add_user_form(action="", method="post", accept-charset="utf-8", role="form")
+        form.form#add_user_form(action="/user/add_user", method="post", accept-charset="utf-8", role="form")
           .modal-header
             button.close(type="button", data-dismiss="modal", aria-hidden="true")
               span.glyphicon.glyphicon-remove(aria-hidden="true")
@@ -54,16 +54,16 @@ block content
               .col-xs-6.col-md-6
                 .form-group
                   lable اسم المستحدم
-                  input#user_name.form-control(type="text", name="user_name", placeholder="اسم المستخدم")
+                  input#user_name.form-control(type="text", name="name", placeholder="اسم المستخدم")
               .col-xs-6.col-md-6
                 .form-group
                   lable رقم الهاتف
-                  input#user_phone.form-control(type="text", name="user_phone", placeholder="رقم الهاتف")
+                  input#user_phone.form-control(type="text", name="phone", placeholder="رقم الهاتف")
             .row
               .col-xs-6.col-md-6
                 .form-group
                   lable البريد الالكتروني
-                  input#user_email.form-control(type="text", name="user_email", placeholder="البريد الالكتروني")
+                  input#user_email.form-control(type="text", name="email", placeholder="البريد الالكتروني")
               .col-xs-6.col-md-6
                 .form-group
                   lable تأكيد البريد الالكتروني
@@ -137,4 +137,4 @@ block content
   script(src='/js/jquery.validate.min.js')
   script(src='/js/bootstrap-notify.min.js')
   script(src='/js/helpers.js')
-  script(src='/js/users.js')
+  script(src='/js/user.js')

@@ -3,10 +3,10 @@ $(document).ready(function(){
   /*----------- validate in add user----------*/
   $("#add_user_form").validate({
     rules:{
-      user_name:{
+      name:{
         required: true
       },
-      user_email:{
+      email:{
         required: true,
         email: true
       },
@@ -15,13 +15,13 @@ $(document).ready(function(){
         email: true,
         equalTo: "#user_email"
       },
-      user_phone:{
+      phone:{
         required: true,
         number: true,
         maxlength: 14,
         minlength: 10
       },
-      user_password:{
+      password:{
         required: true,
       },
       user_confirm_password:{
@@ -30,10 +30,10 @@ $(document).ready(function(){
       },
     },
     messages:{
-      user_name:{
+      name:{
         required: "الرجاء ادخال اسم المستحدم!"
       },
-      user_email:{
+      email:{
         required: "الرجاء ادخال البريد الالكتروني!",
         email: "الرجاء ادخال بريد الكتروني صالح!"
       },
@@ -42,13 +42,13 @@ $(document).ready(function(){
         email: "الرجاء ادخال بريد الكتروني صالح!",
         equalTo: "عفوا البريد الالكتروني غير مطابق!"
       },
-      user_phone:{
+      phone:{
         required: "الرجاء ادخال رقم الهاتف!",
         number: "<h6>يجب ان يحتوي رقم الهاتف علي ارقام صحيحة فقط!</h6>",
         maxlength: "<h6>يجب ان يحتوي رقم الهاتف علي اﻷكثر 14 رقم</h6>",
         minlength: "<h6>يجب ان يحتوي رقم الهاتف علي اﻷقل 10 رقم</h6>",
       },
-      user_password:{
+      password:{
         required: "الرجاء ادخال كلمة المرور!",
       },
       user_confirm_password:{

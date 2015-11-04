@@ -9,7 +9,6 @@ module.exports = function(sequelize, DataTypes) {
   	Is_Closed: {type:DataTypes.INTEGER(2),defaultValue:1},
     FamilyType:{type:DataTypes.INTEGER(1),defaultValue:1}, 
   	status:{type:DataTypes.INTEGER(1),defaultValue:1} 
-	      
   }, {
     classMethods: {
       associate: function(models) {
