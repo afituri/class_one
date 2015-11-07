@@ -18,6 +18,17 @@ module.exports = function (router) {
       res.redirect(result);
     }); 
   });
+
+  router.get('/user/get_user/:id', function(req, res) {
+    user.get_user(req.params.id,function(result){
+      res.send(result);
+    }); 
+  });
+  router.post('/user/update', function(req, res) {
+    user.update_user(req.body,function(result){
+      res.redirect(result);
+    }); 
+  });
   /* Edit Regions page. */
   // router.post('/region/edit_region', function(req, res) {
   //   region.edit_region(req.body,function(result){

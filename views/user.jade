@@ -29,22 +29,23 @@ block content
                 th.text-center تعديل
                 th.text-center إلغاء
             tbody
-              tr
-                td.text-center Aladdin
-                td.text-center alaaden3000@gmail.com
-                td.text-center 0926487264
-                td.text-center
-                  p(data-placement="top", data-toggle="tooltip", title="تعديل")
-                    button.btn.btn-primary.btn-xs.edit_btn(data-title="Edit", data-toggle="modal", data-target="#edit", value="")
-                      span.glyphicon.glyphicon-pencil
-                td.text-center
-                  p(data-placement="top", data-toggle="tooltip", title="إلغاء")
-                    button.btn.btn-danger.btn-xs.delete_btn(data-title="Delete", data-toggle="modal", data-target="#delete", value="")
-                      span.glyphicon.glyphicon-trash
+              for u in users
+                tr
+                  td.text-center #{u.name}
+                  td.text-center #{u.email}
+                  td.text-center #{u.phone}
+                  td.text-center
+                    p(data-placement="top", data-toggle="tooltip", title="تعديل")
+                      button#edit_btn.btn.btn-primary.btn-xs.edit_btn(data-title="Edit", data-toggle="modal", data-target="#edit", value="#{u.id}")
+                        span.glyphicon.glyphicon-pencil
+                  td.text-center
+                    p(data-placement="top", data-toggle="tooltip", title="إلغاء")
+                      button.btn.btn-danger.btn-xs.delete_btn(data-title="Delete", data-toggle="modal", data-target="#delete", value="#{u.id}")
+                        span.glyphicon.glyphicon-trash
   #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="add", aria-hidden="true")
     .modal-dialog
       .modal-content
-        form.form#add_user_form(action="/user/add_user", method="post", accept-charset="utf-8", role="form")
+        form.form#add_user_form(action="/user/new_user", method="post", accept-charset="utf-8", role="form")
           .modal-header
             button.close(type="button", data-dismiss="modal", aria-hidden="true")
               span.glyphicon.glyphicon-remove(aria-hidden="true")
@@ -84,7 +85,7 @@ block content
   #edit.modal.fade(tabindex="-1", role="dialog", aria-labelledby="edit", aria-hidden="true")
     .modal-dialog
       .modal-content
-        form.form#edit_user_form(action="", method="post", accept-charset="utf-8", role="form")
+        form.form#edit_user_form(action="/user/update", method="post", accept-charset="utf-8", role="form")
           .modal-header
             button.close(type="button", data-dismiss="modal", aria-hidden="true")
               span.glyphicon.glyphicon-remove(aria-hidden="true")
@@ -95,6 +96,7 @@ block content
                 .form-group
                   lable اسم المستحدم
                   input#edit_user_name.form-control(type="text", name="edit_user_name", placeholder="اسم المستخدم")
+                  input#id_user(type='hidden' name='id')
               .col-xs-6.col-md-6
                 .form-group
                   lable رقم الهاتف

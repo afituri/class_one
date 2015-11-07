@@ -76,11 +76,11 @@ $(document).ready(function(){
         maxlength: 14,
         minlength: 10
       },
-      edit_user_password:{
-        required: true,
-      },
+      // edit_user_password:{
+      //   required: true,
+      // },
       edit_user_confirm_password:{
-        required: true,
+        // required: true,
         equalTo: "#edit_user_password",
       },
     },
@@ -124,4 +124,12 @@ $(document).ready(function(){
   });
 
   // Validation function end
+  $('body').on('click','#edit_btn', function(){
+    var id = $(this).val();
+     $.get('/user/get_user/'+id,function(data){
+      $('#id_user').val(id);
+      $('#edit_user_name').val(data.name);
+      $('#edit_user_phone').val(data.phone);
+     });
+  });
 });

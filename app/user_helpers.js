@@ -7,7 +7,7 @@ module.exports = {
   /* here we add a new user to the system */
   add_user: function (body, cb) {
     var salt = easyPbkdf2.generateSalt(), //we generate a new salt for every new user
-        password = body.password; //we generate a new password for every new user
+        password = body.user_password; //we generate a new password for every new user
     easyPbkdf2.secureHash( password, salt, function( err, passwordHash, originalSalt ) {
       var obj={
             name : body.name,
@@ -15,6 +15,7 @@ module.exports = {
             password : passwordHash,
             phone : body.phone,
             salt : originalSalt,
+            level:1,
           }
       models.User.create(obj).then(function() {
         cb(true);
@@ -23,15 +24,21 @@ module.exports = {
   },
   updateUser: function (body, cb) {
     var salt = easyPbkdf2.generateSalt(), //we generate a new salt for every new user
-        password = body.password; //we generate a new password for every new user
+        password = body.edit_user_password; //we generate a new password for every new user
     easyPbkdf2.secureHash( password, salt, function( err, passwordHash, originalSalt ) {
-      var obj={
-            name : body.name,
-            email : body.email,
-            password : passwordHash,
-            phone : body.phone,
-            salt : originalSalt,
-          }
+      if(body.edit_user_password){
+        var obj={
+              name : body.edit_user_name,
+              password : passwordHash,
+              phone : body.edit_user_phone,
+              salt : originalSalt,
+            }
+      }else{
+        var obj={
+              name : body.edit_user_name,
+              phone : body.edit_user_phone,
+            }
+      }
       models.User.update(obj,{
           where: {
              id: body.id
@@ -39,6 +46,18 @@ module.exports = {
       }).then(function(user) {
         cb(user);
       });
+    });
+  },
+
+  update_pass: function (pass, cb) {
+    var salt = easyPbkdf2.generateSalt(), //we generate a new salt for every new user
+        password = pass; //we generate a new password for every new user
+    easyPbkdf2.secureHash( pass, salt, function( err, passwordHash, originalSalt ) {
+      var obj={
+            password : passwordHash,
+            salt : originalSalt,
+          }
+      cb(obj);
     });
   },
   /* here we check if the user have root access */

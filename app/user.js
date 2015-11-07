@@ -11,14 +11,34 @@ exports.user_mgr = {
       cb(users)
     });
   },
+
+  get_user : function(id,cb){
+    models.User.findOne({
+      where: {
+        status: 1,
+        id:id
+      }
+    }).then(function(user) {
+      cb(user);
+    });
+  },
    /* add new region*/
   add_user : function(body,cb){
-    // user_helpers.add_user(body,function(result)) {
-    //   if(result) {
-    //     cb('/user?msg=1');
-    //   } else {
-    //     cb('/user?msg=3');
-    //   }
-    // }
-  }
+    user_helpers.add_user(body,function(result) {
+      if(result) {
+        cb('/user?msg=1');
+      } else {
+        cb('/user?msg=3');
+      }
+    });
+  },
+  update_user: function(body,cb){
+    user_helpers.updateUser(body,function(result) {
+      if(result) {
+        cb('/user?msg=1');
+      } else {
+        cb('/user?msg=3');
+      }
+    });
+  },
 };
