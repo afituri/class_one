@@ -3,7 +3,7 @@ var user = require('../app/user').user_mgr;
 var user_helpers = require('../app/user_helpers');
 module.exports = function (router) {
   /* GET Regions page. */ 
-  router.get('/user', function(req, res) {
+  router.get('/user',user_helpers.isLogin, function(req, res) {
     user.get_users(function(result){
       res.render('user', { 
         title: 'المستخدمين', 
