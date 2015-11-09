@@ -137,4 +137,23 @@ $(document).ready(function(){
     $('#id_u').val(id);
   });
 
+  if($getMsg["msg"]==1){
+    custNotify("success","نجاح","تم إضافة مستخدم بنجاح","ok-sign","bounceInDown","bounceOutUp");
+    replaceUrl('/user');    
+  } else if ($getMsg["msg"]==2) {
+    custNotify("danger","خطأ","لم تتم عملية الاضافة","warning-sign","bounceIn","bounceOut");
+    replaceUrl('/user');
+  } else if($getMsg["msg"]==3){
+    custNotify("success","نجاح","تم التعديل بنجاح","ok-sign","bounceInDown","bounceOutUp");
+    replaceUrl('/user');   
+  } else if($getMsg["msg"]==4){
+    custNotify("danger","خطأ","لم تتم عملية التعديل","warning-sign","bounceIn","bounceOut");
+    replaceUrl('/user');   
+  }else if($getMsg["msg"]==5){
+    custNotify("success","نجاح","تم مسح مستخدم بنجاح","ok-sign","bounceInDown","bounceOutUp");
+    replaceUrl('/user');   
+  } else if($getMsg["msg"]==6){
+    custNotify("danger","خطأ","لم تتم عملية المسح","warning-sign","bounceIn","bounceOut");
+    replaceUrl('/user');   
+  }
 });

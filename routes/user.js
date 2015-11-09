@@ -31,7 +31,7 @@ module.exports = function (router) {
   });
   router.post('/user/delete', function(req, res) {
     user.delete_user(req.body.id_u,function(result){
-      res.redirect('/user');
+      res.redirect(result);
     }); 
   });
   /* Edit Regions page. */
