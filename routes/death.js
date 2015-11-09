@@ -5,9 +5,10 @@ var member = require('../app/member').member_mgr;
 var personal = require('../app/personal').personal_mgr;
 var death = require('../app/death').death_mgr;
 var deathreason = require("../app/deathreason").deathreason_mgr;
+var user_helpers = require('../app/user_helpers');
 var url=require('url');
 module.exports = function (router) {
-  router.get('/death', function (req, res) {
+  router.get('/death',user_helpers.isLogin, function (req, res) {
     var id = null;
     if(url.parse(req.url, true).query.q){
       id = url.parse(req.url, true).query.q;
@@ -43,10 +44,10 @@ module.exports = function (router) {
     });
    });
   var perid;
-  router.get('/death/personal_id/:id', function (req, res) {
+  router.get('/death/personal_id/:id',user_helpers.isLogin, function (req, res) {
     perid=req.params.id;
   });
-  router.post('/death/new_death',function (req, res) {
+  router.post('/death/new_death',user_helpers.isLogin, function (req, res) {
     
     PersonalIdin =perid ;
     var death_c={

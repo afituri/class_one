@@ -2,7 +2,6 @@ var passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy,
   easyPbkdf2 = require("easy-pbkdf2")();
 var models = require('../models');
-
 //read the passport api docs if you wanna know what this does
 passport.use(new LocalStrategy(
   function (username, password, done) {
@@ -44,7 +43,7 @@ module.exports = function (router) {
     findById(req.session.passport.user, function (err, user) {
       req.session.idu = user[0].id;
       req.session.name = user[0].name;
-      res.redirect('/');
+      res.redirect('/home');
     });
   });
   // here if a user wants to logout of the app

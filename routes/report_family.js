@@ -1,8 +1,9 @@
 var models = require("../models");
 var family = require("../app/family")
   .family_mgr;
+var user_helpers = require('../app/user_helpers');
 module.exports = function (router) {
-  router.get('/report_family', function (req, res) {
+  router.get('/report_family',user_helpers.isLogin, function (req, res) {
     family.get_family(function (result) {
       res.render('report_family', { 
         title: 'الأسر',

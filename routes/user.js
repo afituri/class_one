@@ -1,5 +1,6 @@
 var models = require("../models");
 var user = require('../app/user').user_mgr;
+var user_helpers = require('../app/user_helpers');
 module.exports = function (router) {
   /* GET Regions page. */ 
   router.get('/user', function(req, res) {
@@ -13,35 +14,35 @@ module.exports = function (router) {
     });
   });     
   /* Add Users page. */
-  router.post('/user/new_user', function(req, res) {
+  router.post('/user/new_user',user_helpers.isLogin, function(req, res) {
     user.add_user(req.body,function(result){
       res.redirect(result);
     }); 
   });
 
-  router.get('/user/get_user/:id', function(req, res) {
+  router.get('/user/get_user/:id',user_helpers.isLogin, function(req, res) {
     user.get_user(req.params.id,function(result){
       res.send(result);
     }); 
   });
-  router.post('/user/update', function(req, res) {
+  router.post('/user/update',user_helpers.isLogin, function(req, res) {
     user.update_user(req.body,function(result){
       res.redirect(result);
     }); 
   });
-  router.post('/user/delete', function(req, res) {
+  router.post('/user/delete',user_helpers.isLogin, function(req, res) {
     user.delete_user(req.body.id_u,function(result){
       res.redirect('/user');
     }); 
   });
   /* Edit Regions page. */
-  // router.post('/region/edit_region', function(req, res) {
+  // router.post('/region/edit_region',user_helpers.isLogin, function(req, res) {
   //   region.edit_region(req.body,function(result){
   //     res.redirect(result);
   //   })
   // });
   /* Delete Regions page. */
-  // router.post('/region/delete_region', function(req, res) {
+  // router.post('/region/delete_region',user_helpers.isLogin, function(req, res) {
   //   region.delete_region(req.body,function(result){
   //     res.redirect(result);
   //   })  

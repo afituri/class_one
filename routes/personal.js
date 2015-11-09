@@ -12,10 +12,11 @@ var kinship = require("../app/kinship")
   .kinship_mgr
 var job = require("../app/job")
   .job_mgr;
+var user_helpers = require('../app/user_helpers');  
 module.exports = function (router) {
   /* GET personals page. */
   var familyId;
-  router.get('/personal/:id', function (req, res) {
+  router.get('/personal/:id',user_helpers.isLogin, function (req, res) {
     familyId=req.params.id;
     family.get_family(function (family) {
       personal.get_personal(req.params.id,function (personal){
@@ -39,7 +40,7 @@ module.exports = function (router) {
     });
   });
   ///edit_personal
-   router.post('/edit_personal', function (req, res) {
+   router.post('/edit_personal',user_helpers.isLogin, function (req, res) {
     console.log(req.body.mother_status);
 
     if(req.body.mother_status==2){
@@ -80,7 +81,7 @@ module.exports = function (router) {
 
    });
 
-  router.post('/insert_personal', function (req, res) {
+  router.post('/insert_personal',user_helpers.isLogin, function (req, res) {
     var kinshipId = req.body.KinshipId;
     from_familyId=req.body.from_familyId;
     if(from_familyId==undefined){
@@ -108,7 +109,7 @@ module.exports = function (router) {
   });
 
 
-  router.get('/delete_personal/:id', function (req, res) {
+  router.get('/delete_personal/:id',user_helpers.isLogin, function (req, res) {
     personal.delete_Members(req.params.id,function  (result){
       personal.delete_personal(req.params.id,function  (result){
         res.send(result);
@@ -116,53 +117,53 @@ module.exports = function (router) {
     });
   });
  
-  router.get('/personal/get_city/:id', function (req, res) {
+  router.get('/personal/get_city/:id',user_helpers.isLogin, function (req, res) {
     city.get_city(req.params.id,function  (result){
       res.send(result[0]);
     });
   });
 
-  router.get('/get_country', function (req, res) {
+  router.get('/get_country',user_helpers.isLogin, function (req, res) {
     country.get_country(function  (result){
       res.send(result);
     });
   });
 
-  router.get('/get_social', function (req, res) {
+  router.get('/get_social',user_helpers.isLogin, function (req, res) {
     res.send(constants.social_status);
   });
 
-  router.get('/get_religion', function (req, res) {
+  router.get('/get_religion',user_helpers.isLogin, function (req, res) {
     res.send(constants.religion);
   });
   
-  router.get('/get_registry/:reg', function (req, res) {
+  router.get('/get_registry/:reg',user_helpers.isLogin, function (req, res) {
     family.get_family_by_registry_number(req.params.reg,function(result){
      res.send(result);   
     });
   });
 
-  router.get('/get_family_by_id/:id', function (req, res) {
+  router.get('/get_family_by_id/:id',user_helpers.isLogin, function (req, res) {
     family.get_family_by_id(req.params.id,function(result){
      res.send(result);   
     });
   });
 
-  router.get('/get_Personal_in_family/:id', function (req, res) {
+  router.get('/get_Personal_in_family/:id',user_helpers.isLogin, function (req, res) {
     family.get_personal_by_family_id(req.params.id,function(result){
       res.send(result);
     });
   });  
 
 
-    router.get('/get_Personal/:id', function (req, res) {
+    router.get('/get_Personal/:id',user_helpers.isLogin, function (req, res) {
       personal.get_personal_only(req.params.id,function (personal){
     
       res.send(personal);
       });
     });  
 
-    router.get('/get_country/:id', function (req, res) {
+    router.get('/get_country/:id',user_helpers.isLogin, function (req, res) {
       country.get_Country_id(req.params.id,function (result){
         res.send(result);
       }); 

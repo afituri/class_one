@@ -12,9 +12,10 @@ var kinship = require("../app/kinship")
   .kinship_mgr
 var job = require("../app/job")
   .job_mgr;
+var user_helpers = require('../app/user_helpers');  
 module.exports = function (router) {
   var familyId;
-  router.get('/report_personal/:id', function (req, res) {
+  router.get('/report_personal/:id',user_helpers.isLogin, function (req, res) {
     familyId=req.params.id;
     console.log(familyId);
     family.get_family(function (family) {

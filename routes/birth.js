@@ -6,9 +6,10 @@ var personal = require('../app/personal').personal_mgr;
 var birth = require('../app/birth').birth_mgr;
 var url=require('url');
 var helpers = require('../app/helpers').helpers_mgr;
+var user_helpers = require('../app/user_helpers');
 module.exports = function (router) {
 
-  router.get('/birth', function (req, res) {
+  router.get('/birth',user_helpers.isLogin, function (req, res) {
     var id = null;
     if(url.parse(req.url, true).query.q){
       id = url.parse(req.url, true).query.q;

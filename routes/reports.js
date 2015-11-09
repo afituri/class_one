@@ -1,4 +1,5 @@
 var models = require("../models");
+var user_helpers = require('../app/user_helpers');
 module.exports = function (router) {
   var jsr = require("jsreport");
   var fs = require("fs");
@@ -6,7 +7,7 @@ module.exports = function (router) {
   var member = require('../app/member').member_mgr;
   var helpers = require('../app/helpers').helpers_mgr;
   // this deathCertificate // widght A4
-  router.get('/deathCertificate', function(req, res, next) {
+  router.get('/deathCertificate',user_helpers.isLogin, function(req, res, next) {
     jsr.render({
       template: {
         content:  fs.readFileSync(path.join(__dirname, "../views/reports/deathCertificate.html"), "utf8"),
@@ -22,7 +23,7 @@ module.exports = function (router) {
   });
 
   // this deathCertificate // widght A4
-  router.get('/birthCertificate', function(req, res, next) {
+  router.get('/birthCertificate',user_helpers.isLogin, function(req, res, next) {
     jsr.render({
       template: {
         content:  fs.readFileSync(path.join(__dirname, "../views/reports/birthCertificate.html"), "utf8"),
@@ -38,7 +39,7 @@ module.exports = function (router) {
   });
 
   // this certificateOfFamilyStatus // widght A4
-  router.get('/certificateOfFamilyStatus/:id', function(req, res, next) {
+  router.get('/certificateOfFamilyStatus/:id',user_helpers.isLogin, function(req, res, next) {
     member.get_family_members(req.params.id,function(result){
       jsr.render({
         template: {
@@ -57,7 +58,7 @@ module.exports = function (router) {
   });
 
   // this certificateSociaSituation // widght A4
-  router.get('/certificateSociaSituation/:id', function(req, res, next) {
+  router.get('/certificateSociaSituation/:id',user_helpers.isLogin, function(req, res, next) {
     member.get_member(req.params.id,function(result){
       member.get_member_children(req.params.id,result[0].Personal.Gender,function(children){
         var date=result[0].Personal.Birth_Date.getDate()+' / '+parseFloat(result[0].Personal.Birth_Date.getMonth()+1)+' / '+result[0].Personal.Birth_Date.getFullYear();
@@ -341,7 +342,7 @@ module.exports = function (router) {
   return html;
   }
   // this is test for aladdin, please don't remove it
-  router.get('/deathCertificateTest', function(req, res, next) {
+  router.get('/deathCertificateTest',user_helpers.isLogin, function(req, res, next) {
     jsr.render({
       template: {
         content:  fs.readFileSync(path.join(__dirname, "../views/reports/deathCertificateTest.html"), "utf8"),
