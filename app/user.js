@@ -28,16 +28,16 @@ exports.user_mgr = {
       if(result) {
         cb('/user?msg=1');
       } else {
-        cb('/user?msg=3');
+        cb('/user?msg=2');
       }
     });
   },
   update_user: function(body,cb){
     user_helpers.updateUser(body,function(result) {
       if(result) {
-        cb('/user?msg=1');
-      } else {
         cb('/user?msg=3');
+      } else {
+        cb('/user?msg=4');
       }
     });
   },
@@ -47,7 +47,11 @@ exports.user_mgr = {
         id: id
       }
     }).then(function(result){
-      cb(result);
+      if(result) {
+        cb('/user?msg=5');
+      } else {
+        cb('/user?msg=6');
+      }
     });
   },
 };
