@@ -8,9 +8,10 @@ var office = require("../app/office")
 var country = require('../app/country').country_mgr;
 
 var region = require('../app/region').region_mgr;
+var user_helpers = require('../app/user_helpers');
 module.exports = function (router) {
   /*--------------*/
-  router.get('/divorce', function (req, res) {
+  router.get('/divorce',user_helpers.isLogin, function (req, res) {
     family.get_family(function (result) {
       region.get_regions(function(result1) {
         country.get_country(function(countrys){
@@ -28,40 +29,40 @@ module.exports = function (router) {
   });
   /*------------*/
   var familyId;
-  router.get('/divorce/:id', function (req, res) {
+  router.get('/divorce/:id',user_helpers.isLogin, function (req, res) {
     familyId=req.params.id;
     divorce.get_wife(familyId,function (wife){ 
      res.send(wife);
     })
   });
   /*-------------*/
-  router.get('/divorce/father/:id', function (req, res) {
+  router.get('/divorce/father/:id',user_helpers.isLogin, function (req, res) {
     divorce.get_father(req.params.id,function (father){
       res.send(father);
     })
   });
   /*-----------*/
-  router.get('/divorce/search_family/:id', function (req, res) {
+  router.get('/divorce/search_family/:id',user_helpers.isLogin, function (req, res) {
       family.get_family_by_registry_number(req.params.id,function (family){
         res.send(family[0]);
      })
   });
   /*============*/
   var sunId;
-  router.get('/divorce/suns/:id', function (req, res) {
+  router.get('/divorce/suns/:id',user_helpers.isLogin, function (req, res) {
     sunId=req.params.id;
       divorce.get_suns(sunId,function (suns){
         res.send(suns);
      })
   });
   /*===============*/
-  router.get('/divorce/Personal/:id', function (req, res) {
+  router.get('/divorce/Personal/:id',user_helpers.isLogin, function (req, res) {
     divorce.get_Personal(req.params.id,function (per){
       res.send(per[0]);
     })
   });
   /*==================*/
-  router.post('/divorce/new_divorce',function (req, res) {
+  router.post('/divorce/new_divorce',user_helpers.isLogin, function (req, res) {
     if(req.body.wife_bt_family == '1'){
       wife_personal_Id = req.body.waif_name;
       divorce.updet_wife_fmly(wife_personal_Id,function(result){

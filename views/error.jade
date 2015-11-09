@@ -1,6 +1,11 @@
 extends layout
 block loginStyle
+block navigation
+block cPanel
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  .container
+    .row
+      .col-xs-10.col-xs-offset-1.col-lg-10.col-lg-offset-1
+        h1= message
+        h2= error.status
+        pre #{error.stack}
