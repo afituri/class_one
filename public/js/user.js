@@ -132,4 +132,9 @@ $(document).ready(function(){
       $('#edit_user_phone').val(data.phone);
      });
   });
+  $('body').on('click','#delete_btn', function(){
+    var id = $(this).val();
+    $('#id_u').val(id);
+  });
+
 });

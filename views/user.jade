@@ -40,7 +40,7 @@ block content
                         span.glyphicon.glyphicon-pencil
                   td.text-center
                     p(data-placement="top", data-toggle="tooltip", title="إلغاء")
-                      button.btn.btn-danger.btn-xs.delete_btn(data-title="Delete", data-toggle="modal", data-target="#delete", value="#{u.id}")
+                      button#delete_btn.btn.btn-danger.btn-xs.delete_btn(data-title="Delete", data-toggle="modal", data-target="#delete", value="#{u.id}")
                         span.glyphicon.glyphicon-trash
   #add.modal.fade(tabindex="-1", role="dialog", aria-labelledby="add", aria-hidden="true")
     .modal-dialog
@@ -117,7 +117,7 @@ block content
   #delete.modal.fade(tabindex="-1", role="dialog", aria-labelledby="delete", aria-hidden="true")
     .modal-dialog
       .modal-content
-        form.form#delete_user_form(action="", method="post", accept-charset="utf-8", role="form")
+        form.form#delete_user_form(action="/user/delete", method="post", accept-charset="utf-8", role="form")
           .modal-header
             button.close(type="button", data-dismiss="modal", aria-hidden="true")
               span.glyphicon.glyphicon-remove(aria-hidden="true")
@@ -127,6 +127,7 @@ block content
               span.glyphicon.glyphicon-warning-sign
               |  هل فعلا تريد حذف هذا المستخدم ؟
           .modal-footer
+            input#id_u(type='hidden',name='id_u')
             button#delete_user_btn.btn.btn-danger(type="submit")
               span.glyphicon.glyphicon-ok-sign
               |  نعم

@@ -29,6 +29,11 @@ module.exports = function (router) {
       res.redirect(result);
     }); 
   });
+  router.post('/user/delete', function(req, res) {
+    user.delete_user(req.body.id_u,function(result){
+      res.redirect('/user');
+    }); 
+  });
   /* Edit Regions page. */
   // router.post('/region/edit_region', function(req, res) {
   //   region.edit_region(req.body,function(result){

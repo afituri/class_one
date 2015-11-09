@@ -41,4 +41,13 @@ exports.user_mgr = {
       }
     });
   },
+  delete_user: function(id,cb){
+    models.User.destroy({
+      where: {
+        id: id
+      }
+    }).then(function(result){
+      cb(result);
+    });
+  },
 };
