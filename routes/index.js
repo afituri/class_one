@@ -20,6 +20,7 @@ var death = require('./death')(router);
 var marriage = require('./marriage')(router);
 var divorce = require('./divorce')(router);
 var user = require('./user')(router);
+var user_helpers = require('../app/user_helpers');
 
 
 
@@ -31,7 +32,7 @@ router.get('/', function (req, res) {
 });
 
 /* GET home page. */
-router.get('/home', function (req, res) {
+router.get('/home',user_helpers.isLogin, function (req, res) {
   res.render('index', {
     title: 'الرئيسية'
   });

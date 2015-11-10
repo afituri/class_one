@@ -3,24 +3,24 @@ $(document).ready(function(){
   /*----------- validate in login form----------*/
   $("#login_form").validate({
     rules:{
-      user_email:{
+      username:{
         required: true,
         email: true
       },
-      user_password:{
+      password:{
         required: true,
       },
     },
     messages:{
-      user_email:{
+      username:{
         required: "",
         email: "خطأ: الرجاء ادخال بريد الكتروني صالح!"
       },
-      user_password:{
+      password:{
         required: "",
       }
     },
-    errorClass: 'custom-error',
+    // errorClass: 'custom-error',
     highlight: function(element) {
       $(element).closest('.form-group').addClass('has-error').removeClass('has-success');
     },
@@ -36,4 +36,8 @@ $(document).ready(function(){
     }
   });
   // Validation function end
+  if ($getMsg["msg"]==1){
+    custNotify("danger","خطأ","الرجاء التأكد من اسم المستخدم وكلمة المرور","warning-sign","bounceIn","bounceOut");
+    replaceUrl('/');
+  }
 });
