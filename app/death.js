@@ -18,5 +18,16 @@ exports.death_mgr = {
       cb(result);
     });
   },
- 
+  get_death: function (id, cb) {
+    models.Death.findAll({
+        where: {
+          status: 1,
+          PersonalId: id,
+
+        }
+      })
+      .then(function (result) {
+        cb(result);
+    });
+  },
 };
