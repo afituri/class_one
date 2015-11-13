@@ -69,11 +69,19 @@ module.exports = function (router) {
             offic:offic,
           }
         res.send(obj);
-        console.log(obj);
+        // console.log(obj);
        })  
      })
   });
   /*============*/
+    router.post('/divorce/edit_divorce',function (req, res) {
+      console.log(req.body);
+    id = req.body.id;
+    delete req.body.id;
+    divorce.edit_divorce(req.body,id,function(result){
+      res.redirect('/divorce');
+    });
+  });
   /*-----------*/
   router.get('/divorce/search_family/:id',user_helpers.isLogin, function (req, res) {
       family.get_family_by_registry_number(req.params.id,function (family){

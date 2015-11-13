@@ -158,6 +158,7 @@ $(document).ready(function(){
       alert(id);
     $.get('/divorce/divorce_data/'+id,function(result){
       console.log(result);
+      $('#id_divorce').append('<input type="hidden" name="id" value = "'+ result.divorce[0].id +'" ></>');
       $('#divorce_place').val(result.divorce[0].divorce_place);
       $('#divorce_date').val(new Date(result.divorce[0].divorce_date).getFullYear() +'/'+ new Date(result.divorce[0].divorce_date).getMonth() +'/'+ new Date(result.divorce[0].divorce_date).getDate());
       $('#contract_divorce_number').val(result.divorce[0].contract_number);

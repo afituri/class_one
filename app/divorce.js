@@ -158,4 +158,14 @@ exports.divorce_mgr = {
         cb(false);
       });
   },
+  edit_divorce : function(body,id,cb){
+    models.Divorce.update(body, {
+    where: {
+      id:id
+    }
+  }).then(function(result) {
+      cb(result);
+      console.log(result);
+    });
+  },
 };

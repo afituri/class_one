@@ -38,7 +38,7 @@ block content
   #edit.modal.fade(tabindex="-1",role="dialog", aria-labelledby="edit", aria-hidden="true")
     .modal-dialog.modal-lg
       .modal-content
-        form.form(action="/divorce/new_divorce", method="post", accept-charset="utf-8", role="form")
+        form.form(action="/divorce/edit_divorce", method="post", accept-charset="utf-8", role="form")
           .modal-header
             button.close(type="button", data-dismiss="modal", aria-hidden="true")
               span.glyphicon.glyphicon-remove(aria-hidden="true")
@@ -53,6 +53,8 @@ block content
                     option(value="", style='color:grey; display:none;') اختر المنطقة...
                     for region in regions
                       option(value="#{region.id}") #{region.region_name}
+                  #id_divorce  
+
               .col-xs-3.col-md-3
                 .form-group
                   label مكتب الاصدار
@@ -75,11 +77,11 @@ block content
               .col-xs-3.col-md-3
                 .form-group
                   label رقم عقد الطﻻق
-                  input.form-control#contract_divorce_number(type="text", name="contract_divorce_number", placeholder="رقم عقد الطﻻق")
+                  input.form-control#contract_divorce_number(type="text", name="contract_number", placeholder="رقم عقد الطﻻق")
               .col-xs-3.col-md-3
                 .form-group
                   label رقم سجل الطﻻق
-                  input.form-control#record_divorce_number(type="text", name="record_divorce_number", placeholder="رقم سجل الطﻻق")
+                  input.form-control#record_divorce_number(type="text", name="record_divorce_nu", placeholder="رقم سجل الطﻻق")
               .col-xs-3.col-md-3
                 .form-group
                   label تاريخ تسجيل الطﻻق
