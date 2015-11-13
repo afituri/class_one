@@ -5,9 +5,10 @@ var marriage = require("../app/marriage")
   .marriage_mgr
 var city = require("../app/city")
   .city_mgr  
+var user_helpers = require('../app/user_helpers');  
 module.exports = function (router) {
 
-  router.get('/marriage', function(req, res) {
+  router.get('/marriage',user_helpers.isLogin, function(req, res) {
     city.get_city_all(function(result){
       res.render('marriage', {
         title : "واقعة زواج",
@@ -18,7 +19,7 @@ module.exports = function (router) {
     });
   });
 
-  router.post('/searchMarriage', function(req, res) {
+  router.post('/searchMarriage',user_helpers.isLogin, function(req, res) {
     if(req.body.searchVal){
       var value={val:req.body.searchVal,gender:1}
     }else{
@@ -30,7 +31,7 @@ module.exports = function (router) {
     });
   });
 
-  router.post('/add_new_marriage', function(req, res) {
+  router.post('/add_new_marriage',user_helpers.isLogin, function(req, res) {
     if(req.body.Socialstatus_Id == 2)
     {
       marriage.update_member_wife(req.body, function (result) {
@@ -50,7 +51,7 @@ module.exports = function (router) {
     }
   }); 
 
-  router.get('/marriage/marriages', function(req, res) {
+  router.get('/marriage/marriages',user_helpers.isLogin, function(req, res) {
     marriage.get_marriage(function (result) {
       city.get_city_all(function(city){
         res.render('view_marriage', {
@@ -60,7 +61,7 @@ module.exports = function (router) {
     });  
   });
 
-  router.post('/update_marriage', function(req, res) {
+  router.post('/update_marriage',user_helpers.isLogin, function(req, res) {
     marriage.edit_marriage(req.body, function (result) {
       res.send(result);
     });

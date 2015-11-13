@@ -1,9 +1,10 @@
 var models = require("../models");
 var family = require("../app/family")
   .family_mgr;
+var user_helpers = require('../app/user_helpers');
 module.exports = function (router) {
   /* GET families page. */
-  router.get('/family', function (req, res) {
+  router.get('/family',user_helpers.isLogin, function (req, res) {
     family.get_family(function (result) {
       res.render('family', { 
         title: 'الأسر',
@@ -16,7 +17,7 @@ module.exports = function (router) {
   });
 
   /* Add Family page. */
-  router.post('/family/new_family', function (req, res) {
+  router.post('/family/new_family',user_helpers.isLogin, function (req, res) {
    // console.log(req.body);
     family.add_family(req.body, function (result) {
       res.send(result);
@@ -24,21 +25,21 @@ module.exports = function (router) {
   });
 
   /* Edit Family page. */
-  router.post('/family/edit_family', function (req, res) {
+  router.post('/family/edit_family',user_helpers.isLogin, function (req, res) {
     family.edit_family (req.body, function (result) {
       res.redirect(result);
     })
   });
 
   /* Delete Familys page. */
-  router.post('/family/delete_family', function (req, res) {
+  router.post('/family/delete_family',user_helpers.isLogin, function (req, res) {
     family.delete_family(req.body, function (result) {
       res.redirect(result);
     })
   });
 
   /* GET branches page. */
-/*  router.get('/family', function (req, res) {
+/*  router.get('/family',user_helpers.isLogin, function (req, res) {
     models.Family.findAndCountAll({
       where: {
         status: 1
@@ -66,7 +67,7 @@ module.exports = function (router) {
     });
 */
   // /* Get Branch by ID */
-  // router.get('/family/get_family/:id', function(req, res) {
+  // router.get('/family/get_family/:id',user_helpers.isLogin, function(req, res) {
   //   models.Branch.findAll({
   //     where: {
   //       status: 1,

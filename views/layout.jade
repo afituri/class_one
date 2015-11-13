@@ -4,12 +4,16 @@ html
     title= title
     link(rel='stylesheet', href='/css/bootstrap.min.css')
     link(rel='stylesheet', href='/css/bootstrap-rtl.min.css')
-    link(rel='stylesheet', href='/css/bootstrap-select.min.css')
-    link(rel='stylesheet', href='/css/bootstrap-datetimepicker.min.css')      
-    link(rel='stylesheet', href='/css/bootstrap-switch.min.css')
-    link(rel='stylesheet', href="/css/bootstrap-toggle.min.css")
+    link(rel='stylesheet', href='/css/font-awesome.min.css')
     link(rel='stylesheet', href='/css/animate.min.css')
-    link(rel='stylesheet', href='/css/style.css')
+    block contantStyle
+      link(rel='stylesheet', href='/css/bootstrap-select.min.css')
+      link(rel='stylesheet', href='/css/bootstrap-datetimepicker.min.css')      
+      link(rel='stylesheet', href='/css/bootstrap-switch.min.css')
+      link(rel='stylesheet', href='/css/bootstrap-toggle.min.css')
+      link(rel='stylesheet', href='/css/style.css')
+    block loginStyle
+      link(rel='stylesheet', href='/css/loginStyle.css')
   body.animated.fadeIn
     block navigation
       .container-fulid  
@@ -20,11 +24,10 @@ html
               span.icon-bar
               span.icon-bar
               span.icon-bar
-            a.navbar-brand(href='http://www.jquery2dotnet.com') Brand
           #bs-example-navbar-collapse-1.collapse.navbar-collapse
             ul.nav.navbar-nav
               li(class=(title == 'الرئيسية' ? 'active' : ''))
-                a(href='/')
+                a(href='/home')
                   span#glyphicon.glyphicon.glyphicon-home
                   span  الـرئـيـسـيـة
               li.dropdown
@@ -55,10 +58,14 @@ html
                   li.divider
                   li
                     a(href='/divorce') واقعة طلاق
+              li(class=users_active)
+                a(href='/user')
+                  span.fa.fa-users
+                  span  المستخدمين
               li.dropdown
                 a.dropdown-toggle(href='#', data-toggle='dropdown')
                   span#glyphicon.glyphicon.glyphicon-search
-                  span  Search 
+                  span  بحـــث 
                   b.caret
                 ul.dropdown-menu(style='min-width: 300px;')
                   li
@@ -66,73 +73,74 @@ html
                       .col-md-12
                         form.navbar-form.navbar-left(role='search')
                           .input-group
-                            input.form-control(type='text', placeholder='Search')
+                            input.form-control(type='text', placeholder='بحـــث')
                             span.input-group-btn
                               button.btn.btn-primary(type='button')
-                                | Go!
+                                | عـرض!
+
             ul.nav.navbar-nav.navbar-right
-              li.dropdown
-                a.dropdown-toggle(href='#', data-toggle='dropdown')
-                  span#glyphicon.glyphicon.glyphicon-comment
-                  | Chats 
-                  span.label.label-primary 42
-                ul.dropdown-menu
-                  li
-                    a(href='#')
-                      span.label.label-warning 7:00 AM
-                      | Hi :)
-                  li
-                    a(href='#')
-                      span.label.label-warning 8:00 AM
-                      | How are you?
-                  li
-                    a(href='#')
-                      span.label.label-warning 9:00 AM
-                      | What are you doing?
-                  li.divider
-                  li
-                    a.text-center(href='#') View All
-              li.dropdown
-                a.dropdown-toggle(href='#', data-toggle='dropdown')
-                  span#glyphicon.glyphicon.glyphicon-envelope
-                  | Inbox 
-                  span.label.label-info 32
-                ul.dropdown-menu
-                  li
-                    a(href='#')
-                      span.label.label-warning 4:00 AM
-                      | Favourites Snippet
-                  li
-                    a(href='#')
-                      span.label.label-warning 4:30 AM
-                      | Email marketing
-                  li
-                    a(href='#')
-                      span.label.label-warning 5:00 AM
-                      | Subscriber focused email
-                      |                             design
-                  li.divider
-                  li
-                    a.text-center(href='#') View All
+              //- li.dropdown
+              //-   a.dropdown-toggle(href='#', data-toggle='dropdown')
+              //-     span#glyphicon.glyphicon.glyphicon-comment
+              //-     | Chats 
+              //-     span.label.label-primary 42
+              //-   ul.dropdown-menu
+              //-     li
+              //-       a(href='#')
+              //-         span.label.label-warning 7:00 AM
+              //-         | Hi :)
+              //-     li
+              //-       a(href='#')
+              //-         span.label.label-warning 8:00 AM
+              //-         | How are you?
+              //-     li
+              //-       a(href='#')
+              //-         span.label.label-warning 9:00 AM
+              //-         | What are you doing?
+              //-     li.divider
+              //-     li
+              //-       a.text-center(href='#') View All
+              //- li.dropdown
+              //-   a.dropdown-toggle(href='#', data-toggle='dropdown')
+              //-     span#glyphicon.glyphicon.glyphicon-envelope
+              //-     | Inbox 
+              //-     span.label.label-info 32
+              //-   ul.dropdown-menu
+              //-     li
+              //-       a(href='#')
+              //-         span.label.label-warning 4:00 AM
+              //-         | Favourites Snippet
+              //-     li
+              //-       a(href='#')
+              //-         span.label.label-warning 4:30 AM
+              //-         | Email marketing
+              //-     li
+              //-       a(href='#')
+              //-         span.label.label-warning 5:00 AM
+              //-         | Subscriber focused email
+              //-         |                             design
+              //-     li.divider
+              //-     li
+              //-       a.text-center(href='#') View All
               li.dropdown
                 a.dropdown-toggle(href='#', data-toggle='dropdown')
                   span.glyphicon.glyphicon-user
-                  span  Admin 
+                  span  اسم المستخدم
                   b.caret
                 ul.dropdown-menu
                   li
                     a(href='#')
                       span.glyphicon.glyphicon-user
-                      span  Profile
+                      span  الملف الشخصي
                   li
                     a(href='#')
                       span.glyphicon.glyphicon-cog
-                      span  Settings
+                      span  الاعدادت
                   li.divider
                   li
-                    a(href='#')
+                    a(href='/logout')
                       span.glyphicon.glyphicon-off
-                      span  Logout
+                      span  خروج
     block cPanel
       .container-fulid
         .col-sm-2.col-md-2
@@ -224,7 +232,7 @@ html
                     tr
                       td(class=active_three_two)
                         span.glyphicon.glyphicon-tasks
-                        a(href='#')  واقـــعـــة وفــــــاة
+                        a(href='/death')  واقـــعـــة وفــــــاة
                     tr
                       td(class=active_three_three)
                         span.glyphicon.glyphicon-tasks
@@ -233,30 +241,25 @@ html
                       td(class=active_three_four)
                         span.glyphicon.glyphicon-tasks
                         a(href='/marriage')  واقـــعـــة زواج
-            //-.panel.panel-default
+            .panel.panel-default
               .panel-heading
                 h4.panel-title
                   a(data-toggle='collapse', data-parent='#accordion', href='#collapseFour')
-                    span.glyphicon.glyphicon-file
-                    span  Reports
+                    if collapse_four
+                      span.glyphicon.glyphicon-folder-open
+                    else
+                      span.glyphicon.glyphicon-folder-close
+                    span  التقــارير
               #collapseFour.panel-collapse.collapse(class=collapse_four)
                 .panel-body
                   table.table
                     tr
                       td(class=active_four_one)
-                        span.glyphicon.glyphicon-usd
-                        a(href='#')  Sales
+                        span.glyphicon.glyphicon-tasks
+                        a(href='/report_family')  شهادة الميلاد والوفاة
                     tr
                       td(class=active_four_two)
-                        span.glyphicon.glyphicon-user
-                        a(href='#')  Customers
-                    tr
-                      td(class=active_four_three)
                         span.glyphicon.glyphicon-tasks
-                        a(href='#')  Products
-                    tr
-                      td(class=active_four_four)
-                        span.glyphicon.glyphicon-shopping-cart
-                        a(href='#')  Shopping Cart
+                        a(href='#')  تقارير اخري
     block content
     

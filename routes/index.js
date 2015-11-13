@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var login = require('../app/login')(router);
 var region = require('./region')(router);
 var country = require('./country')(router);
 var manucipality = require('./manucipality')(router);
@@ -11,19 +12,31 @@ var family = require('./family')(router);
 var personal = require('./personal')(router);
 var city = require('./city')(router);
 var reports = require('./reports')(router);
+var report_family = require('./report_family')(router);
+var report_personal = require('./report_personal')(router);
 var deathreason = require('./deathreason')(router);
 var birth = require('./birth')(router);
 var death = require('./death')(router);
 var marriage = require('./marriage')(router);
 var divorce = require('./divorce')(router);
+var user = require('./user')(router);
+var user_helpers = require('../app/user_helpers');
 
 
 
 /* GET home page. */
+/* GET login page. */
 router.get('/', function (req, res) {
-	res.render('index', {
-		title: 'الرئيسية'
-	});
+  res.render('login', {
+    title: 'شاشة الدخول'
+  });
+});
+
+/* GET home page. */
+router.get('/home',user_helpers.isLogin, function (req, res) {
+  res.render('index', {
+    title: 'الرئيسية'
+  });
 });
 
 module.exports = router;

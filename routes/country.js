@@ -1,8 +1,9 @@
 var models = require("../models");
+var user_helpers = require('../app/user_helpers');
 module.exports = function (router) {
 
   /* GET Countries page. */
-  router.get('/country', function (req, res) {
+  router.get('/country',user_helpers.isLogin, function (req, res) {
     models.Country.findAndCountAll({
       where: {
         status: 1
@@ -18,7 +19,7 @@ module.exports = function (router) {
   });
 
   /* Add Countries page. */
-  router.post('/country/new_country', function (req, res) {
+  router.post('/country/new_country',user_helpers.isLogin, function (req, res) {
     models.Country.create(req.body)
       .then(function (result) {
         res.redirect("/country");
@@ -26,7 +27,7 @@ module.exports = function (router) {
   });
 
   /* Edit Countries page. */
-  router.post('/country/edit_country', function (req, res) {
+  router.post('/country/edit_country',user_helpers.isLogin, function (req, res) {
     models.Country.update({
       country_name: req.body.country_name,
       nationality_male: req.body.nationality_male,
@@ -41,7 +42,7 @@ module.exports = function (router) {
   });
 
   /* Delete Countries page. */
-  router.post('/country/delete_country', function (req, res) {
+  router.post('/country/delete_country',user_helpers.isLogin, function (req, res) {
     models.Country.destroy({
       where: {
         id: req.body.id
