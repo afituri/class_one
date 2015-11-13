@@ -1,5 +1,39 @@
 var models = require("../models");
 exports.divorce_mgr = {
+  get_divorce: function (id,cb) {
+    models.Divorce.findAll({
+      where: {
+        status: 1,
+          husband_family_Id :id
+      },
+        include: [{
+          model: models.Personal,
+          as :'Husband',
+          where: {
+            status: 1,
+          }
+        },{
+          model: models.Personal,
+          as :'Wife',
+            where: {
+              status: 1
+            } 
+        }]
+    }).then(function(result) {
+      cb(result);
+    });
+  },
+  get_divorces: function (id,cb) {
+    models.Divorce.findAll({
+      where: {
+        status: 1,
+          id:id
+      },
+    }).then(function(result) {
+      cb(result);
+    });
+  },
+
   get_wife: function (id,cb) {
     models.Member.findAll({
       where: {

@@ -18,6 +18,7 @@ var marriage = require('./marriage')(router);
 var divorce = require('./divorce')(router);
 
 
+
 /* GET home page. */
 router.get('/', function (req, res) {
 	res.render('index', {

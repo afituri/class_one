@@ -60,7 +60,7 @@ $(document).ready(function(){
      var id = $(this).val();
       $.get('/divorce/father/'+id,function(result){
         $('#father_name').empty();
-        $('#father_name').append("<h4 class='modal-title'>أسم الزوج :<input type = 'hidden' name='father_name' value="+result[0].Personal.Person_Id+"></input><label > "+result[0].Personal.Arabic_Firstname+" "+result[0].Personal.Arabic_Fathername+" "+result[0].Personal.Arabic_Grandfathername+" "+result[0].Personal.Arabic_Familyname+"</label></h4>");
+        $('#father_name').append("<h4 class='modal-title'>أسم الزوج :<input type = 'hidden' name='father_name' value="+result[0].Personal.Person_Id+"></input><input type = 'hidden' name='husband_family_Id' value="+id+"></input><label > "+result[0].Personal.Arabic_Firstname+" "+result[0].Personal.Arabic_Fathername+" "+result[0].Personal.Arabic_Grandfathername+" "+result[0].Personal.Arabic_Familyname+"</label></h4>");
       });
       $.get('/divorce/'+id,function(result){
         $('#waif_name').empty();      
@@ -104,10 +104,15 @@ $(document).ready(function(){
             '<p data-placement="top" data-toggle="tooltip" title="أضافة فرد">'+
             '<button id="open_family" data-title="ADD" data-toggle="modal" data-target="#add" value="'+result.id+'" class="btn btn-primary btn-xs edit_btn"><span class="glyphicon glyphicon-plus"></span></button>'+
             '</p>'+
+            '<td class="text-center">'+
+            '<p data-placement="top" data-toggle="tooltip" title="تعديل الواقعات">'+
+            '<a href="/editdivorce/'+result.id+'" id="open_divorce" data-title="ADD" data-toggle="modal" data-target="" value="'+result.id+'" class="btn btn-primary btn-xs edit_btn"><span class="glyphicon glyphicon-edit"></span></button>'+
+            '</p>'+
             '</td>');
       $.fn.open_family();   
      });
   });
+  /*--------------------*/
   /*.........dath......*/
   $("#back").hide(0);
   $('#waif_name').on('change', function(){
@@ -144,7 +149,29 @@ $(document).ready(function(){
     }else if (id =1){
       $("#tabtow").hide(0);
       $("#child").hide(100);
-
     }
   });
+  /*________________________________________________________*/
+  $('#edit_divorse_btn').on('click', function(){
+      alert("ddd");
+      var id = $(this).val();
+      alert(id);
+    $.get('/divorce/divorce_data/'+id,function(result){
+      console.log(result);
+      $('#divorce_place').val(result.divorce[0].divorce_place);
+      $('#divorce_date').val(new Date(result.divorce[0].divorce_date).getFullYear() +'/'+ new Date(result.divorce[0].divorce_date).getMonth() +'/'+ new Date(result.divorce[0].divorce_date).getDate());
+      $('#contract_divorce_number').val(result.divorce[0].contract_number);
+      $('#record_divorce_number').val(result.divorce[0].record_divorce_nu);
+      $('#inform_date').val(new Date(result.divorce[0].inform_date).getFullYear() +'/'+ new Date(result.divorce[0].inform_date).getMonth() +'/'+ new Date(result.divorce[0].inform_date).getDate());
+      // $('#Offices').val(result.offic.);
+      if (result.divorce[0].divorce_type == 1)
+      {
+        var x ="طﻻق محكمة";
+        $('#divorce_type').selectpicker('val',x);
+      }else{
+        var y = "طﻻق مؤذون";
+        $('#divorce_type').selectpicker('val',y);
+      }
+    });
+  });    
 });    
