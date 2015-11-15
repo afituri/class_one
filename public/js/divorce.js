@@ -92,7 +92,7 @@ $(document).ready(function(){
           var FamilyType = "اجانب";
         }
         $('#family_table').append('<tr>'+
-            '<td class="text-center">'+result.id+'</td>'+
+            '<td class="text-center">'+result.fid+'</td>'+
             '<td class="text-center">'+result.Registrynumber+'</td>'+
             '<td class="text-center">'+result.Recordnumber+'</td>'+
             '<td class="text-center">'+new Date(result.FamilyRecordDate).getFullYear()+'/'+new Date(result.FamilyRecordDate).getMonth()+'/'+new Date(result.FamilyRecordDate).getDate()+'</td>'+
@@ -102,11 +102,11 @@ $(document).ready(function(){
             '<td class="text-center">'+result.office_name+'</td>'+
             '<td class="text-center">'+
             '<p data-placement="top" data-toggle="tooltip" title="أضافة فرد">'+
-            '<button id="open_family" data-title="ADD" data-toggle="modal" data-target="#add" value="'+result.id+'" class="btn btn-primary btn-xs edit_btn"><span class="glyphicon glyphicon-plus"></span></button>'+
+            '<button id="open_family" data-title="ADD" data-toggle="modal" data-target="#add" value="'+result.fid+'" class="btn btn-primary btn-xs edit_btn"><span class="glyphicon glyphicon-plus"></span></button>'+
             '</p>'+
             '<td class="text-center">'+
             '<p data-placement="top" data-toggle="tooltip" title="تعديل الواقعات">'+
-            '<a href="/editdivorce/'+result.id+'" id="open_divorce" data-title="ADD" data-toggle="modal" data-target="" value="'+result.id+'" class="btn btn-primary btn-xs edit_btn"><span class="glyphicon glyphicon-edit"></span></button>'+
+            '<a href="/editdivorce/'+result.fid+'" id="open_divorce" data-title="ADD" data-toggle="modal" data-target="" value="'+result.fid+'" class="btn btn-primary btn-xs edit_btn"><span class="glyphicon glyphicon-edit"></span></button>'+
             '</p>'+
             '</td>');
       $.fn.open_family();   
