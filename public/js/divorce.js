@@ -152,12 +152,9 @@ $(document).ready(function(){
     }
   });
   /*________________________________________________________*/
-  $('#edit_divorse_btn').on('click', function(){
-      alert("ddd");
+  $('body').on('click','#edit_divorse_btn', function(){
       var id = $(this).val();
-      alert(id);
     $.get('/divorce/divorce_data/'+id,function(result){
-      console.log(result);
       $('#id_divorce').append('<input type="hidden" name="id" value = "'+ result.divorce[0].id +'" ></>');
       $('#divorce_place').val(result.divorce[0].divorce_place);
       $('#divorce_date').val(new Date(result.divorce[0].divorce_date).getFullYear() +'/'+ new Date(result.divorce[0].divorce_date).getMonth() +'/'+ new Date(result.divorce[0].divorce_date).getDate());
@@ -168,10 +165,10 @@ $(document).ready(function(){
       if (result.divorce[0].divorce_type == 1)
       {
         var x ="طﻻق محكمة";
-        $('#divorce_type').selectpicker('val',x);
+        $('#divorce_type').selectpicker('val',1);
       }else{
         var y = "طﻻق مؤذون";
-        $('#divorce_type').selectpicker('val',y);
+        $('#divorce_type').selectpicker('val',2);
       }
     });
   });    
