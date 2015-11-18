@@ -20,6 +20,26 @@ exports.marriage_mgr = {
     });
   },
 
+  get_marriage_by_id: function (id,cb) {
+    models.Marriage.findAll({
+      include: [{
+        model: models.Family,
+        where: {
+          status: 1,
+        }
+      }],
+        where: {
+          status: 1,
+          husband_personal_Id:id
+        }
+      })
+      .then(function (result) {
+        // console.log(result.rows[1].dataValues.id);
+        // console.log(result.rows.length);
+        cb(result);
+    });
+  },
+
   add_family : function(body,cb){
     models.Family.create(body).then(function (result) {
       cb(result.id);

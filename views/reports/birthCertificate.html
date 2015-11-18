@@ -89,14 +89,14 @@
     <div>________________________________________________________________________________________________________________________</div>
     <div style="height: 9px;"></div>
     <div class="text-center fontSizeOfficeName">
-      <div> مكتب السجل المدني <span>:</span> طرابلس المركز </div>
+      <div> مكتب السجل المدني <span>:</span> {{office_name}} </div>
     </div>
     <div class="row">
       <div class="col-xs-4">
         <p class="threee">
-           رقم قيد الـعـائـلة <span>:</span> 131314 
+           رقم قيد الـعـائـلة <span>:</span> {{Registrynumber}}
            <br>
-           رقم ورقة العائلة <span>:</span> 1234413 
+           رقم ورقة العائلة <span>:</span> {{Recordnumber}} 
         </p>
         <p class="threee">
            الـمـدينـة <span>:</span> ////////// 
@@ -106,7 +106,7 @@
       </div>
       <div class="col-xs-4 text-center">
         <h5 class="fontSize">
-           شهادة ميلاد
+           {{alert_for_report}}
         </h5>
         <div>
            مستخرج رسمي لاثبات واقعة الميلاد
@@ -114,14 +114,14 @@
       </div>
       <div class="col-xs-4">
         <p class="threee">
-          الرقم الـــوطـــــــنـي <span>:</span> 119890002059
+          الرقم الـــوطـــــــنـي <span>:</span> 
         </p>
         <p class="threee">
-          السنة <span>:</span> 413
+          السنة <span>:</span> 
           <br>
-          الشهر <span>:</span> 143
+          الشهر <span>:</span> 
            <br>
-          سند القيد <span>:</span> /////////
+          سند القيد <span>:</span> {{Regdoctype}}
         </p>
       </div>
     </div>
@@ -129,35 +129,35 @@
     <div class="panel rcorners3">
       <div class="row">
         <div class="col-xs-8">
-          <div class="ppppp"> الاسم ثلاثي <span>:</span> أميرة الجيلاني محمد </div>
+          <div class="ppppp"> الاسم ثلاثي <span>:</span> {{name}} {{father}} {{grand}}  </div>
         </div>
         <div class="col-xs-4">
-          <div> اللقب <span>:</span> هبال </div>
-        </div>
-      </div>
-      <div style="height: 9px;"></div>
-      <div class="row">
-        <div class="col-xs-4">
-          <div> تاريخ الولادة اليوم <span>:</span> 16 </div>
-        </div>
-        <div class="col-xs-4">
-          <div> الشهر <span>:</span> 1 </div>
-        </div>
-        <div class="col-xs-4">
-          <div> السنة <span>:</span> 1976 </div>
+          <div> اللقب <span>:</span> {{sirname}} </div>
         </div>
       </div>
       <div style="height: 9px;"></div>
       <div class="row">
         <div class="col-xs-4">
-          <div> الموافق <span>:</span> السادس عشر </div>
+          <div> تاريخ الولادة اليوم <span>:</span> {{birth_date_day}} </div>
         </div>
         <div class="col-xs-4">
+          <div> الشهر <span>:</span> {{birth_date_month}} </div>
+        </div>
+        <div class="col-xs-4">
+          <div> السنة <span>:</span> {{birth_date_year}} </div>
+        </div>
+      </div>
+      <div style="height: 9px;"></div>
+      <div class="row">
+        <div class="col-xs-6">
+          <div> الموافق <span>:</span> {{birth_date_latter}} </div>
+        </div>
+      <!--   <div class="col-xs-4">
           <div> الشهر <span>:</span> يناير </div>
         </div>
         <div class="col-xs-4">
           <div> السنة <span>:</span> ألف وتسعمائة وستة وسبعون </div>
-        </div>
+        </div> -->
       </div>
       <div style="height: 9px;"></div>
       <div class="row">
@@ -165,82 +165,82 @@
           <div> مكان الولادة المحلة <span>:</span> طرابلس </div>
         </div>
         <div class="col-xs-6">
-          <div> المنطقة أو المدينة <span>:</span> //////////// </div>
+          <div> المنطقة أو المدينة <span>:</span> {{birth_place}}</div>
         </div>
       </div>
       <div style="height: 9px;"></div>
       <div class="row">
         <div class="col-xs-6">
-          <div> الجنس <span>:</span> أنثى </div>
+          <div> الجنس <span>:</span> {{string_gender}} </div>
         </div>
         <div class="col-xs-6">
-          <div> نوع الولادة <span>(</span> فردية <span>-</span> توأم <span>)</span><span>:</span> فردية </div>
+          <div> نوع الولادة <span>(</span> فردية <span>-</span> توأم <span>)</span><span>:</span> {{birth_type}} </div>
         </div>
       </div>
       <div style="height: 9px;"></div>
       <div class="row">
         <div class="col-xs-3">
-          <div> أسم الاب <span>:</span> الجيلاني </div>
+          <div> أسم الاب <span>:</span>  {{father}}  </div>
         </div>
         <div class="col-xs-3">
-          <div> لقبه <span>:</span> هبال </div>
+          <div> لقبه <span>:</span>  {{sirname}}  </div>
         </div>
         <div class="col-xs-3">
-          <div> جنسيته <span>:</span> ليبي </div>
+          <div> جنسيته <span>:</span> {{country_name}} </div>
         </div>
         <div class="col-xs-3">
-          <div> مهنتة <span>:</span> ///////// </div>
+          <div> مهنتة <span>:</span> {{job_name}} </div>
         </div>
       </div>
       <div style="height: 9px;"></div>
       <div class="row">
         <div class="col-xs-6">
-          <div> دينه <span>:</span> مسلم </div>
+          <div> دينه <span>:</span> {{religion}} </div>
         </div>
         <div class="col-xs-6">
-          <div> تاريخ الزواج <span>:</span> /////////// </div>
+          <div> تاريخ الزواج <span>:</span> {{marriage_date}} </div>
         </div>
       </div>
       <div style="height: 9px;"></div>
       <div class="row">
         <div class="col-xs-4">
-          <div> أسم الام <span>:</span> بثينة سالم أحمد </div>
+          <div> أسم الام <span>:</span> {{mother_name}} </div>
         </div>
         <div class="col-xs-2">
-          <div> لقبها <span>:</span> ///////// </div>
+          <div> لقبها <span>:</span> {{mother_sirname}} </div>
         </div>
         <div class="col-xs-3">
-          <div> جنسيتها <span>:</span> ليبية </div>
+          <div> جنسيتها <span>:</span> {{country_name_mother}} </div>
         </div>
         <div class="col-xs-3">
-          <div> مهنته <span>:</span> /////////// </div>
+          <div> مهنتها <span>:</span> {{job_name_mother}} </div>
         </div>
       </div>
       <div style="height: 9px;"></div>
       <div class="row">
         <div class="col-xs-4">
-          <div> تاريخ التبليغ اليوم <span>:</span> /////////// </div>
+          <div> تاريخ التبليغ اليوم <span>:</span>  </div>
         </div>
         <div class="col-xs-4">
-          <div> الشهر <span>:</span> ////////// </div>
+          <div> الشهر <span>:</span>  </div>
         </div>
         <div class="col-xs-4">
-          <div> السنة <span>:</span> /////////// </div>
+          <div> السنة <span>:</span>  </div>
         </div>
       </div>
       <div style="height: 9px;"></div>
       <div class="row">
         <div class="col-xs-12">
-          <div> اسم المبلغ <span>(</span> يذكر الاسم والعنوان فردا أو جهة <span>)</span><span>:</span> //////////// </div>
+          <div> اسم المبلغ <span>(</span> يذكر الاسم والعنوان فردا أو جهة <span>)</span><span>: &nbsp;&nbsp;&nbsp; {{informer_name}}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{informer_address}}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{informer_type}}</span> </div>
         </div>
       </div>
       <div style="height: 9px;"></div>
       <div class="row">
         <div class="col-xs-6">
-          <div> أسم الموظف الذي قام بالقيد <span>:</span> م.طارق دوغة </div>
+          <div> أسم الموظف الذي قام بالقيد <span>:</span>  </div>
         </div>
         <div class="col-xs-6">
-          <div> صفته <span>:</span> موظف </div>
+          <div> صفته <span>:</span>  </div>
         </div>
       </div>
     </div>
@@ -255,25 +255,25 @@
       <div style="height: 9px;"></div>
       <div class="row">
         <div class="col-xs-4">
-          <div bgcolor="gray"> تاريخ القيد اليوم <span>:</span> 27 </div>
+          <div bgcolor="gray"> تاريخ القيد اليوم <span>:</span>  </div>
         </div>
         <div class="col-xs-4">
-          <div> الشهر <span>:</span> 5 </div>
+          <div> الشهر <span>:</span>  </div>
         </div>
         <div class="col-xs-4">
-          <div> السنة <span>:</span> 2015 </div>
+          <div> السنة <span>:</span>  </div>
         </div>
       </div>
       <div style="height: 9px;"></div>
       <div class="row">
         <div class="col-xs-4">
-          <div> الموافق اليوم <span>:</span> السابع والعشرون </div>
+          <div> الموافق اليوم <span>:</span> </div>
         </div>
         <div class="col-xs-4">
-          <div> الشهر <span>:</span> مايو </div>
+          <div> الشهر <span>:</span>  </div>
         </div>
         <div class="col-xs-4">
-          <div> السنة <span>:</span> ألفان وخمسة عشر </div>
+          <div> السنة <span>:</span>  </div>
         </div>
       </div>
     </div>

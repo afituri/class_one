@@ -11,6 +11,26 @@ exports.job_mgr = {
         cb(result);
       });
   },
+
+   get_job_by_id: function (id,mid,cb) {
+    models.Job.findAndCountAll({
+        where: {
+          status: 1,
+          id:id
+        }
+      })
+      .then(function (father_job) {
+        models.Job.findAndCountAll({
+        where: {
+          status: 1,
+          id:mid
+        }
+      })
+      .then(function (mother_job) {
+        cb({father_job:father_job,mother_job:mother_job});
+      });
+      });
+  },
   // add new job
   add_job: function (body, cb) {
     models.Job.create(body)

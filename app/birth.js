@@ -9,8 +9,9 @@ exports.birth_mgr = {
         model: models.Personal,
         where: {
           status: 1
-        },
-      }]
+        }, 
+      }],
+
     }).then(function(result) {
       cb(result);
     });

@@ -52,13 +52,14 @@ block content
 
                   td.text-center #{i.kinship_name}
                   td.text-center #{i.national_id}
+                  
                   td.text-center
-                    p(data-placement="top", data-toggle="tooltip", title="تعديل")
-                      a#porn.btn.btn-primary.btn-xs.edit_btn(herf="",value="#{i.pid}")
+                    p(data-placement="top", data-toggle="tooltip")
+                      button#birth.btn.btn-primary.btn-xs.edit_btn(value="#{i.pid}")
                         span.glyphicon.glyphicon-file
                   td.text-center
-                    p(data-placement="top", data-toggle="tooltip", title="إلغاء")
-                      button#deth.btn.btn-primary.btn-xs.edit_btn(value="#{i.pid}",data-title="Delete", data-toggle="modal", data-target="#delete")
+                    p(data-placement="top", data-toggle="tooltip")
+                      button#death.btn.btn-primary.btn-xs.edit_btn(value="#{i.pid}")
                         span.glyphicon.glyphicon-file
                   td.text-center
                     p(data-placement="top", data-toggle="tooltip")
@@ -73,4 +74,5 @@ block content
   script(src='/js/bootstrap-select.min.js')
   script(src='/js/bootstrap-datetimepicker.min.js')
   script(src='/js/helpers.js')
+  script(src='/js/report_personal.js')
  

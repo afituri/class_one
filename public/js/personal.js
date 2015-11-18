@@ -23,7 +23,7 @@ $(document).ready(function(){
         $('#Socialstatus_Id_edit').empty();
         $.get('/get_social',function(resul){ 
           for(i in resul){
-            $('#Socialstatus_Id_edit').append("<option value = '"+i+"'>"+resul[i][0]+"</option>").selectpicker('refresh');
+            $('#Socialstatus_Id_edit').append("<option value = '"+(i+1)+"'>"+resul[i][0]+"</option>").selectpicker('refresh');
           }
           $('#Socialstatus_Id_edit').selectpicker('val',result.personal[0].Socialstatus_Id);
         });
@@ -45,7 +45,7 @@ $(document).ready(function(){
         $('#Socialstatus_Id_edit').empty();
         $.get('/get_social',function(resu){ 
           for(i in resu){
-            $('#Socialstatus_Id_edit').append("<option value = '"+i+"'>"+resu[i][1]+"</option>").selectpicker('refresh');
+            $('#Socialstatus_Id_edit').append("<option value = '"+(i+1)+"'>"+resu[i][1]+"</option>").selectpicker('refresh');
           }
           $('#Socialstatus_Id_edit').selectpicker('val',result.personal[0].Socialstatus_Id);          
         });
@@ -566,6 +566,10 @@ $(document).ready(function(){
     });
   });
 
+/*$("#Socialstatus_Id").change(function(){
+  alert($(this).val());
+});*/
+
   $("#Gender").change(function(){
     if($(this).val()==1){
       $('#Religion_Id').empty();
@@ -598,7 +602,7 @@ $(document).ready(function(){
       $('#Socialstatus_Id').empty();
       $.get('/get_social',function(result){ 
         for(i in result){
-          $('#Socialstatus_Id').append("<option value = '"+i+"'>"+result[i][1]+"</option>").selectpicker('refresh');
+          $('#Socialstatus_Id').append("<option value = '"+(i+1)+"'>"+result[i][1]+"</option>").selectpicker('refresh');
         }
       });
       $('#Nationality_Id').empty();
@@ -624,7 +628,7 @@ $(document).ready(function(){
       $('#Socialstatus_Id_edit').empty();
       $.get('/get_social',function(result){ 
         for(i in result){
-          $('#Socialstatus_Id_edit').append("<option value = '"+i+"'>"+result[i][0]+"</option>").selectpicker('refresh');
+          $('#Socialstatus_Id_edit').append("<option value = '"+(i+1)+"'>"+result[i][0]+"</option>").selectpicker('refresh');
         }
       });
       $('#Nationality_Id_edit').empty();
@@ -644,7 +648,7 @@ $(document).ready(function(){
       $('#Socialstatus_Id_edit').empty();
       $.get('/get_social',function(result){ 
         for(i in result){
-          $('#Socialstatus_Id_edit').append("<option value = '"+i+"'>"+result[i][1]+"</option>").selectpicker('refresh');
+          $('#Socialstatus_Id_edit').append("<option value = '"+(i+1)+"'>"+result[i][1]+"</option>").selectpicker('refresh');
         }
       });
       $('#Nationality_Id_edit').empty();

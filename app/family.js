@@ -34,6 +34,15 @@ exports.family_mgr = {
       });
     },
 
+ 
+
+
+
+
+
+
+
+
 
   get_family : function(cb){
     models.Family.findAndCountAll({

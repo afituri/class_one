@@ -34,7 +34,7 @@ exports.personal_mgr = {
   },
 
 
-  get_personal_only : function(id,cb){
+  get_personal_only : function(id,mid,cb){
      models.Personal.findAndCountAll({
       where: {
         id: id
@@ -45,11 +45,20 @@ exports.personal_mgr = {
         PersonalId: id
       }
     }).then(function(member) {
-      cb({personal:personal.rows,member:member.rows});
-    });
+
+         models.Personal.findAndCountAll({
+      where: {
+        id: mid
+      }
+    }).then(function(mother) {
+
+
+      cb({personal:personal.rows,member:member.rows,mother:mother});
+    }); });
     });
   
   },
+
 
   add_personal_model : function(body,cb){
     models.Personal.create(body).then(function(result) {
