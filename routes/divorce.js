@@ -6,8 +6,8 @@ var divorce = require("../app/divorce")
 var office = require("../app/office")
   .office_mgr;
 var country = require('../app/country').country_mgr;
-
 var region = require('../app/region').region_mgr;
+var birth = require('../app/birth').birth_mgr;
 var user_helpers = require('../app/user_helpers');
 module.exports = function (router) {
   /*--------------*/
@@ -40,6 +40,47 @@ module.exports = function (router) {
     divorce.get_father(req.params.id,function (father){
       res.send(father);
     })
+  });
+ 
+  /*-----------*/
+   /*-------------*/
+  router.get('/editdivorce/:id', function (req, res) {
+    divorce.get_divorce(req.params.id,function (result){
+      region.get_regions(function(region) {
+        country.get_country(function(countrys){
+          res.render('editdivorce', {
+            title : "تعديل واقعة الطﻻق",
+            regions:region.rows,
+            result:result,
+            countrys:countrys
+          });
+        })  
+      })
+    })
+  });
+  /*-----------*/
+  router.get('/divorce/divorce_data/:id', function (req, res) {
+      divorce.get_divorces(req.params.id,function (divorce){
+        console.log(divorce[0].OfficeId)
+        var idOf =divorce[0].OfficeId;
+        birth.get_birth_office(idOf,function(offic){
+          obj = {
+            divorce:divorce,
+            offic:offic,
+          }
+        res.send(obj);
+        // console.log(obj);
+       })  
+     })
+  });
+  /*============*/
+    router.post('/divorce/edit_divorce',function (req, res) {
+      console.log(req.body);
+    id = req.body.id;
+    delete req.body.id;
+    divorce.edit_divorce(req.body,id,function(result){
+      res.redirect('/divorce');
+    });
   });
   /*-----------*/
   router.get('/divorce/search_family/:id',user_helpers.isLogin, function (req, res) {
@@ -100,6 +141,7 @@ module.exports = function (router) {
       
       var divorce_c = {
         wife_custody : w_custody,
+        husband_family_Id : req.body.husband_family_Id,
         husband_personal_Id : req.body.father_name,
         wife_personal_Id : req.body.waif_name,
         wife_bt_family : req.body.wife_bt_family,

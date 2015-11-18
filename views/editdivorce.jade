@@ -1,0 +1,124 @@
+extends layout
+block content       
+  .container-fulid      
+    .col-sm-10.col-md-10
+      .panel.panel-default
+        .panel-heading
+          .row
+            .pull-right(style="margin-right: 10px;")
+              h3#h3.panel-title اسرة الزوج
+            .col-xs-6.col-md-6
+              .input-group
+                input.form-control#search_input(type='text',name="search_input" placeholder='بحث...برقم القيد فقط')
+                .input-group-btn
+                  button.btn.btn-default#search_button(type="button")
+                    i.glyphicon.glyphicon-search
+        .table-responsive
+          table.table.table-bordred.table-striped.table-condensed
+            thead
+              tr.info
+                th.text-center أسم الزوج
+                th.text-center أسم الزوجة
+                th.text-center رقم عقد الطلاق
+                th.text-center رقم سجل الطلاق
+                th.text-center تاريخ الطلاق
+                th.text-center تعديل الواقعة 
+            tbody#family_table 
+              for i in result
+                tr
+                  td.text-center #{i.Husband.Arabic_Firstname} #{i.Husband.Arabic_Fathername} #{i.Husband.Arabic_Grandfathername} #{i.Husband.Arabic_Familyname}
+                  td.text-center #{i.Wife.Arabic_Firstname} #{i.Wife.Arabic_Fathername} #{i.Wife.Arabic_Grandfathername} #{i.Wife.Arabic_Familyname}
+                  td.text-center #{i.contract_number}
+                  td.text-center #{i.record_divorce_nu}
+                  td.text-center #{i.inform_date}
+                  td.text-center
+                    p(data-placement="top", data-toggle="tooltip", title="تعديل")
+                      button#edit_divorse_btn.btn.btn-primary.btn-xs.edit_btn(data-toggle="modal", data-target="#edit",value="#{i.id}")
+                        span.glyphicon.glyphicon-edit
+  #edit.modal.fade(tabindex="-1",role="dialog", aria-labelledby="edit", aria-hidden="true")
+    .modal-dialog.modal-lg
+      .modal-content
+        form.form(action="/divorce/edit_divorce", method="post", accept-charset="utf-8", role="form")
+          .modal-header
+            button.close(type="button", data-dismiss="modal", aria-hidden="true")
+              span.glyphicon.glyphicon-remove(aria-hidden="true")
+            h4.modal-title.custom_align بيانات واقعة ألطﻻق
+          .modal-body
+            br
+            .row    
+              .col-xs-3.col-md-3
+                .form-group
+                  label المنطقة
+                  select#region.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                    option(value="", style='color:grey; display:none;') اختر المنطقة...
+                    for region in regions
+                      option(value="#{region.id}") #{region.region_name}
+                  #id_divorce  
+
+              .col-xs-3.col-md-3
+                .form-group
+                  label مكتب الاصدار
+                  select#Branches.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                    option(value="", style='colr:grey; display:none;') مكتب الاصدار
+              .col-xs-3.col-md-3
+                .form-group
+                  label السجل المدني
+                  select#Offices.form-control.selectpicker(name="officeId", data-live-search="true", data-size=5)
+                    option(value="", style='colr:grey; display:none;') السجل المدني
+              .col-xs-3.col-md-3
+                .form-group
+                  label مكان الطﻻق
+                  input.form-control#divorce_place(type="text", name="divorce_place", placeholder="عقد الطﻻق")      
+            .row
+              .col-xs-3.col-md-3
+                .form-group
+                  label تاريخ الطﻻق
+                  input#divorce_date.form-control(type="text", name="divorce_date", placeholder="تاريخ الطﻻق")
+              .col-xs-3.col-md-3
+                .form-group
+                  label رقم عقد الطﻻق
+                  input.form-control#contract_divorce_number(type="text", name="contract_number", placeholder="رقم عقد الطﻻق")
+              .col-xs-3.col-md-3
+                .form-group
+                  label رقم سجل الطﻻق
+                  input.form-control#record_divorce_number(type="text", name="record_divorce_nu", placeholder="رقم سجل الطﻻق")
+              .col-xs-3.col-md-3
+                .form-group
+                  label تاريخ تسجيل الطﻻق
+                  input#inform_date.form-control(type="text", name="inform_date", placeholder="تاريخ اﻹكتيتاب")   
+            .row
+              .col-xs-3.col-md-3
+                .form-group
+                  label بلد الطﻻق
+                  select#country.form-control.selectpicker(name="", data-live-search="true", data-size=5)
+                    option(value="", style='colr:grey; display:none;') بلد الطﻻق
+                    for country in countrys
+                      option(value="#{country.id}") #{country.country_name}
+              .col-xs-3.col-md-3
+                .form-group
+                  label مدينة الطﻻق
+                  select#Cities.form-control.selectpicker(name="city_Id", data-live-search="true", data-size=5)
+                    option(value="", style='colr:grey; display:none;') مدينة الطﻻق   
+              .col-xs-3.col-md-3
+                .form-group
+                  label حالة الطﻻق 
+                  select#divorce_type.form-control.selectpicker(name="divorce_type", data-live-search="true", data-size=5)
+                    option(value="", style='colr:grey; display:none;') حالة الطﻻق    
+                    option(value="1") طﻻق محكمة
+                    option(value="2") طﻻق مؤذون   
+          .modal-footer
+            button.btn.btn-success.btn-lg(type="submit", style="width: 100%;")
+              span.glyphicon.glyphicon
+              |  تعديل
+  script(src='/js/jquery-2.1.1.min.js')
+  script(src='/js/bootstrap.min.js')
+  script(src='/js/bootstrap-select.min.js')
+  script(src='/js/jquery.validate.min.js')
+  script(src='/js/bootstrap-notify.min.js')
+  script(src='/js/moment-with-locales.min.js')
+  script(src='/js/bootstrap-datetimepicker.min.js')
+  script(src='/js/bootstrap-switch.min.js')
+  script(src='/js/bootstrap-toggle.min.js') 
+  script(src='/js/jquery.mask.min.js')
+  script(src='/js/divorce.js')  
+  script(src='/js/helpers.js')          

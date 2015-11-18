@@ -74,7 +74,7 @@ exports.family_mgr = {
        models.sequelize.query('select *,f.id as fid from Families as f,Offices as o where  f.Registrynumber LIKE ? and o.id=f.OfficeId', {
        replacements:[reg]
        }).then(function (result) {
- 
+        console.log(result[0]);
         cb(result[0]);
        });
 

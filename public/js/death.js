@@ -31,10 +31,6 @@ $(document).ready(function(){
       $('#region_show').hide();
     }
   });
-  $('body').on('click','#delete_btn', function(){
-    var id = $(this).val();
-    $('#birth_id_delete').val(id);
-  });
   $('#region').on('change', function(){
     var id = $(this).val();
     $('#Branches').empty();
@@ -60,12 +56,12 @@ $(document).ready(function(){
     });
   });
 
-  $('#country').on('change', function(){
+  $('#countrys').on('change', function(){
     var id = $(this).val();
     $('#Cities').empty();
     $.get('/city/get_city/'+id,function(data){
       for(key in data){
-          $('#Cities').append("<option value = '"+data[key].id+"'>"+data[key].city_name+"</option>").selectpicker('refresh');
+          $('#City').append("<option value = '"+data[key].id+"'>"+data[key].city_name+"</option>").selectpicker('refresh');
         }
     });
   });
@@ -123,8 +119,23 @@ $(document).ready(function(){
     $(this).removeData('bs.modal');
     $('#new_birth_form').validate().resetForm();
   });
-  $('.edit_death_no').on('click',function(){
-
-    custNotify("danger","خطأ","هذا الشخص غير متوفي!","warning-sign","bounceIn","bounceOut");
+//////////////////////////edit death////////////////////////////////
+  $('.edit_death').on('click',function(){
+    var id = $(this).val();
+      $.get('/get_death/'+id,function(data){
+        $('#country').selectpicker('val' ,data[0].CityId);
+        $('#death_date').val(data[0].death_date);
+        $('#pod_area').val(data[0].pod_area);
+        $('#pod_description').val(data[0].pod_description);
+        $('#death_time').val(data[0].death_time);
+        $('#inform_date').val(data[0].inform_date);
+        $('#pod_type').selectpicker('val' ,data[0].pod_type);
+        $('#death_type').selectpicker('val' ,data[0].death_type);
+        $('#doctor_name').val(data[0].doctor_name);
+        $('#medical_report').selectpicker('val' ,data[0].medical_report);
+        $('#record_no').selectpicker('val' ,data[0].record_no);
+        $('#record_paper_no').val(data[0].record_paper_no);
+        $('#region').val(data[0].region);
+    });
   });
 });

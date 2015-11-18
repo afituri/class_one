@@ -24,12 +24,12 @@ module.exports = function (router) {
                 var q=true;
               }
               res.render('death', {
-              title : "افراد الاسرة" ,regions:result.rows,countrys:countrys,deathreason:deathreasons.rows,personals:fpersonals,q:q,query:id
+              title : "واقعة وفاة" ,regions:result.rows,countrys:countrys,deathreason:deathreasons.rows,personals:fpersonals,q:q,query:id
               });
             });
           }else{
             res.render('death', {
-              title : "افراد الاسرة",
+              title : "واقعة وفاة",
               collapse_three: 'in', 
               active_three_one: 'active',
               regions:result.rows,
@@ -74,5 +74,11 @@ module.exports = function (router) {
       });
     });  
  });
+
+  router.get('/get_death/:id',user_helpers.isLogin, function (req, res) {
+    death.get_death(req.params.id,function(result){
+      res.send(result);      
+    });
+  });
 }
   

@@ -4,30 +4,31 @@ block navigation
 block cPanel
 block content
   .top-content.font
-    .inner-bg
-      .container
-        .row
-          .col-xs-2.col-xs-offset-5.col-md-2.col-md-offset-5
-            img.img-responsive(src='/img/Logo.png')
-        .row
-          .col-sm-6.col-sm-offset-3.form-box
-            .form-top
-              .form-top-right
-                h3.text-right شاشة الدخول
-                p الرجاء ادخال اسم المستخدم وكلمة المرور
-              .form-top-left
-                i.fa.fa-lock
-            .form-bottom
-              form#login_form.login-form(role="form", action="/login", method="post")
-                .form-group.text-right
-                  label.sr-only(for="form-username") Username
-                  input#user_email.form-username.form-control(type="text", name="username", placeholder="اسم المستخدم")
-                .form-group
-                  label.sr-only(for="form-password") Password
-                  input#user_password.form-password.form-control(type="password", name="password", placeholder="كلمة المرور")
-                button.btn(type="submit") 
-                  i.fa.fa-sign-in
-                  span  دخول
+    //- .inner-bg
+    br
+    .container
+      .row
+        .col-xs-2.col-xs-offset-5.col-md-2.col-md-offset-5
+          img.img-responsive(src='/img/Logo.png')
+      .row
+        .col-sm-6.col-sm-offset-3.form-box
+          .form-top
+            .form-top-right
+              h3.text-right شاشة الدخول
+              p الرجاء ادخال اسم المستخدم وكلمة المرور
+            .form-top-left
+              i.fa.fa-lock
+          .form-bottom
+            form#login_form.login-form(role="form", action="/login", method="post")
+              .form-group.text-right
+                label.sr-only(for="form-username") Username
+                input#user_email.form-username.form-control(type="text", name="username", placeholder="اسم المستخدم")
+              .form-group(style="padding:12px 0 12px 0;")
+                label.sr-only(for="form-password") Password
+                input#user_password.form-password.form-control(type="password", name="password", placeholder="كلمة المرور")
+              button.btn(type="submit") 
+                i.fa.fa-sign-in
+                span  دخول
   script(src='/js/jquery-2.1.1.min.js')
   script(src='/js/bootstrap.min.js')
   script(src='/js/jquery.validate.min.js')
