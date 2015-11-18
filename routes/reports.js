@@ -22,16 +22,13 @@ module.exports = function (router) {
   function calculateAge (birthDate, otherDate) {
     birthDate = new Date(birthDate);
     otherDate = new Date(otherDate);
-
     var years = (otherDate.getFullYear() - birthDate.getFullYear());
-
     if (otherDate.getMonth() < birthDate.getMonth() || 
-        otherDate.getMonth() == birthDate.getMonth() && otherDate.getDate() < birthDate.getDate()) {
-        years--;
+      otherDate.getMonth() == birthDate.getMonth() && otherDate.getDate() < birthDate.getDate()) {
+      years--;
     }
-
     return years;
-}
+  }
 
 
   // this deathCertificate // widght A4
@@ -39,76 +36,69 @@ module.exports = function (router) {
     console.log(object_data_death);
     var personal_id=object_data_death.personalID;
     personal.get_personal_only(personal_id,0,function(personal){
-   // console.log(personal.personal[0].dataValues);
-    var name =personal.personal[0].dataValues.Arabic_Firstname;
-    var father_name=personal.personal[0].dataValues.Arabic_Fathername;
-    var grand_name=personal.personal[0].dataValues.Arabic_Grandfathername;
-    var family_name=personal.personal[0].dataValues.Arabic_Familyname;
-    var full_name=name+" "+father_name+" "+grand_name+" "+family_name;
-    var gender=personal.personal[0].dataValues.Gender;
-    var Birth_Date=personal.personal[0].dataValues.Birth_Date;
-    var nationality_id=personal.personal[0].dataValues.Nationality_Id;
-    var relgion=personal.personal[0].dataValues.Religion_Id;
-    var day,month,year;
-    if(gender==1){
-      gender="ذكر";
-    } else if(gender==2){
-      gender="انثي";
-    }
-
-    if(personal.personal[0] != undefined){
-      day=Birth_Date.getDate();
-      month=Birth_Date.getMonth()+1;
-      year=Birth_Date.getFullYear();
-    }
- 
-
-    var relgion_txt;
-    if(personal.personal[0].dataValues.Gender==1){
-    if(relgion==1){
-      relgion_txt="مسلم";
-    } else if(relgion==2){
-      relgion_txt="مسيحي";
-    } else if(relgion==3){
-      relgion_txt="يهودي";
-    }
-  } else if(personal.personal[0].dataValues.Gender==2){
-    if(relgion==1){
-      relgion_txt="مسلمة";
-    } else if(relgion==2){
-      relgion_txt="مسيحية";
-    } else if(relgion==3){
-      relgion_txt="يهودية";
-    }
-
-  }
-    var curntDate=new Date();
-    console.log(day+"/"+month+"/"+year);
-    console.log(curntDate.getDate()+"/"+curntDate.getMonth()+"/"+curntDate.getFullYear());
-    var daycurent=curntDate.getDate();
-    var monthcurent=curntDate.getMonth();
-    var yearcurent=curntDate.getFullYear();
-    var newdate=(curntDate.getMonth()+1)+"/"+curntDate.getDate()+"/"+curntDate.getFullYear();
-    var age=calculateAge(month+"/"+day+"/"+year,newdate);
-    console.log(age);
-    console.log(nationality_id);
-    country.get_country_by_country_id(nationality_id,0,function(country){
-    console.log(country.father_nat[0].dataValues);
-      var nationality_txt;
-      if(personal.personal[0].dataValues.Gender==1){
-        nationality_txt=country.father_nat[0].dataValues.nationality_male;
-      } else if(personal.personal[0].dataValues.Gender==2){
-        nationality_txt=country.father_nat[0].dataValues.nationality_female;
+      // console.log(personal.personal[0].dataValues);
+      var name =personal.personal[0].dataValues.Arabic_Firstname;
+      var father_name=personal.personal[0].dataValues.Arabic_Fathername;
+      var grand_name=personal.personal[0].dataValues.Arabic_Grandfathername;
+      var family_name=personal.personal[0].dataValues.Arabic_Familyname;
+      var full_name=name+" "+father_name+" "+grand_name+" "+family_name;
+      var gender=personal.personal[0].dataValues.Gender;
+      var Birth_Date=personal.personal[0].dataValues.Birth_Date;
+      var nationality_id=personal.personal[0].dataValues.Nationality_Id;
+      var relgion=personal.personal[0].dataValues.Religion_Id;
+      var day,month,year;
+      if(gender==1){
+        gender="ذكر";
+      } else if(gender==2){
+        gender="انثي";
       }
-     jsr.render({
-      template: {
-        content:  fs.readFileSync(path.join(__dirname, "../views/reports/deathCertificate.html"), "utf8"),
-        phantom:{
-          format: 'A4',
-        },
-        recipe: "phantom-pdf",
-      },
-       data:{full_name:full_name,
+      if(personal.personal[0] != undefined){
+        day=Birth_Date.getDate();
+        month=Birth_Date.getMonth()+1;
+        year=Birth_Date.getFullYear();
+      }
+      var relgion_txt;
+      if(personal.personal[0].dataValues.Gender==1){
+      if(relgion==1){
+        relgion_txt="مسلم";
+      } else if(relgion==2){
+        relgion_txt="مسيحي";
+      } else if(relgion==3){
+        relgion_txt="يهودي";
+      }
+    } else if(personal.personal[0].dataValues.Gender==2){
+      if(relgion==1){
+        relgion_txt="مسلمة";
+      } else if(relgion==2){
+        relgion_txt="مسيحية";
+      } else if(relgion==3){
+        relgion_txt="يهودية";
+      }
+
+    }
+      var curntDate=new Date();
+      var daycurent=curntDate.getDate();
+      var monthcurent=curntDate.getMonth();
+      var yearcurent=curntDate.getFullYear();
+      var newdate=(curntDate.getMonth()+1)+"/"+curntDate.getDate()+"/"+curntDate.getFullYear();
+      var age=calculateAge(month+"/"+day+"/"+year,newdate);
+      country.get_country_by_country_id(nationality_id,0,function(country){
+        var nationality_txt;
+        if(personal.personal[0].dataValues.Gender==1){
+          nationality_txt=country.father_nat[0].dataValues.nationality_male;
+        } else if(personal.personal[0].dataValues.Gender==2){
+          nationality_txt=country.father_nat[0].dataValues.nationality_female;
+        }
+        jsr.render({
+          template: {
+            content:  fs.readFileSync(path.join(__dirname, "../views/reports/deathCertificate.html"), "utf8"),
+            phantom:{
+              format: 'A4',
+            },
+            recipe: "phantom-pdf",
+          },
+           data:{
+            full_name:full_name,
             family_name:family_name,
             gender:gender,
             day:day,
@@ -116,11 +106,13 @@ module.exports = function (router) {
             year:year, 
             age:age,
             nationality_txt:nationality_txt,
-            relgion_txt:relgion_txt}
-    }).then(function (response) {
-      response.result.pipe(res);
-    });});
-  });
+            relgion_txt:relgion_txt
+          }
+        }).then(function (response) {
+          response.result.pipe(res);
+        });
+      });
+    });
   });
 
   //set_data
@@ -129,8 +121,6 @@ module.exports = function (router) {
     object_data = {personalID:req.params.id,familyID:req.body.familyid}
     res.send(true);
   });
-
- 
 
   // this deathCertificate // widght A4
   router.get('/birthCertificate/',user_helpers.isLogin, function(req, res, next) {

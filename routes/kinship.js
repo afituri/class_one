@@ -11,7 +11,8 @@ module.exports = function (router) {
         title: 'صلة القرابة',
         kinships: result.rows,
         collapse_one: 'collapse in', 
-        active_one_five: 'active'
+        active_one_five: 'active',
+        name: req.session.name
       });
     })
   });

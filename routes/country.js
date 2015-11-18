@@ -13,7 +13,8 @@ module.exports = function (router) {
         title: 'بلدان الميلاد',
         countries: result.rows,
         collapse_one: 'collapse in', 
-        active_one_seven: 'active'
+        active_one_seven: 'active',
+        name: req.session.name
       });
     });
   });

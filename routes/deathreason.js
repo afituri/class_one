@@ -7,7 +7,8 @@ module.exports = function (router) {
     deathreason.get_deathreason(function(result){
       res.render('deathreason', { 
         title: 'اسباب الوفيات', 
-        deathreasons:result.rows, 
+        deathreasons:result.rows,
+        name: req.session.name
       });
     })
   });

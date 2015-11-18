@@ -24,7 +24,14 @@ module.exports = function (router) {
                 var q=true;
               }
               res.render('death', {
-              title : "واقعة وفاة" ,regions:result.rows,countrys:countrys,deathreason:deathreasons.rows,personals:fpersonals,q:q,query:id
+                title : "واقعة وفاة" ,
+                regions:result.rows,
+                countrys:countrys,
+                deathreason:deathreasons.rows,
+                personals:fpersonals,
+                q:q,
+                query:id,
+                name: req.session.name
               });
             });
           }else{
@@ -36,7 +43,8 @@ module.exports = function (router) {
               countrys:countrys,
               deathreason:deathreasons.rows,
               q:false,
-              query:""
+              query:"",
+              name: req.session.name
             });
           }
         });  

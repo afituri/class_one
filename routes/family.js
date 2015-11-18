@@ -11,7 +11,8 @@ module.exports = function (router) {
         collapse_two: 'in', 
         active_two_one: 'active',
         familys: result.result.rows,
-        offices: result.offices
+        offices: result.offices,
+        name: req.session.name
       });
     });
   });

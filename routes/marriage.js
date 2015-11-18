@@ -14,7 +14,8 @@ module.exports = function (router) {
         title : "واقعة زواج",
         collapse_three: 'in', 
         active_three_four: 'active',
-        citys:result.rows
+        citys:result.rows,
+        name: req.session.name
       });
     });
   });
@@ -35,11 +36,10 @@ module.exports = function (router) {
     if(req.body.Socialstatus_Id == 2)
     {
       marriage.update_member_wife(req.body, function (result) {
-          marriage.add_new_marriage(req.body, function (result) {
-            res.send(result);
-          });
+        marriage.add_new_marriage(req.body, function (result) {
+          res.send(result);
         });
-
+      });
     }else{
       marriage.add_family(req.body, function (result) {
         marriage.update_member(req.body,result, function (result) {
@@ -55,7 +55,10 @@ module.exports = function (router) {
     marriage.get_marriage(function (result) {
       city.get_city_all(function(city){
         res.render('view_marriage', {
-          title : "عرض واقعات الزواج" ,marriages:result,citys:city.rows
+          title : "عرض واقعات الزواج" ,
+          marriages:result,
+          citys:city.rows,
+          name: req.session.name
         });
       });
     });  

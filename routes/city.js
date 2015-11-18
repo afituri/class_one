@@ -25,7 +25,8 @@ module.exports = function (router) {
           cities: result.rows,
           countries: countries,
           collapse_one: 'collapse in', 
-          active_one_eight: 'active'
+          active_one_eight: 'active',
+          name: req.session.name
         });
       })
     });

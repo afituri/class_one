@@ -13,7 +13,8 @@ module.exports = function (router) {
         title: 'المهن', 
         jobs:result.rows,
         collapse_one: 'collapse in', 
-        active_one_six: 'active'
+        active_one_six: 'active',
+        name: req.session.name
       });
     });
   });

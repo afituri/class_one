@@ -14,7 +14,8 @@ module.exports = function (router) {
         regions: result.regions,
         branches: result.branches,
         collapse_one: 'collapse in', 
-        active_one_four: 'active'
+        active_one_four: 'active',
+        name: req.session.name
       });
     })
   });

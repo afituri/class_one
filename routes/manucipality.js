@@ -10,7 +10,8 @@ module.exports = function (router) {
         title: 'البلديات',
         manucipalitys: result.rows,
         collapse_one: 'collapse in', 
-        active_one_three: 'active'
+        active_one_three: 'active',
+        name: req.session.name
       });
     })
   });

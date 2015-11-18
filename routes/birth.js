@@ -23,8 +23,14 @@ module.exports = function (router) {
             }else{
               var q=true;
             }
-            res.render('birth', {
-            title : "افراد الاسرة" ,regions:result.rows,countrys:countrys,personals:fpersonals,q:q,query:id
+              res.render('birth', {
+              title : "افراد الاسرة" ,
+              regions:result.rows,
+              countrys:countrys,
+              personals:fpersonals,
+              q:q,
+              query:id,
+              name: req.session.name
             });
           });
         }else{
@@ -35,7 +41,8 @@ module.exports = function (router) {
             regions:result.rows,
             countrys:countrys,
             q:false,
-            query:""
+            query:"",
+            name: req.session.name
           });
         }
       });

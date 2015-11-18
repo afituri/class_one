@@ -9,7 +9,8 @@ module.exports = function (router) {
         title: 'المستخدمين', 
         users:result.rows, 
         collapse_one: 'collapse in', 
-        active_one_one: 'active'
+        active_one_one: 'active',
+        name: req.session.name
       });
     });
   });     

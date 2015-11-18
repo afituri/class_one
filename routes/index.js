@@ -35,7 +35,8 @@ router.get('/', function (req, res) {
 /* GET home page. */
 router.get('/home',user_helpers.isLogin, function (req, res) {
   res.render('index', {
-    title: 'الرئيسية'
+    title: 'الرئيسية',
+    name: req.session.name
   });
 });
 

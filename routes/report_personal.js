@@ -1,17 +1,11 @@
 var models = require("../models");
 var constants = require("../data/constants.json");
-var country = require("../app/country")
-  .country_mgr;
-var city = require("../app/city")
-  .city_mgr;
-var family = require("../app/family")
-  .family_mgr;
-var personal = require("../app/personal")
-  .personal_mgr;
-var kinship = require("../app/kinship")
-  .kinship_mgr
-var job = require("../app/job")
-  .job_mgr;
+var country = require("../app/country").country_mgr;
+var city = require("../app/city").city_mgr;
+var family = require("../app/family").family_mgr;
+var personal = require("../app/personal").personal_mgr;
+var kinship = require("../app/kinship").kinship_mgr
+var job = require("../app/job").job_mgr;
 var user_helpers = require('../app/user_helpers');  
 module.exports = function (router) {
   var familyId;
@@ -32,6 +26,7 @@ module.exports = function (router) {
                 personal: personal[0],
                 social: constants,
                 country:country,
+                name: req.session.name
               });
             });
           });
@@ -39,6 +34,4 @@ module.exports = function (router) {
       });
     });
   });
-
-
 };

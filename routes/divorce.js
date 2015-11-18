@@ -21,7 +21,8 @@ module.exports = function (router) {
             active_three_three: 'active',
             familys: result.result.rows,
             regions:result1.rows,
-            countrys:countrys
+            countrys:countrys,
+            name: req.session.name
           });
         })  
       })
@@ -52,7 +53,8 @@ module.exports = function (router) {
             title : "تعديل واقعة الطﻻق",
             regions:region.rows,
             result:result,
-            countrys:countrys
+            countrys:countrys,
+            name: req.session.name
           });
         })  
       })

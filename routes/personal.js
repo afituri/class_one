@@ -1,17 +1,11 @@
 var models = require("../models");
 var constants = require("../data/constants.json");
-var country = require("../app/country")
-  .country_mgr;
-var city = require("../app/city")
-  .city_mgr;
-var family = require("../app/family")
-  .family_mgr;
-var personal = require("../app/personal")
-  .personal_mgr;
-var kinship = require("../app/kinship")
-  .kinship_mgr
-var job = require("../app/job")
-  .job_mgr;
+var country = require("../app/country").country_mgr;
+var city = require("../app/city").city_mgr;
+var family = require("../app/family").family_mgr;
+var personal = require("../app/personal").personal_mgr;
+var kinship = require("../app/kinship").kinship_mgr
+var job = require("../app/job").job_mgr;
 var user_helpers = require('../app/user_helpers');  
 module.exports = function (router) {
   /* GET personals page. */
@@ -32,6 +26,7 @@ module.exports = function (router) {
                 personal: personal[0],
                 social: constants,
                 country:country,
+                name: req.session.name
               });
             });
           });
@@ -40,13 +35,10 @@ module.exports = function (router) {
     });
   });
   ///edit_personal
-   router.post('/edit_personal',user_helpers.isLogin, function (req, res) {
-    console.log(req.body.mother_status);
-
+  router.post('/edit_personal',user_helpers.isLogin, function (req, res) {
     if(req.body.mother_status==2){
       req.body.Motherperson_Id=null;
     }
-
     var kinshipId = req.body.KinshipId;
     personalId=req.body.personalId;
     from_familyId=req.body.from_familyId;
@@ -69,17 +61,13 @@ module.exports = function (router) {
     delete req.body.KinshipId;
     delete req.body.personalId;
     delete req.body.from_familyId;
-     personal.edit_personal_model (req.body,personalId,function(result){
+    personal.edit_personal_model (req.body,personalId,function(result){
       member={leader:leader,from_familyId:from_familyId,KinshipId:kinshipId,PersonalId:personalId,FamilyId:familyId};
       personal.edit_Members(member,personalId,function(resultt){
         res.send(true);
       });
     }); 
-   
-
-
-
-   });
+  });
 
   router.post('/insert_personal',user_helpers.isLogin, function (req, res) {
     var kinshipId = req.body.KinshipId;
@@ -107,7 +95,6 @@ module.exports = function (router) {
       });
     }); 
   });
-
 
   router.get('/delete_personal/:id',user_helpers.isLogin, function (req, res) {
     personal.delete_Members(req.params.id,function  (result){
@@ -155,19 +142,15 @@ module.exports = function (router) {
     });
   });  
 
-
-    router.get('/get_Personal/:id',user_helpers.isLogin, function (req, res) {
-      personal.get_personal_only(req.params.id,function (personal){
-    
+  router.get('/get_Personal/:id',user_helpers.isLogin, function (req, res) {
+    personal.get_personal_only(req.params.id,function (personal){   
       res.send(personal);
-      });
-    });  
-
-    router.get('/get_country/:id',user_helpers.isLogin, function (req, res) {
-      country.get_Country_id(req.params.id,function (result){
-        res.send(result);
-      }); 
     });
+  });  
+
+  router.get('/get_country/:id',user_helpers.isLogin, function (req, res) {
+    country.get_Country_id(req.params.id,function (result){
+      res.send(result);
+    }); 
+  });
 }
-
-
