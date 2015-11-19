@@ -5,14 +5,7 @@
 
 body {
   font-family: 'droidkufi', sans-serif;
-  background: url('/img/LogoOpacity.png') no-repeat center center fixed;
-  background-size: 550px 550px;
 }
-
-/*.full {
-  background: url('/img/LogoOpacity.png') no-repeat center center fixed;
-  background-size: 550px 550px;
-}*/
 
 input[type="text"],input[type="password"]{
   line-height: 25px;
